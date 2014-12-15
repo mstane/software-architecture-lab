@@ -69,7 +69,7 @@ public class SelectOneListBox<T> extends ListBox implements HasSelectedValue<T>
     }
  
     @Override
-    public T getSelectedValue()
+    public T getSelectedVal()
     {
         if (getSelectedIndex() >= 0)
         {
@@ -86,7 +86,7 @@ public class SelectOneListBox<T> extends ListBox implements HasSelectedValue<T>
     }
  
     @Override
-    public void setSelectedValue(T value)
+    public void setSelectedVal(T value)
     {
         if (value == null)
             return;
@@ -110,7 +110,7 @@ public class SelectOneListBox<T> extends ListBox implements HasSelectedValue<T>
     @Override
     public T getValue()
     {
-        return this.getSelectedValue();
+        return this.getSelectedVal();
     }
  
     @Override
@@ -123,7 +123,7 @@ public class SelectOneListBox<T> extends ListBox implements HasSelectedValue<T>
     public void setValue(T value, boolean fireEvents)
     {
         T oldValue = getValue();
-        this.setSelectedValue(value);
+        this.setSelectedVal(value);
         if (fireEvents)
         {
             ValueChangeEvent.fireIfNotEqual(this, oldValue, value);

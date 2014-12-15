@@ -26,7 +26,7 @@
         </tr>
         <tr>
           <td colspan='2' align='center' class='{style.header}'>
-            <ui:msg key='loginTitle'>Sign in to your account</ui:msg>
+            <ui:msg key='loginTitle'>Sign in to your account 123</ui:msg>
           </td>
         </tr>
       	<tr>

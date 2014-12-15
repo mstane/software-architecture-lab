@@ -65,7 +65,5 @@
 		<when-type-is
 			class="com.google.gwt.validation.client.UserValidationMessagesResolver" />
 	</replace-with>
-
-	<add-linker name="xsiframe"/>
 	
 </module>

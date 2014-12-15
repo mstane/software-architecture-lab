@@ -16,7 +16,7 @@ public interface HasSelectedValue<T> extends HasValue<T>
 {
     void setSelections(Collection<T> selections);
  
-    void setSelectedValue(T selected);
+    void setSelectedVal(T selected);
      
-    T getSelectedValue();
+    T getSelectedVal();
 }
