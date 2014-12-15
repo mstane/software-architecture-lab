@@ -1,0 +1,153 @@
+<!DOCTYPE ui:UiBinder SYSTEM 'http://dl.google.com/gwt/DTD/xhtml.ent'>
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' xmlns:d='urn:import:com.google.gwt.user.datepicker.client'
+	xmlns:c="urn:import:com.google.gwt.user.cellview.client"
+	ui:generateFormat='com.google.gwt.i18n.rebind.format.PropertiesFormat'
+	ui:generateLocales='default'>
+
+	<ui:style>
+		.header {
+		font-size: 110%;
+		font-weight: bold;
+		color: #555
+		}
+
+		.label {
+		font-weight: bold;
+		}
+
+		.bookBody {
+		height: 400px;
+		width: 800px;
+		}
+
+		.cellTable {
+		border-bottom: 1px solid #ccc;
+		text-align: left;
+		margin-bottom: 4px;
+		}
+
+		.error {
+		color: red;
+		}
+	</ui:style>
+
+	<g:DecoratorPanel>
+		<g:HTMLPanel>
+			<table style="margin:50px">
+				<tr>
+					<td colspan='2' align='center' class='{style.header}'>
+						<ui:msg key='bookFormTitle'>Book</ui:msg>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<br />
+						<br />
+						<br />
+					</td>
+				</tr>
+				<tr>
+					<td class='{style.label}'>
+						<ui:msg key='bookFormTitle'>Title:</ui:msg>
+					</td>
+					<td>
+						<g:TextBox ui:field='titleTextBox' />
+					</td>
+				</tr>
+				<tr>
+					<td class='{style.label}'>
+						<ui:msg key='bookFormAuthor'>Author:</ui:msg>
+					</td>
+					<td>
+						<g:TextBox ui:field='authorTextBox' />
+					</td>
+				</tr>
+				<tr>
+					<td class='{style.label}'>
+						<ui:msg key='bookFormUrl'>Url:</ui:msg>
+					</td>
+					<td>
+						<g:TextBox ui:field='urlTextBox' />
+					</td>
+				</tr>
+                <tr>
+                    <td class='{style.label}'>
+                        <ui:msg key='bookFormStartReadingDate'>Start Reading Date:</ui:msg>
+                    </td>
+                    <td>
+                        <g:TextBox ui:field='startReadingDateTextBox' />
+                    </td>
+                </tr>
+                <tr>
+                    <td class='{style.label}'>
+                        <ui:msg key='bookFormEndReadingDate'>End Reading Date:</ui:msg>
+                    </td>
+                    <td>
+                        <g:TextBox ui:field='endReadingDateTextBox' />
+                    </td>
+                </tr>
+                <tr>
+                    <td class='{style.label}'>
+                        <ui:msg key='bookFormRating'>Rating:</ui:msg>
+                    </td>
+                    <td>
+                        <g:TextBox ui:field='ratingTextBox' />
+                    </td>
+                </tr>
+				<tr>
+					<td>
+						<br />
+						<br />
+						<br />
+					</td>
+				</tr>
+				<tr>
+					<td colspan='2'>
+						<c:CellTable addStyleNames='{style.cellTable}'
+							pageSize='15' width="400px" ui:field='noteTable' />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<br />
+						<br />
+					</td>
+				</tr>
+				<tr>
+					<td colspan='2'>
+						<ui:msg key='noteFormNotes' class='{style.label}'>Notes:</ui:msg>
+						<br />
+						<g:TextArea visibleLines="8" width="100%" ui:field='notesTextArea' />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<br />
+						<br />
+					</td>
+				</tr>
+				<tr>
+					<td colspan='2' align='center'>
+						<g:Button ui:field='saveButton'>
+							<ui:msg key='bookFormUpdateButton'>Save Book</ui:msg>
+						</g:Button>
+						&nbsp;
+						<g:Button ui:field='newNoteButton'>
+							<ui:msg key='bookFormNewNoteButton'>New Note</ui:msg>
+						</g:Button>
+						&nbsp;
+						<g:Button ui:field='deleteButton'>
+							<ui:msg key='bookFormDeleteButton'>Delete Book</ui:msg>
+						</g:Button>
+					</td>
+				</tr>
+				<tr>
+					<td colspan='2' align='center'>
+						<g:Label styleName="{style.error}" ui:field="errorLabel" />
+					</td>
+				</tr>
+			</table>
+		</g:HTMLPanel>
+	</g:DecoratorPanel>
+</ui:UiBinder>
