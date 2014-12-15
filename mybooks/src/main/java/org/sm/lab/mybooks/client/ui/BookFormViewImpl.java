@@ -11,12 +11,10 @@ import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
@@ -99,6 +97,7 @@ public class BookFormViewImpl extends Composite implements BookFormView {
 
     @Override
     public HasValue<String> getBookTitle() {
+        Log.debug("BookFormViewImpl.getBookTitle()");
         return titleTextBox;
     }
     
@@ -135,6 +134,17 @@ public class BookFormViewImpl extends Composite implements BookFormView {
     @Override
     public HasText getErrorLabel() {
         return errorLabel;
+    }
+    
+    @Override
+    public void clear() {
+        titleTextBox.setValue("");
+        authorTextBox.setValue("");
+        urlTextBox.setValue("");
+        startReadingDateTextBox.setValue("");
+        endReadingDateTextBox.setValue("");
+        ratingTextBox.setValue("");
+        errorLabel.setText("");        
     }
 
     @Override

@@ -29,7 +29,10 @@ public class BookFormPlace extends Place {
 
 		@Override
 		public String getToken(BookFormPlace place) {
-			return "";
+			if (place != null && place.getBookDto() != null && place.getBookDto().getId() != null) {
+			    return "id=" + place.getBookDto().getId();
+			}
+		    return "";
 		}
 
 	}

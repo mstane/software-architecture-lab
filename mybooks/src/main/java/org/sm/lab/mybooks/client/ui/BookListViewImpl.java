@@ -127,8 +127,6 @@ public class BookListViewImpl extends Composite implements BookListView {
 		pagerPanel.setDisplay(cellList);
 		rangeLabelPager.setDisplay(cellList);
 
-//		bookForm.setVisible(false);
-
 		newBookButton.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				presenter.onAddButtonClicked();
@@ -146,7 +144,6 @@ public class BookListViewImpl extends Composite implements BookListView {
 
 	public Widget asWidget() {
 	    Log.debug("BookListViewImpl.asWidget()");
-//		bookForm.setVisible(false);
 		return widget;
 	}
 

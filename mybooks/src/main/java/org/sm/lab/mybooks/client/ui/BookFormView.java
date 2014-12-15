@@ -31,6 +31,8 @@ public interface BookFormView extends IsWidget {
 	void setDeleteButtonEnable(boolean enable);
 	void setNewNoteButton(boolean enable);
 
+	void clear();
+	
 	void setPresenter(Presenter presenter);
 
 	void setVisible(boolean visibility);

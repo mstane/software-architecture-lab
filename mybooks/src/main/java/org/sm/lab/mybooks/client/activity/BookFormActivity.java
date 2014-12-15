@@ -76,16 +76,19 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
 	
     @Override
     public void start(AcceptsOneWidget container, EventBus eventBus) {
+        Log.debug("BookFormActivity.start()");
+        
+        view.clear();
+        
         BookFormPlace place = (BookFormPlace)placeController.getWhere();
         
         dto = place.getBookDto();
         
         if (dto != null) {
-            
-            setValues(view, dto);
-            
+            setValues();
             fetchNoteList();
-
+        } else {
+            dto = new BookDto();
         }
         
         view.getErrorLabel().setText("");
@@ -127,8 +130,9 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
 	
 
 	private void doSave() {
+	    Log.debug("BookFormActivity.doSave()");
 	    
-	    getValues(view, dto);
+	    getValues();
 		
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<BookDto>> violations = validator.validate(dto, Default.class, ClientGroup.class);
@@ -146,7 +150,6 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
             view.getErrorLabel().setText(errorMessage.toString());
             return;
         }
-		
 		if (dto.getId() == null) {
 			dispatchRpcService.execute(new CreateBookAction(dto), new AppAsyncCallback<CreateBookResult>(eventBus, appDialogBox) {
 	            public void onSuccess(CreateBookResult result) {
@@ -167,7 +170,7 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
 	}
 
 	private void doDelete() {
-	    getValues(view, dto);
+	    getValues();
 	    
 		dispatchRpcService.execute(new DeleteBookAction(dto), new AppAsyncCallback<DeleteBookResult>(eventBus, appDialogBox) {
             public void onSuccess(DeleteBookResult result) {
@@ -188,22 +191,26 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
 
 	}
 	
-    private void getValues(BookFormView view, BookDto dto) {
-        dto.setTitle(view.getBookTitle().getValue());
+    private void getValues() {        
+        Log.debug("BookFormActivity.getValues()");
+        
+        dto.setTitle(view.getBookTitle().getValue());        
         dto.setAuthor(view.getAuthor().getValue());
         dto.setUrl(view.getUrl().getValue());
 //        dto.setStartReadingDate(view.getStartReadingDate());
 //        dto.setEndReadingDate(view.getEndReadingDate());
-        dto.setRating(dto.getRating());
-        
+        try {
+            dto.setRating(Integer.valueOf(view.getRating().getValue()));
+        } catch (NumberFormatException e) {
+        }
     }
 
-    private void setValues(BookFormView view, BookDto dto) {
+    private void setValues() {
         view.getBookTitle().setValue(dto.getTitle());
         view.getAuthor().setValue(dto.getAuthor());
         view.getUrl().setValue(dto.getUrl());
-        view.getStartReadingDate().setValue(dto.getStartReadingDate().toString());
-        view.getEndReadingDate().setValue(dto.getEndReadingDate().toString());
+//        view.getStartReadingDate().setValue(dto.getStartReadingDate().toString());
+//        view.getEndReadingDate().setValue(dto.getEndReadingDate().toString());
         view.getRating().setValue(dto.getRating().toString());
     }
 
