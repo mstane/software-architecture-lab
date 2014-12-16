@@ -94,7 +94,6 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
             dto = new BookDto();
         }
         
-        view.getErrorLabel().setText("");
         view.setVisible(true);
         
         setEnabled();  
@@ -188,8 +187,6 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
             public void onSuccess(LoadAllNotesResult result) {
             	Log.debug("LoadAllNotesResult -- onSuccess()");
             	noteList.addAll(result.getDtos());
-//            	noteTableDataProvider.setList(result.getDtos());
-//            	noteTableDataProvider.refresh();
             }
         });
 

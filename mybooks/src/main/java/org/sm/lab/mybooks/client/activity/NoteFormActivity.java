@@ -68,8 +68,7 @@ public class NoteFormActivity extends AbstractActivity implements NoteFormView.P
 
     public void bind() {
         if (dto != null) {
-            view.getNoteTitle().setValue(dto.getTitle());
-            view.getContent().setValue(dto.getContent());
+            setValues();
         }
 
     }
@@ -103,8 +102,8 @@ public class NoteFormActivity extends AbstractActivity implements NoteFormView.P
     }
 
     private void doSave() {
-        dto.setTitle(view.getNoteTitle().getValue());
-        dto.setContent(view.getContent().getValue());
+        
+        getValues();
 
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<NoteDto>> violations = validator.validate(dto, Default.class, ClientGroup.class);
@@ -161,6 +160,16 @@ public class NoteFormActivity extends AbstractActivity implements NoteFormView.P
                 bind();
             }
         });
+    }
+    
+    public void setValues() {
+        view.getNoteTitle().setValue(dto.getTitle());
+        view.getContent().setValue(dto.getContent());
+    }
+    
+    public void getValues() {
+        dto.setTitle(view.getNoteTitle().getValue());
+        dto.setContent(view.getContent().getValue());
     }
 
     @Override
