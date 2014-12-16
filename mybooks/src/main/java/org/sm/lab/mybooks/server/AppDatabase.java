@@ -215,8 +215,30 @@ public class AppDatabase {
 		}		
 	}
 	
+	public ReaderDto getReader(Long id) {
+		EntityManager em = EmfService.getFactory().createEntityManager();
+		Reader reader = em.find(Reader.class, id);
+		ReaderDto readerDto = reader == null ? null : reader.getDto();
+		em.close();
+		return readerDto;
+	}
+	
+	
+	public ReaderDto createReader(ReaderDto readerDto) throws MyBooksException {
+		EntityManager em = EmfService.getFactory().createEntityManager();
+		
+		em.getTransaction().begin();
 
-	public void updateReader(ReaderDto readerDto) {
+		Reader reader = new Reader(readerDto);
+		reader.setId(null); //if id == null then ROWID that is one larger than the largest ROWID in the table prior to the insert
+
+		em.getTransaction().commit();
+		em.close();
+		return reader.getDto();
+
+	}
+
+	public ReaderDto updateReader(ReaderDto readerDto) {
 		EntityManager em = EmfService.getFactory().createEntityManager();
 		Reader reader = em.find(Reader.class, readerDto.getId());
 
@@ -228,7 +250,22 @@ public class AppDatabase {
 		em.getTransaction().commit();
 
 		em.close();
+		
+		return reader.getDto();
 	}	
+	
+	public void deleteReader(ReaderDto readerDto) {
+		EntityManager em = EmfService.getFactory().createEntityManager();
+		Reader reader = em.find(Reader.class, readerDto.getId());
+
+		em.getTransaction().begin();
+
+		em.remove(reader);
+
+		em.getTransaction().commit();
+
+		em.close();
+	}
 	
 		
 	
