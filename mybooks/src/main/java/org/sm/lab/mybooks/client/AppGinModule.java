@@ -1,7 +1,14 @@
 package org.sm.lab.mybooks.client;
 
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.SimpleEventBus;
+import com.google.gwt.inject.client.AbstractGinModule;
+import com.google.gwt.place.shared.PlaceController;
+import com.google.inject.Singleton;
+
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
+import org.sm.lab.mybooks.client.activity.BookFormActivity;
 import org.sm.lab.mybooks.client.activity.BookListActivity;
 import org.sm.lab.mybooks.client.activity.LoginActivity;
 import org.sm.lab.mybooks.client.activity.NoteFormActivity;
@@ -14,12 +21,6 @@ import org.sm.lab.mybooks.client.ui.ProfileFormView;
 import org.sm.lab.mybooks.client.ui.ProfileFormViewImpl;
 import org.sm.lab.mybooks.client.util.AppDialogBox;
 import org.sm.lab.mybooks.client.util.IAppDialogBox;
-
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.event.shared.SimpleEventBus;
-import com.google.gwt.inject.client.AbstractGinModule;
-import com.google.gwt.place.shared.PlaceController;
-import com.google.inject.Singleton;
 
 public class AppGinModule extends AbstractGinModule {
 
@@ -36,7 +37,7 @@ public class AppGinModule extends AbstractGinModule {
         
         bind(LoginActivity.class).in(Singleton.class);
         bind(BookListActivity.class).in(Singleton.class);
-//        bind(BookFormActivity.class).in(Singleton.class);
+        bind(BookFormActivity.class).in(Singleton.class);
         bind(NoteFormActivity.class).in(Singleton.class);
         bind(ProfileFormActivity.class).in(Singleton.class);
 

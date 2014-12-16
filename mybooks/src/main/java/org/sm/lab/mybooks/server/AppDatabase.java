@@ -160,6 +160,7 @@ public class AppDatabase {
 		note.setCreatedTime(createdTime);
 		note.setModifiedTime(createdTime);
 
+		em.persist(note);
 		em.getTransaction().commit();
 		em.close();
 		return note.getDto();
@@ -232,6 +233,7 @@ public class AppDatabase {
 		Reader reader = new Reader(readerDto);
 		reader.setId(null); //if id == null then ROWID that is one larger than the largest ROWID in the table prior to the insert
 
+		em.persist(reader);
 		em.getTransaction().commit();
 		em.close();
 		return reader.getDto();
