@@ -115,13 +115,6 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan='2'>
-						<ui:msg key='noteFormNotes' class='{style.label}'>Notes:</ui:msg>
-						<br />
-						<g:TextArea visibleLines="8" width="100%" ui:field='notesTextArea' />
-					</td>
-				</tr>
-				<tr>
 					<td>
 						<br />
 						<br />

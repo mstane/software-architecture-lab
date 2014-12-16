@@ -132,7 +132,7 @@ public class BookListActivity extends AbstractActivity implements BookListView.P
 	@Override
 	public String mayStop() {
 		Log.debug("BookListActivity.mayStop()");
-		return "BookListActivity.mayStop()";
+		return null;
 	}
 
 	@Override

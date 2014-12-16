@@ -268,7 +268,7 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
 	@Override
 	public String mayStop() {
 		Log.debug("BookFormActivity.mayStop()");
-		return "BookFormActivity.mayStop()";
+		return null;
 	}
 
 	@Override
