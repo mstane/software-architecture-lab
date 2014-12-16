@@ -1,12 +1,12 @@
 package org.sm.lab.mybooks.client.activity;
 
-import com.allen_sauer.gwt.log.client.Log;
-import com.google.gwt.activity.shared.AbstractActivity;
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.view.client.ListDataProvider;
-import com.google.inject.Inject;
+import java.util.List;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.groups.Default;
 
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
@@ -33,13 +33,13 @@ import org.sm.lab.mybooks.shared.dto.BookDto;
 import org.sm.lab.mybooks.shared.dto.NoteDto;
 import org.sm.lab.mybooks.shared.validation.ClientGroup;
 
-import java.util.List;
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.groups.Default;
+import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.view.client.ListDataProvider;
+import com.google.inject.Inject;
 
 public class BookFormActivity extends AbstractActivity implements BookFormView.Presenter, NoteChangedEventHandler {
 
@@ -81,9 +81,7 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
         view.clear();
         
         BookFormPlace place = (BookFormPlace)placeController.getWhere();
-        
         dto = place.getBookDto();
-        
         if (dto != null) {
             setValues();
             fetchNoteList();
@@ -211,7 +209,10 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
         view.getUrl().setValue(dto.getUrl());
 //        view.getStartReadingDate().setValue(dto.getStartReadingDate().toString());
 //        view.getEndReadingDate().setValue(dto.getEndReadingDate().toString());
-        view.getRating().setValue(dto.getRating().toString());
+        Integer rating = dto.getRating();
+        if (rating != null && rating > 0) {
+        	view.getRating().setValue(rating.toString());
+        }
     }
 
 	
@@ -262,6 +263,24 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
         view.setNewNoteButton(enabled);
         view.setDeleteButtonEnable(enabled);              
         
+	}
+
+	@Override
+	public String mayStop() {
+		Log.debug("BookFormActivity.mayStop()");
+		return "BookFormActivity.mayStop()";
+	}
+
+	@Override
+	public void onCancel() {
+		Log.debug("BookFormActivity.onCancel()");
+		
+	}
+
+	@Override
+	public void onStop() {
+		Log.debug("BookFormActivity.onStop()");
+		
 	}
 
 

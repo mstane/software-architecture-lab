@@ -129,5 +129,23 @@ public class BookListActivity extends AbstractActivity implements BookListView.P
 		listDataProvider.refresh();
 	}
 	
+	@Override
+	public String mayStop() {
+		Log.debug("BookListActivity.mayStop()");
+		return "BookListActivity.mayStop()";
+	}
+
+	@Override
+	public void onCancel() {
+		Log.debug("BookListActivity.onCancel()");
+		
+	}
+
+	@Override
+	public void onStop() {
+		Log.debug("BookListActivity.onStop()");
+		
+	}
+	
 
 }

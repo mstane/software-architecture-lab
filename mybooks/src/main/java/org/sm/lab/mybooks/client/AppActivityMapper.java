@@ -1,5 +1,15 @@
 package org.sm.lab.mybooks.client;
 
+import org.sm.lab.mybooks.client.event.LoginEvent;
+import org.sm.lab.mybooks.client.event.LoginEventHandler;
+import org.sm.lab.mybooks.client.place.BookFormPlace;
+import org.sm.lab.mybooks.client.place.BookListPlace;
+import org.sm.lab.mybooks.client.place.LoginPlace;
+import org.sm.lab.mybooks.client.place.NoteFormPlace;
+import org.sm.lab.mybooks.client.place.ProfileFormPlace;
+import org.sm.lab.mybooks.shared.AppConsts;
+import org.sm.lab.mybooks.shared.dto.ReaderDto;
+
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
@@ -9,15 +19,6 @@ import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Timer;
 import com.google.inject.Inject;
-
-import org.sm.lab.mybooks.client.event.LoginEvent;
-import org.sm.lab.mybooks.client.event.LoginEventHandler;
-import org.sm.lab.mybooks.client.place.BookFormPlace;
-import org.sm.lab.mybooks.client.place.BookListPlace;
-import org.sm.lab.mybooks.client.place.LoginPlace;
-import org.sm.lab.mybooks.client.place.NoteFormPlace;
-import org.sm.lab.mybooks.shared.AppConsts;
-import org.sm.lab.mybooks.shared.dto.ReaderDto;
 
 public class AppActivityMapper implements ActivityMapper {
     
@@ -54,6 +55,7 @@ public class AppActivityMapper implements ActivityMapper {
         else if (place instanceof BookFormPlace) return ginjector.getBookFormActivity();
         else if (place instanceof BookListPlace) return ginjector.getBookListActivity();
         else if (place instanceof NoteFormPlace) return ginjector.getNoteFormActivity();
+        else if (place instanceof ProfileFormPlace) return ginjector.getProfileFormActivity();
         
         return null;
     }

@@ -157,7 +157,7 @@
              			<g:Anchor ui:field='menuBooksAnchor' href="#BookListPlace:" addStyleNames='{style.contentButton}'>
                				<ui:msg key='menuBooksMsg'>Books</ui:msg>
              			</g:Anchor>
-             			<g:Anchor ui:field='menuProfileAnchor' href="#ProfilePlace:" addStyleNames='{style.contentButton}'>
+             			<g:Anchor ui:field='menuProfileAnchor' href="#ProfileFormPlace:" addStyleNames='{style.contentButton}'>
                				<ui:msg key='menuProfileMsg'>Profile</ui:msg>
              			</g:Anchor>
              			<g:Anchor ui:field='menuLogoutAnchor' href="#LoginPlace:" addStyleNames='{style.contentButton}'>

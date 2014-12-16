@@ -1,5 +1,6 @@
 package org.sm.lab.mybooks.client.place;
 
+import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceTokenizer;
 
@@ -24,15 +25,18 @@ public class BookFormPlace extends Place {
 
 		@Override
 		public BookFormPlace getPlace(String token) {
+			Log.debug("BookFormPlace.Tokenizer.getPlace");
 			return new BookFormPlace();
 		}
 
 		@Override
 		public String getToken(BookFormPlace place) {
+			String token = "";
 			if (place != null && place.getBookDto() != null && place.getBookDto().getId() != null) {
-			    return "id=" + place.getBookDto().getId();
+			    token = "id=" + place.getBookDto().getId();
 			}
-		    return "";
+			Log.debug("BookFormPlace.Tokenizer.getToken;token=" + token);
+		    return token;
 		}
 
 	}
