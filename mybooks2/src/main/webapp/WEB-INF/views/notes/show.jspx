@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_org_sm_lab_mybooks2_domain_Note" object="${note}" path="/notes" z="7o7acwxEUunS0ss21mP/x18/fGw=">
+        <field:display field="title" id="s_org_sm_lab_mybooks2_domain_Note_title" object="${note}" z="jJMNvZPvhxk8QTxMkvDfopNVTPc="/>
+        <field:display field="content" id="s_org_sm_lab_mybooks2_domain_Note_content" object="${note}" z="rSZKSeAoq4ZuGJpQHTaMGdeIhpA="/>
+        <field:display date="true" dateTimePattern="${note_createdtime_date_format}" field="createdTime" id="s_org_sm_lab_mybooks2_domain_Note_createdTime" object="${note}" z="jaA0YAWSEmC4GfAYdLppBCo0KfE="/>
+        <field:display date="true" dateTimePattern="${note_modifiedtime_date_format}" field="modifiedTime" id="s_org_sm_lab_mybooks2_domain_Note_modifiedTime" object="${note}" z="fVxdhaq/hQDykzq6Jyh39fswWB0="/>
+        <field:display field="book" id="s_org_sm_lab_mybooks2_domain_Note_book" object="${note}" z="JaNtwoG07qq5uulFxeiQgrYGb/s="/>
+    </page:show>
+</div>
