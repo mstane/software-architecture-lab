@@ -1,3 +1,4 @@
+
 package org.sm.lab.mybooks.client.activity;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -36,83 +37,79 @@ import javax.validation.Validator;
 import javax.validation.groups.Default;
 
 public class NoteFormActivity extends AbstractActivity implements NoteFormView.Presenter {
-	
-	private NoteDto dto;
 
-	private final DispatchAsync dispatchRpcService;
-	private final EventBus eventBus;
-	private final BookListView parentView;
-	private final NoteFormView view;
-	private final IAppDialogBox appDialogBox;
-	private final PlaceController placeController;
-	
-	@Inject
-	public NoteFormActivity(AppGinjector ginjector) {
-	    Log.debug("NoteFormActivity.NoteFormActivity()");
-	    
+    private NoteDto dto;
+
+    private final DispatchAsync dispatchRpcService;
+    private final EventBus eventBus;
+    private final BookListView parentView;
+    private final NoteFormView view;
+    private final IAppDialogBox appDialogBox;
+    private final PlaceController placeController;
+
+    @Inject
+    public NoteFormActivity(AppGinjector ginjector) {
+        Log.debug("NoteFormActivity.NoteFormActivity()");
+
         this.dispatchRpcService = ginjector.getDispatchAsync();
         this.eventBus = ginjector.getEventBus();
         this.appDialogBox = ginjector.getAppDialogBox();
         this.placeController = ginjector.getPlaceController();
-		
+
         this.parentView = ginjector.getBookListView();
         this.view = parentView.getNoteForm();
         this.view.setPresenter(this);
 
-	}
-	
-	public NoteDto getDto() {
-		return this.dto;
-	}
-	
-	public void bind() {
-		if (dto != null) {
-			view.getNoteTitle().setValue(dto.getTitle());			
-			view.getContent().setValue(dto.getContent());
-		}
+    }
 
-	}
-	
-	
+    public NoteDto getDto() {
+        return this.dto;
+    }
 
+    public void bind() {
+        if (dto != null) {
+            setValues();
+        }
+
+    }
 
     @Override
     public void start(AcceptsOneWidget container, EventBus eventBus) {
         Log.debug("NoteFormActivity.start()");
-        
-        NoteFormPlace place = (NoteFormPlace)placeController.getWhere();
-        
+
+        NoteFormPlace place = (NoteFormPlace) placeController.getWhere();
+
         dto = place.getNoteDto();
+
+        view.setVisible(true);
+        view.clear();
+        if (dto.getId() != null && dto.getId() > 0) {
+            fetchNoteDetails();
+        }
+
+        container.setWidget(parentView.asWidget());
+
+    }
+
+    @Override
+    public void onUpdateButtonClicked() {
+        doSave();
+    }
+
+    @Override
+    public void onDeleteButtonClicked() {
+        doDelete();
+    }
+
+    private void doSave() {
         
-		view.setVisible(true);
-		view.clear();
-		if (dto.getId() != null && dto.getId() > 0) {
-			fetchNoteDetails();
-		}
-		
-		container.setWidget(parentView.asWidget());
-		
-	}
-	
-	@Override
-	public void onUpdateButtonClicked() {
-		doSave();
-	}
+        getValues();
 
-	@Override
-	public void onDeleteButtonClicked() {
-		doDelete();
-	}
-
-	private void doSave() {
-		dto.setTitle(view.getNoteTitle().getValue());
-		dto.setContent(view.getContent().getValue());
-		
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<NoteDto>> violations = validator.validate(dto, Default.class, ClientGroup.class);
-        
+
         view.getErrorLabel().setText("");
-        
+
         if (!violations.isEmpty()) {
             StringBuffer errorMessage = new StringBuffer();
             for (ConstraintViolation<NoteDto> constraintViolation : violations) {
@@ -124,45 +121,60 @@ public class NoteFormActivity extends AbstractActivity implements NoteFormView.P
             view.getErrorLabel().setText(errorMessage.toString());
             return;
         }
-		
-		if (dto.getId() == null) {
-			dispatchRpcService.execute(new CreateNoteAction(dto), new AppAsyncCallback<CreateNoteResult>(eventBus, appDialogBox) {
-	            public void onSuccess(CreateNoteResult result) {
-	            	Log.debug("CreateNoteAction -- onSuccess()");
-	            	dto = result.getDto();
-					eventBus.fireEvent(new NoteChangedEvent(Action.CREATED, dto));
-	            }
-	        });
-		} else {
-			dispatchRpcService.execute(new UpdateNoteAction(dto), new AppAsyncCallback<UpdateNoteResult>(eventBus, appDialogBox) {
-	            public void onSuccess(UpdateNoteResult result) {
-	            	Log.debug("UpdateNoteAction -- onSuccess()");
-	            	dto = result.getDto();
-	            	eventBus.fireEvent(new NoteChangedEvent(Action.UPDATED, dto));
-	            }
-	        });
-		}
-		
-	}
 
-	private void doDelete() {		
-		dispatchRpcService.execute(new DeleteNoteAction(dto), new AppAsyncCallback<DeleteNoteResult>(eventBus, appDialogBox) {
+        if (dto.getId() == null) {
+            dispatchRpcService.execute(new CreateNoteAction(dto), new AppAsyncCallback<CreateNoteResult>(eventBus, appDialogBox) {
+                public void onSuccess(CreateNoteResult result) {
+                    Log.debug("CreateNoteAction -- onSuccess()");
+                    dto = result.getDto();
+                    eventBus.fireEvent(new NoteChangedEvent(Action.CREATED, dto));
+                }
+            });
+        } else {
+            dispatchRpcService.execute(new UpdateNoteAction(dto), new AppAsyncCallback<UpdateNoteResult>(eventBus, appDialogBox) {
+                public void onSuccess(UpdateNoteResult result) {
+                    Log.debug("UpdateNoteAction -- onSuccess()");
+                    dto = result.getDto();
+                    eventBus.fireEvent(new NoteChangedEvent(Action.UPDATED, dto));
+                }
+            });
+        }
+
+    }
+
+    private void doDelete() {
+        dispatchRpcService.execute(new DeleteNoteAction(dto), new AppAsyncCallback<DeleteNoteResult>(eventBus, appDialogBox) {
             public void onSuccess(DeleteNoteResult result) {
-            	Log.debug("DeleteNoteAction -- onSuccess()");
-            	eventBus.fireEvent(new NoteChangedEvent(Action.DELETED, dto));
+                Log.debug("DeleteNoteAction -- onSuccess()");
+                eventBus.fireEvent(new NoteChangedEvent(Action.DELETED, dto));
+                view.setVisible(false);
             }
         });
-	}
-	
-	private void fetchNoteDetails() {
-		dispatchRpcService.execute(new GetNoteAction(dto) , new AppAsyncCallback<GetNoteResult>(eventBus, appDialogBox) {
-            public void onSuccess(GetNoteResult result) {
-            	Log.debug("GetNoteAction -- onSuccess()");
-            	dto = result.getDto();
-            	bind();
-            }
-        });
-	}
+    }
 
+    private void fetchNoteDetails() {
+        dispatchRpcService.execute(new GetNoteAction(dto), new AppAsyncCallback<GetNoteResult>(eventBus, appDialogBox) {
+            public void onSuccess(GetNoteResult result) {
+                Log.debug("GetNoteAction -- onSuccess()");
+                dto = result.getDto();
+                bind();
+            }
+        });
+    }
+    
+    public void setValues() {
+        view.getNoteTitle().setValue(dto.getTitle());
+        view.getContent().setValue(dto.getContent());
+    }
+    
+    public void getValues() {
+        dto.setTitle(view.getNoteTitle().getValue());
+        dto.setContent(view.getContent().getValue());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
 
 }

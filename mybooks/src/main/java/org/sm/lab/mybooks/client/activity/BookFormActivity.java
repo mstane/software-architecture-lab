@@ -44,7 +44,9 @@ import com.google.inject.Inject;
 public class BookFormActivity extends AbstractActivity implements BookFormView.Presenter, NoteChangedEventHandler {
 
 	private BookDto dto;
-	private ListDataProvider<NoteDto> noteTableDataProvider = new ListDataProvider<NoteDto>();
+	private ListDataProvider<NoteDto> noteTableDataProvider = null;
+	private List<NoteDto> noteList = null;
+	
 	private final DispatchAsync dispatchRpcService;
 	private final EventBus eventBus;
 	private final BookListView listView;
@@ -65,7 +67,9 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
         this.view = listView.getBookFormView();
         this.view.setPresenter(this);
 		
+        noteTableDataProvider = new ListDataProvider<NoteDto>();
 		noteTableDataProvider.addDataDisplay(view.getNoteTable());
+		noteList = noteTableDataProvider.getList();
 		
 		eventBus.addHandler(NoteChangedEvent.TYPE, this);
 	}
@@ -79,6 +83,7 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
         Log.debug("BookFormActivity.start()");
         
         view.clear();
+        noteList.clear();
         
         BookFormPlace place = (BookFormPlace)placeController.getWhere();
         dto = place.getBookDto();
@@ -89,7 +94,6 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
             dto = new BookDto();
         }
         
-        view.getErrorLabel().setText("");
         view.setVisible(true);
         
         setEnabled();  
@@ -178,12 +182,11 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
         });
 	}
 	
-	private void fetchNoteList() {
+	private void fetchNoteList() {	    
 		dispatchRpcService.execute(new LoadAllNotesAction(dto.getId()) , new AppAsyncCallback<LoadAllNotesResult>(eventBus, appDialogBox) {
             public void onSuccess(LoadAllNotesResult result) {
             	Log.debug("LoadAllNotesResult -- onSuccess()");
-            	noteTableDataProvider.setList(result.getDtos());
-            	noteTableDataProvider.refresh();
+            	noteList.addAll(result.getDtos());
             }
         });
 
@@ -216,18 +219,15 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
     }
 
 	
-	public void addNoteInTable(NoteDto noteDto) {
-		List<NoteDto> notes = noteTableDataProvider.getList();
-
-		notes.remove(noteDto);
-		notes.add(noteDto);
+	public void updateNoteInTable(NoteDto noteDto) {
+	    noteList.remove(noteDto);
+	    noteList.add(noteDto);
 
 		refreshNoteTable();
 	}
 	
 	public void removeNoteFromTable(NoteDto noteDto) {
-		List<NoteDto> notes = noteTableDataProvider.getList();
-		notes.remove(noteDto);
+	    noteList.remove(noteDto);
 		
 		refreshNoteTable();
 	}
@@ -242,9 +242,9 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
 		NoteDto noteDto = event.getChangedNote();
 
 		if (action == NoteChangedEvent.Action.CREATED) {
-			addNoteInTable(noteDto);
+		    updateNoteInTable(noteDto);
 		} else if (action == NoteChangedEvent.Action.UPDATED) {
-			refreshNoteTable();
+		    updateNoteInTable(noteDto);
 		} else if (action == NoteChangedEvent.Action.DELETED) {
 			removeNoteFromTable(noteDto);
 		}
@@ -282,6 +282,11 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
 		Log.debug("BookFormActivity.onStop()");
 		
 	}
+	
+	@Override
+    public boolean equals(Object obj) {
+        return false;
+    }
 
 
 }
