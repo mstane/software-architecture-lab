@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.sm.lab.mybooks2.enums.SystemRole;
 import org.sm.lab.mybooks2.repository.ReaderRepository;
 import org.sm.lab.mybooks2.service.ReaderService;
@@ -13,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
 
-@Component
 @Configurable
+@Component
 public class ReaderDataOnDemand {
 
 	private Random rnd = new SecureRandom();
@@ -77,14 +79,14 @@ public class ReaderDataOnDemand {
             index = data.size() - 1;
         }
         Reader obj = data.get(index);
-        Long id = obj.getId();
+        String id = obj.getId();
         return readerService.findReader(id);
     }
 
 	public Reader getRandomReader() {
         init();
         Reader obj = data.get(rnd.nextInt(data.size()));
-        Long id = obj.getId();
+        String id = obj.getId();
         return readerService.findReader(id);
     }
 

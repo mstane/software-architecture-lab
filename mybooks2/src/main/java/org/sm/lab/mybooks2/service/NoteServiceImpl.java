@@ -1,6 +1,7 @@
 package org.sm.lab.mybooks2.service;
 
 import java.util.List;
+
 import org.sm.lab.mybooks2.domain.Note;
 import org.sm.lab.mybooks2.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class NoteServiceImpl implements NoteService {
         noteRepository.delete(note);
     }
 
-	public Note findNote(Long id) {
+	public Note findNote(String id) {
         return noteRepository.findOne(id);
     }
 

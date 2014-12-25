@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface NoteRepository extends JpaSpecificationExecutor<Note>, JpaRepository<Note, Long> {
+public interface NoteRepository extends JpaRepository<Note, String>, JpaSpecificationExecutor<Note> {
 }

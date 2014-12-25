@@ -1,5 +1,6 @@
 package org.sm.lab.mybooks2.service;
 import java.util.List;
+
 import org.sm.lab.mybooks2.domain.Reader;
 
 public interface ReaderService {
@@ -10,7 +11,7 @@ public interface ReaderService {
 	public abstract void deleteReader(Reader reader);
 
 
-	public abstract Reader findReader(Long id);
+	public abstract Reader findReader(String id);
 
 
 	public abstract List<Reader> findAllReaders();

@@ -1,6 +1,7 @@
 package org.sm.lab.mybooks2.service;
 
 import java.util.List;
+
 import org.sm.lab.mybooks2.domain.Book;
 import org.sm.lab.mybooks2.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class BookServiceImpl implements BookService {
         bookRepository.delete(book);
     }
 
-	public Book findBook(Long id) {
+	public Book findBook(String id) {
         return bookRepository.findOne(id);
     }
 

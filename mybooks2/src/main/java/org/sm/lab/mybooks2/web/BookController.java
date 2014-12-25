@@ -1,8 +1,10 @@
 package org.sm.lab.mybooks2.web;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import org.joda.time.format.DateTimeFormat;
 import org.sm.lab.mybooks2.domain.Book;
 import org.sm.lab.mybooks2.enums.Genre;
@@ -52,7 +54,7 @@ public class BookController {
     }
 
 	@RequestMapping(value = "/{id}", produces = "text/html")
-    public String show(@PathVariable("id") Long id, Model uiModel) {
+    public String show(@PathVariable("id") String id, Model uiModel) {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("book", bookService.findBook(id));
         uiModel.addAttribute("itemId", id);
@@ -86,13 +88,13 @@ public class BookController {
     }
 
 	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
-    public String updateForm(@PathVariable("id") Long id, Model uiModel) {
+    public String updateForm(@PathVariable("id") String id, Model uiModel) {
         populateEditForm(uiModel, bookService.findBook(id));
         return "books/update";
     }
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
-    public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+    public String delete(@PathVariable("id") String id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         Book book = bookService.findBook(id);
         bookService.deleteBook(book);
         uiModel.asMap().clear();

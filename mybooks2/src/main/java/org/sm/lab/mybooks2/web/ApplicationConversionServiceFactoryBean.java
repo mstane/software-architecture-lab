@@ -41,18 +41,10 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         };
     }
 
-	public Converter<Long, Book> getIdToBookConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, org.sm.lab.mybooks2.domain.Book>() {
-            public org.sm.lab.mybooks2.domain.Book convert(java.lang.Long id) {
-                return bookService.findBook(id);
-            }
-        };
-    }
-
-	public Converter<String, Book> getStringToBookConverter() {
+	public Converter<String, Book> getIdToBookConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.String, org.sm.lab.mybooks2.domain.Book>() {
-            public org.sm.lab.mybooks2.domain.Book convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), Book.class);
+            public org.sm.lab.mybooks2.domain.Book convert(java.lang.String id) {
+                return bookService.findBook(id);
             }
         };
     }
@@ -65,18 +57,10 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         };
     }
 
-	public Converter<Long, Note> getIdToNoteConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, org.sm.lab.mybooks2.domain.Note>() {
-            public org.sm.lab.mybooks2.domain.Note convert(java.lang.Long id) {
-                return noteService.findNote(id);
-            }
-        };
-    }
-
-	public Converter<String, Note> getStringToNoteConverter() {
+	public Converter<String, Note> getIdToNoteConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.String, org.sm.lab.mybooks2.domain.Note>() {
-            public org.sm.lab.mybooks2.domain.Note convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), Note.class);
+            public org.sm.lab.mybooks2.domain.Note convert(java.lang.String id) {
+                return noteService.findNote(id);
             }
         };
     }
@@ -89,18 +73,10 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         };
     }
 
-	public Converter<Long, Reader> getIdToReaderConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, org.sm.lab.mybooks2.domain.Reader>() {
-            public org.sm.lab.mybooks2.domain.Reader convert(java.lang.Long id) {
-                return readerService.findReader(id);
-            }
-        };
-    }
-
-	public Converter<String, Reader> getStringToReaderConverter() {
+	public Converter<String, Reader> getIdToReaderConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.String, org.sm.lab.mybooks2.domain.Reader>() {
-            public org.sm.lab.mybooks2.domain.Reader convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), Reader.class);
+            public org.sm.lab.mybooks2.domain.Reader convert(java.lang.String id) {
+                return readerService.findReader(id);
             }
         };
     }
@@ -108,13 +84,10 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	public void installLabelConverters(FormatterRegistry registry) {
         registry.addConverter(getBookToStringConverter());
         registry.addConverter(getIdToBookConverter());
-        registry.addConverter(getStringToBookConverter());
         registry.addConverter(getNoteToStringConverter());
         registry.addConverter(getIdToNoteConverter());
-        registry.addConverter(getStringToNoteConverter());
         registry.addConverter(getReaderToStringConverter());
         registry.addConverter(getIdToReaderConverter());
-        registry.addConverter(getStringToReaderConverter());
     }
 
 	public void afterPropertiesSet() {

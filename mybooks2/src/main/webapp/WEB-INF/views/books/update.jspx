@@ -11,6 +11,6 @@
         <field:input field="rating" id="c_org_sm_lab_mybooks2_domain_Book_rating" validationMessageCode="field_invalid_integer" z="Vfr7pRu0/eV2sfwoDEGYffllR6M="/>
         <field:select field="genre" id="c_org_sm_lab_mybooks2_domain_Book_genre" items="${genres}" path="genres" z="yRaxJdm7njiWcXHyXkbU0x9NUwk="/>
         <field:select field="reader" id="c_org_sm_lab_mybooks2_domain_Book_reader" itemValue="id" items="${readers}" path="/readers" z="meVkR7/PB2Wr1Mo21mwjpXkPjvo="/>
-        <field:select field="notes" id="c_org_sm_lab_mybooks2_domain_Book_notes" itemValue="id" items="${notes}" multiple="true" path="/notes" z="5UX0PVQJeh84TLuQ02M6J0+Xf+Y="/>
+        <field:simple field="notes" id="c_org_sm_lab_mybooks2_domain_Book_notes" messageCode="entity_reference_not_managed" messageCodeAttribute="Note" z="gdJD6U4Z9ifJZ6Fm9al6a1mtSzM="/>
     </form:update>
 </div>

@@ -13,7 +13,10 @@
         <roo.version>1.3.1.RC1</roo.version>
         <slf4j.version>1.7.5</slf4j.version>
         <spring.version>3.2.6.RELEASE</spring.version>
-    <spring-security.version>3.1.0.RELEASE</spring-security.version>
+        <gae.version>1.9.17</gae.version>
+        <datanucleusVersion>3.1.3</datanucleusVersion>
+        <gae.home>${user.home}/.m2/repository/com/google/appengine/appengine-java-sdk/${gae.version}/appengine-java-sdk-${gae.version}</gae.home>
+        <spring-security.version>3.1.0.RELEASE</spring-security.version>
     </properties>
     <repositories>
         <repository>
@@ -31,6 +34,14 @@
             <name>Spring Roo Repository</name>
             <url>http://spring-roo-repository.springsource.org/release</url>
         </repository>
+    <repository>
+            <id>DataNucleus_Repos2</id>
+            <url>http://www.datanucleus.org/downloads/maven2</url>
+            <name>DataNucleus Repository</name>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
     </repositories>
     <pluginRepositories>
         <pluginRepository>
@@ -47,6 +58,10 @@
             <id>spring-roo-repository</id>
             <name>Spring Roo Repository</name>
             <url>http://spring-roo-repository.springsource.org/release</url>
+        </pluginRepository>
+    <pluginRepository>
+            <id>DataNucleus_2</id>
+            <url>http://www.datanucleus.org/downloads/maven2/</url>
         </pluginRepository>
     </pluginRepositories>
     <dependencies>
@@ -137,39 +152,62 @@
             <version>${spring.version}</version>
         </dependency>
     <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>2.2.9</version>
+            <groupId>com.google.appengine.orm</groupId>
+            <artifactId>datanucleus-appengine</artifactId>
+            <version>2.1.1</version>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>4.3.6.Final</version>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-1.0-sdk</artifactId>
+            <version>${gae.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.6.Final</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>cglib</groupId>
-                    <artifactId>cglib</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>dom4j</groupId>
-                    <artifactId>dom4j</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-testing</artifactId>
+            <version>${gae.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <version>1.0.0.Final</version>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-stubs</artifactId>
+            <version>${gae.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-            <version>3.2.1</version>
+            <groupId>com.google.appengine</groupId>
+            <artifactId>appengine-api-labs</artifactId>
+            <version>${gae.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jpa_2.0_spec</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-core</artifactId>
+            <version>${datanucleusVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-rdbms</artifactId>
+            <version>${datanucleusVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-api-jpa</artifactId>
+            <version>${datanucleusVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-api-jdo</artifactId>
+            <version>${datanucleusVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.jdo</groupId>
+            <artifactId>jdo-api</artifactId>
+            <version>3.0</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -256,6 +294,7 @@
             <groupId>org.glassfish.web</groupId>
             <artifactId>jstl-impl</artifactId>
             <version>1.2</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.el</groupId>
@@ -352,15 +391,15 @@
                         <version>${aspectj.version}</version>
                     </dependency>
                 </dependencies>
-                <executions>
-                    <execution>
-                        <phase>process-sources</phase>
-                        <goals>
-                            <goal>compile</goal>
-                            <goal>test-compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
+<!--                 <executions> -->
+<!--                     <execution> -->
+<!--                         <phase>process-sources</phase> -->
+<!--                         <goals> -->
+<!--                             <goal>compile</goal> -->
+<!--                             <goal>test-compile</goal> -->
+<!--                         </goals> -->
+<!--                     </execution> -->
+<!--                 </executions> -->
                 <configuration>
                     <outxml>true</outxml>
                     <aspectLibraries>
@@ -437,11 +476,15 @@
                         <buildCommand>
                             <name>org.springframework.ide.eclipse.core.springbuilder</name>
                         </buildCommand>
+                    <buildCommand>
+                            <name>com.google.appengine.eclipse.core.enhancerbuilder</name>
+                        </buildCommand>
                     </additionalBuildcommands>
                     <additionalProjectnatures>
                         <projectnature>org.eclipse.ajdt.ui.ajnature</projectnature>
                         <projectnature>com.springsource.sts.roo.core.nature</projectnature>
                         <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+                    <projectnature>com.google.appengine.eclipse.core.gaeNature</projectnature>
                     </additionalProjectnatures>
                 </configuration>
             </plugin>
@@ -468,6 +511,45 @@
                         <contextPath>/${project.name}</contextPath>
                     </webAppConfig>
                 </configuration>
+            </plugin>
+        <plugin>
+                <groupId>com.google.appengine</groupId>
+                <artifactId>appengine-maven-plugin</artifactId>
+                <version>${gae.version}</version>
+            </plugin>
+            <plugin>
+                <groupId>org.datanucleus</groupId>
+                <artifactId>maven-datanucleus-plugin</artifactId>
+                <version>${datanucleusVersion}</version>
+                <configuration>
+                        <fork>false</fork>
+                        <log4jConfiguration>${basedir}/src/main/resources/log4j.properties</log4jConfiguration>
+                        <mappingIncludes>**/*.class</mappingIncludes>
+                        <verbose>true</verbose>
+                        <enhancerName>ASM</enhancerName>
+                        <api>JPA</api>
+                    <mappingExcludes>**/CustomRequestFactoryServlet.class, **/GaeAuthFilter.class</mappingExcludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>enhance</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.datanucleus</groupId>
+                        <artifactId>datanucleus-core</artifactId>
+                        <version>${datanucleusVersion}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.datanucleus</groupId>
+                        <artifactId>datanucleus-api-jpa</artifactId>
+                        <version>${datanucleusVersion}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         <plugin>
                 <groupId>org.codehaus.mojo</groupId>

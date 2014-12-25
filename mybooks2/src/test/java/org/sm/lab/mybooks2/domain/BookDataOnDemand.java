@@ -7,8 +7,10 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.sm.lab.mybooks2.enums.Genre;
 import org.sm.lab.mybooks2.repository.BookRepository;
 import org.sm.lab.mybooks2.service.BookService;
@@ -16,8 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
 
-@Component
 @Configurable
+@Component
 public class BookDataOnDemand {
 
 	private Random rnd = new SecureRandom();
@@ -89,14 +91,14 @@ public class BookDataOnDemand {
             index = data.size() - 1;
         }
         Book obj = data.get(index);
-        Long id = obj.getId();
+        String id = obj.getId();
         return bookService.findBook(id);
     }
 
 	public Book getRandomBook() {
         init();
         Book obj = data.get(rnd.nextInt(data.size()));
-        Long id = obj.getId();
+        String id = obj.getId();
         return bookService.findBook(id);
     }
 

@@ -7,16 +7,18 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.sm.lab.mybooks2.repository.NoteRepository;
 import org.sm.lab.mybooks2.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
 
-@Component
 @Configurable
+@Component
 public class NoteDataOnDemand {
 
 	private Random rnd = new SecureRandom();
@@ -70,14 +72,14 @@ public class NoteDataOnDemand {
             index = data.size() - 1;
         }
         Note obj = data.get(index);
-        Long id = obj.getId();
+        String id = obj.getId();
         return noteService.findNote(id);
     }
 
 	public Note getRandomNote() {
         init();
         Note obj = data.get(rnd.nextInt(data.size()));
-        Long id = obj.getId();
+        String id = obj.getId();
         return noteService.findNote(id);
     }
 

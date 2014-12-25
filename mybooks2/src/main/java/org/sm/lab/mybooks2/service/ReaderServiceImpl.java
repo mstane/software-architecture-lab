@@ -1,6 +1,7 @@
 package org.sm.lab.mybooks2.service;
 
 import java.util.List;
+
 import org.sm.lab.mybooks2.domain.Reader;
 import org.sm.lab.mybooks2.repository.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class ReaderServiceImpl implements ReaderService {
         readerRepository.delete(reader);
     }
 
-	public Reader findReader(Long id) {
+	public Reader findReader(String id) {
         return readerRepository.findOne(id);
     }
 

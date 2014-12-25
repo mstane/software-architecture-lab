@@ -1,5 +1,6 @@
 package org.sm.lab.mybooks2.service;
 import java.util.List;
+
 import org.sm.lab.mybooks2.domain.Note;
 
 public interface NoteService {
@@ -10,7 +11,7 @@ public interface NoteService {
 	public abstract void deleteNote(Note note);
 
 
-	public abstract Note findNote(Long id);
+	public abstract Note findNote(String id);
 
 
 	public abstract List<Note> findAllNotes();

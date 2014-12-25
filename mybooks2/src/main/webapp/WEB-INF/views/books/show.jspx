@@ -11,6 +11,5 @@
         <field:display field="rating" id="s_org_sm_lab_mybooks2_domain_Book_rating" object="${book}" z="LKjAXXo4o7JxrhkyQwCl0Kepc1g="/>
         <field:display field="genre" id="s_org_sm_lab_mybooks2_domain_Book_genre" object="${book}" z="01tgSAN8+m2GprOaNY0F5HzWlD0="/>
         <field:display field="reader" id="s_org_sm_lab_mybooks2_domain_Book_reader" object="${book}" z="RenbkoXCWGEhlnvkYbNztByZbaE="/>
-        <field:display field="notes" id="s_org_sm_lab_mybooks2_domain_Book_notes" object="${book}" z="clgjX0NSefMZX/Ho1X12v7cUsUo="/>
     </page:show>
 </div>

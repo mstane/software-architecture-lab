@@ -1,9 +1,13 @@
 package org.sm.lab.mybooks2.domain;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
+import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.sm.lab.mybooks2.repository.BookRepository;
@@ -12,7 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath*:/META-INF/spring/applicationContext*.xml")
@@ -27,11 +34,23 @@ public class BookIntegrationTest {
 	@Autowired
     BookDataOnDemand dod;
 
+	private static final LocalServiceTestHelper helper = new LocalServiceTestHelper(new com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig());
+
 	@Autowired
     BookService bookService;
 
 	@Autowired
     BookRepository bookRepository;
+
+	@BeforeClass
+    public static void setUp() {
+        helper.setUp();
+    }
+
+	@AfterClass
+    public static void tearDown() {
+        helper.tearDown();
+    }
 
 	@Test
     public void testCountAllBooks() {
@@ -44,7 +63,7 @@ public class BookIntegrationTest {
     public void testFindBook() {
         Book obj = dod.getRandomBook();
         Assert.assertNotNull("Data on demand for 'Book' failed to initialize correctly", obj);
-        Long id = obj.getId();
+        String id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Book' failed to provide an identifier", id);
         obj = bookService.findBook(id);
         Assert.assertNotNull("Find method for 'Book' illegally returned null for id '" + id + "'", obj);
@@ -77,12 +96,12 @@ public class BookIntegrationTest {
     public void testFlush() {
         Book obj = dod.getRandomBook();
         Assert.assertNotNull("Data on demand for 'Book' failed to initialize correctly", obj);
-        Long id = obj.getId();
+        String id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Book' failed to provide an identifier", id);
         obj = bookService.findBook(id);
         Assert.assertNotNull("Find method for 'Book' illegally returned null for id '" + id + "'", obj);
         boolean modified =  dod.modifyBook(obj);
-        Integer currentVersion = obj.getVersion();
+        Long currentVersion = obj.getVersion();
         bookRepository.flush();
         Assert.assertTrue("Version for 'Book' failed to increment on flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
@@ -91,11 +110,11 @@ public class BookIntegrationTest {
     public void testUpdateBookUpdate() {
         Book obj = dod.getRandomBook();
         Assert.assertNotNull("Data on demand for 'Book' failed to initialize correctly", obj);
-        Long id = obj.getId();
+        String id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Book' failed to provide an identifier", id);
         obj = bookService.findBook(id);
         boolean modified =  dod.modifyBook(obj);
-        Integer currentVersion = obj.getVersion();
+        Long currentVersion = obj.getVersion();
         Book merged = bookService.updateBook(obj);
         bookRepository.flush();
         Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
@@ -123,10 +142,11 @@ public class BookIntegrationTest {
     }
 
 	@Test
+    @Transactional(propagation = Propagation.SUPPORTS)
     public void testDeleteBook() {
         Book obj = dod.getRandomBook();
         Assert.assertNotNull("Data on demand for 'Book' failed to initialize correctly", obj);
-        Long id = obj.getId();
+        String id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Book' failed to provide an identifier", id);
         obj = bookService.findBook(id);
         bookService.deleteBook(obj);

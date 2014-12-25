@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BookRepository extends JpaSpecificationExecutor<Book>, JpaRepository<Book, Long> {
+public interface BookRepository extends JpaSpecificationExecutor<Book>, JpaRepository<Book, String> {
 }

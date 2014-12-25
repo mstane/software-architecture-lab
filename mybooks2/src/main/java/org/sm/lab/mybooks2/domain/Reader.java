@@ -1,21 +1,24 @@
 package org.sm.lab.mybooks2.domain;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.validation.constraints.Pattern;
-import javax.persistence.Enumerated;
-import org.sm.lab.mybooks2.enums.SystemRole;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.datanucleus.api.jpa.annotations.Extension;
+import org.sm.lab.mybooks2.enums.SystemRole;
 
 @Entity
 public class Reader {
@@ -51,33 +54,8 @@ public class Reader {
 
     /**
      */
-    @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Book> books = new HashSet<Book>();
-
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
-
-	@Version
-    @Column(name = "version")
-    private Integer version;
-
-	public Long getId() {
-        return this.id;
-    }
-
-	public void setId(Long id) {
-        this.id = id;
-    }
-
-	public Integer getVersion() {
-        return this.version;
-    }
-
-	public void setVersion(Integer version) {
-        this.version = version;
-    }
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reader")
+    private List<Book> books = new ArrayList<Book>();
 
 	public String getUsername() {
         return this.username;
@@ -127,15 +105,41 @@ public class Reader {
         this.systemRole = systemRole;
     }
 
-	public Set<Book> getBooks() {
+	public List<Book> getBooks() {
         return this.books;
     }
 
-	public void setBooks(Set<Book> books) {
+	public void setBooks(List<Book> books) {
         this.books = books;
     }
 
 	public String toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
+
+	@Id
+    @Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private String id;
+
+	@Version
+    @Column(name = "version")
+    private Long version;
+
+	public String getId() {
+        return this.id;
+    }
+
+	public void setId(String id) {
+        this.id = id;
+    }
+
+	public Long getVersion() {
+        return this.version;
+    }
+
+	public void setVersion(Long version) {
+        this.version = version;
     }
 }

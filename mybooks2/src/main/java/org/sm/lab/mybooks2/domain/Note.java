@@ -1,19 +1,22 @@
 package org.sm.lab.mybooks2.domain;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.datanucleus.api.jpa.annotations.Extension;
 import org.springframework.format.annotation.DateTimeFormat;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Note {
@@ -44,6 +47,32 @@ public class Note {
      */
     @ManyToOne
     private Book book;
+
+	@Id
+    @Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private String id;
+
+	@Version
+    @Column(name = "version")
+    private Long version;
+
+	public String getId() {
+        return this.id;
+    }
+
+	public void setId(String id) {
+        this.id = id;
+    }
+
+	public Long getVersion() {
+        return this.version;
+    }
+
+	public void setVersion(Long version) {
+        this.version = version;
+    }
 
 	public String getTitle() {
         return this.title;
@@ -83,31 +112,6 @@ public class Note {
 
 	public void setBook(Book book) {
         this.book = book;
-    }
-
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
-
-	@Version
-    @Column(name = "version")
-    private Integer version;
-
-	public Long getId() {
-        return this.id;
-    }
-
-	public void setId(Long id) {
-        this.id = id;
-    }
-
-	public Integer getVersion() {
-        return this.version;
-    }
-
-	public void setVersion(Integer version) {
-        this.version = version;
     }
 
 	public String toString() {

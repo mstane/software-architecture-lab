@@ -9,6 +9,5 @@
         <field:display field="lastName" id="s_org_sm_lab_mybooks2_domain_Reader_lastName" object="${reader}" z="KxC3nLo7H8H9nsFR5RtqroVqX48="/>
         <field:display field="email" id="s_org_sm_lab_mybooks2_domain_Reader_email" object="${reader}" z="h7q+r08LXD+Q0izbX1Mc7FS95dw="/>
         <field:display field="systemRole" id="s_org_sm_lab_mybooks2_domain_Reader_systemRole" object="${reader}" z="Gj/MuVCQTgsshy6uJZBmTmrx910="/>
-        <field:display field="books" id="s_org_sm_lab_mybooks2_domain_Reader_books" object="${reader}" z="JdcreTKTHbn5WoGZ20KniQC5s8s="/>
     </page:show>
 </div>

@@ -9,7 +9,7 @@
         <field:input field="lastName" id="c_org_sm_lab_mybooks2_domain_Reader_lastName" z="vIabjv6Bl2wNdLQv5Lrr1Mcre+I="/>
         <field:input field="email" id="c_org_sm_lab_mybooks2_domain_Reader_email" validationMessageCode="field_invalid_email" validationRegex="[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+" z="icet82YaQF/S43guDlHPqHbY3qo="/>
         <field:select field="systemRole" id="c_org_sm_lab_mybooks2_domain_Reader_systemRole" items="${systemroles}" path="systemroles" required="true" z="SuAAX+jMnEAEMbRGNllULxcOwio="/>
-        <field:select field="books" id="c_org_sm_lab_mybooks2_domain_Reader_books" itemValue="id" items="${books}" multiple="true" path="/books" z="dqdYN+lZuGRj9SzISCXKGQPBQvI="/>
+        <field:simple field="books" id="c_org_sm_lab_mybooks2_domain_Reader_books" messageCode="entity_reference_not_managed" messageCodeAttribute="Book" z="7KiIrFISvtKYNJGPuDcovbfex1g="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_org_sm_lab_mybooks2_domain_Reader" render="${not empty dependencies}" z="M77LKRVlu2JFCcjU/QwPkDwFIM4="/>
 </div>
