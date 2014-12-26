@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -62,11 +63,11 @@ public class Book {
 
     /**
      */
-    private Integer rating;
+    private Long rating;
 
     /**
      */
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Genre genre;
 
     /**
@@ -273,11 +274,11 @@ public class Book {
         this.endReadingDate = endReadingDate;
     }
 
-	public Integer getRating() {
+	public Long getRating() {
         return this.rating;
     }
 
-	public void setRating(Integer rating) {
+	public void setRating(Long rating) {
         this.rating = rating;
     }
 

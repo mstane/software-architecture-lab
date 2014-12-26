@@ -63,7 +63,7 @@ public class BookDataOnDemand {
     }
 
 	public void setRating(Book obj, int index) {
-        Integer rating = new Integer(index);
+        Long rating = new Long(index);
         obj.setRating(rating);
     }
 
