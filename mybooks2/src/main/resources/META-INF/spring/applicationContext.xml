@@ -54,6 +54,5 @@
     <bean class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean" id="entityManagerFactory">
         <property name="persistenceUnitName" value="transactions-optional"/>
     </bean>
-    <bean class="org.sm.lab.mybooks2.security.AppAuthenticationSuccessHandler" id="appAuthenticationSuccessHandler"/>
-    <bean class="org.sm.lab.mybooks2.security.AppLogoutSuccessHandler" id="appLogoutSuccessHandler"/>    
+  
 </beans>

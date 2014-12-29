@@ -3,6 +3,10 @@
 	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+        
+    <beans:bean id="appAuthenticationSuccessHandler" class="org.sm.lab.mybooks2.security.AppAuthenticationSuccessHandler"/>
+    <beans:bean id="appLogoutSuccessHandler" class="org.sm.lab.mybooks2.security.AppLogoutSuccessHandler"/>          
+        
 	<!-- HTTP security configurations -->
 	<http auto-config="true" use-expressions="true" path-type="regex">
 		<form-login login-processing-url="/resources/j_spring_security_check"
