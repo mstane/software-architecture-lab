@@ -12,6 +12,9 @@ public interface ReaderService {
 
 
 	public abstract Reader findReader(String id);
+	
+	
+	public abstract Reader findByUsername(String username);
 
 
 	public abstract List<Reader> findAllReaders();

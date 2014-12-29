@@ -49,7 +49,6 @@ public class Reader {
 
     /**
      */
-    @NotNull
     @Enumerated(EnumType.STRING)
     private SystemRole systemRole;
 

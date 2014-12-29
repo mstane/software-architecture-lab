@@ -46,6 +46,24 @@ public class ReaderController {
         populateEditForm(uiModel, new Reader());
         return "readers/create";
     }
+	
+	@RequestMapping(params = "register", method = RequestMethod.POST, produces = "text/html")
+    public String createRegister(@Valid Reader reader, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            populateEditForm(uiModel, reader);
+            return "readers/register";
+        }
+        uiModel.asMap().clear();
+        reader.setSystemRole(SystemRole.Common);
+        readerService.saveReader(reader);
+        return "redirect:/readers/" + encodeUrlPathSegment(reader.getId().toString(), httpServletRequest);
+    }
+
+	@RequestMapping(params = "register", produces = "text/html")
+    public String createFormRegister(Model uiModel) {
+        populateEditForm(uiModel, new Reader());
+        return "readers/register";
+    }		
 
 	@RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") String id, Model uiModel) {

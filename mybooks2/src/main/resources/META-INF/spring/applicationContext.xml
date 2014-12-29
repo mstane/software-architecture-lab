@@ -44,8 +44,8 @@
         dependency inject an object into your class.
     -->
     <context:component-scan base-package="org.sm.lab.mybooks2">
-        <context:exclude-filter expression=".*_Roo_.*" type="regex"/>
-        <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
+<!--         <context:exclude-filter expression=".*_Roo_.*" type="regex"/> -->
+<!--         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/> -->
     </context:component-scan>
     <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
@@ -54,4 +54,6 @@
     <bean class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean" id="entityManagerFactory">
         <property name="persistenceUnitName" value="transactions-optional"/>
     </bean>
+    <bean class="org.sm.lab.mybooks2.security.AppAuthenticationSuccessHandler" id="appAuthenticationSuccessHandler"/>
+    <bean class="org.sm.lab.mybooks2.security.AppLogoutSuccessHandler" id="appLogoutSuccessHandler"/>    
 </beans>
