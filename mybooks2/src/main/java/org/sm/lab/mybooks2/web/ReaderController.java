@@ -48,7 +48,7 @@ public class ReaderController {
     }
 	
 	@RequestMapping(params = "register", method = RequestMethod.POST, produces = "text/html")
-    public String createRegister(@Valid Reader reader, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+    public String register(@Valid Reader reader, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, reader);
             return "readers/register";
@@ -60,7 +60,7 @@ public class ReaderController {
     }
 
 	@RequestMapping(params = "register", produces = "text/html")
-    public String createFormRegister(Model uiModel) {
+    public String registerForm(Model uiModel) {
         populateEditForm(uiModel, new Reader());
         return "readers/register";
     }		
