@@ -7,23 +7,25 @@
             <menu:item id="i_home" url="/" z="sz+eIIQyHVKJdJ+y4Fol1pWqgc0="/>
 			<sec:authorize access="isAnonymous()">
 			<menu:item id="i_login" url="/login" z="I1UxtEjQWxYQ753REPo8dzuUsGg="/>
-			<menu:item id="i_register" url="/readers?register" z="e0UEGo6L31cC31D4lgkjPEbpROM="/>
+			<menu:item id="i_register" url="/profile?register" z="e0UEGo6L31cC31D4lgkjPEbpROM="/>
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
-			<menu:item id="i_my_profile" url="/readers/${sessionScope.readerSession.id}" z="I1UxtEjQWxYQ753REPo8dzuUsGg="/>
+			<menu:item id="i_my_profile" url="/profile/${sessionScope.readerSession.id}" z="I1UxtEjQWxYQ753REPo8dzuUsGg="/>
 			</sec:authorize>
 			<sec:authorize access="isAuthenticated()">
 			<menu:item id="i_logout" url="/resources/j_spring_security_logout" z="48NWieNgYE1J83qxtuhIJZ761Oc="/>
         	</sec:authorize>
         </menu:category>
+        <sec:authorize access="hasRole('Admin')">
+        <menu:category id="c_reader" z="+VA51Miuz3jk+Mx4Pca2VZBLiAo=">
+            <menu:item id="i_reader_new" messageCode="global_menu_new" url="/admin?form" z="ED7o+P1pGv6qUtW5txtB+vSllmM="/>
+            <menu:item id="i_reader_list" messageCode="global_menu_list" url="/admin?page=1&amp;size=${empty param.size ? 10 : param.size}" z="JemI0+/AzXxMrU1cvH2k81NW6Ro="/>
+        </menu:category>
+        </sec:authorize>
         <sec:authorize access="isAuthenticated()">    
         <menu:category id="c_note" z="9h2hsuneSrocx9jL7zHkTKVuHy8=">
             <menu:item id="i_note_new" messageCode="global_menu_new" url="/notes?form" z="oYBQPPA8gC477hQQZwvFgzKbD6o="/>
             <menu:item id="i_note_list" messageCode="global_menu_list" url="/notes?page=1&amp;size=${empty param.size ? 10 : param.size}" z="FTO+GmUarl6QwFawad+RFkRN43I="/>
-        </menu:category>
-        <menu:category id="c_reader" z="+VA51Miuz3jk+Mx4Pca2VZBLiAo=">
-            <menu:item id="i_reader_new" messageCode="global_menu_new" url="/readers?form" z="ED7o+P1pGv6qUtW5txtB+vSllmM="/>
-            <menu:item id="i_reader_list" messageCode="global_menu_list" url="/readers?page=1&amp;size=${empty param.size ? 10 : param.size}" z="JemI0+/AzXxMrU1cvH2k81NW6Ro="/>
         </menu:category>
         <menu:category id="c_book" z="WxiVAJUlwzLkYi6u7YpEjYOT82A=">
             <menu:item id="i_book_new" messageCode="global_menu_new" url="/books?form" z="gAIxvrBOHQC/N0HWTGD46jzwyk8="/>

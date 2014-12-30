@@ -15,9 +15,10 @@
 		<logout logout-url="/resources/j_spring_security_logout"
 			success-handler-ref="appLogoutSuccessHandler" />
 		<!-- Configure these elements to secure URIs in your application -->
-        <access-denied-handler error-page="/access-denied"/>	
-        <intercept-url pattern=".*(note|book|reader).*(update|delete|form|create).*" access="isAuthenticated()" />
-        <intercept-url pattern=".*admin.*(update|delete|form|create).*" access="hasRole('Admin')" />
+        <access-denied-handler error-page="/access-denied"/>
+        <intercept-url pattern=".*register.*" access="permitAll" />	
+        <intercept-url pattern=".*(note|book).*" access="isAuthenticated()" />
+        <intercept-url pattern="/admin.*" access="hasRole('Admin')" />
         <intercept-url pattern=".*" access="permitAll" />
 	</http>
 	<!-- Configure Authentication mechanism -->

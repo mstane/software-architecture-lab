@@ -2,7 +2,7 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_org_sm_lab_mybooks2_domain_Reader" object="${reader}" path="/readers" z="CBptwF5o0F/ig/hq7px7Nw3FHc8=">
+    <page:show id="ps_org_sm_lab_mybooks2_domain_Reader" object="${reader}" path="/profile" list="false" create="false" z="CBptwF5o0F/ig/hq7px7Nw3FHc8=">
         <field:display field="username" id="s_org_sm_lab_mybooks2_domain_Reader_username" object="${reader}" z="HixGNlOgDXYaTeP3r5snbMPV05M="/>
         <field:display field="password" id="s_org_sm_lab_mybooks2_domain_Reader_password" object="${reader}" z="3TsGyrae78v+jowiKNMJ53NnOZA="/>
         <field:display field="firstName" id="s_org_sm_lab_mybooks2_domain_Reader_firstName" object="${reader}" z="7HbhiiIGw2q2W0P+Efj3ZKkbYOE="/>
