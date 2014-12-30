@@ -37,7 +37,7 @@ public class ProfileController {
             return "profile/register";
         }
         uiModel.asMap().clear();
-        reader.setSystemRole(SystemRole.Admin);
+        reader.setSystemRole(SystemRole.Common);
         readerService.saveReader(reader);
         return "redirect:/profile/" + encodeUrlPathSegment(reader.getId().toString(), httpServletRequest);
     }
