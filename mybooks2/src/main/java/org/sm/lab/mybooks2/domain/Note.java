@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
@@ -34,13 +36,11 @@ public class Note {
     /**
      */
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
     private Date createdTime;
 
     /**
      */
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
     private Date modifiedTime;
 
     /**
@@ -58,6 +58,17 @@ public class Note {
     @Column(name = "version")
     private Long version;
 
+	@PrePersist
+	protected void onCreate() {
+		createdTime = new Date();
+		modifiedTime = new Date();
+	}
+
+	@PreUpdate
+	protected void onUpdate() {
+		modifiedTime = new Date();
+	}
+	
 	public String getId() {
         return this.id;
     }

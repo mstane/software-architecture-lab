@@ -5,8 +5,6 @@
     <form:create id="fc_org_sm_lab_mybooks2_domain_Note" modelAttribute="note" path="/notes" render="${empty dependencies}" z="LTRSA3pphyR8h87uV7gq+2Hzz80=">
         <field:input field="title" id="c_org_sm_lab_mybooks2_domain_Note_title" min="2" required="true" z="sdayMPziX1v1cnnkVrtWM0QEJH4="/>
         <field:input field="content" id="c_org_sm_lab_mybooks2_domain_Note_content" z="/13IQ4iadzlFMekz9ymPE0a9xfk="/>
-        <field:datetime dateTimePattern="${note_createdtime_date_format}" field="createdTime" id="c_org_sm_lab_mybooks2_domain_Note_createdTime" z="UgXldZdhzvtxziOriDBzYRyPj/g="/>
-        <field:datetime dateTimePattern="${note_modifiedtime_date_format}" field="modifiedTime" id="c_org_sm_lab_mybooks2_domain_Note_modifiedTime" z="JQ3iBtTUajoC55bA0pHnCzwv6Bk="/>
         <field:select field="book" id="c_org_sm_lab_mybooks2_domain_Note_book" itemValue="id" items="${books}" path="/books" z="0eFROr1s5Ag3NkJV48yzAMC1KlQ="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_org_sm_lab_mybooks2_domain_Note" render="${not empty dependencies}" z="NAtz5gIoaBYtrDBRT30HYgEK4TA="/>

@@ -98,8 +98,8 @@ public class NoteController {
     }
 
 	void addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("note_createdtime_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("note_modifiedtime_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("note_createdtime_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("note_modifiedtime_date_format", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
     }
 
 	void populateEditForm(Model uiModel, Note note) {
