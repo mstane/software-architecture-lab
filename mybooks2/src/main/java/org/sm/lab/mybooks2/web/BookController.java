@@ -38,7 +38,7 @@ public class BookController {
 
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid Book book, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, book);
             return "books/create";
         }

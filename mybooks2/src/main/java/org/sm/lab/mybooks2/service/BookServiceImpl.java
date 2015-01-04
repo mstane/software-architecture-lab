@@ -3,8 +3,12 @@ package org.sm.lab.mybooks2.service;
 import java.util.List;
 
 import org.sm.lab.mybooks2.domain.Book;
+import org.sm.lab.mybooks2.domain.Reader;
 import org.sm.lab.mybooks2.repository.BookRepository;
+import org.sm.lab.mybooks2.repository.ReaderRepository;
+import org.sm.lab.mybooks2.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +18,9 @@ public class BookServiceImpl implements BookService {
 
 	@Autowired
     BookRepository bookRepository;
+	
+	@Autowired
+	ReaderRepository readerRepository;
 
 	public long countAllBooks() {
         return bookRepository.count();
@@ -36,6 +43,9 @@ public class BookServiceImpl implements BookService {
     }
 
 	public void saveBook(Book book) {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Reader reader = readerRepository.findOne(userDetails.getId());
+        book.setReader(reader);
         bookRepository.save(book);
     }
 

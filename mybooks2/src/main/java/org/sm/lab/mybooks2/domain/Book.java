@@ -51,12 +51,14 @@ public class Book {
 
     /**
      */
+    @Column(nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
     private Date startReadingDate;
 
     /**
      */
+    @Column(nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
     private Date endReadingDate;
