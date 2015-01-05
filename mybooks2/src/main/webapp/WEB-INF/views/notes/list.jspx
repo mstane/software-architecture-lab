@@ -8,7 +8,7 @@
             <table:column id="c_org_sm_lab_mybooks2_domain_Note_content" property="content" z="MkpGxN3Q9q0LxUW97aKc+8P3HT0="/>
             <table:column date="true" dateTimePattern="${note_createdtime_date_format}" id="c_org_sm_lab_mybooks2_domain_Note_createdTime" property="createdTime" z="gHsazvpqfQ/ajbZ+5ZScBRoKufM="/>
             <table:column date="true" dateTimePattern="${note_modifiedtime_date_format}" id="c_org_sm_lab_mybooks2_domain_Note_modifiedTime" property="modifiedTime" z="fS/3z24mMWWvsPNGZf0K/k7BHfU="/>
-            <table:column id="c_org_sm_lab_mybooks2_domain_Note_book" property="book" z="sWVIh0RLOZpJMlz4bC5ZS4/YrI4="/>
+            <table:column id="c_org_sm_lab_mybooks2_domain_Note_book" property="book" propertyField="Title" z="sWVIh0RLOZpJMlz4bC5ZS4/YrI4="/>
         </table:table>
     </page:list>
 </div>

@@ -3,6 +3,7 @@
 
   <jsp:directive.attribute name="id" type="java.lang.String" required="true" rtexprvalue="true" description="The identifier for this tag (do not change!)" />
   <jsp:directive.attribute name="property" type="java.lang.String" required="true" rtexprvalue="true" description="The property (field name) of the dataset to be displayed in a column (required)." />
+  <jsp:directive.attribute name="propertyField" type="java.lang.String" required="false" rtexprvalue="true" description="The property's (if object) field name of the dataset to be displayed in a column (required)." />
   <jsp:directive.attribute name="maxLength" type="java.lang.Integer" required="false" rtexprvalue="true" description="Max displayed text length (default '10'). Unlimited if negative" />
   <jsp:directive.attribute name="label" type="java.lang.String" required="false" rtexprvalue="true" description="The column label to be used in the table (optional)." />
   <jsp:directive.attribute name="date" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate that this field is of type java.util.Date" />
@@ -19,6 +20,10 @@
 
     <c:if test="${empty dateTimePattern}">
       <c:set value="MM/dd/yyyy" var="dateTimePattern" />
+    </c:if>
+    
+    <c:if test="${empty propertyField}">
+      <c:set value="none" var="propertyField" />
     </c:if>
       
     <c:choose>
@@ -49,14 +54,16 @@
     </c:choose>
 
     <c:choose>
-      <c:when test="${empty columnProperties and empty columnLabels}">
+      <c:when test="${empty columnProperties and empty columnLabels and empty columnPropertyFields}">
         <c:set var="columnProperties" value="${property}" scope="request" />
         <c:set var="columnLabels" value="${label}" scope="request" />
+        <c:set var="columnPropertyFields" value="${propertyField}" scope="request" />
         <c:set var="columnMaxLengths" value="${empty maxLength ? 128 : maxLength}" scope="request" />
       </c:when>
       <c:otherwise>
         <c:set var="columnProperties" value="${columnProperties}&#9999;${property}" scope="request" />
         <c:set var="columnLabels" value="${columnLabels}&#9999;${label}" scope="request" />
+        <c:set var="columnPropertyFields" value="${columnPropertyFields}&#9999;${propertyField}" scope="request" />
         <c:set var="columnMaxLengths" value="${columnMaxLengths}&#9999;${empty maxLength ? 128 : maxLength}" scope="request" />
       </c:otherwise>
     </c:choose>
