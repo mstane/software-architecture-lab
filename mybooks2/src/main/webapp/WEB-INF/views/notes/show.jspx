@@ -7,6 +7,6 @@
         <field:display field="content" id="s_org_sm_lab_mybooks2_domain_Note_content" object="${note}" z="rSZKSeAoq4ZuGJpQHTaMGdeIhpA="/>
         <field:display date="true" dateTimePattern="${note_createdtime_date_format}" field="createdTime" id="s_org_sm_lab_mybooks2_domain_Note_createdTime" object="${note}" z="jaA0YAWSEmC4GfAYdLppBCo0KfE="/>
         <field:display date="true" dateTimePattern="${note_modifiedtime_date_format}" field="modifiedTime" id="s_org_sm_lab_mybooks2_domain_Note_modifiedTime" object="${note}" z="fVxdhaq/hQDykzq6Jyh39fswWB0="/>
-        <field:display field="book" id="s_org_sm_lab_mybooks2_domain_Note_book" object="${note}" z="JaNtwoG07qq5uulFxeiQgrYGb/s="/>
+        <field:display field="title" id="s_org_sm_lab_mybooks2_domain_Note_book" object="${note.book}" z="JaNtwoG07qq5uulFxeiQgrYGb/s="/>
     </page:show>
 </div>
