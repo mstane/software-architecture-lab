@@ -146,4 +146,27 @@ public class BookController {
         addDateTimeFormatPatterns(uiModel);
         return "books/list";
     }
+
+	@RequestMapping(params = { "find=search", "form" }, method = RequestMethod.GET)
+    public String searchForm(Model uiModel) {
+		uiModel.addAttribute("genres", Arrays.asList(Genre.values()));
+		return "books/search";
+    }
+
+	@RequestMapping(params = "find=search", method = RequestMethod.GET)
+    public String search(@RequestParam("title") String title, @RequestParam("author") String author, @RequestParam("url") String url, @RequestParam("startReadingDate") String startReadingDate, @RequestParam("endReadingDate") String endReadingDate, @RequestParam("rating") String rating, @RequestParam("genre") String genre, 
+    		@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, @RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel
+    		) {
+        if (page != null || size != null) {
+            int sizeNo = size == null ? 10 : size.intValue();
+            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
+            uiModel.addAttribute("books", Book.search(title, author, url, startReadingDate, endReadingDate, rating, genre).setFirstResult(firstResult).setMaxResults(sizeNo).getResultList());
+            float nrOfPages = (float) Book.countSearch(title, author, url, startReadingDate, endReadingDate, rating, genre) / sizeNo;
+            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+        } else {
+            uiModel.addAttribute("books", Book.search(title, author, url, startReadingDate, endReadingDate, rating, genre).getResultList());
+        }
+        addDateTimeFormatPatterns(uiModel);
+        return "books/list";
+    }
 }

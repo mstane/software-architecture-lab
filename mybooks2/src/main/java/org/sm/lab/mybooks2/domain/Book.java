@@ -30,6 +30,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Configurable
 @Entity
@@ -229,6 +230,64 @@ public class Book {
         }
         TypedQuery<Book> q = em.createQuery(queryBuilder.toString(), Book.class);
         q.setParameter("title", title);
+        return q;
+    }
+
+	public static Long countSearch(String title, String author, String url, String startReadingDate, String endReadingDate, String rating, String genre) {
+		TypedQuery q = search(title, author, url, startReadingDate, endReadingDate, rating, genre);
+		return ((Long) q.getSingleResult());
+	}
+	
+	public static TypedQuery<Book> search(String title, String author, String url, String startReadingDate, String endReadingDate, String rating, String genre) {
+        EntityManager em = Book.entityManager();
+        
+        StringBuilder queryBuilder = new StringBuilder();
+		if (title != null && title.length() > 0) {
+			queryBuilder.append("o.title = :title");
+		}
+		if (author != null && author.length() > 0) {
+			if (queryBuilder.length() < 1) queryBuilder.append(" WHERE ");
+			else queryBuilder.append(" AND ");
+			queryBuilder.append("o.author = :author");
+		}
+		if (url != null && url.length() > 0) {
+			if (queryBuilder.length() < 1) queryBuilder.append(" WHERE ");
+			else queryBuilder.append(" AND ");
+			queryBuilder.append("o.url = :url");
+		}
+		if (startReadingDate != null && startReadingDate.length() > 0) {
+			if (queryBuilder.length() < 1) queryBuilder.append(" WHERE ");
+			else queryBuilder.append(" AND ");
+			queryBuilder.append("o.startReadingDate = :startReadingDate");
+		}
+		if (endReadingDate != null && endReadingDate.length() > 0) {
+			if (queryBuilder.length() < 1) queryBuilder.append(" WHERE ");
+			else queryBuilder.append(" AND ");
+			queryBuilder.append("o.endReadingDate = :endReadingDate");
+		}
+		if (rating != null && rating.length() > 0) {
+			if (queryBuilder.length() < 1) queryBuilder.append(" WHERE ");
+			else queryBuilder.append(" AND ");
+			queryBuilder.append("o.rating = :rating");
+		}
+		if (genre != null && genre.length() > 0) {
+			if (queryBuilder.length() < 1) queryBuilder.append(" WHERE ");
+			else queryBuilder.append(" AND ");
+			queryBuilder.append("o.genre = :genre");
+		}
+		
+        TypedQuery<Book> q = em.createQuery("SELECT o FROM Book AS o" + queryBuilder.toString(), Book.class);
+
+		if (title != null && title.length() > 0) q.setParameter("title", title);
+		if (author != null && author.length() > 0) q.setParameter("author", author);
+		if (url != null && url.length() > 0) q.setParameter("url", url);
+		if (startReadingDate != null && startReadingDate.length() > 0) q.setParameter("startReadingDate", startReadingDate);
+		if (endReadingDate != null && endReadingDate.length() > 0) q.setParameter("endReadingDate", endReadingDate);
+		if (rating != null && rating.length() > 0) q.setParameter("rating", title);
+		if (genre != null && genre.length() > 0) q.setParameter("genre", title);
+
+        
+        
         return q;
     }
 

@@ -31,6 +31,7 @@
             <menu:item id="i_book_new" messageCode="global_menu_new" url="/books?form" z="gAIxvrBOHQC/N0HWTGD46jzwyk8="/>
             <menu:item id="i_book_list" messageCode="global_menu_list" url="/books?page=1&amp;size=${empty param.size ? 10 : param.size}" z="VM0+BikyiEq8a8S+W6bSp3FXQFo="/>
             <menu:item id="fi_book_title" messageCode="global_menu_find" url="/books?find=ByTitle&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="6bojyZutXwAXvGb4kH3KXf7W/Eg="/>
+            <menu:item id="fi_search" messageCode="global_menu_find" url="/books?find=search&amp;form&amp;page=1&amp;size=${empty param.size ? 10 : param.size}"/>
         </menu:category>
         </sec:authorize>
         <sec:authorize access="hasRole('Admin')">
