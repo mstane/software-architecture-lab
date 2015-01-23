@@ -7,10 +7,11 @@ import org.sm.lab.mybooks.client.activity.BookListActivity;
 import org.sm.lab.mybooks.client.activity.LoginActivity;
 import org.sm.lab.mybooks.client.activity.NoteFormActivity;
 import org.sm.lab.mybooks.client.activity.ProfileFormActivity;
-import org.sm.lab.mybooks.client.ui.BookListView;
-import org.sm.lab.mybooks.client.ui.LoginView;
-import org.sm.lab.mybooks.client.ui.ProfileFormView;
 import org.sm.lab.mybooks.client.util.IAppDialogBox;
+import org.sm.lab.mybooks.client.view.BookListView;
+import org.sm.lab.mybooks.client.view.LoginView;
+import org.sm.lab.mybooks.client.view.MainView;
+import org.sm.lab.mybooks.client.view.ProfileFormView;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.PlaceController;
@@ -18,7 +19,7 @@ import com.google.gwt.place.shared.PlaceController;
 public interface ClientFactory {
 
     DispatchAsync getDispatchAsync();
-	MyBooksShell getMyBooksShell();
+    MainView getMainView();
 	EventBus getEventBus();
 	PlaceController getPlaceController();
 	IAppDialogBox getAppDialogBox();

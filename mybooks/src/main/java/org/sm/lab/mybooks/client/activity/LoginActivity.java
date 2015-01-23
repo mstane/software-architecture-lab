@@ -1,19 +1,14 @@
 package org.sm.lab.mybooks.client.activity;
 
-import com.allen_sauer.gwt.log.client.Log;
-import com.google.gwt.activity.shared.AbstractActivity;
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.inject.Inject;
+import java.util.Date;
 
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
 import org.sm.lab.mybooks.client.ClientFactory;
 import org.sm.lab.mybooks.client.event.LoginEvent;
-import org.sm.lab.mybooks.client.ui.LoginView;
 import org.sm.lab.mybooks.client.util.AppAsyncCallback;
 import org.sm.lab.mybooks.client.util.IAppDialogBox;
+import org.sm.lab.mybooks.client.view.LoginView;
 import org.sm.lab.mybooks.shared.AppConsts;
 import org.sm.lab.mybooks.shared.action.LoginAction;
 import org.sm.lab.mybooks.shared.action.LoginResult;
@@ -21,7 +16,12 @@ import org.sm.lab.mybooks.shared.action.LogoutAction;
 import org.sm.lab.mybooks.shared.action.LogoutResult;
 import org.sm.lab.mybooks.shared.dto.ReaderDto;
 
-import java.util.Date;
+import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.inject.Inject;
 
 public class LoginActivity extends AbstractActivity implements LoginView.Presenter {
 

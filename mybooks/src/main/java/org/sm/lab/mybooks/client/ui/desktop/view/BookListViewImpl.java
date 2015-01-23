@@ -1,4 +1,12 @@
-package org.sm.lab.mybooks.client.ui;
+package org.sm.lab.mybooks.client.ui.desktop.view;
+
+import org.sm.lab.mybooks.client.MyBooks;
+import org.sm.lab.mybooks.client.ui.desktop.RangeLabelPager;
+import org.sm.lab.mybooks.client.ui.desktop.ShowMorePagerPanel;
+import org.sm.lab.mybooks.client.view.BookFormView;
+import org.sm.lab.mybooks.client.view.BookListView;
+import org.sm.lab.mybooks.client.view.NoteFormView;
+import org.sm.lab.mybooks.shared.dto.BookDto;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.cell.client.AbstractCell;
@@ -21,11 +29,6 @@ import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.ProvidesKey;
 import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
-
-import org.sm.lab.mybooks.client.RangeLabelPager;
-import org.sm.lab.mybooks.client.MyBooks;
-import org.sm.lab.mybooks.client.ShowMorePagerPanel;
-import org.sm.lab.mybooks.shared.dto.BookDto;
 
 public class BookListViewImpl extends Composite implements BookListView {
 

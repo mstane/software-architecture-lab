@@ -1,4 +1,6 @@
-package org.sm.lab.mybooks.client.ui;
+package org.sm.lab.mybooks.client.ui.desktop.view;
+
+import org.sm.lab.mybooks.client.view.NoteFormView;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;

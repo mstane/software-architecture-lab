@@ -1,4 +1,4 @@
-package org.sm.lab.mybooks.client;
+package org.sm.lab.mybooks.client.ui.desktop;
 
 import com.google.gwt.event.dom.client.ScrollEvent;
 import com.google.gwt.event.dom.client.ScrollHandler;

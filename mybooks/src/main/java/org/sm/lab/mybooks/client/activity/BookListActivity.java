@@ -1,12 +1,6 @@
 package org.sm.lab.mybooks.client.activity;
 
-import com.allen_sauer.gwt.log.client.Log;
-import com.google.gwt.activity.shared.AbstractActivity;
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.view.client.ListDataProvider;
-import com.google.inject.Inject;
+import java.util.List;
 
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
@@ -15,14 +9,20 @@ import org.sm.lab.mybooks.client.event.BookChangedEvent;
 import org.sm.lab.mybooks.client.event.BookChangedEvent.Action;
 import org.sm.lab.mybooks.client.event.BookChangedEventHandler;
 import org.sm.lab.mybooks.client.place.BookFormPlace;
-import org.sm.lab.mybooks.client.ui.BookListView;
-import org.sm.lab.mybooks.client.util.IAppDialogBox;
 import org.sm.lab.mybooks.client.util.AppAsyncCallback;
+import org.sm.lab.mybooks.client.util.IAppDialogBox;
+import org.sm.lab.mybooks.client.view.BookListView;
 import org.sm.lab.mybooks.shared.action.LoadAllBooksAction;
 import org.sm.lab.mybooks.shared.action.LoadAllBooksResult;
 import org.sm.lab.mybooks.shared.dto.BookDto;
 
-import java.util.List;
+import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.view.client.ListDataProvider;
+import com.google.inject.Inject;
 
 public class BookListActivity extends AbstractActivity implements BookListView.Presenter, BookChangedEventHandler {
 

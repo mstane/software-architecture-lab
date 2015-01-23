@@ -1,12 +1,12 @@
 
 package org.sm.lab.mybooks.client.activity;
 
-import com.allen_sauer.gwt.log.client.Log;
-import com.google.gwt.activity.shared.AbstractActivity;
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.inject.Inject;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.groups.Default;
 
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
@@ -14,10 +14,10 @@ import org.sm.lab.mybooks.client.ClientFactory;
 import org.sm.lab.mybooks.client.event.NoteChangedEvent;
 import org.sm.lab.mybooks.client.event.NoteChangedEvent.Action;
 import org.sm.lab.mybooks.client.place.NoteFormPlace;
-import org.sm.lab.mybooks.client.ui.BookListView;
-import org.sm.lab.mybooks.client.ui.NoteFormView;
 import org.sm.lab.mybooks.client.util.AppAsyncCallback;
 import org.sm.lab.mybooks.client.util.IAppDialogBox;
+import org.sm.lab.mybooks.client.view.BookListView;
+import org.sm.lab.mybooks.client.view.NoteFormView;
 import org.sm.lab.mybooks.shared.action.CreateNoteAction;
 import org.sm.lab.mybooks.shared.action.CreateNoteResult;
 import org.sm.lab.mybooks.shared.action.DeleteNoteAction;
@@ -29,12 +29,12 @@ import org.sm.lab.mybooks.shared.action.UpdateNoteResult;
 import org.sm.lab.mybooks.shared.dto.NoteDto;
 import org.sm.lab.mybooks.shared.validation.ClientGroup;
 
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.groups.Default;
+import com.allen_sauer.gwt.log.client.Log;
+import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.inject.Inject;
 
 public class NoteFormActivity extends AbstractActivity implements NoteFormView.Presenter {
 

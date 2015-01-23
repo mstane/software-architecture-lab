@@ -1,4 +1,4 @@
-package org.sm.lab.mybooks.client.ui;
+package org.sm.lab.mybooks.client.view;
 
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.HasValue;

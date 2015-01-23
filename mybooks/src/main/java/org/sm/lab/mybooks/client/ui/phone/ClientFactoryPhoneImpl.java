@@ -1,24 +1,38 @@
-package org.sm.lab.mybooks.client;
+package org.sm.lab.mybooks.client.ui.phone;
 
+import net.customware.gwt.dispatch.client.DefaultExceptionHandler;
 import net.customware.gwt.dispatch.client.DispatchAsync;
+import net.customware.gwt.dispatch.client.secure.CookieSecureSessionAccessor;
+import net.customware.gwt.dispatch.client.secure.SecureDispatchAsync;
 
+import org.sm.lab.mybooks.client.AppActivityMapper;
+import org.sm.lab.mybooks.client.AppPlaceHistoryMapper;
+import org.sm.lab.mybooks.client.ClientFactory;
 import org.sm.lab.mybooks.client.activity.BookFormActivity;
 import org.sm.lab.mybooks.client.activity.BookListActivity;
 import org.sm.lab.mybooks.client.activity.LoginActivity;
 import org.sm.lab.mybooks.client.activity.NoteFormActivity;
 import org.sm.lab.mybooks.client.activity.ProfileFormActivity;
-import org.sm.lab.mybooks.client.ui.BookListView;
-import org.sm.lab.mybooks.client.ui.BookListViewImpl;
-import org.sm.lab.mybooks.client.ui.LoginView;
-import org.sm.lab.mybooks.client.ui.LoginViewImpl;
-import org.sm.lab.mybooks.client.ui.ProfileFormView;
-import org.sm.lab.mybooks.client.ui.ProfileFormViewImpl;
-import org.sm.lab.mybooks.client.util.AppDialogBox;
-import org.sm.lab.mybooks.client.util.IAppDialogBox;
+import org.sm.lab.mybooks.client.place.LoginPlace;
 
+import org.sm.lab.mybooks.client.ui.phone.view.PhoneMainViewImpl;
+import org.sm.lab.mybooks.client.util.IAppDialogBox;
+import org.sm.lab.mybooks.client.view.BookListView;
+import org.sm.lab.mybooks.client.view.LoginView;
+import org.sm.lab.mybooks.client.view.MainView;
+import org.sm.lab.mybooks.client.view.ProfileFormView;
+import org.sm.lab.mybooks.shared.AppConsts;
+
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
+import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.place.shared.PlaceHistoryHandler;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.googlecode.mgwt.mvp.client.AnimatingActivityManager;
+import com.googlecode.mgwt.ui.client.MGWT;
+import com.googlecode.mgwt.ui.client.MGWTSettings;
 
 
 
@@ -28,7 +42,7 @@ public class ClientFactoryPhoneImpl implements ClientFactory {
 	private EventBus eventBus;
 	private PlaceController placeController;
 	
-	private MyBooksShell myBooksShell;
+	private MainView mainView;
 	private IAppDialogBox appDialogBox;
 	
 	private LoginView loginView;
@@ -43,12 +57,33 @@ public class ClientFactoryPhoneImpl implements ClientFactory {
 
 
 	public ClientFactoryPhoneImpl() {
-		dispatchAsync = new DefaultSecureDispatchAsync();
+		dispatchAsync = new SecureDispatchAsync(new DefaultExceptionHandler(), new CookieSecureSessionAccessor(AppConsts.COOKIE_NAME));
 		eventBus = new SimpleEventBus();
-		placeController = new DefaultPlaceController(eventBus);
-		myBooksShell = new MyBooksShell(eventBus);
+		placeController = new PlaceController(eventBus);
+		mainView = new PhoneMainViewImpl();
 		
-		appDialogBox = new AppDialogBox();
+//		appDialogBox = new AppDialogBox();
+
+	
+		MGWT.applySettings(MGWTSettings.getAppSetting());
+
+		
+		Place defaultPlace = new LoginPlace();
+		
+        // Start PlaceHistoryHandler with our PlaceHistoryMapper
+        AppPlaceHistoryMapper historyMapper= GWT.create(AppPlaceHistoryMapper.class);
+        PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(historyMapper);
+        historyHandler.register(this.getPlaceController(), this.getEventBus(), defaultPlace);
+
+
+		AppActivityMapper activityMapper = new AppActivityMapper(this);
+		AppAnimationMapper appAnimationMapper = new AppAnimationMapper();
+		AnimatingActivityManager activityManager = new AnimatingActivityManager(activityMapper, appAnimationMapper, this.getEventBus());
+		activityManager.setDisplay(this.getMainView().getAnimatableDisplay());
+		
+		RootPanel.get().add(this.getMainView());		
+		historyHandler.handleCurrentHistory();
+
 	}
 	
 	@Override
@@ -67,8 +102,8 @@ public class ClientFactoryPhoneImpl implements ClientFactory {
 	}
 
 	@Override
-	public MyBooksShell getMyBooksShell() {
-		return myBooksShell;
+	public MainView getMainView() {
+		return mainView;
 	}
 	
 	@Override
@@ -79,7 +114,7 @@ public class ClientFactoryPhoneImpl implements ClientFactory {
 	@Override
 	public LoginView getLoginView() {
 		if (loginView == null) {
-			loginView = new LoginViewImpl();
+//			loginView = new LoginViewImpl();
 		}
 		return loginView;
 	}
@@ -87,7 +122,7 @@ public class ClientFactoryPhoneImpl implements ClientFactory {
 	@Override
 	public BookListView getBookListView() {
 		if (bookListView == null) {
-			bookListView = new BookListViewImpl();
+//			bookListView = new BookListViewImpl();
 		}
 		return bookListView;
 	}
@@ -95,7 +130,7 @@ public class ClientFactoryPhoneImpl implements ClientFactory {
 	@Override
 	public ProfileFormView getProfileFormView() {
 		if (profileFormView == null) {
-			profileFormView = new ProfileFormViewImpl();
+//			profileFormView = new ProfileFormViewImpl();
 		}
 		return profileFormView;
 	}

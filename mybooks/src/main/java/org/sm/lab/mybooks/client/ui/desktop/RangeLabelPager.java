@@ -1,4 +1,4 @@
-package org.sm.lab.mybooks.client;
+package org.sm.lab.mybooks.client.ui.desktop;
 
 import com.google.gwt.i18n.client.HasDirection;
 import com.google.gwt.user.cellview.client.AbstractPager;

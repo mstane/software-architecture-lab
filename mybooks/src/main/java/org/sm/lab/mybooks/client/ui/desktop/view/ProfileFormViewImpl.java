@@ -1,4 +1,6 @@
-package org.sm.lab.mybooks.client.ui;
+package org.sm.lab.mybooks.client.ui.desktop.view;
+
+import org.sm.lab.mybooks.client.view.ProfileFormView;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.GWT;

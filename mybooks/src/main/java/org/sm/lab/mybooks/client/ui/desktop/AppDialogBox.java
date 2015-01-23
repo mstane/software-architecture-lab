@@ -1,4 +1,6 @@
-package org.sm.lab.mybooks.client.util;
+package org.sm.lab.mybooks.client.ui.desktop;
+
+import org.sm.lab.mybooks.client.util.IAppDialogBox;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

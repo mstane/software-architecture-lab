@@ -1,4 +1,7 @@
-package org.sm.lab.mybooks.client.ui;
+package org.sm.lab.mybooks.client.ui.desktop.view;
+
+import org.sm.lab.mybooks.client.view.BookFormView;
+import org.sm.lab.mybooks.shared.dto.NoteDto;
 
 import com.allen_sauer.gwt.log.client.Log;
 import com.google.gwt.core.client.GWT;
@@ -20,8 +23,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.CellPreviewEvent;
 import com.google.gwt.view.client.CellPreviewEvent.Handler;
 import com.google.gwt.view.client.HasData;
-
-import org.sm.lab.mybooks.shared.dto.NoteDto;
 
 /**
  * A form used for editing books.

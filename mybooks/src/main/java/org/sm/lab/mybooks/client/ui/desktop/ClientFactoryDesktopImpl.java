@@ -1,26 +1,39 @@
-package org.sm.lab.mybooks.client;
+package org.sm.lab.mybooks.client.ui.desktop;
 
+import net.customware.gwt.dispatch.client.DefaultExceptionHandler;
 import net.customware.gwt.dispatch.client.DispatchAsync;
+import net.customware.gwt.dispatch.client.secure.CookieSecureSessionAccessor;
+import net.customware.gwt.dispatch.client.secure.SecureDispatchAsync;
 
+import org.sm.lab.mybooks.client.AppActivityMapper;
+import org.sm.lab.mybooks.client.AppPlaceHistoryMapper;
+import org.sm.lab.mybooks.client.ClientFactory;
 import org.sm.lab.mybooks.client.activity.BookFormActivity;
 import org.sm.lab.mybooks.client.activity.BookListActivity;
 import org.sm.lab.mybooks.client.activity.LoginActivity;
 import org.sm.lab.mybooks.client.activity.NoteFormActivity;
 import org.sm.lab.mybooks.client.activity.ProfileFormActivity;
-import org.sm.lab.mybooks.client.ui.BookListView;
-import org.sm.lab.mybooks.client.ui.BookListViewImpl;
-import org.sm.lab.mybooks.client.ui.LoginView;
-import org.sm.lab.mybooks.client.ui.LoginViewImpl;
-import org.sm.lab.mybooks.client.ui.ProfileFormView;
-import org.sm.lab.mybooks.client.ui.ProfileFormViewImpl;
-import org.sm.lab.mybooks.client.util.AppDialogBox;
+import org.sm.lab.mybooks.client.place.LoginPlace;
+import org.sm.lab.mybooks.client.ui.desktop.view.BookListViewImpl;
+import org.sm.lab.mybooks.client.ui.desktop.view.DesktopMainViewImpl;
+import org.sm.lab.mybooks.client.ui.desktop.view.LoginViewImpl;
+import org.sm.lab.mybooks.client.ui.desktop.view.ProfileFormViewImpl;
 import org.sm.lab.mybooks.client.util.IAppDialogBox;
+import org.sm.lab.mybooks.client.view.BookListView;
+import org.sm.lab.mybooks.client.view.LoginView;
+import org.sm.lab.mybooks.client.view.MainView;
+import org.sm.lab.mybooks.client.view.ProfileFormView;
+import org.sm.lab.mybooks.shared.AppConsts;
 
+import com.google.gwt.activity.shared.ActivityManager;
+import com.google.gwt.activity.shared.ActivityMapper;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
+import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceController;
-
-
+import com.google.gwt.place.shared.PlaceHistoryHandler;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 
 public class ClientFactoryDesktopImpl implements ClientFactory {
 
@@ -28,7 +41,7 @@ public class ClientFactoryDesktopImpl implements ClientFactory {
 	private EventBus eventBus;
 	private PlaceController placeController;
 	
-	private MyBooksShell myBooksShell;
+	private MainView mainView;
 	private IAppDialogBox appDialogBox;
 	
 	private LoginView loginView;
@@ -43,12 +56,28 @@ public class ClientFactoryDesktopImpl implements ClientFactory {
 
 
 	public ClientFactoryDesktopImpl() {
-		dispatchAsync = new DefaultSecureDispatchAsync();
+		dispatchAsync = new SecureDispatchAsync(new DefaultExceptionHandler(), new CookieSecureSessionAccessor(AppConsts.COOKIE_NAME));
 		eventBus = new SimpleEventBus();
-		placeController = new DefaultPlaceController(eventBus);
-		myBooksShell = new MyBooksShell(eventBus);
+		placeController = new PlaceController(eventBus);
+		mainView = new DesktopMainViewImpl(eventBus);
 		
 		appDialogBox = new AppDialogBox();
+		
+		Place defaultPlace = new LoginPlace();
+		
+        // Start ActivityManager for the main widget with our ActivityMapper
+        ActivityMapper activityMapper = new AppActivityMapper(this);
+        ActivityManager activityManager = new ActivityManager(activityMapper, this.getEventBus());
+        activityManager.setDisplay(mainView.getContentPanel());
+	
+        // Start PlaceHistoryHandler with our PlaceHistoryMapper
+        AppPlaceHistoryMapper historyMapper= GWT.create(AppPlaceHistoryMapper.class);
+        PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(historyMapper);
+        historyHandler.register(this.getPlaceController(), this.getEventBus(), defaultPlace);
+		
+		RootLayoutPanel.get().add(mainView);
+        historyHandler.handleCurrentHistory();
+		
 	}
 	
 	@Override
@@ -67,8 +96,8 @@ public class ClientFactoryDesktopImpl implements ClientFactory {
 	}
 
 	@Override
-	public MyBooksShell getMyBooksShell() {
-		return myBooksShell;
+	public MainView getMainView() {
+		return mainView;
 	}
 	
 	@Override
