@@ -1,10 +1,5 @@
 package org.sm.lab.mybooks.server.db;
 
-import org.sm.lab.mybooks.shared.dto.BookDto;
-import org.sm.lab.mybooks.shared.dto.Genre;
-import org.sm.lab.mybooks.shared.dto.NoteDto;
-import org.sm.lab.mybooks.shared.dto.ReaderDto;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +17,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.sm.lab.mybooks.shared.dto.BookDto;
+import org.sm.lab.mybooks.shared.dto.Genre;
+import org.sm.lab.mybooks.shared.dto.NoteDto;
+import org.sm.lab.mybooks.shared.dto.ReaderDto;
 
 @Entity
 public class Book implements Serializable {

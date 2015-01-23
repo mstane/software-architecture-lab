@@ -13,12 +13,9 @@ import org.sm.lab.mybooks.client.ui.ProfileFormView;
 import org.sm.lab.mybooks.client.util.IAppDialogBox;
 
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.inject.client.GinModules;
-import com.google.gwt.inject.client.Ginjector;
 import com.google.gwt.place.shared.PlaceController;
 
-@GinModules(AppGinModule.class)
-public interface AppGinjector extends Ginjector {
+public interface ClientFactory {
 
     DispatchAsync getDispatchAsync();
 	MyBooksShell getMyBooksShell();

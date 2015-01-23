@@ -9,7 +9,7 @@ import javax.validation.groups.Default;
 
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
-import org.sm.lab.mybooks.client.AppGinjector;
+import org.sm.lab.mybooks.client.ClientFactory;
 import org.sm.lab.mybooks.client.event.ReaderChangedEvent;
 import org.sm.lab.mybooks.client.event.ReaderChangedEvent.Action;
 import org.sm.lab.mybooks.client.place.ProfileFormPlace;
@@ -47,15 +47,15 @@ public class ProfileFormActivity extends AbstractActivity implements ProfileForm
 	private final PlaceController placeController;
 	
 	@Inject
-	public ProfileFormActivity(AppGinjector ginjector) {
+	public ProfileFormActivity(ClientFactory injector) {
 	    Log.debug("ProfileFormActivity.ProfileFormActivity()");
 	    
-        this.dispatchRpcService = ginjector.getDispatchAsync();
-        this.eventBus = ginjector.getEventBus();
-        this.appDialogBox = ginjector.getAppDialogBox();
-        this.placeController = ginjector.getPlaceController();
+        this.dispatchRpcService = injector.getDispatchAsync();
+        this.eventBus = injector.getEventBus();
+        this.appDialogBox = injector.getAppDialogBox();
+        this.placeController = injector.getPlaceController();
 
-        this.view = ginjector.getProfileFormView();
+        this.view = injector.getProfileFormView();
         this.view.setPresenter(this);
 
 	}

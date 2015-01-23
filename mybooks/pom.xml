@@ -35,7 +35,13 @@
 			<version>${gwtVersion}</version>
 		</dependency>
 		
-
+		<!-- mgwt dependency -->
+		<dependency>
+			<groupId>com.googlecode.mgwt</groupId>
+			<artifactId>mgwt</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		
 		<!-- Hibernate bean validation binary for the server -->
 		<dependency>
 			<groupId>javax.validation</groupId>
@@ -97,13 +103,6 @@
 			<version>1.6.1</version>
 		</dependency>        
 	        
-        
-		<dependency>
-			<groupId>com.google.gwt.inject</groupId>
-			<artifactId>gin</artifactId>
-			<version>2.1.2</version>
-		</dependency>
-
 		<dependency>
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
@@ -204,6 +203,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>

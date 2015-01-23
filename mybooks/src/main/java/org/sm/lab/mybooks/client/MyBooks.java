@@ -27,19 +27,19 @@ public class MyBooks implements EntryPoint {
 
 		Window.setTitle("My Books");
 		
-		AppGinjector ginjector = GWT.create(AppGinjector.class);
+		ClientFactory clientFactory = GWT.create(ClientFactory.class);
 		
-		MyBooksShell shell = ginjector.getMyBooksShell();
+		MyBooksShell shell = clientFactory.getMyBooksShell();
 		
         // Start ActivityManager for the main widget with our ActivityMapper
-        ActivityMapper activityMapper = new AppActivityMapper(ginjector);
-        ActivityManager activityManager = new ActivityManager(activityMapper, ginjector.getEventBus());
+        ActivityMapper activityMapper = new AppActivityMapper(clientFactory);
+        ActivityManager activityManager = new ActivityManager(activityMapper, clientFactory.getEventBus());
         activityManager.setDisplay(shell.getContentPanel());
 	
         // Start PlaceHistoryHandler with our PlaceHistoryMapper
         AppPlaceHistoryMapper historyMapper= GWT.create(AppPlaceHistoryMapper.class);
         PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(historyMapper);
-        historyHandler.register(ginjector.getPlaceController(), ginjector.getEventBus(), defaultPlace);
+        historyHandler.register(clientFactory.getPlaceController(), clientFactory.getEventBus(), defaultPlace);
 		
 		RootLayoutPanel.get().add(shell);
         historyHandler.handleCurrentHistory();

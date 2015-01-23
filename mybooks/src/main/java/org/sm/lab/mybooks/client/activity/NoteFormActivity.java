@@ -10,7 +10,7 @@ import com.google.inject.Inject;
 
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
-import org.sm.lab.mybooks.client.AppGinjector;
+import org.sm.lab.mybooks.client.ClientFactory;
 import org.sm.lab.mybooks.client.event.NoteChangedEvent;
 import org.sm.lab.mybooks.client.event.NoteChangedEvent.Action;
 import org.sm.lab.mybooks.client.place.NoteFormPlace;
@@ -48,15 +48,15 @@ public class NoteFormActivity extends AbstractActivity implements NoteFormView.P
     private final PlaceController placeController;
 
     @Inject
-    public NoteFormActivity(AppGinjector ginjector) {
+    public NoteFormActivity(ClientFactory injector) {
         Log.debug("NoteFormActivity.NoteFormActivity()");
 
-        this.dispatchRpcService = ginjector.getDispatchAsync();
-        this.eventBus = ginjector.getEventBus();
-        this.appDialogBox = ginjector.getAppDialogBox();
-        this.placeController = ginjector.getPlaceController();
+        this.dispatchRpcService = injector.getDispatchAsync();
+        this.eventBus = injector.getEventBus();
+        this.appDialogBox = injector.getAppDialogBox();
+        this.placeController = injector.getPlaceController();
 
-        this.parentView = ginjector.getBookListView();
+        this.parentView = injector.getBookListView();
         this.view = parentView.getNoteForm();
         this.view.setPresenter(this);
 

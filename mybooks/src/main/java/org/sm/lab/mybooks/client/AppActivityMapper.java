@@ -22,18 +22,18 @@ import com.google.inject.Inject;
 
 public class AppActivityMapper implements ActivityMapper {
     
-    private AppGinjector ginjector;
+    private ClientFactory injector;
     private EventBus eventBus;
     private PlaceController placeController;
     
     private int sessionDuration = 0;
     
     @Inject
-    public AppActivityMapper(AppGinjector ginjector) {
+    public AppActivityMapper(ClientFactory injector) {
         super();
-        this.ginjector = ginjector;
-        this.eventBus = ginjector.getEventBus();
-        this.placeController = ginjector.getPlaceController();
+        this.injector = injector;
+        this.eventBus = injector.getEventBus();
+        this.placeController = injector.getPlaceController();
         
         eventBus.addHandler(LoginEvent.TYPE,
                 new LoginEventHandler() {
@@ -51,11 +51,11 @@ public class AppActivityMapper implements ActivityMapper {
         
         resetSessionTimer(place);
         
-        if (place instanceof LoginPlace) return ginjector.getLoginActivity();
-        else if (place instanceof BookFormPlace) return ginjector.getBookFormActivity();
-        else if (place instanceof BookListPlace) return ginjector.getBookListActivity();
-        else if (place instanceof NoteFormPlace) return ginjector.getNoteFormActivity();
-        else if (place instanceof ProfileFormPlace) return ginjector.getProfileFormActivity();
+        if (place instanceof LoginPlace) return injector.getLoginActivity();
+        else if (place instanceof BookFormPlace) return injector.getBookFormActivity();
+        else if (place instanceof BookListPlace) return injector.getBookListActivity();
+        else if (place instanceof NoteFormPlace) return injector.getNoteFormActivity();
+        else if (place instanceof ProfileFormPlace) return injector.getProfileFormActivity();
         
         return null;
     }

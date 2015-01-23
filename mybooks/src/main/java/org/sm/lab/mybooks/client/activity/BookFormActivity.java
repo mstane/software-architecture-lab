@@ -10,7 +10,7 @@ import javax.validation.groups.Default;
 
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
-import org.sm.lab.mybooks.client.AppGinjector;
+import org.sm.lab.mybooks.client.ClientFactory;
 import org.sm.lab.mybooks.client.event.BookChangedEvent;
 import org.sm.lab.mybooks.client.event.BookChangedEvent.Action;
 import org.sm.lab.mybooks.client.event.NoteChangedEvent;
@@ -55,15 +55,15 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
 	private final PlaceController placeController;
 
 	@Inject
-	public BookFormActivity(AppGinjector ginjector) {
+	public BookFormActivity(ClientFactory injector) {
 	    Log.debug("BookFormActivity.BookFormActivity()");
 	    
-        this.dispatchRpcService = ginjector.getDispatchAsync();
-        this.eventBus = ginjector.getEventBus();
-        this.appDialogBox = ginjector.getAppDialogBox();
-        this.placeController = ginjector.getPlaceController();
+        this.dispatchRpcService = injector.getDispatchAsync();
+        this.eventBus = injector.getEventBus();
+        this.appDialogBox = injector.getAppDialogBox();
+        this.placeController = injector.getPlaceController();
 		
-		this.listView = ginjector.getBookListView();
+		this.listView = injector.getBookListView();
         this.view = listView.getBookFormView();
         this.view.setPresenter(this);
 		

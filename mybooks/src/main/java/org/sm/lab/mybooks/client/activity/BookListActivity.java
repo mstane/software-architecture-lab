@@ -10,7 +10,7 @@ import com.google.inject.Inject;
 
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
-import org.sm.lab.mybooks.client.AppGinjector;
+import org.sm.lab.mybooks.client.ClientFactory;
 import org.sm.lab.mybooks.client.event.BookChangedEvent;
 import org.sm.lab.mybooks.client.event.BookChangedEvent.Action;
 import org.sm.lab.mybooks.client.event.BookChangedEventHandler;
@@ -34,15 +34,15 @@ public class BookListActivity extends AbstractActivity implements BookListView.P
 	private final PlaceController placeController;
 
 	@Inject
-	public BookListActivity(AppGinjector ginjector) {
+	public BookListActivity(ClientFactory injector) {
 	    Log.debug("BookListActivity.BookListActivity()");
 	    
-	    this.dispatchRpcService = ginjector.getDispatchAsync();
-		this.eventBus = ginjector.getEventBus();
-		this.appDialogBox = ginjector.getAppDialogBox();
-		this.placeController = ginjector.getPlaceController();
+	    this.dispatchRpcService = injector.getDispatchAsync();
+		this.eventBus = injector.getEventBus();
+		this.appDialogBox = injector.getAppDialogBox();
+		this.placeController = injector.getPlaceController();
 		
-        this.view = ginjector.getBookListView();
+        this.view = injector.getBookListView();
         this.view.setPresenter(this);
 		
 		listDataProvider.addDataDisplay(view.getCellList());

@@ -9,7 +9,7 @@ import com.google.inject.Inject;
 
 import net.customware.gwt.dispatch.client.DispatchAsync;
 
-import org.sm.lab.mybooks.client.AppGinjector;
+import org.sm.lab.mybooks.client.ClientFactory;
 import org.sm.lab.mybooks.client.event.LoginEvent;
 import org.sm.lab.mybooks.client.ui.LoginView;
 import org.sm.lab.mybooks.client.util.AppAsyncCallback;
@@ -33,14 +33,14 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 	private ReaderDto dto;
 
 	@Inject
-	public LoginActivity(AppGinjector ginjector) {
+	public LoginActivity(ClientFactory injector) {
 	    Log.debug("LoginActivity:LoginActivity()");
 	    
-        this.dispatchRpcService = ginjector.getDispatchAsync();
-        this.eventBus = ginjector.getEventBus();
-        this.appDialogBox = ginjector.getAppDialogBox();
+        this.dispatchRpcService = injector.getDispatchAsync();
+        this.eventBus = injector.getEventBus();
+        this.appDialogBox = injector.getAppDialogBox();
 		
-		this.view = ginjector.getLoginView();
+		this.view = injector.getLoginView();
 		this.view.setPresenter(this);
 	}
 
