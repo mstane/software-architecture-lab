@@ -19,7 +19,7 @@
 	<set-property name="gwt.enableDebugId" value="true" />
 	
 	<!-- Limit permutations -->
-	<set-property name="user.agent" value="safari" />
+<!-- 	<set-property name="user.agent" value="safari" /> -->
 
 	<!-- GWT dispatch -->
 	<inherits name='net.customware.gwt.dispatch.Dispatch' />
@@ -64,10 +64,17 @@
 		<when-type-is
 			class="com.google.gwt.validation.client.UserValidationMessagesResolver" />
 	</replace-with>
+	
+	<inherits name="org.sm.lab.mybooks.FormFactor" />
 
 	<replace-with class="org.sm.lab.mybooks.client.ClientFactoryDesktopImpl">
 		<when-type-is class="org.sm.lab.mybooks.client.ClientFactory" />
 	</replace-with>
+
+	<replace-with class="org.sm.lab.mybooks.client.ClientFactoryPhoneImpl">
+		<when-type-is class="org.sm.lab.mybooks.client.ClientFactory" />
+		<when-property-is name="formfactor" value="phone" />
+	</replace-with>
 	
-	
+
 </module>
