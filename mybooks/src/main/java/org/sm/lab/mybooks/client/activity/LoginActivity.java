@@ -84,7 +84,7 @@ public class LoginActivity extends AbstractActivity implements LoginView.Present
 	    
 	    Log.debug("LoginActivity:onLogInButtonClicked()");
 	    
-	    final boolean rememberMe = view.getRemeberMe().getValue();
+	    final boolean rememberMe = view.getRemeberMe() == null ? false : view.getRemeberMe().getValue();
 	    
 		dispatchRpcService.execute(new LoginAction(view.getUsername()
 				.getValue(), view.getPassword().getValue(), rememberMe),

@@ -54,8 +54,13 @@ public class BookListActivity extends AbstractActivity implements BookListView.P
     public void onAddButtonClicked() {
         Log.debug("BookListActivity.onAddButtonClicked()");
         
-        view.getBookFormView().setVisible(false);
-        view.getNoteForm().setVisible(false);
+        if (view.getBookFormView() != null) {
+        	view.getBookFormView().setVisible(false);
+        }
+        if (view.getNoteForm() != null) {
+        	view.getNoteForm().setVisible(false);
+        }
+        
         placeController.goTo(new BookFormPlace());
     }
 
@@ -72,8 +77,12 @@ public class BookListActivity extends AbstractActivity implements BookListView.P
     public void start(AcceptsOneWidget container, EventBus eventBus) {
         Log.debug("BookListActivity.start()");
         
-        view.getBookFormView().setVisible(false);
-        view.getNoteForm().setVisible(false);
+        if (view.getBookFormView() != null) {
+        	view.getBookFormView().setVisible(false);
+        }
+        if (view.getNoteForm() != null) {
+        	view.getNoteForm().setVisible(false);
+        }
 //        view.setSelected(null);
         container.setWidget(view.asWidget());
         

@@ -15,6 +15,7 @@ public interface BookFormView extends IsWidget {
 		void onDeleteButtonClicked();
 		void onNewNoteButtonClicked();
 		void onNoteItemClicked(NoteDto noteDto);
+		void onBackButtonPressed();
 	}
 
 	HasValue<String> getBookTitle();

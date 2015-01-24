@@ -16,6 +16,7 @@ import org.sm.lab.mybooks.client.event.BookChangedEvent.Action;
 import org.sm.lab.mybooks.client.event.NoteChangedEvent;
 import org.sm.lab.mybooks.client.event.NoteChangedEventHandler;
 import org.sm.lab.mybooks.client.place.BookFormPlace;
+import org.sm.lab.mybooks.client.place.BookListPlace;
 import org.sm.lab.mybooks.client.place.NoteFormPlace;
 import org.sm.lab.mybooks.client.util.AppAsyncCallback;
 import org.sm.lab.mybooks.client.util.IAppDialogBox;
@@ -287,6 +288,13 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
     public boolean equals(Object obj) {
         return false;
     }
+	
+	// added for mobile view embedding
+	@Override
+	public void onBackButtonPressed() {
+		placeController.goTo(new BookListPlace());
+
+	}
 
 
 }

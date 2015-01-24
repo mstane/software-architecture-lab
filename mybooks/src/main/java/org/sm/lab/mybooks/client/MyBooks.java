@@ -24,27 +24,55 @@ public class MyBooks implements EntryPoint {
 	}
 
 	@Override
-	public void onModuleLoad() {
+    public void onModuleLoad() {
 
-		GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+            GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
 
-			@Override
-			public void onUncaughtException(Throwable e) {
-				// TODO put a meaninful handler
-				Window.alert("uncaught: " + e.getMessage());
-				e.printStackTrace();
+                    @Override
+                    public void onUncaughtException(Throwable e) {
+                            Window.alert("uncaught: " + e.getMessage());
+                            String s = buildStackTrace(e, "RuntimeException:\n");
+                            Window.alert(s);
+                            e.printStackTrace();
 
-			}
-		});
+                    }
+            });
 
-		new Timer() {
-			@Override
-			public void run() {
-				start();
+            new Timer() {
+                    @Override
+                    public void run() {
+                            start();
 
-			}
-		}.schedule(1);
+                    }
+            }.schedule(1);
 
-	}
+    }
+
+    private String buildStackTrace(Throwable t, String log) {
+
+            if (t != null) {
+                    log += t.getClass().toString();
+                    log += t.getMessage();
+                    //
+                    StackTraceElement[] stackTrace = t.getStackTrace();
+                    if (stackTrace != null) {
+                            StringBuffer trace = new StringBuffer();
+
+                            for (int i = 0; i < stackTrace.length; i++) {
+                                    trace.append(stackTrace[i].getClassName() + "." + stackTrace[i].getMethodName() + "(" + stackTrace[i].getFileName() + ":" + stackTrace[i].getLineNumber());
+                            }
+
+                            log += trace.toString();
+                    }
+                    //
+                    Throwable cause = t.getCause();
+                    if (cause != null && cause != t) {
+
+                            log += buildStackTrace(cause, "CausedBy:\n");
+
+                    }
+            }
+            return log;
+    }
 
 }

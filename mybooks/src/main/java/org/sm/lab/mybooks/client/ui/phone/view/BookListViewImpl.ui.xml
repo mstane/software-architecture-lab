@@ -1,0 +1,19 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" 
+	xmlns:c="com.google.gwt.user.cellview.client"
+	xmlns:m="urn:import:com.googlecode.mgwt.ui.client.widget">
+
+	<m:panel.flex.RootFlexPanel>
+		<m:header.HeaderPanel>
+			<g:HTML>Books</g:HTML>
+		</m:header.HeaderPanel>
+
+		<m:panel.scroll.ScrollPanel scrollingEnabledX="false">
+			<g:FlowPanel>
+<!-- 				<c:CellList ui:field="cellList"></c:CellList> -->
+			</g:FlowPanel>
+		</m:panel.scroll.ScrollPanel>
+				
+	</m:panel.flex.RootFlexPanel>
+</ui:UiBinder>

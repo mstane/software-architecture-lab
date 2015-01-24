@@ -14,7 +14,8 @@ import org.sm.lab.mybooks.client.activity.LoginActivity;
 import org.sm.lab.mybooks.client.activity.NoteFormActivity;
 import org.sm.lab.mybooks.client.activity.ProfileFormActivity;
 import org.sm.lab.mybooks.client.place.LoginPlace;
-
+import org.sm.lab.mybooks.client.ui.phone.view.BookListViewImpl;
+import org.sm.lab.mybooks.client.ui.phone.view.LoginViewImpl;
 import org.sm.lab.mybooks.client.ui.phone.view.PhoneMainViewImpl;
 import org.sm.lab.mybooks.client.util.IAppDialogBox;
 import org.sm.lab.mybooks.client.view.BookListView;
@@ -114,7 +115,7 @@ public class ClientFactoryPhoneImpl implements ClientFactory {
 	@Override
 	public LoginView getLoginView() {
 		if (loginView == null) {
-//			loginView = new LoginViewImpl();
+			loginView = new LoginViewImpl();
 		}
 		return loginView;
 	}
@@ -122,7 +123,7 @@ public class ClientFactoryPhoneImpl implements ClientFactory {
 	@Override
 	public BookListView getBookListView() {
 		if (bookListView == null) {
-//			bookListView = new BookListViewImpl();
+			bookListView = new BookListViewImpl();
 		}
 		return bookListView;
 	}

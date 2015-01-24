@@ -11,6 +11,7 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiTemplate;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.ResizeComposite;
 import com.google.gwt.user.client.ui.ScrollPanel;
@@ -57,7 +58,8 @@ public class DesktopMainViewImpl extends ResizeComposite implements LoginEventHa
 		
 	}
 
-	public ScrollPanel getContentPanel() {
+	@Override
+	public AcceptsOneWidget getContentPanel() {
 		return contentPanel;
 	}
 	
