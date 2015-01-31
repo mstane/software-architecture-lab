@@ -14,13 +14,17 @@ import org.sm.lab.mybooks.client.activity.LoginActivity;
 import org.sm.lab.mybooks.client.activity.NoteFormActivity;
 import org.sm.lab.mybooks.client.activity.ProfileFormActivity;
 import org.sm.lab.mybooks.client.place.LoginPlace;
+import org.sm.lab.mybooks.client.ui.phone.view.BookFormViewImpl;
+import org.sm.lab.mybooks.client.ui.phone.view.NoteFormViewImpl;
 import org.sm.lab.mybooks.client.ui.phone.view.BookListViewImpl;
 import org.sm.lab.mybooks.client.ui.phone.view.LoginViewImpl;
 import org.sm.lab.mybooks.client.ui.phone.view.PhoneMainViewImpl;
 import org.sm.lab.mybooks.client.util.IAppDialogBox;
+import org.sm.lab.mybooks.client.view.BookFormView;
 import org.sm.lab.mybooks.client.view.BookListView;
 import org.sm.lab.mybooks.client.view.LoginView;
 import org.sm.lab.mybooks.client.view.MainView;
+import org.sm.lab.mybooks.client.view.NoteFormView;
 import org.sm.lab.mybooks.client.view.ProfileFormView;
 import org.sm.lab.mybooks.shared.AppConsts;
 
@@ -48,6 +52,8 @@ public class ClientFactoryPhoneImpl implements ClientFactory {
 	
 	private LoginView loginView;
 	private BookListView bookListView;
+	private BookFormView bookFormView;
+	private NoteFormView noteFormView;
 	private ProfileFormView profileFormView;
 	
 	private LoginActivity loginActivity;
@@ -127,6 +133,22 @@ public class ClientFactoryPhoneImpl implements ClientFactory {
 		}
 		return bookListView;
 	}
+	
+	@Override
+	public BookFormView getBookFormView() {
+		if (bookFormView == null) {
+			bookFormView = new BookFormViewImpl();
+		}
+		return bookFormView;
+	}
+
+	@Override
+	public NoteFormView getNoteFormView() {
+		if (noteFormView == null) {
+			noteFormView = new NoteFormViewImpl();
+		}
+		return noteFormView;
+	}	
 	
 	@Override
 	public ProfileFormView getProfileFormView() {

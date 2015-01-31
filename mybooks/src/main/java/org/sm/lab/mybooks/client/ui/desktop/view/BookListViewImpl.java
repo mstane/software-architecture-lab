@@ -1,5 +1,8 @@
 package org.sm.lab.mybooks.client.ui.desktop.view;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import org.sm.lab.mybooks.client.MyBooks;
 import org.sm.lab.mybooks.client.ui.desktop.RangeLabelPager;
 import org.sm.lab.mybooks.client.ui.desktop.ShowMorePagerPanel;
@@ -24,6 +27,8 @@ import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSe
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.ProvidesKey;
@@ -71,9 +76,11 @@ public class BookListViewImpl extends Composite implements BookListView {
 	}
 
 	@UiField
+	SimplePanel bookPanel;
 	BookFormViewImpl bookForm;
 
 	@UiField
+	SimplePanel notePanel;
 	NoteFormViewImpl noteForm;
 
 	@UiField
@@ -151,16 +158,6 @@ public class BookListViewImpl extends Composite implements BookListView {
 	}
 
 	@Override
-	public BookFormView getBookFormView() {
-		return this.bookForm;
-	}
-	
-	@Override
-	public NoteFormView getNoteForm() {
-		return this.noteForm;
-	}
-
-	@Override
 	public HasData<BookDto> getCellList() {
 		return cellList;
 	}
@@ -176,6 +173,101 @@ public class BookListViewImpl extends Composite implements BookListView {
         }
         
     }
+
+
+
+	@Override
+	public void add(Widget w) {
+		if (w instanceof BookFormView) {
+			bookPanel.remove(w);
+			bookPanel.add(w);
+		} else if (w instanceof NoteFormView) {
+			notePanel.remove(w);
+			notePanel.add(w);
+		}
+		
+	}
+
+
+
+	@Override
+	public void clear() {
+		bookPanel.clear();
+		notePanel.clear();
+	}
+
+
+	@Override
+	public Iterator<Widget> iterator() {
+		return new Iterator<Widget>() {
+			Widget returned = null;
+			int index = 0;
+
+			@Override
+			public boolean hasNext() {
+				if (index == 0) {
+					return bookForm != null || noteForm != null;
+				} else if (index == 1) {
+					return bookForm != null && noteForm != null;
+				}
+				return false;
+			}
+
+			@Override
+			public Widget next() {
+				if (index == 0) {
+					if (bookForm != null) {
+						index = 1;
+						return (returned = bookForm);
+					} else if (noteForm != null) {
+						index = 1;
+						return (returned = noteForm);
+					}
+				} else if (index == 1) {
+					if (noteForm != null) {
+						index = 2;
+						return (returned = noteForm);
+					}
+				}
+				throw new NoSuchElementException();
+			}
+
+			@Override
+			public void remove() {
+				if (returned instanceof BookFormView) {
+					bookPanel.remove(returned);
+				} else if (returned instanceof NoteFormView) {
+					notePanel.remove(returned);
+				}
+
+			}
+
+		};
+	}
+
+	@Override
+	public boolean remove(Widget w) {
+		if (w instanceof BookFormView) {
+			return bookPanel.remove(w);
+		} else if (w instanceof NoteFormView) {
+			return notePanel.remove(w);
+		}
+		return false;
+	}
+
+
+
+	@Override
+	public void add(IsWidget w) {
+		add((Widget)w);
+	}
+
+
+
+	@Override
+	public boolean remove(IsWidget w) {
+		return remove((Widget)w);
+	}
 
 
 }

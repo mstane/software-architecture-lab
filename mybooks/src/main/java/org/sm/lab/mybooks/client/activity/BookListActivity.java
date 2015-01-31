@@ -11,6 +11,7 @@ import org.sm.lab.mybooks.client.event.BookChangedEventHandler;
 import org.sm.lab.mybooks.client.place.BookFormPlace;
 import org.sm.lab.mybooks.client.util.AppAsyncCallback;
 import org.sm.lab.mybooks.client.util.IAppDialogBox;
+import org.sm.lab.mybooks.client.view.BookFormView;
 import org.sm.lab.mybooks.client.view.BookListView;
 import org.sm.lab.mybooks.shared.action.LoadAllBooksAction;
 import org.sm.lab.mybooks.shared.action.LoadAllBooksResult;
@@ -30,6 +31,7 @@ public class BookListActivity extends AbstractActivity implements BookListView.P
 	private final DispatchAsync dispatchRpcService;
 	private final EventBus eventBus;
 	private final BookListView view;
+	private final BookFormView formView;
 	private final IAppDialogBox appDialogBox;
 	private final PlaceController placeController;
 
@@ -44,7 +46,8 @@ public class BookListActivity extends AbstractActivity implements BookListView.P
 		
         this.view = injector.getBookListView();
         this.view.setPresenter(this);
-		
+		this.formView = injector.getBookFormView();
+        
 		listDataProvider.addDataDisplay(view.getCellList());
 		
 		eventBus.addHandler(BookChangedEvent.TYPE, this);
@@ -54,12 +57,12 @@ public class BookListActivity extends AbstractActivity implements BookListView.P
     public void onAddButtonClicked() {
         Log.debug("BookListActivity.onAddButtonClicked()");
         
-        if (view.getBookFormView() != null) {
-        	view.getBookFormView().setVisible(false);
-        }
-        if (view.getNoteForm() != null) {
-        	view.getNoteForm().setVisible(false);
-        }
+//        if (view.getBookFormView() != null) {
+//        	view.getBookFormView().setVisible(false);
+//        }
+//        if (view.getNoteForm() != null) {
+//        	view.getNoteForm().setVisible(false);
+//        }
         
         placeController.goTo(new BookFormPlace());
     }
@@ -67,8 +70,9 @@ public class BookListActivity extends AbstractActivity implements BookListView.P
     public void onItemClicked(BookDto dto) {
         Log.debug("BookListActivity.onItemClicked()");
         
-        view.getBookFormView().setVisible(false);
-        view.getNoteForm().setVisible(false);
+//        view.getBookFormView().setVisible(false);
+//        view.getNoteForm().setVisible(false);
+        view.add(formView);
         placeController.goTo(new BookFormPlace(dto));
     }
 
@@ -77,12 +81,12 @@ public class BookListActivity extends AbstractActivity implements BookListView.P
     public void start(AcceptsOneWidget container, EventBus eventBus) {
         Log.debug("BookListActivity.start()");
         
-        if (view.getBookFormView() != null) {
-        	view.getBookFormView().setVisible(false);
-        }
-        if (view.getNoteForm() != null) {
-        	view.getNoteForm().setVisible(false);
-        }
+//        if (view.getBookFormView() != null) {
+//        	view.getBookFormView().setVisible(false);
+//        }
+//        if (view.getNoteForm() != null) {
+//        	view.getNoteForm().setVisible(false);
+//        }
 //        view.setSelected(null);
         container.setWidget(view.asWidget());
         

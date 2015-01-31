@@ -57,7 +57,8 @@ public class NoteFormActivity extends AbstractActivity implements NoteFormView.P
         this.placeController = injector.getPlaceController();
 
         this.parentView = injector.getBookListView();
-        this.view = parentView.getNoteForm();
+//        this.view = parentView.getNoteForm();
+        this.view = injector.getNoteFormView();
         this.view.setPresenter(this);
 
     }

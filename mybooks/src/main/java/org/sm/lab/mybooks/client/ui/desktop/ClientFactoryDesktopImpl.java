@@ -14,14 +14,18 @@ import org.sm.lab.mybooks.client.activity.LoginActivity;
 import org.sm.lab.mybooks.client.activity.NoteFormActivity;
 import org.sm.lab.mybooks.client.activity.ProfileFormActivity;
 import org.sm.lab.mybooks.client.place.LoginPlace;
+import org.sm.lab.mybooks.client.ui.desktop.view.BookFormViewImpl;
 import org.sm.lab.mybooks.client.ui.desktop.view.BookListViewImpl;
 import org.sm.lab.mybooks.client.ui.desktop.view.DesktopMainViewImpl;
 import org.sm.lab.mybooks.client.ui.desktop.view.LoginViewImpl;
+import org.sm.lab.mybooks.client.ui.desktop.view.NoteFormViewImpl;
 import org.sm.lab.mybooks.client.ui.desktop.view.ProfileFormViewImpl;
 import org.sm.lab.mybooks.client.util.IAppDialogBox;
+import org.sm.lab.mybooks.client.view.BookFormView;
 import org.sm.lab.mybooks.client.view.BookListView;
 import org.sm.lab.mybooks.client.view.LoginView;
 import org.sm.lab.mybooks.client.view.MainView;
+import org.sm.lab.mybooks.client.view.NoteFormView;
 import org.sm.lab.mybooks.client.view.ProfileFormView;
 import org.sm.lab.mybooks.shared.AppConsts;
 
@@ -46,6 +50,8 @@ public class ClientFactoryDesktopImpl implements ClientFactory {
 	
 	private LoginView loginView;
 	private BookListView bookListView;
+	private BookFormView bookFormView;
+	private NoteFormView noteFormView;
 	private ProfileFormView profileFormView;
 	
 	private LoginActivity loginActivity;
@@ -122,13 +128,29 @@ public class ClientFactoryDesktopImpl implements ClientFactory {
 	}
 	
 	@Override
+	public BookFormView getBookFormView() {
+		if (bookFormView == null) {
+			bookFormView = new BookFormViewImpl();
+		}
+		return bookFormView;
+	}
+
+	@Override
+	public NoteFormView getNoteFormView() {
+		if (noteFormView == null) {
+			noteFormView = new NoteFormViewImpl();
+		}
+		return noteFormView;
+	}	
+	
+	@Override
 	public ProfileFormView getProfileFormView() {
 		if (profileFormView == null) {
 			profileFormView = new ProfileFormViewImpl();
 		}
 		return profileFormView;
 	}
-
+	
 	@Override
 	public LoginActivity getLoginActivity() {
 		if (loginActivity == null) {
@@ -170,5 +192,6 @@ public class ClientFactoryDesktopImpl implements ClientFactory {
 		}
 		return profileFormActivity;
 	}
+
 
 }

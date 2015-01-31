@@ -1,5 +1,7 @@
 package org.sm.lab.mybooks.client.ui.phone.view;
 
+import java.util.Iterator;
+
 import org.sm.lab.mybooks.client.MyBooks;
 import org.sm.lab.mybooks.client.view.BookFormView;
 import org.sm.lab.mybooks.client.view.BookListView;
@@ -19,6 +21,7 @@ import com.google.gwt.user.cellview.client.HasKeyboardPagingPolicy.KeyboardPagin
 import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSelectionPolicy;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.ProvidesKey;
@@ -129,17 +132,40 @@ public class BookListViewImpl extends Composite implements BookListView {
         
     }
 
-// Desktop specific functions	
 	@Override
-	public BookFormView getBookFormView() {
-//		return this.bookForm;
+	public void add(Widget w) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Iterator<Widget> iterator() {
+		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
-	public NoteFormView getNoteForm() {
-//		return this.noteForm;
-		return null;
+	public boolean remove(Widget w) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void add(IsWidget w) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean remove(IsWidget w) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 

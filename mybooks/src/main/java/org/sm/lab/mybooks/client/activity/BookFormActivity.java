@@ -22,6 +22,7 @@ import org.sm.lab.mybooks.client.util.AppAsyncCallback;
 import org.sm.lab.mybooks.client.util.IAppDialogBox;
 import org.sm.lab.mybooks.client.view.BookFormView;
 import org.sm.lab.mybooks.client.view.BookListView;
+import org.sm.lab.mybooks.client.view.NoteFormView;
 import org.sm.lab.mybooks.shared.action.CreateBookAction;
 import org.sm.lab.mybooks.shared.action.CreateBookResult;
 import org.sm.lab.mybooks.shared.action.DeleteBookAction;
@@ -52,6 +53,7 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
 	private final EventBus eventBus;
 	private final BookListView listView;
 	private final BookFormView view;
+	private final NoteFormView noteFormView;
 	private final IAppDialogBox appDialogBox;
 	private final PlaceController placeController;
 
@@ -65,7 +67,9 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
         this.placeController = injector.getPlaceController();
 		
 		this.listView = injector.getBookListView();
-        this.view = listView.getBookFormView();
+//        this.view = listView.getBookFormView();
+		this.view = injector.getBookFormView();
+		this.noteFormView = injector.getNoteFormView();
         this.view.setPresenter(this);
 		
         noteTableDataProvider = new ListDataProvider<NoteDto>();
@@ -125,6 +129,7 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
     @Override
     public void onNoteItemClicked(NoteDto noteDto) {
         Log.debug("BookFormActivity.onNoteItemClicked()");
+        listView.add(noteFormView);
 
         noteDto.setBook(dto);
 

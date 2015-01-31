@@ -42,13 +42,13 @@
 								</g:Button>
 							</td>
 							<td class='{style.bookFormCell}' valign='top' align='left'>
-								<v:BookFormViewImpl ui:field='bookForm' />
+								<g:SimplePanel ui:field='bookPanel' />
 							</td>
 						</tr>
 					</table>
 				</td>
 				<td class='{style.noteFormCell}' valign='top' align='left'>
-					<v:NoteFormViewImpl ui:field='noteForm' />
+					<g:SimplePanel ui:field='notePanel' />
 				</td>
 			</tr>
 		</table>
