@@ -24,13 +24,11 @@ import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.datanucleus.api.jpa.annotations.Extension;
 import org.sm.lab.mybooks2.enums.Genre;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Configurable
 @Entity
@@ -117,8 +115,8 @@ public class Book {
     }
 
 	@Transactional
-    public static Book findBook(String id) {
-        if (id == null || id.length() == 0) return null;
+    public static Book findBook(Long id) {
+        if (id == null) return null;
         return entityManager().find(Book.class, id);
     }
 
@@ -177,28 +175,27 @@ public class Book {
     }
 
 	@Id
-    @Extension(vendorName = "datanucleus", key = "gae.encoded-pk", value = "true")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private String id;
+    private Long id;
 
 	@Version
     @Column(name = "version")
-    private Long version;
+    private Integer version;
 
-	public String getId() {
+	public Long getId() {
         return this.id;
     }
 
-	public void setId(String id) {
+	public void setId(Long id) {
         this.id = id;
     }
 
-	public Long getVersion() {
+	public Integer getVersion() {
         return this.version;
     }
 
-	public void setVersion(Long version) {
+	public void setVersion(Integer version) {
         this.version = version;
     }
 

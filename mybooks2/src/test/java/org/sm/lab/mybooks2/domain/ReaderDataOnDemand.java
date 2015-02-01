@@ -79,14 +79,14 @@ public class ReaderDataOnDemand {
             index = data.size() - 1;
         }
         Reader obj = data.get(index);
-        String id = obj.getId();
+        Long id = obj.getId();
         return readerService.findReader(id);
     }
 
 	public Reader getRandomReader() {
         init();
         Reader obj = data.get(rnd.nextInt(data.size()));
-        String id = obj.getId();
+        Long id = obj.getId();
         return readerService.findReader(id);
     }
 

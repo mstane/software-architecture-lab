@@ -11,7 +11,7 @@ public interface NoteService {
 	public abstract void deleteNote(Note note);
 
 
-	public abstract Note findNote(String id);
+	public abstract Note findNote(Long id);
 
 
 	public abstract List<Note> findAllNotes();

@@ -30,7 +30,7 @@ public class BookServiceImpl implements BookService {
         bookRepository.delete(book);
     }
 
-	public Book findBook(String id) {
+	public Book findBook(Long id) {
         return bookRepository.findOne(id);
     }
 

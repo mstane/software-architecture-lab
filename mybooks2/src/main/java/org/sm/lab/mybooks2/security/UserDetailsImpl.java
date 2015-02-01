@@ -12,12 +12,12 @@ public class UserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	private Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-	private String id;
+	private Long id;
 	private String password;
 	private String username;
 	private SystemRole systemRole;
 
-	public UserDetailsImpl(String id, String username, String password,
+	public UserDetailsImpl(Long id, String username, String password,
 			Collection<GrantedAuthority> authorities, SystemRole systemRole) {
 		this.id = id;
 		this.username = username;
@@ -30,7 +30,7 @@ public class UserDetailsImpl implements UserDetails {
 		return this.authorities;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 

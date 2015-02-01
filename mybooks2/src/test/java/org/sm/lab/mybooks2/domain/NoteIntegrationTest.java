@@ -5,9 +5,7 @@ import java.util.List;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.sm.lab.mybooks2.repository.NoteRepository;
@@ -18,8 +16,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath*:/META-INF/spring/applicationContext*.xml")
@@ -34,23 +30,11 @@ public class NoteIntegrationTest {
 	@Autowired
     NoteDataOnDemand dod;
 
-	private static final LocalServiceTestHelper helper = new LocalServiceTestHelper(new com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig());
-
 	@Autowired
     NoteService noteService;
 
 	@Autowired
     NoteRepository noteRepository;
-
-	@BeforeClass
-    public static void setUp() {
-        helper.setUp();
-    }
-
-	@AfterClass
-    public static void tearDown() {
-        helper.tearDown();
-    }
 
 	@Test
     public void testCountAllNotes() {
@@ -63,7 +47,7 @@ public class NoteIntegrationTest {
     public void testFindNote() {
         Note obj = dod.getRandomNote();
         Assert.assertNotNull("Data on demand for 'Note' failed to initialize correctly", obj);
-        String id = obj.getId();
+        Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Note' failed to provide an identifier", id);
         obj = noteService.findNote(id);
         Assert.assertNotNull("Find method for 'Note' illegally returned null for id '" + id + "'", obj);
@@ -96,12 +80,12 @@ public class NoteIntegrationTest {
     public void testFlush() {
         Note obj = dod.getRandomNote();
         Assert.assertNotNull("Data on demand for 'Note' failed to initialize correctly", obj);
-        String id = obj.getId();
+        Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Note' failed to provide an identifier", id);
         obj = noteService.findNote(id);
         Assert.assertNotNull("Find method for 'Note' illegally returned null for id '" + id + "'", obj);
         boolean modified =  dod.modifyNote(obj);
-        Long currentVersion = obj.getVersion();
+        Integer currentVersion = obj.getVersion();
         noteRepository.flush();
         Assert.assertTrue("Version for 'Note' failed to increment on flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
@@ -110,11 +94,11 @@ public class NoteIntegrationTest {
     public void testUpdateNoteUpdate() {
         Note obj = dod.getRandomNote();
         Assert.assertNotNull("Data on demand for 'Note' failed to initialize correctly", obj);
-        String id = obj.getId();
+        Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Note' failed to provide an identifier", id);
         obj = noteService.findNote(id);
         boolean modified =  dod.modifyNote(obj);
-        Long currentVersion = obj.getVersion();
+        Integer currentVersion = obj.getVersion();
         Note merged = noteService.updateNote(obj);
         noteRepository.flush();
         Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
@@ -146,7 +130,7 @@ public class NoteIntegrationTest {
     public void testDeleteNote() {
         Note obj = dod.getRandomNote();
         Assert.assertNotNull("Data on demand for 'Note' failed to initialize correctly", obj);
-        String id = obj.getId();
+        Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Note' failed to provide an identifier", id);
         obj = noteService.findNote(id);
         noteService.deleteNote(obj);

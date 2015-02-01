@@ -11,7 +11,7 @@ public interface BookService {
 	public abstract void deleteBook(Book book);
 
 
-	public abstract Book findBook(String id);
+	public abstract Book findBook(Long id);
 
 
 	public abstract List<Book> findAllBooks();

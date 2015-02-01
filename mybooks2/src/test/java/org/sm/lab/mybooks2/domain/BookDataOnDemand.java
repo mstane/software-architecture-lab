@@ -91,14 +91,14 @@ public class BookDataOnDemand {
             index = data.size() - 1;
         }
         Book obj = data.get(index);
-        String id = obj.getId();
+        Long id = obj.getId();
         return bookService.findBook(id);
     }
 
 	public Book getRandomBook() {
         init();
         Book obj = data.get(rnd.nextInt(data.size()));
-        String id = obj.getId();
+        Long id = obj.getId();
         return bookService.findBook(id);
     }
 

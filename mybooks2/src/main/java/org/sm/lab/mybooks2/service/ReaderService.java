@@ -11,7 +11,7 @@ public interface ReaderService {
 	public abstract void deleteReader(Reader reader);
 
 
-	public abstract Reader findReader(String id);
+	public abstract Reader findReader(Long id);
 	
 	
 	public abstract Reader findByUsername(String username);

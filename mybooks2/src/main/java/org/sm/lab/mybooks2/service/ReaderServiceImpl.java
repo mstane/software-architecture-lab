@@ -27,7 +27,7 @@ public class ReaderServiceImpl implements ReaderService {
         readerRepository.delete(reader);
     }
 
-	public Reader findReader(String id) {
+	public Reader findReader(Long id) {
         return readerRepository.findOne(id);
     }
 	

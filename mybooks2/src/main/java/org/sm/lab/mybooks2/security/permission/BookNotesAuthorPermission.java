@@ -18,7 +18,7 @@ public class BookNotesAuthorPermission extends AppPermission {
         boolean hasPermission = false;
         Book book = null;
         if (isAuthenticated(authentication) && isValidId(targetDomainObject)) {
-        	book = bookRepository.findOne((String) targetDomainObject);
+        	book = bookRepository.findOne((Long) targetDomainObject);
         	
         	if (book != null) {
             	UserDetailsImpl userDetails = getUserDetails(authentication);

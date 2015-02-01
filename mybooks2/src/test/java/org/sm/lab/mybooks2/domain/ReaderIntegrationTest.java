@@ -5,9 +5,7 @@ import java.util.List;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
-import org.junit.AfterClass;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.sm.lab.mybooks2.repository.ReaderRepository;
@@ -18,8 +16,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 
 @Configurable
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -34,23 +30,11 @@ public class ReaderIntegrationTest {
 	@Autowired
     ReaderDataOnDemand dod;
 
-	private static final LocalServiceTestHelper helper = new LocalServiceTestHelper(new com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig());
-
 	@Autowired
     ReaderService readerService;
 
 	@Autowired
     ReaderRepository readerRepository;
-
-	@BeforeClass
-    public static void setUp() {
-        helper.setUp();
-    }
-
-	@AfterClass
-    public static void tearDown() {
-        helper.tearDown();
-    }
 
 	@Test
     public void testCountAllReaders() {
@@ -63,7 +47,7 @@ public class ReaderIntegrationTest {
     public void testFindReader() {
         Reader obj = dod.getRandomReader();
         Assert.assertNotNull("Data on demand for 'Reader' failed to initialize correctly", obj);
-        String id = obj.getId();
+        Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Reader' failed to provide an identifier", id);
         obj = readerService.findReader(id);
         Assert.assertNotNull("Find method for 'Reader' illegally returned null for id '" + id + "'", obj);
@@ -96,12 +80,12 @@ public class ReaderIntegrationTest {
     public void testFlush() {
         Reader obj = dod.getRandomReader();
         Assert.assertNotNull("Data on demand for 'Reader' failed to initialize correctly", obj);
-        String id = obj.getId();
+        Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Reader' failed to provide an identifier", id);
         obj = readerService.findReader(id);
         Assert.assertNotNull("Find method for 'Reader' illegally returned null for id '" + id + "'", obj);
         boolean modified =  dod.modifyReader(obj);
-        Long currentVersion = obj.getVersion();
+        Integer currentVersion = obj.getVersion();
         readerRepository.flush();
         Assert.assertTrue("Version for 'Reader' failed to increment on flush directive", (currentVersion != null && obj.getVersion() > currentVersion) || !modified);
     }
@@ -110,11 +94,11 @@ public class ReaderIntegrationTest {
     public void testUpdateReaderUpdate() {
         Reader obj = dod.getRandomReader();
         Assert.assertNotNull("Data on demand for 'Reader' failed to initialize correctly", obj);
-        String id = obj.getId();
+        Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Reader' failed to provide an identifier", id);
         obj = readerService.findReader(id);
         boolean modified =  dod.modifyReader(obj);
-        Long currentVersion = obj.getVersion();
+        Integer currentVersion = obj.getVersion();
         Reader merged = readerService.updateReader(obj);
         readerRepository.flush();
         Assert.assertEquals("Identifier of merged object not the same as identifier of original object", merged.getId(), id);
@@ -146,7 +130,7 @@ public class ReaderIntegrationTest {
     public void testDeleteReader() {
         Reader obj = dod.getRandomReader();
         Assert.assertNotNull("Data on demand for 'Reader' failed to initialize correctly", obj);
-        String id = obj.getId();
+        Long id = obj.getId();
         Assert.assertNotNull("Data on demand for 'Reader' failed to provide an identifier", id);
         obj = readerService.findReader(id);
         readerService.deleteReader(obj);

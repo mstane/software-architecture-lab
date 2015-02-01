@@ -49,7 +49,7 @@ public class ProfileController {
     }		
 
 	@RequestMapping(value = "/{id}", produces = "text/html")
-    public String show(@PathVariable("id") String id, Model uiModel) {
+    public String show(@PathVariable("id") Long id, Model uiModel) {
         uiModel.addAttribute("reader", readerService.findReader(id));
         uiModel.addAttribute("itemId", id);
         return "profile/show";
@@ -67,13 +67,13 @@ public class ProfileController {
     }
 
 	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
-    public String updateForm(@PathVariable("id") String id, Model uiModel) {
+    public String updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, readerService.findReader(id));
         return "profile/update";
     }
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
-    public String delete(@PathVariable("id") String id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+    public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         Reader reader = readerService.findReader(id);
         readerService.deleteReader(reader);
         uiModel.asMap().clear();

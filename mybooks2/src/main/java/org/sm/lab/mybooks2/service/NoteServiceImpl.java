@@ -23,7 +23,7 @@ public class NoteServiceImpl implements NoteService {
         noteRepository.delete(note);
     }
 
-	public Note findNote(String id) {
+	public Note findNote(Long id) {
         return noteRepository.findOne(id);
     }
 

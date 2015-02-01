@@ -72,14 +72,14 @@ public class NoteDataOnDemand {
             index = data.size() - 1;
         }
         Note obj = data.get(index);
-        String id = obj.getId();
+        Long id = obj.getId();
         return noteService.findNote(id);
     }
 
 	public Note getRandomNote() {
         init();
         Note obj = data.get(rnd.nextInt(data.size()));
-        String id = obj.getId();
+        Long id = obj.getId();
         return noteService.findNote(id);
     }
 
