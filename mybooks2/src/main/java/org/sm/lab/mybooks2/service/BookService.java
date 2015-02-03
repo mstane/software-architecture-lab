@@ -2,6 +2,8 @@ package org.sm.lab.mybooks2.service;
 import java.util.List;
 
 import org.sm.lab.mybooks2.domain.Book;
+import org.sm.lab.mybooks2.domain.Note;
+import org.sm.lab.mybooks2.domain.Reader;
 
 public interface BookService {
 
@@ -24,5 +26,10 @@ public interface BookService {
 
 
 	public abstract Book updateBook(Book book);
+	
+	public abstract List<Book> findByReader(Reader reader, int firstResult, int maxResults);
+	
+	public abstract List<Book> findByKeyword(String keyword, int firstResult, int maxResults);
+	
 
 }

@@ -8,6 +8,8 @@ import org.sm.lab.mybooks2.repository.BookRepository;
 import org.sm.lab.mybooks2.repository.ReaderRepository;
 import org.sm.lab.mybooks2.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,4 +54,14 @@ public class BookServiceImpl implements BookService {
 	public Book updateBook(Book book) {
         return bookRepository.save(book);
     }
+
+	@Override
+	public List<Book> findByReader(Reader reader, int firstResult, int maxResults) {
+		return bookRepository.findByReader(reader, new PageRequest(firstResult / maxResults, maxResults, new Sort("title")));
+	}
+
+	@Override
+	public List<Book> findByKeyword(String keyword, int firstResult, int maxResults) {
+		return bookRepository.findByKeyword(keyword, new PageRequest(firstResult / maxResults, maxResults, new Sort("title")));
+	}
 }
