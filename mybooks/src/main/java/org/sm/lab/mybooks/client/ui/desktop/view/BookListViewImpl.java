@@ -77,11 +77,9 @@ public class BookListViewImpl extends Composite implements BookListView {
 
 	@UiField
 	SimplePanel bookPanel;
-	BookFormViewImpl bookForm;
 
 	@UiField
 	SimplePanel notePanel;
-	NoteFormViewImpl noteForm;
 
 	@UiField
 	ShowMorePagerPanel pagerPanel;
@@ -206,9 +204,9 @@ public class BookListViewImpl extends Composite implements BookListView {
 			@Override
 			public boolean hasNext() {
 				if (index == 0) {
-					return bookForm != null || noteForm != null;
+					return bookPanel.getWidget() != null || notePanel.getWidget() != null;
 				} else if (index == 1) {
-					return bookForm != null && noteForm != null;
+					return bookPanel.getWidget() != null && notePanel.getWidget() != null;
 				}
 				return false;
 			}
@@ -216,17 +214,17 @@ public class BookListViewImpl extends Composite implements BookListView {
 			@Override
 			public Widget next() {
 				if (index == 0) {
-					if (bookForm != null) {
+					if (bookPanel.getWidget() != null) {
 						index = 1;
-						return (returned = bookForm);
-					} else if (noteForm != null) {
+						return (returned = bookPanel.getWidget());
+					} else if (notePanel.getWidget() != null) {
 						index = 1;
-						return (returned = noteForm);
+						return (returned = notePanel.getWidget());
 					}
 				} else if (index == 1) {
-					if (noteForm != null) {
+					if (notePanel.getWidget() != null) {
 						index = 2;
-						return (returned = noteForm);
+						return (returned = notePanel.getWidget());
 					}
 				}
 				throw new NoSuchElementException();

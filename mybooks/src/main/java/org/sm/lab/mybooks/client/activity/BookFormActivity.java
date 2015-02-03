@@ -67,7 +67,6 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
         this.placeController = injector.getPlaceController();
 		
 		this.listView = injector.getBookListView();
-//        this.view = listView.getBookFormView();
 		this.view = injector.getBookFormView();
 		this.noteFormView = injector.getNoteFormView();
         this.view.setPresenter(this);
@@ -119,6 +118,8 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
 	@Override
 	public void onNewNoteButtonClicked() {
 	    Log.debug("BookFormActivity.onNewNoteButtonClicked()");
+	    noteFormView.clear();
+	    listView.add(noteFormView);
 	    
 	    NoteDto noteDto = new NoteDto();
 	    noteDto.setBook(dto);
