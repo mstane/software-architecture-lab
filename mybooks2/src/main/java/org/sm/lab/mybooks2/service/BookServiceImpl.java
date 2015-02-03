@@ -57,11 +57,11 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public List<Book> findByReader(Reader reader, int firstResult, int maxResults) {
-		return bookRepository.findByReader(reader, new PageRequest(firstResult / maxResults, maxResults, new Sort("title")));
+		return bookRepository.findByReader(reader, new PageRequest(firstResult / maxResults, maxResults, new Sort("title"))).getContent();
 	}
 
 	@Override
 	public List<Book> findByKeyword(String keyword, int firstResult, int maxResults) {
-		return bookRepository.findByKeyword(keyword, new PageRequest(firstResult / maxResults, maxResults, new Sort("title")));
+		return bookRepository.findByKeyword(keyword, new PageRequest(firstResult / maxResults, maxResults, new Sort("title"))).getContent();
 	}
 }

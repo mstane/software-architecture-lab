@@ -48,11 +48,11 @@ public class NoteServiceImpl implements NoteService {
     }
 	
 	public List<Note> findByBook(Book book, int firstResult, int maxResults) {
-		return noteRepository.findByBook(book, new PageRequest(firstResult / maxResults, maxResults, new Sort("title")));
+		return noteRepository.findByBook(book, new PageRequest(firstResult / maxResults, maxResults, new Sort("title"))).getContent();
 	}
 	
 	public List<Note> findByKeyword(String keyword, int firstResult, int maxResults) {
-        return noteRepository.findByKeyword(keyword, new PageRequest(firstResult / maxResults, maxResults, new Sort("title")));
+        return noteRepository.findByKeyword(keyword, new PageRequest(firstResult / maxResults, maxResults, new Sort("title"))).getContent();
     }
 	
 }
