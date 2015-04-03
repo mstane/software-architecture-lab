@@ -1,0 +1,32 @@
+<div th:fragment="content">
+	<div class="row">
+		<div class="col-xs-12">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Title</th>
+						<th>Author</th>
+						<th>URL</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="book in books">
+						<td>{{book.id}}</td>
+						<td>{{book.title}}</td>
+						<td>{{book.author}}</td>
+						<td>{{book.url}}</td>
+						<td><a ui-sref="edit({ bookId: book.id })">Edit</a> | <a
+							ng-click="deleteBook(book)">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<a ui-sref="create" class="btn btn-default">New Book</a>
+		</div>
+	</div>
+</div>

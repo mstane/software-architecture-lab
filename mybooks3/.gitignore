@@ -1,0 +1,8 @@
+/bin/
+/target/
+/.settings/
+/.classpath
+/.project
+/.springBeans
+/mybooks3.properties
+/mybooks3.script

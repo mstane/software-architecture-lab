@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/sitelayout">
+<head>
+    <title th:text="#{app.name}">List of Books</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div id="home" ng-app="mybooks3App">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div>
+                        <div class="ui-view"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
