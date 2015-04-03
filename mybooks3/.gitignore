@@ -4,8 +4,4 @@
 /.classpath
 /.project
 /.springBeans
-/mybooks3.properties
-/mybooks3.script
-/mybooks3.tmp/
-/mybooks3.lck
-/mybooks3.log
+/db/
