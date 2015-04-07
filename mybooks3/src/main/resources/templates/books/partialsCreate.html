@@ -3,26 +3,36 @@
         <div class="col-xs-12">
             <form class="form-horizontal">
                 <div class="form-group">
-                    <label for="name" class="col-xs-2">Title</label>
+                    <label for="title" class="col-xs-2">Title</label>
 
                     <div class="col-xs-6">
                         <input class="form-control" placeholder="Title" ng-model="book.title"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="address" class="col-xs-2">Author</label>
+                    <label for="author" class="col-xs-2">Author</label>
 
                     <div class="col-xs-6">
                         <input class="form-control" placeholder="Author" ng-model="book.author"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="zip" class="col-xs-2">URL</label>
+                    <label for="url" class="col-xs-2">URL</label>
 
                     <div class="col-xs-6">
                         <input class="form-control" placeholder="URL" ng-model="book.url"/>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="genre" class="col-xs-2">Genre</label>
+
+                    <div class="col-xs-6">
+                    	<select class="form-control" placeholder="Genre" ng-model="book.genre" ng-options="genre as genre for genre in genres">
+							<option value="">-- Select --</option>						
+						</select>
+                    </div>
+                </div>                
+
                 <a class="btn btn-default" ng-click="createBook()">Submit</a>
             </form>
         </div>

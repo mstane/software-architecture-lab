@@ -106,7 +106,9 @@ app.factory("BookFactory", function ($resource) {
 
 
 app.controller("BookController", function ($scope, BookFactory, $location) {
-    function init() {
+	$scope.genres=["Comedy", "Drama", "Epic"];
+	
+	function init() {
         $scope.getBooks();
     }
 
@@ -118,14 +120,20 @@ app.controller("BookController", function ($scope, BookFactory, $location) {
     $scope.deleteBook = function (book) {
         return book.$delete({}, function () {
             $scope.books.splice($scope.books.indexOf(book), 1);
+            alert("Successfully deleted.");
         });
     };
 
     $scope.createBook = function () {
-        var book = new BookFactory($scope.book);
-        book.$save({}, function() {
-            $location.path("/books");
-        });
+		if($scope.book == null || $scope.book.title == null || $scope.book.author == null || $scope.book.url == null || $scope.book.genre == null){
+			alert("Insufficient Data! Please provide valid values.");
+		} else {
+	        var book = new BookFactory($scope.book);
+	        book.$save({}, function() {
+	            $location.path("/books");
+	            alert("Successfully created.");
+	        });
+		}    	
     };
 
     init();
@@ -140,9 +148,26 @@ app.controller("BookEditController", function ($scope, BookFactory, $location, $
        var book = new BookFactory($scope.book);
        book.$update().then(function() {
     	   $location.path("/books");
+    	   alert("Successfully updated.");
        }) ;
     }
     init();
 });
 
+
+//app Directive for confirm dialog box
+app.directive('ngConfirmClick', [
+	function(){
+         return {
+             link: function (scope, element, attr) {
+                 var msg = attr.ngConfirmClick || "Are you sure?";
+                 var clickAction = attr.confirmedClick;
+                 element.bind('click',function (event) {
+                     if ( window.confirm(msg) ) {
+                         scope.$eval(clickAction);
+                     }
+                 });
+             }
+         };
+ }]);
 

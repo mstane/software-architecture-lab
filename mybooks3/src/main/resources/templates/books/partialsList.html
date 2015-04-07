@@ -18,7 +18,7 @@
 						<td>{{book.author}}</td>
 						<td>{{book.url}}</td>
 						<td><a href="#/edit/{{book.id}}">Edit</a> | <a
-							ng-click="deleteBook(book)">Delete</a></td>
+							confirmed-click="deleteBook(book)" ng-confirm-click="Are you sure?">Delete</a></td>
 					</tr>
 				</tbody>
 			</table>
