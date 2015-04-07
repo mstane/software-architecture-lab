@@ -17,7 +17,7 @@
 						<td>{{book.title}}</td>
 						<td>{{book.author}}</td>
 						<td>{{book.url}}</td>
-						<td><a ui-sref="edit({ bookId: book.id })">Edit</a> | <a
+						<td><a href="#/edit/{{book.id}}">Edit</a> | <a
 							ng-click="deleteBook(book)">Delete</a></td>
 					</tr>
 				</tbody>
@@ -26,7 +26,7 @@
 	</div>
 	<div class="row">
 		<div class="col-xs-12">
-			<a ui-sref="create" class="btn btn-default">New Book</a>
+			<a href="#/create" class="btn btn-default">New Book</a>
 		</div>
 	</div>
 </div>

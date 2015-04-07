@@ -18,13 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/rest/books")
 public class RestBookController {
-	private BookService bookService;
 	
 	@Autowired
-	public RestBookController(BookService bookService) {
-		this.bookService = bookService;
-	}
-
+	BookService bookService;
+	
 	@RequestMapping(method=RequestMethod.POST)
 	public Book create(@RequestBody @Valid Book book) {
 		return this.bookService.saveBook(book);

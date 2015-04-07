@@ -1,0 +1,41 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{app.name}">List of Books</title>
+<link rel="stylesheet" th:href="@{/css/angular-bootstrap.css}"
+	href="css/angular-bootstrap.css" />
+<style type="text/css">
+[ng\:cloak], [ng-cloak], .ng-cloak {
+	display: none !important;
+}
+</style>
+<script th:inline="javascript">
+        /*<![CDATA[*/
+        var URLS = {};
+        URLS.books = /*[[@{/rest/books/:id}]]*/ '/books/rest';
+        URLS.home = /*[[@{/books/home}]]*/ '/books/home';
+        URLS.login = /*[[@{/books/login}]]*/ '/books/login';
+        URLS.partialsList = /*[[@{/books/partialsList}]]*/ '/books/partialsList';
+        URLS.partialsEdit = /*[[@{/books/partialsEdit}]]*/ '/books/partialsEdit';
+        URLS.partialsCreate = /*[[@{/books/partialsCreate}]]*/ '/books/partialsCreate';
+        /*]]>*/
+    </script>
+</head>
+
+<body ng-app="hello" ng-cloak="" class="ng-cloak">
+	<div ng-controller="navigation" class="container">
+		<ul class="nav nav-pills" role="tablist">
+			<li><a href="#/">home</a></li>
+			<li ng-show="authenticated"><a href="#/books">books</a></li>
+			<li><a href="#/login">login</a></li>
+			<li ng-show="authenticated"><a href="" ng-click="logout()">logout</a></li>
+		</ul>
+	</div>
+	<div ng-view="" class="container"></div>
+
+	<script th:src="@{/js/angular-bootstrap.js}"
+		src="js/angular-bootstrap.js"></script>
+	<script th:src="@{/js/app.js}" src="js/app.js"></script>
+
+</body>
+</html>
