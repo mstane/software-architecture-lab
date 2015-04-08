@@ -8,6 +8,7 @@
 						<th>Title</th>
 						<th>Author</th>
 						<th>URL</th>
+						<th>Genre</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -17,6 +18,7 @@
 						<td>{{book.title}}</td>
 						<td>{{book.author}}</td>
 						<td>{{book.url}}</td>
+						<td>{{book.genre}}</td>
 						<td><a href="#/edit/{{book.id}}">Edit</a> | <a
 							confirmed-click="deleteBook(book)" ng-confirm-click="Are you sure?">Delete</a></td>
 					</tr>

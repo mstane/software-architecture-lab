@@ -106,6 +106,7 @@ app.factory("BookFactory", function ($resource) {
 
 
 app.controller("BookController", function ($scope, BookFactory, $location) {
+	
 	$scope.genres=["Comedy", "Drama", "Epic"];
 	
 	function init() {
@@ -140,6 +141,9 @@ app.controller("BookController", function ($scope, BookFactory, $location) {
 });
 
 app.controller("BookEditController", function ($scope, BookFactory, $location, $routeParams) {
+	
+	$scope.genres=["Comedy", "Drama", "Epic"];
+	
     function init() {
     	$scope.book = BookFactory.get({id:$routeParams.bookId})
     }
