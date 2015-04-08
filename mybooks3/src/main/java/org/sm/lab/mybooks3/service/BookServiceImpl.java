@@ -62,4 +62,15 @@ public class BookServiceImpl implements BookService {
 	public List<Book> findByKeyword(String keyword, int firstResult, int maxResults) {
 		return bookRepository.findByKeyword(keyword, new PageRequest(firstResult / maxResults, maxResults, new Sort("title"))).getContent();
 	}
+
+	@Override
+	public List<Book> search(String title, String author, String url, String startReadingDate, String endReadingDate, String rating, String genre) {
+		return bookRepository.search(title, author, url, startReadingDate, endReadingDate, rating, genre);
+	}
+	
+	@Override
+	public Long countSearch(String title, String author, String url, String startReadingDate, String endReadingDate, String rating, String genre) {
+		return bookRepository.countSearch(title, author, url, startReadingDate, endReadingDate, rating, genre);
+	}
+	
 }
