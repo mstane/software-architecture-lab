@@ -1,7 +1,6 @@
 var app = angular.module('hello', [ 'ngRoute', 'ngResource' ]);
 
 
-
 app.config(function($routeProvider, $httpProvider) {
 			$routeProvider.when('/', {
 				templateUrl : URLS.home,
@@ -9,6 +8,8 @@ app.config(function($routeProvider, $httpProvider) {
 			}).when('/login', {
 				templateUrl : URLS.login,
 				controller : 'navigation'
+			}).when('/register', {
+				templateUrl : URLS.register
 			}).when('/books', {
 				templateUrl : URLS.partialsList,
 				controller : 'BookController'
