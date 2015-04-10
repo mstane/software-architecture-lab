@@ -5,22 +5,21 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title th:text="#{app.name}">List of Books</title>
-<link rel="stylesheet" th:href="@{/css/angular-bootstrap.css}"
-	href="css/angular-bootstrap.css" />
-<link rel="stylesheet" th:href="@{/css/custom.css}"
-	href="../static/css/custom.css" />
+<link rel="stylesheet" th:href="@{/css/angular-bootstrap.css}" href="../static/css/angular-bootstrap.css" />
+<link rel="stylesheet" th:href="@{/css/custom.css}" href="../static/css/custom.css" />
 
 <style type="text/css">
 [ng\:cloak], [ng-cloak], .ng-cloak {
 	display: none !important;
 }
+
 </style>
 <script th:inline="javascript">
         /*<![CDATA[*/
         var URLS = {};
         URLS.books = /*[[@{/rest/books/:id}]]*/ '/books/rest';
-        URLS.home = /*[[@{/books/home}]]*/ '/books/home';
-        URLS.login = /*[[@{/books/login}]]*/ '/books/login';
+        URLS.home = /*[[@{/books/home}]]*/ '/books/home.html';
+        URLS.login = /*[[@{/books/login}]]*/ '/books/login.html';
         URLS.register = /*[[@{/books/register}]]*/ '/books/register';
         URLS.partialsList = /*[[@{/books/partialsList}]]*/ '/books/partialsList';
         URLS.partialsEdit = /*[[@{/books/partialsEdit}]]*/ '/books/partialsEdit';
@@ -81,8 +80,7 @@
 		</div>
 	</div>
 
-	<script th:src="@{/js/angular-bootstrap.js}"
-		src="js/angular-bootstrap.js"></script>
+	<script th:src="@{/js/angular-bootstrap.js}" src="../static/js/angular-bootstrap.js"></script>
 	<script th:src="@{/js/app.js}" src="../static/js/app.js"></script>
 
 </body>
