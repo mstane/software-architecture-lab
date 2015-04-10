@@ -1,34 +1,32 @@
 <div th:fragment="content">
-	<div class="row">
-		<div class="col-xs-12">
-			<table class="table table-bordered table-striped">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>Title</th>
-						<th>Author</th>
-						<th>URL</th>
-						<th>Genre</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="book in books">
-						<td>{{book.id}}</td>
-						<td>{{book.title}}</td>
-						<td>{{book.author}}</td>
-						<td>{{book.url}}</td>
-						<td>{{book.genre}}</td>
-						<td><a href="#/edit/{{book.id}}">Edit</a> | <a
-							confirmed-click="deleteBook(book)" ng-confirm-click="Are you sure?">Delete</a></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+	<h2 class="sub-header">Books</h2>
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Title</th>
+					<th>Author</th>
+					<th>URL</th>
+					<th>Genre</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="book in books">
+					<td>{{book.id}}</td>
+					<td>{{book.title}}</td>
+					<td>{{book.author}}</td>
+					<td>{{book.url}}</td>
+					<td>{{book.genre}}</td>
+					<td><a href="#/edit/{{book.id}}">Edit</a> | <a
+						confirmed-click="deleteBook(book)"
+						ng-confirm-click="Are you sure?">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
-	<div class="row">
-		<div class="col-xs-12">
-			<a href="#/create" class="btn btn-default">New Book</a>
-		</div>
-	</div>
+	<a href="#/create" class="btn btn-default">New Book</a>
 </div>
+
+

@@ -2,42 +2,31 @@
 	<h1>Sign Up</h1>
 	<h4 class="muted">Fill in this form to register with us.</h4>
 	<hr/>
-	<form class="form-horizontal">
-		<div class="control-group">
-			<label class="control-label">First Name</label>
-			<div class="controls">
-				<input type="text" placeholder="First Name"/>
-			</div>
+	<div class="alert alert-danger" ng-show="error">There was a problem logging in. Please try again.</div>
+	<form role="form" ng-submit="">
+		<div class="form-group">
+			<label for="firstName">First Name</label> 
+			<input type="text" class="form-control" id="firstName" name="firstName" ng-model="register.firstName" />
+		</div>		
+		<div class="form-group">
+			<label for="lastName">Last Name</label> 
+			<input type="text" class="form-control" id="lastName" name="lastName" ng-model="register.lastName" />
+		</div>		
+		<div class="form-group">
+			<label for="email">Your Email</label> 
+			<input type="text" class="form-control" id="email" name="email" ng-model="register.email" />
 		</div>
-		<div class="control-group">
-			<label class="control-label">Last Name</label>
-			<div class="controls">
-				<input type="text" placeholder="Last Name"/>
-			</div>
+		<div class="form-group">
+			<label for="mailingAddress">Mailing Address</label> 
+			<textarea type="text" class="form-control" id="mailingAddress" name="mailingAddress" ng-model="register.mailingAddress"></textarea>
 		</div>
-		<div class="control-group">
-			<label class="control-label">Your Email</label>
-			<div class="controls">
-				<input type="text" placeholder="Email"/>
-			</div>
+		<div class="form-group">
+			<label for="password">Password</label> 
+			<input type="password" class="form-control" id="password" name="password" ng-model="register.password" />
 		</div>
-		<div class="control-group">
-			<label class="control-label">Mailing Address</label>
-			<div class="controls">
-				<textarea placeholder="Mailing Address"></textarea>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">Password</label>
-			<div class="controls">
-				<input type="password" placeholder="Password"/>
-			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">Confirm Password</label>
-			<div class="controls">
-				<input type="password" placeholder="Confirm Password"/>
-			</div>
+		<div class="form-group">
+			<label for="confirmPassword">Confirm Password</label> 
+			<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" ng-model="register.confirmPassword" />
 		</div>
 		<div class="form-actions">
 			<button type="submit" class="btn btn-primary">Sign Up</button>
