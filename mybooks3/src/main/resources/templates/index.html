@@ -17,13 +17,16 @@
 <script th:inline="javascript">
         /*<![CDATA[*/
         var URLS = {};
-        URLS.books = /*[[@{/rest/books/:id}]]*/ '/books/rest';
-        URLS.home = /*[[@{/books/home}]]*/ 'books/home.html';
-        URLS.login = /*[[@{/books/login}]]*/ '/books/login.html';
-        URLS.register = /*[[@{/books/register}]]*/ '/books/register';
-        URLS.partialsList = /*[[@{/books/partialsList}]]*/ '/books/partialsList';
-        URLS.partialsEdit = /*[[@{/books/partialsEdit}]]*/ '/books/partialsEdit';
-        URLS.partialsCreate = /*[[@{/books/partialsCreate}]]*/ '/books/partialsCreate';
+        
+        URLS.home = /*[[@{/home}]]*/ '/home.html';
+        URLS.login = /*[[@{/login}]]*/ '/login.html';
+        URLS.register = /*[[@{/register}]]*/ '/register';
+        
+        URLS.booksRest = /*[[@{/rest/books/:id}]]*/ '/books/rest';
+        URLS.booksList = /*[[@{/books/list}]]*/ '/books/list';
+        URLS.booksEdit = /*[[@{/books/edit}]]*/ '/books/edit';
+        URLS.booksCreate = /*[[@{/books/create}]]*/ '/books/create';
+        
         /*]]>*/
     </script>
 </head>
@@ -45,10 +48,12 @@
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
-					<li ng-show="authenticated"><a href="#/books">Books</a></li>
-					<li ng-show="authenticated"><a href="" ng-click="logout()">Logout</a></li>
+					<li><a href="#/books/list">Books</a></li>
+					<li><a href="#/">My Profile</a></li>
+					<li><a href="#/">Admin</a></li>
 					<li><a href="#/login">Login</a></li>
 					<li><a href="#/register">Register</a></li>
+					<li ng-show="authenticated"><a href="" ng-click="logout()">Logout</a></li>
 				</ul>
 				<form class="navbar-form navbar-right">
 					<input type="text" class="form-control" placeholder="Search..." />
@@ -58,28 +63,10 @@
 	</nav>
 
 	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-					<li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
-					<li><a href="#">My profile</a></li>
-					<li><a href="#">Logout</a></li>
-				</ul>
-				<ul class="nav nav-sidebar">
-					<li><a href="#">Create new book</a></li>
-					<li><a href="#">List all books</a></li>
-					<li><a href="#">Search books</a></li>
-					<li><a href="#">Search notes</a></li>
-				</ul>
-			</div>
-
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-				<div ng-view=""></div>
-			</div>
-
-		</div>
+		<br/>
+		<div ng-view=""></div>
 	</div>
-
+	
 	<script th:src="@{/js/angular-bootstrap.js}" src="../static/js/angular-bootstrap.js"></script>
 	<script th:src="@{/js/app.js}" src="../static/js/app.js"></script>
 

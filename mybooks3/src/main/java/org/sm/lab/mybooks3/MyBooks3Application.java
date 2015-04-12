@@ -56,7 +56,7 @@ public class MyBooks3Application {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 			http.httpBasic().and().authorizeRequests()
-					.antMatchers("/index.html", "/books/home", "/books/login", "/").permitAll().anyRequest()
+					.antMatchers("/index.html", "/home", "/login", "/").permitAll().anyRequest()
 					.authenticated().and().csrf()
 					.csrfTokenRepository(csrfTokenRepository()).and()
 					.addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);

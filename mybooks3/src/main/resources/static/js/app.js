@@ -10,14 +10,14 @@ app.config(function($routeProvider, $httpProvider) {
 				controller : 'navigation'
 			}).when('/register', {
 				templateUrl : URLS.register
-			}).when('/books', {
-				templateUrl : URLS.partialsList,
+			}).when('/books/list', {
+				templateUrl : URLS.booksList,
 				controller : 'BookController'
-			}).when('/edit/:bookId', {
-				templateUrl : URLS.partialsEdit,
+			}).when('/books/edit/:bookId', {
+				templateUrl : URLS.booksEdit,
 				controller : 'BookEditController'
-			}).when('/create', {
-				templateUrl : URLS.partialsCreate,
+			}).when('/books/create', {
+				templateUrl : URLS.booksCreate,
 				controller : 'BookController'
 			}).otherwise('/');
 
@@ -98,7 +98,7 @@ app.controller('home', function($scope, $http) {
 
 
 app.factory("BookFactory", function ($resource) {
-    return $resource(URLS.books, {id: "@id"}, {
+    return $resource(URLS.booksRest, {id: "@id"}, {
         update: {
             method: 'PUT'
         }
@@ -132,7 +132,7 @@ app.controller("BookController", function ($scope, BookFactory, $location) {
 		} else {
 	        var book = new BookFactory($scope.book);
 	        book.$save({}, function() {
-	            $location.path("/books");
+	            $location.path("/books/list");
 	            alert("Successfully created.");
 	        });
 		}    	
@@ -152,7 +152,7 @@ app.controller("BookEditController", function ($scope, BookFactory, $location, $
     $scope.updateBook = function() {
        var book = new BookFactory($scope.book);
        book.$update().then(function() {
-    	   $location.path("/books");
+    	   $location.path("/books/list");
     	   alert("Successfully updated.");
        }) ;
     }

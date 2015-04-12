@@ -7,6 +7,11 @@
 	</ol>
 
 	<h2 class="sub-header">Books</h2>
+	
+	<p>Create new book</p>
+	<p>List all books</p>
+	<p>Search books</p>
+	<p>Search notes</p>
 
 	<div class="table-responsive">
 		<table class="table table-striped">
@@ -27,14 +32,14 @@
 					<td>{{book.author}}</td>
 					<td>{{book.url}}</td>
 					<td>{{book.genre}}</td>
-					<td><a href="#/edit/{{book.id}}">Edit</a> | <a
+					<td><a href="#/books/edit/{{book.id}}">Edit</a> | <a
 						confirmed-click="deleteBook(book)"
 						ng-confirm-click="Are you sure?">Delete</a></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	<a href="#/create" class="btn btn-default">New Book</a>
+	<a href="#/books/create" class="btn btn-default">New Book</a>
 </div>
 
 

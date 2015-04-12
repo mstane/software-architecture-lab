@@ -9,13 +9,13 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/books/partialsList").setViewName("books/partialsList::content");
-		registry.addViewController("/books/partialsCreate").setViewName("books/partialsCreate::content");
-		registry.addViewController("/books/partialsEdit").setViewName("books/partialsEdit::content");
+		registry.addViewController("/books/list").setViewName("books/list::content");
+		registry.addViewController("/books/create").setViewName("books/create::content");
+		registry.addViewController("/books/edit").setViewName("books/edit::content");
 		
-		registry.addViewController("/books/home").setViewName("books/home::content");
-		registry.addViewController("/books/login").setViewName("books/login::content");
-		registry.addViewController("/books/register").setViewName("books/register::content");
+		registry.addViewController("/home").setViewName("home::content");
+		registry.addViewController("/login").setViewName("login::content");
+		registry.addViewController("/register").setViewName("register::content");
 	}
 
 }
