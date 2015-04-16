@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title th:text="#{app.name}">List of Books</title>
-<link rel="stylesheet" th:href="@{/css/angular-bootstrap.css}" href="../../static/css/angular-bootstrap.css" />
-<link rel="stylesheet" th:href="@{/css/custom.css}" href="../../static/css/custom.css" />
+<link rel="stylesheet" th:href="@{/css/angular-bootstrap.css}"
+	href="../../static/css/angular-bootstrap.css" />
+<link rel="stylesheet" th:href="@{/css/custom.css}"
+	href="../../static/css/custom.css" />
 </head>
 
 <body ng-app="hello">
@@ -17,10 +19,9 @@
 				<button type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
 					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> 
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="#/">MyBooks3</a>
 			</div>
@@ -59,27 +60,30 @@
 
 
 
-
-<div th:fragment="content">
-	<div class="alert alert-danger" ng-show="error">There was a problem logging in. Please try again.</div>
-	<form name='loginForm' role="form" novalidate="" ng-submit="login()">
-		<div class="form-group">
-			<label for="username">Username:</label> 
-			<input type="text" class="form-control" id="username" name="username" ng-model="credentials.username" required="" ng-minlength="3" />
-			<span class='help-block' ng-show='loginForm.username.$error.required'>Username is required</span>
-			<span class='help-block' ng-show='loginForm.username.$error.minlength'>Too short</span>
-		</div>
-		<div class="form-group">
-			<label for="password">Password:</label> 
-			<input type="password" class="form-control" id="password" name="password" ng-model="credentials.password" required="" ng-minlength="3" />
-			<span class='help-block' ng-show='loginForm.password.$error.required'>Password is required</span>
-			<span class='help-block' ng-show='loginForm.password.$error.minlength'>Too short</span>
-		</div>
-		<button type="submit" class="btn btn-primary" ng-disabled='loginForm.$invalid'>Submit</button>
-	</form>
-</div>
-
-
+				<div th:fragment="content">
+	
+					<div class="alert alert-danger" ng-show="error">There was a problem logging in. Please try again.</div>
+					<form class="form-signin" name='loginForm' role="form" novalidate="" ng-submit="login()">
+						<h2 class="form-signin-heading">Please sign in</h2>
+						
+						<label for="username" class="sr-only">Email address</label>
+						<input type="text" class="form-control" id="username" name="username" ng-model="credentials.username" placeholder="Username" required="" ng-minlength="3" autofocus=""/>
+						<span class='help-block' ng-show='loginForm.username.$error.required'>Username is required</span> 
+						<span class='help-block' ng-show='loginForm.username.$error.minlength'>Too short</span>
+						
+						<label for="password" class="sr-only">Password</label> 
+						<input type="password" id="password" class="form-control" placeholder="Password" name="password" ng-model="credentials.password" required="" ng-minlength="3" />
+						<span class='help-block' ng-show='loginForm.password.$error.required'>Password is required</span> 
+						<span class='help-block' ng-show='loginForm.password.$error.minlength'>Too short</span>
+						
+						<div class="checkbox">
+							<label> <input type="checkbox" value="remember-me"/>
+								Remember me
+							</label>
+						</div>
+						<button type="submit" class="btn btn-lg btn-primary btn-block" ng-disabled='loginForm.$invalid'>Sign in</button>
+					</form>
+				</div>
 
 
 
@@ -88,7 +92,8 @@
 		</div>
 	</div>
 
-	<script th:src="@{/js/angular-bootstrap.js}" src="../../static/js/angular-bootstrap.js"></script>
+	<script th:src="@{/js/angular-bootstrap.js}"
+		src="../../static/js/angular-bootstrap.js"></script>
 	<script th:src="@{/js/app.js}" src="../../static/js/app.js"></script>
 
 </body>
