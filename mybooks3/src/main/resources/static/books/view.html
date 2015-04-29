@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="icon" href="../img/favicon.ico" />
 <title>My Books 3</title>
-<link rel="stylesheet" href="../css/bandle.css" />
+<link rel="stylesheet" href="../css/bundle.css" />
 <link rel="stylesheet" href="../css/custom.css" />
 </head>
 
@@ -78,11 +78,15 @@
 							<td>Rating:</td>
 							<td>5</td>
 						</tr>
+						<tr>
+							<td>Review:</td>
+							<td>Review 1</td>
+						</tr>
 					</tbody>
 				</table>
 
 				<div class="form-actions">
-					<button type="submit" class="btn">Edit</button>
+					<a href="/books/edit.html" class="btn btn-default">Edit</a>
 				</div>
 
 			</div>
@@ -91,12 +95,39 @@
 		<hr />
 
 		<p>List of notes</p>
+		
+		
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Title</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr onclick="document.location = '/notes/view.html';">
+						<td>id1</td>
+						<td>title1</td>
+					</tr>
+					<tr onclick="document.location = '/notes/view.html';">
+						<td>id2</td>
+						<td>title2</td>
+					</tr>
+					<tr onclick="document.location = '/notes/view.html';">
+						<td>id3</td>
+						<td>title3</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<a href="/notes/edit.html" class="btn btn-default">New Note</a>
 
 		<hr />
 
 	</div>
 
-	<script src="../js/bandle.js"></script>
+	<script src="../js/bundle.js"></script>
 	<script src="../js/app.js"></script>
 
 </body>
