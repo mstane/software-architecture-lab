@@ -1,121 +1,92 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title th:text="#{app.name}">List of Books</title>
-<link rel="stylesheet" th:href="@{/css/bundle.css}" href="../../static/css/bundle.css" />
-<link rel="stylesheet" th:href="@{/css/custom.css}" href="../../static/css/custom.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./img/favicon.ico" />
+<title>My Books 3</title>
+<link rel="stylesheet" href="../../../../target/generated-resources/static/css/bundle.css" />
+<link rel="stylesheet" href="../static/css/custom.css" />
 </head>
 
-<body ng-app="hello">
+<body>
 
 	<nav class="navbar navbar-default navbar-fixed-top">
-		<div ng-controller="navigation" class="container-fluid">
+		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 					<span class="sr-only">Toggle navigation</span> 
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#/">MyBooks3</a>
+				<a class="navbar-brand" href="home.html" title="MyBooks3">MyBooks3</a>
 			</div>
-			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li ng-show="authenticated"><a href="#/books">Books</a></li>
-					<li ng-show="authenticated"><a href="" ng-click="logout()">Logout</a></li>
-					<li><a href="#/login">Login</a></li>
-					<li><a href="#/register">Register</a></li>
-				</ul>
-				<form class="navbar-form navbar-right">
-					<input type="text" class="form-control" placeholder="Search..." />
-				</form>
-			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+        		<ul class="nav navbar-nav navbar-right">		
+					<li><a href="login.html">Login</a></li>
+					<li><a href="register.html">Register</a></li>				
+          		</ul>
+        	</div>
 		</div>
-	</nav>
-
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-					<li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
-					<li><a href="#">My profile</a></li>
-					<li><a href="#">Logout</a></li>
-				</ul>
-				<ul class="nav nav-sidebar">
-					<li><a href="#">Create new book</a></li>
-					<li><a href="#">List all books</a></li>
-					<li><a href="#">Search books</a></li>
-					<li><a href="#">Search notes</a></li>
-				</ul>
-			</div>
-
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+	</nav> 
+	
+	<div class="container container-form-style">
+	
+		<br/>
 
 
 
-
-
-
-<div th:fragment="content">
-	<h1>Sign Up</h1>
-	<h4 class="muted">Fill in this form to register with us.</h4>
-	<hr/>
-	<div class="alert alert-danger" ng-show="error">There was a problem logging in. Please try again.</div>
-	<form name='registerForm' role="form" ng-submit="">
-		<div class="form-group">
-			<label for="firstName">First Name</label> 
-			<input type="text" class="form-control" id="firstName" name="firstName" ng-model="register.firstName" />
-		</div>		
-		<div class="form-group">
-			<label for="lastName">Last Name</label> 
-			<input type="text" class="form-control" id="lastName" name="lastName" ng-model="register.lastName" />
-		</div>		
-		<div class="form-group">
-			<label for="email">Your Email</label> 
-			<input type="email" class="form-control" id="email" name="email" ng-model="register.email" required="" />
-			<span class='help-block' ng-show='registerForm.email.$error.required'>Email is required</span>
-			<span class='help-block' ng-show="registerForm.email.$error.email">Invalid email address.</span>
+		<div th:fragment="content" class="container-form-style">
+			<h1>Sign Up</h1>
+			<h4 class="muted">Fill in this form to register with us.</h4>
+			<hr/>
+			<div class="alert alert-danger" ng-show="error">There was a problem logging in. Please try again.</div>
+			<form name='registerForm' role="form" ng-submit="">
+				<div class="form-group">
+					<label for="firstName">First Name</label> 
+					<input type="text" class="form-control" id="firstName" name="firstName" ng-model="register.firstName" />
+				</div>		
+				<div class="form-group">
+					<label for="lastName">Last Name</label> 
+					<input type="text" class="form-control" id="lastName" name="lastName" ng-model="register.lastName" />
+				</div>
+				<div class="form-group">
+					<label for="username">Username</label> 
+					<input type="text" class="form-control" id="username" name="username" ng-model="register.username" />
+				</div>						
+				<div class="form-group">
+					<label for="email">Email</label> 
+					<input type="email" class="form-control" id="email" name="email" ng-model="register.email" required="" />
+					<span class='help-block' ng-show='registerForm.email.$error.required'>Email is required</span>
+					<span class='help-block' ng-show="registerForm.email.$error.email">Invalid email address.</span>
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label> 
+					<input type="password" class="form-control" id="password" name="password" ng-model="register.password" required="" ng-minlength="3" />
+					<span class='help-block' ng-show='registerForm.password.$error.required'>Password is required</span>
+					<span class='help-block' ng-show='registerForm.password.$error.minlength'>Too short</span>
+				</div>
+				<div class="form-group">
+					<label for="confirmPassword">Confirm Password</label> 
+					<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" ng-model="register.confirmPassword" required="" />
+					<span class='help-block' ng-show='registerForm.confirmPassword.$error.required'>Confirm Password is required</span>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary">Sign Up</button>
+					<button type="reset" class="btn">Reset</button>
+				</div>
+			</form>
 		</div>
-		<div class="form-group">
-			<label for="mailingAddress">Mailing Address</label> 
-			<textarea type="text" class="form-control" id="mailingAddress" name="mailingAddress" ng-model="register.mailingAddress"></textarea>
-		</div>
-		<div class="form-group">
-			<label for="password">Password</label> 
-			<input type="password" class="form-control" id="password" name="password" ng-model="register.password" required="" ng-minlength="3" />
-			<span class='help-block' ng-show='registerForm.password.$error.required'>Password is required</span>
-			<span class='help-block' ng-show='registerForm.password.$error.minlength'>Too short</span>
-		</div>
-		<div class="form-group">
-			<label for="confirmPassword">Confirm Password</label> 
-			<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" ng-model="register.confirmPassword" required="" />
-			<span class='help-block' ng-show='registerForm.confirmPassword.$error.required'>Confirm Password is required</span>
-		</div>
-		<div class="form-actions">
-			<button type="submit" class="btn btn-primary">Sign Up</button>
-			<button type="reset" class="btn">Reset</button>
-		</div>
-	</form>
-</div>
 
 
 
-
-
-
-
-			</div>
-
-		</div>
 	</div>
 
-	<script th:src="@{/js/bundle.js}" src="../../static/js/bundle.js"></script>
-	<script th:src="@{/js/app.js}" src="../../static/js/app.js"></script>
+	<script src="../../../../target/generated-resources/static/js/bundle.js"></script>
+	<script src="../static/js/app.js"></script>
 
 </body>
 </html>

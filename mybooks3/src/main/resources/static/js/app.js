@@ -2,7 +2,7 @@ var app = angular.module('hello', [ 'ngRoute', 'ngResource' ]);
 
 
 app.config(function($routeProvider, $httpProvider) {
-			$routeProvider.when('/', {
+			$routeProvider.when('/home', {
 				templateUrl : URLS.home,
 				controller : 'home'
 			}).when('/login', {
@@ -10,6 +10,8 @@ app.config(function($routeProvider, $httpProvider) {
 				controller : 'navigation'
 			}).when('/register', {
 				templateUrl : URLS.register
+			}).when('/forgotten_password', {
+				templateUrl : URLS.forgotten_password
 			}).when('/books/list', {
 				templateUrl : URLS.booksList,
 				controller : 'BookController'
@@ -19,7 +21,7 @@ app.config(function($routeProvider, $httpProvider) {
 			}).when('/books/create', {
 				templateUrl : URLS.booksCreate,
 				controller : 'BookController'
-			}).otherwise('/');
+			}).otherwise('/home');
 
 			$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 		});

@@ -16,6 +16,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/home").setViewName("home::content");
 		registry.addViewController("/login").setViewName("login::content");
 		registry.addViewController("/register").setViewName("register::content");
+		registry.addViewController("/forgotten_password").setViewName("forgotten_password::content");
 	}
 
 }

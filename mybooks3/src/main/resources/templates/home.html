@@ -1,92 +1,68 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title th:text="#{app.name}">List of Books</title>
-<link rel="stylesheet" th:href="@{/css/bundle.css}" href="../../static/css/bundle.css" />
-<link rel="stylesheet" th:href="@{/css/custom.css}" href="../../static/css/custom.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./img/favicon.ico" />
+<title>My Books 3</title>
+<link rel="stylesheet" href="../../../../target/generated-resources/static/css/bundle.css" />
+<link rel="stylesheet" href="../static/css/custom.css" />
 </head>
 
 <body ng-app="hello">
 
 	<nav class="navbar navbar-default navbar-fixed-top">
-		<div ng-controller="navigation" class="container-fluid">
+		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 					<span class="sr-only">Toggle navigation</span> 
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#/">MyBooks3</a>
+				<a class="navbar-brand" href="home.html" title="MyBooks3">MyBooks3</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li ng-show="authenticated"><a href="#/books">Books</a></li>
-					<li ng-show="authenticated"><a href="" ng-click="logout()">Logout</a></li>
-					<li><a href="#/login">Login</a></li>
-					<li><a href="#/register">Register</a></li>
-				</ul>
-				<form class="navbar-form navbar-right">
-					<input type="text" class="form-control" placeholder="Search..." />
-				</form>
-			</div>
+        		<ul class="nav navbar-nav navbar-right">
+					<li><a href="books/list.html">Books</a></li>
+					<li><a href="readers/view.html">My Profile</a></li>
+					<li><a href="readers/list.html">Admin</a></li>
+					<li><a href="register.html">Register</a></li>
+					<li><a href="login.html">Login/Logout</a></li>				
+          		</ul>
+        	</div>
 		</div>
 	</nav>
 
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-sm-3 col-md-2 sidebar">
-				<ul class="nav nav-sidebar">
-					<li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
-					<li><a href="#">My profile</a></li>
-					<li><a href="#">Logout</a></li>
-				</ul>
-				<ul class="nav nav-sidebar">
-					<li><a href="#">Create new book</a></li>
-					<li><a href="#">List all books</a></li>
-					<li><a href="#">Search books</a></li>
-					<li><a href="#">Search notes</a></li>
-				</ul>
+	<div class="container">
+
+		<br/>
+
+		<div th:fragment="content">
+		
+			<div class="jumbotron">
+				<h1>MyBooks3</h1>
+				<p>Your book collection.</p>
 			</div>
-
-			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
-
-
-
-
-
-<div th:fragment="content">
-
-	<div class="jumbotron">
-		<h1>MyBooks3</h1>
-		<p>Your book collection.</p>
-	</div>
-
-	<div ng-show="authenticated">
-		<p>The ID is {{greeting.id}}</p>
-		<p>The content is {{greeting.content}}</p>
-	</div>
-	<div ng-show="!authenticated">
-		<p>Login to see your greeting</p>
-	</div>
-</div>
-
-
-
-
+		
+			<div ng-show="authenticated">
+				<p>Hello Reader!</p>
+				<p>The ID is {{greeting.id}}</p>
+				<p>The content is {{greeting.content}}</p>
 			</div>
-
+			<div ng-show="!authenticated">
+				<p>Welcome to MyBooks3</p>
+				<p>Login to see your greeting</p>
+			</div>
 		</div>
+
+
 	</div>
 
-	<script th:src="@{/js/bundle.js}" src="../../static/js/bundle.js"></script>
-	<script th:src="@{/js/app.js}" src="../../static/js/app.js"></script>
+	<script src="../../../../target/generated-resources/static/js/bundle.js"></script>
+	<script src="../static/js/app.js"></script>
 
 </body>
 </html>
