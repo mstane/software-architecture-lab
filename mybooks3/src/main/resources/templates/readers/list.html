@@ -34,54 +34,58 @@
 		</div>
 	</nav>    
 	
-	<div class="container container-form-style">
-	
+	<div class="container">
+
 		<br/>
+		
+		<div th:fragment="content" class="container-form-style">
 	
-		<ol class="breadcrumb">
-			<li><a href="../home.html">Home</a></li>
-			<li class="active">Admin</li>
-		</ol>
-	
-		<h2 class="sub-header">Readers</h2>
-	
-		<div class="table-responsive">
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>First Name</th>
-						<th>Last Name</th>
-						<th>Username</th>
-						<th>Genre</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr onclick="document.location = './view.html';">
-						<td>id1</td>
-						<td>First Name 1</td>
-						<td>Last Name 1</td>
-						<td>Username 1</td>
-						<td>Email 1</td>
-					</tr>
-					<tr onclick="document.location = './view.html';">
-						<td>id2</td>
-						<td>First Name 2</td>
-						<td>Last Name 2</td>
-						<td>Username 2</td>
-						<td>Email 2</td>
-					</tr>
-					<tr onclick="document.location = './view.html';">
-						<td>id3</td>
-						<td>First Name 3</td>
-						<td>Last Name 3</td>
-						<td>Username 3</td>
-						<td>Email 3</td>
-					</tr>
-				</tbody>
-			</table>
+			<ol class="breadcrumb">
+				<li><a href="../home.html">Home</a></li>
+				<li class="active">Admin</li>
+			</ol>
+		
+			<h2 class="sub-header">Readers</h2>
+		
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Username</th>
+							<th>Genre</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr onclick="document.location = './view.html';">
+							<td>id1</td>
+							<td>First Name 1</td>
+							<td>Last Name 1</td>
+							<td>Username 1</td>
+							<td>Email 1</td>
+						</tr>
+						<tr onclick="document.location = './view.html';">
+							<td>id2</td>
+							<td>First Name 2</td>
+							<td>Last Name 2</td>
+							<td>Username 2</td>
+							<td>Email 2</td>
+						</tr>
+						<tr onclick="document.location = './view.html';">
+							<td>id3</td>
+							<td>First Name 3</td>
+							<td>Last Name 3</td>
+							<td>Username 3</td>
+							<td>Email 3</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<a href="./edit.html" class="btn btn-default">New Reader</a>
+			
 		</div>
-		<a href="./edit.html" class="btn btn-default">New Reader</a>
 
 	</div>
 

@@ -34,40 +34,42 @@
 		</div>
 	</nav>
 
-	<div class="container container-form-style">
+	<div class="container">
 
-		<br />
+		<br/>
+		
+		<div th:fragment="content" class="container-form-style">
 
-		<ol class="breadcrumb">
-			<li><a href="../home.html">Home</a></li>
-			<li><a href="../books/list.html">Books</a></li>
-			<li class="active">Note View</li>
-		</ol>
-
-		<br />
-
-		<div class="row">
-			<div class=" col-md-9 col-lg-9 ">
-				<table class="table">
-					<tbody>
-						<tr>
-							<td>Title:</td>
-							<td>Title1</td>
-						</tr>
-						<tr>
-							<td>Content:</td>
-							<td>Content 1</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<div class="form-actions">
-					<a href="./edit.html" class="btn btn-default">Edit</a>
+			<ol class="breadcrumb">
+				<li><a href="../home.html">Home</a></li>
+				<li><a href="../books/list.html">Books</a></li>
+				<li class="active">Note View</li>
+			</ol>
+	
+			<br />
+	
+			<div class="row">
+				<div class=" col-md-9 col-lg-9 ">
+					<table class="table">
+						<tbody>
+							<tr>
+								<td>Title:</td>
+								<td>Title1</td>
+							</tr>
+							<tr>
+								<td>Content:</td>
+								<td>Content 1</td>
+							</tr>
+						</tbody>
+					</table>
+	
+					<div class="form-actions">
+						<a href="./edit.html" class="btn btn-default">Edit</a>
+					</div>
+	
 				</div>
-
 			</div>
 		</div>
-
 	</div>
 
 	<script src="../../../../../target/generated-resources/static/js/bundle.js"></script>

@@ -34,47 +34,51 @@
 		</div>
 	</nav>    
 	
-	<div class="container container-form-style">
-	
+	<div class="container">
+
 		<br/>
+		
+		<div th:fragment="content" class="container-form-style">
 	
-		<ol class="breadcrumb">
-			<li><a href="../home.html">Home</a></li>
-			<li class="active">My Profile</li>
-		</ol>
-		
-		<br/>		
-		
-		<form name='readerForm' role="form">
-			<div class="form-group">
-				<label for="firstName">First Name</label> 
-				<input type="text" class="form-control" id="firstName" name="firstName" />
-			</div>		
-			<div class="form-group">
-				<label for="lastName">Last Name</label> 
-				<input type="text" class="form-control" id="lastName" name="lastName" />
-			</div>
-			<div class="form-group">
-				<label for="username">Username</label> 
-				<input type="text" class="form-control" id="username" name="username" />
-			</div>
-			<div class="form-group">
-				<label for="email">Email</label> 
-				<input type="email" class="form-control" id="email" name="email" ng-model="register.email" />
-			</div>
-			<div class="form-group">
-				<label for="password">Password</label> 
-				<input type="password" class="form-control" id="password" name="password"/>
-			</div>
-			<div class="form-group">
-				<label for="confirmPassword">Confirm Password</label> 
-				<input type="password" class="form-control" id="confirmPassword" name="confirmPassword"/>
-			</div>
-			<div class="form-actions">
-				<button type="submit" class="btn btn-primary">Save</button>
-				<button type="reset" class="btn">Reset</button>
-			</div>
-		</form>
+			<ol class="breadcrumb">
+				<li><a href="../home.html">Home</a></li>
+				<li class="active">My Profile</li>
+			</ol>
+			
+			<br/>		
+			
+			<form name='readerForm' role="form">
+				<div class="form-group">
+					<label for="firstName">First Name</label> 
+					<input type="text" class="form-control" id="firstName" name="firstName" />
+				</div>		
+				<div class="form-group">
+					<label for="lastName">Last Name</label> 
+					<input type="text" class="form-control" id="lastName" name="lastName" />
+				</div>
+				<div class="form-group">
+					<label for="username">Username</label> 
+					<input type="text" class="form-control" id="username" name="username" />
+				</div>
+				<div class="form-group">
+					<label for="email">Email</label> 
+					<input type="email" class="form-control" id="email" name="email" ng-model="register.email" />
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label> 
+					<input type="password" class="form-control" id="password" name="password"/>
+				</div>
+				<div class="form-group">
+					<label for="confirmPassword">Confirm Password</label> 
+					<input type="password" class="form-control" id="confirmPassword" name="confirmPassword"/>
+				</div>
+				<div class="form-actions">
+					<button type="submit" class="btn btn-primary">Save</button>
+					<button type="reset" class="btn">Reset</button>
+				</div>
+			</form>
+			
+		</div>
 
 	</div>
 

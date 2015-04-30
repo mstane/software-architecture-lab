@@ -41,7 +41,7 @@
 		<div th:fragment="content" class="container-form-style">
 		
 			<ol class="breadcrumb">
-				<li><a href="../home.html" th:href="@{/home}">Home</a></li>
+				<li><a href="../home.html" th:href="@{#/home}">Home</a></li>
 				<li class="active">Books</li>
 			</ol>	
 				
@@ -56,19 +56,19 @@
 							<th>Author</th>
 							<th>URL</th>
 							<th>Genre</th>
-							<th>Action</th>
+<!-- 							<th>Action</th> -->
 						</tr>
 					</thead>
 					<tbody th:remove="all-but-first">
-						<tr ng-repeat="book in books">
-							<td>{{book.id}}</td>
-							<td>{{book.title}}</td>
-							<td>{{book.author}}</td>
-							<td>{{book.url}}</td>
-							<td>{{book.genre}}</td>
-							<td><a href="#/books/edit/{{book.id}}">Edit</a> | <a
-								confirmed-click="deleteBook(book)"
-								ng-confirm-click="Are you sure?">Delete</a></td>
+						<tr ng-repeat="book in books" onclick="document.location = '#/books/view';">
+							<td th:text="'{{book.id}}'">id0</td>
+							<td th:text="'{{book.title}}'">title0</td>
+							<td th:text="'{{book.author}}'">author0</td>
+							<td th:text="'{{book.url}}'">url0</td>
+							<td th:text="'{{book.genre}}'">genre0</td>
+<!-- 							<td><a href="#/books/edit/{{book.id}}">Edit</a> | <a -->
+<!-- 								confirmed-click="deleteBook(book)" -->
+<!-- 								ng-confirm-click="Are you sure?">Delete</a></td> -->
 						</tr>
 						<tr onclick="document.location = './view.html';">
 							<td>id1</td>
@@ -101,7 +101,7 @@
 					</tbody>
 				</table>
 			</div>
-			<a href="#/books/create" class="btn btn-default">New Book</a>
+			<a href="./create.html" th:href="@{#/books/create}" class="btn btn-default">New Book</a>
 		</div>
 
 

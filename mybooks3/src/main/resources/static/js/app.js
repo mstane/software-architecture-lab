@@ -15,12 +15,24 @@ app.config(function($routeProvider, $httpProvider) {
 			}).when('/books/list', {
 				templateUrl : URLS.booksList,
 				controller : 'BookController'
+			}).when('/books/view', {
+				templateUrl : URLS.booksView
 			}).when('/books/edit/:bookId', {
 				templateUrl : URLS.booksEdit,
 				controller : 'BookEditController'
 			}).when('/books/create', {
 				templateUrl : URLS.booksCreate,
 				controller : 'BookController'
+			}).when('/readers/list', {
+				templateUrl : URLS.readersList					
+			}).when('/readers/view', {
+				templateUrl : URLS.readersView					
+			}).when('/readers/edit', {
+				templateUrl : URLS.readersEdit					
+			}).when('/notes/view', {
+				templateUrl : URLS.notesView					
+			}).when('/notes/edit', {
+				templateUrl : URLS.notesEdit					
 			}).otherwise('/home');
 
 			$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

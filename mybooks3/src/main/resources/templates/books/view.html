@@ -34,98 +34,106 @@
 		</div>
 	</nav>
 
-	<div class="container container-form-style">
 
+
+
+	<div class="container">
+	
 		<br />
-
-		<ol class="breadcrumb">
-			<li><a href="../home.html">Home</a></li>
-			<li><a href="./list.html">Books</a></li>
-			<li class="active">View</li>
-		</ol>
-
-		<br />
-
-		<div class="row">
-			<div class=" col-md-9 col-lg-9 ">
-				<table class="table">
+		
+		<div th:fragment="content" class="container-form-style">
+	
+			<ol class="breadcrumb">
+				<li><a href="../home.html">Home</a></li>
+				<li><a href="./list.html">Books</a></li>
+				<li class="active">View</li>
+			</ol>
+	
+			<br />
+	
+			<div class="row">
+				<div class=" col-md-9 col-lg-9 ">
+					<table class="table">
+						<tbody>
+							<tr>
+								<td>Title:</td>
+								<td>Title1</td>
+							</tr>
+							<tr>
+								<td>Author:</td>
+								<td>Author1</td>
+							</tr>
+							<tr>
+								<td>URL:</td>
+								<td>url1</td>
+							</tr>
+							<tr>
+								<td>Genre</td>
+								<td>Comedy1</td>
+							</tr>
+							<tr>
+								<td>Start Reading Date:</td>
+								<td>03/20/2015</td>
+							</tr>
+							<tr>
+								<td>End Reading Date:</td>
+								<td>04/28/2015</td>
+							</tr>
+							<tr>
+								<td>Rating:</td>
+								<td>5</td>
+							</tr>
+							<tr>
+								<td>Review:</td>
+								<td>Review 1</td>
+							</tr>
+						</tbody>
+					</table>
+	
+					<div class="form-actions">
+						<a href="./edit.html" class="btn btn-default">Edit</a>
+					</div>
+	
+				</div>
+			</div>
+	
+			<hr />
+	
+			<p>List of notes</p>
+			
+			
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Title</th>
+						</tr>
+					</thead>
 					<tbody>
-						<tr>
-							<td>Title:</td>
-							<td>Title1</td>
+						<tr onclick="document.location = '../notes/view.html';">
+							<td>id1</td>
+							<td>title1</td>
 						</tr>
-						<tr>
-							<td>Author:</td>
-							<td>Author1</td>
+						<tr onclick="document.location = '../notes/view.html';">
+							<td>id2</td>
+							<td>title2</td>
 						</tr>
-						<tr>
-							<td>URL:</td>
-							<td>url1</td>
-						</tr>
-						<tr>
-							<td>Genre</td>
-							<td>Comedy1</td>
-						</tr>
-						<tr>
-							<td>Start Reading Date:</td>
-							<td>03/20/2015</td>
-						</tr>
-						<tr>
-							<td>End Reading Date:</td>
-							<td>04/28/2015</td>
-						</tr>
-						<tr>
-							<td>Rating:</td>
-							<td>5</td>
-						</tr>
-						<tr>
-							<td>Review:</td>
-							<td>Review 1</td>
+						<tr onclick="document.location = '../notes/view.html';">
+							<td>id3</td>
+							<td>title3</td>
 						</tr>
 					</tbody>
 				</table>
-
-				<div class="form-actions">
-					<a href="./edit.html" class="btn btn-default">Edit</a>
-				</div>
-
 			</div>
+			<a th:href="@{/notes/edit}" href="../notes/edit.html" class="btn btn-default">New Note</a>
+	
+			<hr />
+			
 		</div>
-
-		<hr />
-
-		<p>List of notes</p>
 		
-		
-		<div class="table-responsive">
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>Title</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr onclick="document.location = '../notes/view.html';">
-						<td>id1</td>
-						<td>title1</td>
-					</tr>
-					<tr onclick="document.location = '../notes/view.html';">
-						<td>id2</td>
-						<td>title2</td>
-					</tr>
-					<tr onclick="document.location = '../notes/view.html';">
-						<td>id3</td>
-						<td>title3</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<a href="../notes/edit.html" class="btn btn-default">New Note</a>
-
-		<hr />
-
 	</div>
+	
 
 	<script src="../../../../../target/generated-resources/static/js/bundle.js"></script>
 	<script src="../../static/js/app.js"></script>

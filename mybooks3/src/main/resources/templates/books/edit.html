@@ -34,21 +34,19 @@
 		</div>
 	</nav>    
 	
-	<div class="container container-form-style">
-	
-		<br/>
-	
-		<ol class="breadcrumb">
-			<li><a href="../home.html">Home</a></li>
-			<li><a href="./list.html">Books</a></li>
-			<li class="active">Edit</li>
-		</ol>
-		
-		<br/>
+	<div class="container">
 
+			<div th:fragment="content" class="container-form-style">
 
+				<br/>
+			
+				<ol class="breadcrumb">
+					<li><a href="../home.html" th:href="@{#/home}">Home</a></li>
+					<li class="active">Books</li>
+				</ol>
+				
+				<br/>
 
-			<div th:fragment="content">
 			    <div class="row">
 			        <div class="col-xs-12">
 			            <form class="form-horizontal">

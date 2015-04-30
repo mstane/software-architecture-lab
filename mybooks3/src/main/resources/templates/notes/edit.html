@@ -34,46 +34,48 @@
 		</div>
 	</nav>    
 	
-	<div class="container container-form-style">
-	
+	<div class="container">
+
 		<br/>
-	
-		<ol class="breadcrumb">
-			<li><a href="../home.html">Home</a></li>
-			<li><a href="../books/list.html">Books</a></li>
-			<li class="active">Note View</li>
-		</ol>
 		
-		<br/>
-
-	    <div class="row">
-	        <div class="col-xs-12">
-	            <form class="form-horizontal">
-	                <div class="form-group">
-	                    <label for="title" class="col-xs-3">Title</label>
+		<div th:fragment="content" class="container-form-style">
 	
-	                    <div class="col-xs-6">
-	                        <input class="form-control" placeholder="Title" value="Title1" />
-	                    </div>
-	                </div>
-	                <div class="form-group">
-	                    <label for="Content" class="col-xs-3">Content</label>
+			<ol class="breadcrumb">
+				<li><a href="../home.html">Home</a></li>
+				<li><a href="../books/list.html">Books</a></li>
+				<li class="active">Note View</li>
+			</ol>
+			
+			<br/>
 	
-	                    <div class="col-xs-6">
-	                    	<textarea class="form-control" placeholder="Content">Content 1</textarea>
-	                    </div>
-	                </div>
+		    <div class="row">
+		        <div class="col-xs-12">
+		            <form class="form-horizontal">
+		                <div class="form-group">
+		                    <label for="title" class="col-xs-3">Title</label>
+		
+		                    <div class="col-xs-6">
+		                        <input class="form-control" placeholder="Title" value="Title1" />
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label for="Content" class="col-xs-3">Content</label>
+		
+		                    <div class="col-xs-6">
+		                    	<textarea class="form-control" placeholder="Content">Content 1</textarea>
+		                    </div>
+		                </div>
+	
+						<div class="form-actions">
+							<button type="submit" class="btn btn-primary">Save</button>
+							<button type="submit" class="btn">Delete</button>
+						</div>
+	
+					</form>
+		        </div>
+		    </div>
 
-					<div class="form-actions">
-						<button type="submit" class="btn btn-primary">Save</button>
-						<button type="submit" class="btn">Delete</button>
-					</div>
-
-				</form>
-	        </div>
-	    </div>
-
-
+		</div>
 
 	</div>
 

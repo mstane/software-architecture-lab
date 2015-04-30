@@ -1,40 +1,102 @@
-<div th:fragment="content">
-    <div class="row">
-        <div class="col-xs-12">
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <label for="title" class="col-xs-2">Title</label>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="../img/favicon.ico" />
+<title>My Books 3</title>
+<link rel="stylesheet" href="../../../../../target/generated-resources/static/css/bundle.css" />
+<link rel="stylesheet" href="../../static/css/custom.css" />
+</head>
 
-                    <div class="col-xs-6">
-                        <input class="form-control" placeholder="Title" ng-model="book.title"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="author" class="col-xs-2">Author</label>
+<body>
 
-                    <div class="col-xs-6">
-                        <input class="form-control" placeholder="Author" ng-model="book.author"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="url" class="col-xs-2">URL</label>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> 
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/home.html" title="MyBooks3">MyBooks3</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+        		<ul class="nav navbar-nav navbar-right">		
+					<li><a href="./list.html">Books</a></li>
+					<li><a href="../readers/view.html">My Profile</a></li>
+					<li><a href="../readers/list.html">Admin</a></li>
+					<li><a href="../login.html">Logout</a></li>				
+          		</ul>
+        	</div>
+		</div>
+	</nav>    
+	
+	<div class="container">
 
-                    <div class="col-xs-6">
-                        <input class="form-control" placeholder="URL" ng-model="book.url"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="genre" class="col-xs-2">Genre</label>
+		<br/>
+		
+		<div th:fragment="content" class="container-form-style">
+				
+			<ol class="breadcrumb">
+				<li><a href="../home.html" th:href="@{#/home}">Home</a></li>
+				<li class="active">Books</li>
+			</ol>
+					
+			<h3 class="sub-header">Create a New Book</h3>			
+				
+			<br/>		
+					
+		    <div class="row">
+		        <div class="col-xs-12">
+		            <form class="form-horizontal">
+		                <div class="form-group">
+		                    <label for="title" class="col-xs-2">Title</label>
+		
+		                    <div class="col-xs-6">
+		                        <input class="form-control" placeholder="Title" ng-model="book.title"/>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label for="author" class="col-xs-2">Author</label>
+		
+		                    <div class="col-xs-6">
+		                        <input class="form-control" placeholder="Author" ng-model="book.author"/>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label for="url" class="col-xs-2">URL</label>
+		
+		                    <div class="col-xs-6">
+		                        <input class="form-control" placeholder="URL" ng-model="book.url"/>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label for="genre" class="col-xs-2">Genre</label>
+		
+		                    <div class="col-xs-6">
+		                    	<select class="form-control" placeholder="Genre" ng-model="book.genre" ng-options="genre as genre for genre in genres">
+									<option value="">-- Select --</option>						
+								</select>
+		                    </div>
+		                </div>                
+		
+		                <a class="btn btn-default" ng-click="createBook()">Submit</a>
+		            </form>
+		        </div>
+		    </div>
+		</div>
+		
+		
 
-                    <div class="col-xs-6">
-                    	<select class="form-control" placeholder="Genre" ng-model="book.genre" ng-options="genre as genre for genre in genres">
-							<option value="">-- Select --</option>						
-						</select>
-                    </div>
-                </div>                
 
-                <a class="btn btn-default" ng-click="createBook()">Submit</a>
-            </form>
-        </div>
-    </div>
-</div>
+
+	</div>
+
+	<script src="../../../../../target/generated-resources/static/js/bundle.js"></script>
+	<script src="../../static/js/app.js"></script>
+
+</body>
+</html>
