@@ -44,8 +44,8 @@
 		<div th:fragment="content" class="container-form-style">
 	
 			<ol class="breadcrumb">
-				<li><a href="../home.html">Home</a></li>
-				<li><a href="./list.html">Books</a></li>
+				<li><a href="../home.html" th:href="@{#/home}">Home</a></li>
+				<li><a href="./list.html" th:href="@{#/books/list}">Books</a></li>			
 				<li class="active">View</li>
 			</ol>
 	
@@ -91,7 +91,7 @@
 					</table>
 	
 					<div class="form-actions">
-						<a href="./edit.html" class="btn btn-default">Edit</a>
+						<a href="./edit.html" th:href="@{#/books/edit/1}" class="btn btn-default">Edit</a>
 					</div>
 	
 				</div>
@@ -111,22 +111,22 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr onclick="document.location = '../notes/view.html';">
+						<tr th:onclick="'document.location = \'#/notes/view\';'" onclick="document.location = '../notes/view.html';">
 							<td>id1</td>
 							<td>title1</td>
 						</tr>
-						<tr onclick="document.location = '../notes/view.html';">
+						<tr th:onclick="'document.location = \'#/notes/view\';'" onclick="document.location = '../notes/view.html';">
 							<td>id2</td>
 							<td>title2</td>
 						</tr>
-						<tr onclick="document.location = '../notes/view.html';">
+						<tr th:onclick="'document.location = \'#/notes/view\';'" onclick="document.location = '../notes/view.html';">
 							<td>id3</td>
 							<td>title3</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-			<a th:href="@{/notes/edit}" href="../notes/edit.html" class="btn btn-default">New Note</a>
+			<a th:href="@{#/notes/edit}" href="../notes/edit.html" class="btn btn-default">New Note</a>
 	
 			<hr />
 			

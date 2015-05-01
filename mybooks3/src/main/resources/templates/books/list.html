@@ -60,7 +60,7 @@
 						</tr>
 					</thead>
 					<tbody th:remove="all-but-first">
-						<tr ng-repeat="book in books" onclick="document.location = '#/books/view';">
+						<tr ng-repeat="book in books" th:onclick="'document.location = \'#/books/view\';'" onclick="document.location = './view.html';">
 							<td th:text="'{{book.id}}'">id0</td>
 							<td th:text="'{{book.title}}'">title0</td>
 							<td th:text="'{{book.author}}'">author0</td>

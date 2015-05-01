@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,6 +9,7 @@
 <title>My Books 3</title>
 <link rel="stylesheet" href="../../../../../target/generated-resources/static/css/bundle.css" />
 <link rel="stylesheet" href="../../static/css/custom.css" />
+</head>
 
 <body>
 
@@ -41,7 +42,7 @@
 		<div th:fragment="content" class="container-form-style">
 	
 			<ol class="breadcrumb">
-				<li><a href="../home.html">Home</a></li>
+				<li><a href="../home.html" th:href="@{#/home}">Home</a></li>
 				<li class="active">My Profile</li>
 			</ol>
 			

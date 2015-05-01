@@ -52,7 +52,7 @@
 						<span class='help-block' ng-show='loginForm.password.$error.required'>Password is required</span> 
 						<span class='help-block' ng-show='loginForm.password.$error.minlength'>Too short</span>
 						
-						<a href="#/forgotten_password">Forgotten password</a>
+						<a th:href="@{#/forgotten_password}" href="./forgotten_password.html">Forgotten password</a>
 						
 						<div class="checkbox">
 							<label> <input type="checkbox" value="remember-me"/>
