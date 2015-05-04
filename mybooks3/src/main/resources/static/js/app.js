@@ -15,6 +15,8 @@ app.config(function($routeProvider, $httpProvider) {
 			}).when('/books/list', {
 				templateUrl : URLS.booksList,
 				controller : 'BookController'
+			}).when('/books/search', {
+				templateUrl : URLS.booksSearch
 			}).when('/books/view', {
 				templateUrl : URLS.booksView
 			}).when('/books/edit/:bookId', {
