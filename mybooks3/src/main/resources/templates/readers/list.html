@@ -45,36 +45,40 @@
 				<li class="active">Admin</li>
 			</ol>
 		
-			<h2 class="sub-header">Readers</h2>
+			<div class="row container-form-style">	
+				<h2 class="sub-header pull-left">Readers</h2> 
+				<div class="btn-toolbar pull-right">
+					<a href="./search.html" th:href="@{#/readers/search}" class="btn btn-primary">Search</a>
+					<a href="./edit.html" th:href="@{#/readers/edit}" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></a>
+				</div>
+			</div>
+			
+			<hr/>
 		
 			<div class="table-responsive">
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>ID</th>
 							<th>First Name</th>
 							<th>Last Name</th>
 							<th>Username</th>
-							<th>Genre</th>
+							<th>Email</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:onclick="'document.location = \'#/readers/view\';'" onclick="document.location = './view.html';">
-							<td>id1</td>
 							<td>First Name 1</td>
 							<td>Last Name 1</td>
 							<td>Username 1</td>
 							<td>Email 1</td>
 						</tr>
 						<tr th:onclick="'document.location = \'#/readers/view\';'" onclick="document.location = './view.html';">
-							<td>id2</td>
 							<td>First Name 2</td>
 							<td>Last Name 2</td>
 							<td>Username 2</td>
 							<td>Email 2</td>
 						</tr>
 						<tr th:onclick="'document.location = \'#/readers/view\';'" onclick="document.location = './view.html';">
-							<td>id3</td>
 							<td>First Name 3</td>
 							<td>Last Name 3</td>
 							<td>Username 3</td>
@@ -83,7 +87,6 @@
 					</tbody>
 				</table>
 			</div>
-			<a th:href="@{#/readers/edit}" href="./edit.html" class="btn btn-default">New Reader</a>
 			
 		</div>
 

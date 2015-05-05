@@ -27,6 +27,8 @@ app.config(function($routeProvider, $httpProvider) {
 				controller : 'BookController'
 			}).when('/readers/list', {
 				templateUrl : URLS.readersList					
+			}).when('/readers/search', {
+				templateUrl : URLS.readersSearch
 			}).when('/readers/view', {
 				templateUrl : URLS.readersView					
 			}).when('/readers/edit', {

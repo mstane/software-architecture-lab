@@ -42,62 +42,52 @@
 		
 			<ol class="breadcrumb">
 				<li><a href="../home.html" th:href="@{#/home}">Home</a></li>
-				<li class="active">Books</li>
-			</ol>
-				
-			<div class="row container-form-style">	
-				<h2 class="sub-header pull-left">Books</h2> 
-				<div class="btn-toolbar pull-right">
-					<a href="./search.html" th:href="@{#/books/search}" class="btn btn-primary">Search</a>
-					<a href="./create.html" th:href="@{#/books/create}" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></a>
-				</div>
+				<li class="active">Search Readers</li>
+			</ol>	
+			<div class="jumbotron">	
+				<div class="form-group row">
+	                <div class="col-md-10">
+	                    <input type="text" class="form-control" id="inputKey" placeholder="Keyword"/>
+	                </div>
+	                <div class="col-md-2">
+	                	<a href="./search.html" th:href="@{#/readers/search}" class="btn btn-primary">Search</a>
+	                </div>
+            	</div>
 			</div>
+
 			
-			<hr/>
-		
 			<div class="table-responsive">
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>Title</th>
-							<th>Author</th>
-							<th>Genre</th>
-<!-- 							<th>Action</th> -->
+							<th>First Name</th>
+							<th>Last Name</th>
+							<th>Username</th>
+							<th>Email</th>
 						</tr>
 					</thead>
-					<tbody th:remove="all-but-first">
-						<tr ng-repeat="book in books" th:onclick="'document.location = \'#/books/view\';'" onclick="document.location = './view.html';">
-							<td th:text="'{{book.title}}'">title0</td>
-							<td th:text="'{{book.author}}'">author0</td>
-							<td th:text="'{{book.genre}}'">genre0</td>
-<!-- 							<td><a href="#/books/edit/{{book.id}}">Edit</a> | <a -->
-<!-- 								confirmed-click="deleteBook(book)" -->
-<!-- 								ng-confirm-click="Are you sure?">Delete</a></td> -->
+					<tbody>
+						<tr th:onclick="'document.location = \'#/readers/view\';'" onclick="document.location = './view.html';">
+							<td>First Name 1</td>
+							<td>Last Name 1</td>
+							<td>Username 1</td>
+							<td>Email 1</td>
 						</tr>
-						<tr onclick="document.location = './view.html';">
-							<td>title1</td>
-							<td>author1</td>
-							<td>genre1</td>
+						<tr th:onclick="'document.location = \'#/readers/view\';'" onclick="document.location = './view.html';">
+							<td>First Name 2</td>
+							<td>Last Name 2</td>
+							<td>Username 2</td>
+							<td>Email 2</td>
 						</tr>
-						<tr onclick="document.location = './view.html';">
-							<td>title2</td>
-							<td>author2</td>
-							<td>genre2</td>
+						<tr th:onclick="'document.location = \'#/readers/view\';'" onclick="document.location = './view.html';">
+							<td>First Name 3</td>
+							<td>Last Name 3</td>
+							<td>Username 3</td>
+							<td>Email 3</td>
 						</tr>
-						<tr onclick="document.location = './view.html';">
-							<td>title3</td>
-							<td>author3</td>
-							<td>genre3</td>
-						</tr>
-						<tr onclick="document.location = './view.html';">
-							<td>title4</td>
-							<td>author4</td>
-							<td>genre4</td>
-						</tr>						
 					</tbody>
 				</table>
-			</div>
-			
+			</div>			
 		</div>
 
 
