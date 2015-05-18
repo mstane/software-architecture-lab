@@ -44,10 +44,15 @@
 				<li><a href="../home.html" th:href="@{#/home}">Home</a></li>
 				<li class="active">Books</li>
 			</ol>
-					
-			<h3 class="sub-header">Create a New Book</h3>			
 				
-			<br/>		
+			<div class="row container-form-style">	
+				<h2 class="sub-header pull-left">Create a New Book</h2> 
+				<div class="btn-toolbar pull-right">
+					<a class="btn btn-default" ng-click="createBook()">Save</a>
+				</div>
+			</div>		
+				
+			<hr/>		
 					
 		    <div class="row">
 		        <div class="col-xs-12">
@@ -82,8 +87,6 @@
 								</select>
 		                    </div>
 		                </div>                
-		
-		                <a class="btn btn-default" ng-click="createBook()">Submit</a>
 		            </form>
 		        </div>
 		    </div>

@@ -45,7 +45,16 @@
 					<li class="active">Books</li>
 				</ol>
 				
-				<br/>
+				<div class="row container-form-style">	
+					<h2 class="sub-header pull-left">Book Edit</h2> 
+					<div class="btn-toolbar pull-right">
+			             <a class="btn btn-default" ng-click="updateBook()">Save</a>
+<!-- 								<button type="submit" class="btn btn-primary">Save</button> -->
+						<button type="submit" class="btn">Delete</button>
+					</div>
+				</div>
+				
+				<hr/>
 
 			    <div class="row">
 			        <div class="col-xs-12">
@@ -113,13 +122,6 @@
 			                    	<textarea class="form-control" placeholder="Review">Review 1</textarea>
 			                    </div>
 			                </div>				                                
-			                
-			              	<div class="form-actions">
-			              		<a class="btn btn-default" ng-click="updateBook()">Save</a>
-<!-- 								<button type="submit" class="btn btn-primary">Save</button> -->
-								<button type="submit" class="btn">Delete</button>
-							</div>
-			                
 			                
 			            </form>
 			        </div>

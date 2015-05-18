@@ -37,12 +37,18 @@
 	
 		<br/>
 
-
-
 		<div th:fragment="content" class="container-form-style">
-			<h1>Sign Up</h1>
-			<h4 class="muted">Fill in this form to register with us.</h4>
+		
+			<div class="row container-form-style">	
+				<h2 class="sub-header pull-left">Sign Up</h2> 
+				<div class="btn-toolbar pull-right">
+					<button type="submit" class="btn btn-primary">Sign Up</button>
+					<button type="reset" class="btn">Reset</button>
+				</div>
+			</div>
+			
 			<hr/>
+			
 			<div class="alert alert-danger" ng-show="error">There was a problem logging in. Please try again.</div>
 			<form name='registerForm' role="form" ng-submit="">
 				<div class="form-group">
@@ -73,10 +79,6 @@
 					<label for="confirmPassword">Confirm Password</label> 
 					<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" ng-model="register.confirmPassword" required="" />
 					<span class='help-block' ng-show='registerForm.confirmPassword.$error.required'>Confirm Password is required</span>
-				</div>
-				<div class="form-actions">
-					<button type="submit" class="btn btn-primary">Sign Up</button>
-					<button type="reset" class="btn">Reset</button>
 				</div>
 			</form>
 		</div>
