@@ -1,12 +1,22 @@
 package org.sm.lab.mybooks3.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import org.sm.lab.mybooks3.domain.Book;
+import org.sm.lab.mybooks3.domain.Reader;
+import org.sm.lab.mybooks3.enums.Genre;
+import org.springframework.data.domain.Pageable;
 
 public class BookRepositoryImpl implements BookRepositoryCustom {
 
@@ -97,5 +107,49 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 				endReadingDate, rating, genre);
 		return Long.valueOf(list.size());
 	}
+	
+	
+	public List<Book> searchByPredicate(String username, String keyword, Pageable pageable, Genre genre) {
+		
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		
+		CriteriaQuery<Book> searchQuery = cb.createQuery(Book.class);
+		Root<Book> searchRoot = searchQuery.from(Book.class);
+		searchQuery.select(searchRoot);
+		
+		List<Predicate> predicates = new ArrayList<Predicate>();
+		
+		Join<Book, Reader> reader = searchRoot.join("reader");
+		predicates.add(cb.equal(reader.<String>get("username"), username));
+		
+		
+        if (keyword != null && !keyword.isEmpty()) {
+            predicates.add(cb.like(searchRoot.<String>get("title"), keyword));
+            predicates.add(cb.like(searchRoot.<String>get("author"), keyword));
+            
+//            predicates.add(cb.like(searchRoot.<String>get("review"), keyword));
+
+//            predicates.add(cb.like(searchRoot.<String>get("title"), keyword));   //Notes
+//            predicates.add(cb.like(searchRoot.<String>get("content"), keyword)); //Notes
+        }
+        
+        if (genre != null) {
+        	predicates.add(cb.equal(searchRoot.<Genre>get("genre"), genre));
+        }
+		
+		searchQuery.where(predicates.toArray(new Predicate[]{}));
+		
+        List<Order> orderList = new ArrayList<Order>();
+        orderList.add(cb.asc(searchRoot.get("id")));
+        searchQuery.orderBy(orderList);
+        
+        TypedQuery<Book> filterQuery = entityManager.createQuery(searchQuery)
+                .setFirstResult((pageable.getPageNumber() - 1) * pageable.getPageSize())
+                .setMaxResults(pageable.getPageSize());
+		
+		return filterQuery.getResultList();
+	}
+	
 
 }
+
