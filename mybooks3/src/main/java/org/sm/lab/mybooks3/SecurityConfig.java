@@ -45,10 +45,12 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.httpBasic()
 				.and()
+				
 			.authorizeRequests()
-				.antMatchers("/", "/index.html", "/home", "/login", "/register", "/forgotten_password").permitAll()
-				.anyRequest().authenticated()
+				.antMatchers("/rest/**").authenticated()
+				.anyRequest().permitAll()
 				.and()
+				
 			.logout()
 				.logoutUrl("/logout")
 //				.deleteCookies("remember-me")
