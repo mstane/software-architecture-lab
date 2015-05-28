@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.sm.lab.mybooks3.domain.Book;
-import org.sm.lab.mybooks3.service.BookService;
+import org.sm.lab.mybooks3.domain.Reader;
+import org.sm.lab.mybooks3.service.ReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,36 +16,35 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/rest/books")
-public class RestBookController {
+@RequestMapping("/rest/readers")
+public class ReaderRestController {
 	
 	@Autowired
-	BookService bookService;
+	ReaderService readerService;
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public Book create(@RequestBody @Valid Book book) {
-		return this.bookService.saveBook(book);
+	public Reader create(@RequestBody @Valid Reader reader) {
+		return this.readerService.saveReader(reader);
 	}
 
 	@RequestMapping(method=RequestMethod.GET)
-	public List<Book> list() {
-//		return this.bookService.findAllBooks();
-		return this.bookService.findReadersBooks((long)1);
+	public List<Reader> list() {
+		return this.readerService.findAllReaders();
 	}
 
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public Book get(@PathVariable("id") long id) {
-		return this.bookService.findBook(id);
+	public Reader get(@PathVariable("id") long id) {
+		return this.readerService.findReader(id);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public Book update(@PathVariable("id") long id, @RequestBody @Valid Book book) {
-		return bookService.saveBook(book);
+	public Reader update(@PathVariable("id") long id, @RequestBody @Valid Reader reader) {
+		return readerService.saveReader(reader);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Boolean> delete(@PathVariable("id") long id) {
-		this.bookService.deleteBook(id);
+		this.readerService.deleteReader(id);
 		return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
 	}
 }

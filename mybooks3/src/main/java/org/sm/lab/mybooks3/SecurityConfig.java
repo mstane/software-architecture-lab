@@ -57,6 +57,8 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.logoutSuccessUrl("/")
 				.permitAll()
 				.and()
+//			.rememberMe().key("remember-me").tokenValiditySeconds(86400)
+//				.and()
 			.csrf()
 				.csrfTokenRepository(csrfTokenRepository())
 				.and()

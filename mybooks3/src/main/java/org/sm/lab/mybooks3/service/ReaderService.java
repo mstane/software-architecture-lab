@@ -9,7 +9,7 @@ public interface ReaderService {
 	public abstract long countAllReaders();
 
 
-	public abstract void deleteReader(Reader reader);
+	public abstract void deleteReader(Long id);
 
 
 	public abstract Reader findReader(Long id);
@@ -27,7 +27,7 @@ public interface ReaderService {
 	public abstract List<Reader> findReaderEntries(int firstResult, int maxResults);
 
 
-	public abstract void saveReader(Reader reader);
+	public abstract Reader saveReader(Reader reader);
 
 
 	public abstract Reader updateReader(Reader reader);

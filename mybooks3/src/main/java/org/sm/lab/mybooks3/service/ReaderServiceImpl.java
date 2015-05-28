@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.sm.lab.mybooks3.domain.Reader;
 import org.sm.lab.mybooks3.repository.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +23,8 @@ public class ReaderServiceImpl implements ReaderService {
         return readerRepository.count();
     }
 
-	public void deleteReader(Reader reader) {
-        readerRepository.delete(reader);
+	public void deleteReader(Long id) {
+        readerRepository.delete(id);
     }
 
 	public Reader findReader(Long id) {
@@ -48,9 +47,9 @@ public class ReaderServiceImpl implements ReaderService {
         return readerRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
     }
 
-	public void saveReader(Reader reader) {
+	public Reader saveReader(Reader reader) {
 		encodePassword(reader);
-        readerRepository.save(reader);
+        return readerRepository.save(reader);
     }
 
 	public Reader updateReader(Reader reader) {
