@@ -67,10 +67,10 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 			} else {
 				$rootScope.authenticated = false;
 			}
-			callback && callback($rootScope.authenticated);
+			callback && callback($rootScope.authenticated, data);
 		}).error(function(data) {
 			$rootScope.authenticated = false;
-			callback && callback(false);
+			callback && callback(false, data);
 		});
 
 	}
@@ -79,7 +79,7 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 
 	$scope.credentials = {};
 	$scope.login = function() {
-		authenticate($scope.credentials, function(authenticated) {
+		authenticate($scope.credentials, function(authenticated, message) {
 			if (authenticated) {
 				console.log("Login succeeded")
 				$location.path("/");
@@ -88,7 +88,11 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 			} else {
 				console.log("Login failed")
 				$location.path("/login");
-				$scope.error = true;
+				if (message) {
+					$scope.error = message;
+				} else {
+					$scope.error = "There was a problem logging in. Please try again.";
+				}
 				$rootScope.authenticated = false;
 			}
 		})

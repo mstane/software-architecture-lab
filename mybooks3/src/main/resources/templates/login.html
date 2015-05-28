@@ -38,7 +38,7 @@
 
 				<div th:fragment="content">
 	
-					<div class="alert alert-danger" ng-show="error">There was a problem logging in. Please try again.</div>
+					<div class="alert alert-danger" ng-show="error">{{error}}</div>
 					<form class="form-signin" name='loginForm' role="form" novalidate="" ng-submit="login()">
 						<h2 class="form-signin-heading">Please sign in</h2>
 						
