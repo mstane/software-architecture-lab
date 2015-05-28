@@ -1,10 +1,12 @@
 package org.sm.lab.mybooks3.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.sm.lab.mybooks3.domain.Reader;
 import org.sm.lab.mybooks3.repository.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +34,10 @@ public class ReaderServiceImpl implements ReaderService {
 	
 	public Reader findByUsername(String username) {
 		return readerRepository.findByUsername(username);
+	}
+	
+	public Optional<Reader> findByEmail(String email) {
+		return readerRepository.findByEmail(email);
 	}
 
 	public List<Reader> findAllReaders() {

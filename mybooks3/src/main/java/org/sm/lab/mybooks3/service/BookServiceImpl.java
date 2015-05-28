@@ -9,6 +9,7 @@ import org.sm.lab.mybooks3.repository.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,9 @@ public class BookServiceImpl implements BookService {
 	
 	@Autowired
 	ReaderRepository readerRepository;
+	
+	@Autowired
+	AuthorizationService authorizationService;
 
 	public long countAllBooks() {
         return bookRepository.count();
@@ -35,6 +39,11 @@ public class BookServiceImpl implements BookService {
     }
 
 	public List<Book> findAllBooks() {
+        return bookRepository.findAll();
+    }
+
+	@PreAuthorize("@authorizationService.canAccessUser(principal, #readerId)")
+	public List<Book> findReadersBooks(Long readerId) {
         return bookRepository.findAll();
     }
 

@@ -29,7 +29,8 @@ public class RestBookController {
 
 	@RequestMapping(method=RequestMethod.GET)
 	public List<Book> list() {
-		return this.bookService.findAllBooks();
+//		return this.bookService.findAllBooks();
+		return this.bookService.findReadersBooks((long)1);
 	}
 
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)

@@ -1,5 +1,6 @@
 package org.sm.lab.mybooks3.service;
 import java.util.List;
+import java.util.Optional;
 
 import org.sm.lab.mybooks3.domain.Reader;
 
@@ -15,6 +16,9 @@ public interface ReaderService {
 	
 	
 	public abstract Reader findByUsername(String username);
+	
+	
+	public abstract Optional<Reader> findByEmail(String email);
 
 
 	public abstract List<Reader> findAllReaders();

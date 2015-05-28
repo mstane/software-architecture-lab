@@ -13,6 +13,8 @@ public interface BookService {
 	public abstract Book findBook(Long id);
 
 	public abstract List<Book> findAllBooks();
+	
+	public List<Book> findReadersBooks(Long readerId);
 
 	public abstract List<Book> findBookEntries(int firstResult, int maxResults);
 

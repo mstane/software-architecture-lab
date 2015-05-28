@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +18,8 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.sm.lab.mybooks3.enums.SystemRole;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Reader implements Serializable {
@@ -44,12 +47,10 @@ public class Reader implements Serializable {
     @Enumerated(EnumType.STRING)
     private SystemRole systemRole;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reader")
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "reader")
     private List<Book> books = new ArrayList<Book>();
     
-    
-    
-
 	public Long getId() {
 		return id;
 	}

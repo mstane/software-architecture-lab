@@ -68,7 +68,7 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 				$rootScope.authenticated = false;
 			}
 			callback && callback($rootScope.authenticated);
-		}).error(function() {
+		}).error(function(data) {
 			$rootScope.authenticated = false;
 			callback && callback(false);
 		});
