@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ReaderRepository extends JpaRepository<Reader, Long>, JpaSpecificationExecutor<Reader> {
 
-	Reader findByUsername(String username);
+	Optional<Reader> findByUsername(String username);
 	
 	Optional<Reader> findByEmail(String email);
 	

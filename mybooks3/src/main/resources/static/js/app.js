@@ -11,7 +11,8 @@ app.config(function($routeProvider, $httpProvider) {
 			}).when('/register', {
 				templateUrl : URLS.register
 			}).when('/forgotten_password', {
-				templateUrl : URLS.forgotten_password
+				templateUrl : URLS.forgotten_password,
+				controller : 'navigation'
 			}).when('/books/list', {
 				templateUrl : URLS.booksList,
 				controller : 'BookController'
@@ -103,8 +104,16 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 			$rootScope.authenticated = false;
 			$location.path("/");
 		}).error(function(data) {
-			console.log("Logout failed")
+			console.log("Logout failed");
 			$rootScope.authenticated = false;
+		});
+	}
+	
+	$scope.forgottenPasswordSend = function() {
+		$http.get('/forgotten_password_send', { params : { emailOrUsername : $scope.emailOrUsername } }).success(function() {
+			console.log("Forgotten password succeeded");
+		}).error(function(data) {
+			console.log("Forgotten password failed");
 		});
 	}
 

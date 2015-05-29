@@ -31,7 +31,7 @@ public class ReaderServiceImpl implements ReaderService {
         return readerRepository.findOne(id);
     }
 	
-	public Reader findByUsername(String username) {
+	public Optional<Reader> findByUsername(String username) {
 		return readerRepository.findByUsername(username);
 	}
 	

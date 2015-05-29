@@ -15,7 +15,7 @@ public interface ReaderService {
 	public abstract Reader findReader(Long id);
 	
 	
-	public abstract Reader findByUsername(String username);
+	public abstract Optional<Reader> findByUsername(String username);
 	
 	
 	public abstract Optional<Reader> findByEmail(String email);
