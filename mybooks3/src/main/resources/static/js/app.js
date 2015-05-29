@@ -84,7 +84,7 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 			if (authenticated) {
 				console.log("Login succeeded")
 				$location.path("/");
-				$scope.error = false;
+				$scope.error = null;
 				$rootScope.authenticated = true;
 			} else {
 				console.log("Login failed")
@@ -110,9 +110,14 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 	}
 	
 	$scope.forgottenPasswordSend = function() {
-		$http.get('/forgotten_password_send', { params : { emailOrUsername : $scope.emailOrUsername } }).success(function() {
+		$scope.messageSuccess = null;
+		$scope.messageError = null;
+		
+		$http.get('/forgotten_password_send', { params : { emailOrUsername : $scope.emailOrUsername } }).success(function(data, status, headers, config) {
+			$scope.messageSuccess = data.message;
 			console.log("Forgotten password succeeded");
-		}).error(function(data) {
+		}).error(function(data, status, headers, config) {
+			$scope.messageError = data.message;
 			console.log("Forgotten password failed");
 		});
 	}
