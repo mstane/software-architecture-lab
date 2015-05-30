@@ -28,13 +28,15 @@ public class Reader implements Serializable {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+	@Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
 	@NotNull
     @Size(min = 2)
+	@Column(unique = true)
     private String username;
 
+	@NotNull
     private String password;
 
     private String firstName;
@@ -42,6 +44,7 @@ public class Reader implements Serializable {
     private String lastName;
 
     @Pattern(regexp = "[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+")
+    @Column(unique = true)
     private String email;
 
     @Enumerated(EnumType.STRING)

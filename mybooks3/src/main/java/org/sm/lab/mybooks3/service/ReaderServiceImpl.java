@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.sm.lab.mybooks3.domain.Reader;
 import org.sm.lab.mybooks3.repository.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,8 +17,8 @@ public class ReaderServiceImpl implements ReaderService {
 	@Autowired
     ReaderRepository readerRepository;
 	
-//	@Autowired
-//	StandardPasswordEncoder passwordEncoder;
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
 	public long countAllReaders() {
         return readerRepository.count();
@@ -60,7 +61,7 @@ public class ReaderServiceImpl implements ReaderService {
 	private void encodePassword(Reader reader) {
 		String password = reader.getPassword();
 		if (password != null) {
-//			password = passwordEncoder.encode(password);
+			password  = passwordEncoder.encode(password);
 			reader.setPassword(password);
 		}
 		

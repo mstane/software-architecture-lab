@@ -9,7 +9,8 @@ app.config(function($routeProvider, $httpProvider) {
 				templateUrl : URLS.login,
 				controller : 'navigation'
 			}).when('/register', {
-				templateUrl : URLS.register
+				templateUrl : URLS.register,
+				controller : 'navigation'
 			}).when('/forgotten_password', {
 				templateUrl : URLS.forgotten_password,
 				controller : 'navigation'
@@ -48,6 +49,9 @@ app.config(function($routeProvider, $httpProvider) {
 
 
 app.controller('navigation', function($rootScope, $scope, $http, $location, $route) {
+	
+	$rootScope.messageSuccess = null;
+	$rootScope.messageError = null;
 
 	$scope.tab = function(route) {
 		return $route.current && route === $route.current.controller;
@@ -84,15 +88,15 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 			if (authenticated) {
 				console.log("Login succeeded")
 				$location.path("/");
-				$scope.error = null;
+				$rootScope.messageError = null;
 				$rootScope.authenticated = true;
 			} else {
 				console.log("Login failed")
 				$location.path("/login");
 				if (message) {
-					$scope.error = message;
+					$rootScope.messageError = message;
 				} else {
-					$scope.error = "There was a problem logging in. Please try again.";
+					$rootScope.messageError = "There was a problem logging in. Please try again.";
 				}
 				$rootScope.authenticated = false;
 			}
@@ -110,15 +114,23 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 	}
 	
 	$scope.forgottenPasswordSend = function() {
-		$scope.messageSuccess = null;
-		$scope.messageError = null;
-		
 		$http.get('/forgotten_password_send', { params : { emailOrUsername : $scope.emailOrUsername } }).success(function(data, status, headers, config) {
-			$scope.messageSuccess = data.message;
+			$rootScope.messageSuccess = data.message;
 			console.log("Forgotten password succeeded");
 		}).error(function(data, status, headers, config) {
-			$scope.messageError = data.message;
+			$rootScope.messageError = data.message;
 			console.log("Forgotten password failed");
+		});
+	}
+	
+	$scope.register = function() {
+		$http.post('/register_reader', $scope.reader).success(function(data, status, headers, config) {
+			$rootScope.messageSuccess = data.message;
+			console.log("Register succeeded");
+			$location.path("/");
+		}).error(function(data, status, headers, config) {
+			$rootScope.messageError = data.message;
+			console.log("Register failed");
 		});
 	}
 
@@ -212,3 +224,19 @@ app.directive('ngConfirmClick', [
          };
  }]);
 
+app.directive('compareTo', [
+	function() {
+		return {
+			require: "ngModel",
+			scope: { otherModelValue: "=compareTo" },
+      link: function(scope, element, attributes, ngModel) {
+    	  		ngModel.$validators.compareTo = function(modelValue) {
+    	  			return modelValue == scope.otherModelValue;
+    	  		};
+    	  		scope.$watch("otherModelValue", function() {
+    	  			ngModel.$validate();
+    	  		});
+      }
+    };
+  }
+]);

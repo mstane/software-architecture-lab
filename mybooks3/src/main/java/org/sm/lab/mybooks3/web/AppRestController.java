@@ -6,14 +6,19 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.validation.Valid;
+
 import org.sm.lab.mybooks3.domain.Reader;
+import org.sm.lab.mybooks3.enums.SystemRole;
 import org.sm.lab.mybooks3.service.ReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,6 +46,24 @@ public class AppRestController {
 		model.put("id", UUID.randomUUID().toString());
 		model.put("content", "Hello!");
 		return model;
+	}
+	
+	@RequestMapping(value = "/register_reader", method = RequestMethod.POST)
+	public ResponseEntity<String> registerReader(@RequestBody @Valid Reader reader) {
+		HttpStatus httpStatus = null;
+		String message = null;
+		try {
+    		reader.setSystemRole(SystemRole.Common);
+    		readerService.saveReader(reader);
+       		httpStatus = HttpStatus.OK;
+       		message = "You have successfully registered.";
+		} catch (Exception e) {
+			httpStatus = HttpStatus.BAD_REQUEST;
+			message = e.getMessage();
+		}
+		
+		return getMessageResponse(httpStatus, message);
+		
 	}
 	
 	@RequestMapping(value = "/forgotten_password_send")

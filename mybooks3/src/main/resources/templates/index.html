@@ -73,6 +73,9 @@
 
 	<div class="container">
 		<br/>
+		<div class="alert alert-success" ng-show="messageSuccess">{{messageSuccess}}</div>
+		<div class="alert alert-danger" ng-show="messageError">{{messageError}}</div>
+		
 		<div ng-view=""></div>
 	</div>
 	
