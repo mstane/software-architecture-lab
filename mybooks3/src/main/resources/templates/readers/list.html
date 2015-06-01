@@ -65,12 +65,12 @@
 							<th>Email</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr th:onclick="'document.location = \'#/readers/view\';'" onclick="document.location = './view.html';">
-							<td>First Name 1</td>
-							<td>Last Name 1</td>
-							<td>Username 1</td>
-							<td>Email 1</td>
+					<tbody th:remove="all-but-first">
+						<tr ng-repeat="reader in readers">
+							<td><a th:text="'{{reader.firstName}}'" th:href="'#/readers/view/{{reader.id}}'" href="#/readers/view/">First Name 1</a></td>
+							<td><a th:text="'{{reader.lastName}}'" th:href="'#/readers/view/{{reader.id}}'" href="#/readers/view/">Last Name 1</a></td>
+							<td><a th:text="'{{reader.lastName}}'" th:href="'#/readers/view/{{reader.id}}'" href="#/readers/view/">Username 1</a></td>
+							<td><a th:text="'{{reader.email}}'" th:href="'#/readers/view/{{reader.id}}'" href="#/readers/view/">Email 1</a></td>
 						</tr>
 						<tr th:onclick="'document.location = \'#/readers/view\';'" onclick="document.location = './view.html';">
 							<td>First Name 2</td>

@@ -46,40 +46,48 @@
 				<li class="active">My Profile</li>
 			</ol>
 			
-			<div class="row container-form-style">	
-				<h2 class="sub-header pull-left">Reader Edit</h2> 
-				<div class="btn-toolbar pull-right">
-					<button type="submit" class="btn btn-primary">Save</button>
-					<button type="reset" class="btn">Reset</button>
-				</div>
-			</div>
-			
 			<hr/>	
 			
-			<form name='readerForm' role="form">
+			<form name='readerForm' role="form" novalidate="" ng-submit="update()">
+
+				<div class="row container-form-style">	
+					<h2 class="sub-header pull-left">Reader Edit</h2> 
+					<div class="btn-toolbar pull-right">
+						<button type="submit" ng-disabled='readerForm.$invalid' class="btn btn-primary">Save</button>
+						<button type="reset" class="btn">Reset</button>
+					</div>
+				</div>
+
 				<div class="form-group">
 					<label for="firstName">First Name</label> 
-					<input type="text" class="form-control" id="firstName" name="firstName" />
+					<input type="text" class="form-control" id="firstName" name="firstName" ng-model="reader.firstName" />
 				</div>		
 				<div class="form-group">
 					<label for="lastName">Last Name</label> 
-					<input type="text" class="form-control" id="lastName" name="lastName" />
+					<input type="text" class="form-control" id="lastName" name="lastName" ng-model="reader.lastName" />
 				</div>
 				<div class="form-group">
 					<label for="username">Username</label> 
-					<input type="text" class="form-control" id="username" name="username" />
+					<input type="text" class="form-control" id="username" name="username" ng-model="reader.username" required="" />
+					<span class='help-block' ng-show='readerForm.username.$error.required'>Username is required</span>
 				</div>
 				<div class="form-group">
 					<label for="email">Email</label> 
-					<input type="email" class="form-control" id="email" name="email" ng-model="register.email" />
+					<input type="email" class="form-control" id="email" name="email" ng-model="reader.email" required="" />
+					<span class='help-block' ng-show='readerForm.email.$error.required'>Email is required</span>
+					<span class='help-block' ng-show="readerForm.email.$error.email">Invalid email address.</span>
 				</div>
 				<div class="form-group">
 					<label for="password">Password</label> 
-					<input type="password" class="form-control" id="password" name="password"/>
+					<input type="password" class="form-control" id="password" name="password" ng-model="reader.password" required="" ng-minlength="3" />
+					<span class='help-block' ng-show='readerForm.password.$error.required'>Password is required</span>
+					<span class='help-block' ng-show='readerForm.password.$error.minlength'>Too short</span>
 				</div>
 				<div class="form-group">
 					<label for="confirmPassword">Confirm Password</label> 
-					<input type="password" class="form-control" id="confirmPassword" name="confirmPassword"/>
+					<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" ng-model="reader.confirmPassword" required="" compare-to="reader.password"/>
+					<span class='help-block' ng-show='readerForm.confirmPassword.$error.required'>Confirm Password is required</span>
+					<span class='help-block' ng-show='readerForm.confirmPassword.$error.compareTo'>Must match the previous entry</span>					
 				</div>
 
 			</form>

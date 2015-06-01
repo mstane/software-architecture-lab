@@ -28,14 +28,16 @@ app.config(function($routeProvider, $httpProvider) {
 				templateUrl : URLS.booksCreate,
 				controller : 'BookController'
 			}).when('/readers/list', {
-				templateUrl : URLS.readersList					
+				templateUrl : URLS.readersList,
+				controller: 'ReaderController'
 			}).when('/readers/search', {
 				templateUrl : URLS.readersSearch
 			}).when('/readers/view/:readerId', {
 				templateUrl : URLS.readersView,
 				controller: 'ReaderController'
-			}).when('/readers/edit', {
-				templateUrl : URLS.readersEdit					
+			}).when('/readers/edit/:readerId', {
+				templateUrl : URLS.readersEdit,
+				controller: 'ReaderController'					
 			}).when('/notes/view', {
 				templateUrl : URLS.notesView					
 			}).when('/notes/edit', {
@@ -141,7 +143,15 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 app.controller("ReaderController", function ($scope, $http, BookFactory, $location, $routeParams) {
     
 	function init() {
-		if ($routeParams.readerId) {
+		var path = $location.$$path;
+		
+		if (path == URLS.readersList) {
+			$http.get('/rest/readers/').success(function(data, status, headers, config) {
+				$scope.readers = data;
+			}).error(function(data, status, headers, config) {
+				$rootScope.messageError = data.message;
+			});			
+		} else if ($routeParams.readerId) {
 			$http.get('/rest/readers/' + $routeParams.readerId, { }).success(function(data, status, headers, config) {
 				$scope.reader = data;
 			}).error(function(data, status, headers, config) {
@@ -149,6 +159,16 @@ app.controller("ReaderController", function ($scope, $http, BookFactory, $locati
 			});
 		}
     }
+	
+	$scope.update = function() {
+		$http.put('/rest/readers/' + $routeParams.readerId, $scope.reader).success(function(data, status, headers, config) {
+			$rootScope.messageSuccess = "You have successfully updated your profile.";
+			$location.path("/readers/view/" + $routeParams.readerId);
+		}).error(function(data, status, headers, config) {
+			$rootScope.messageError = data.message;
+		});
+	}
+	
 	
     init();
     
