@@ -61,7 +61,7 @@
         <div id="navbar" class="collapse navbar-collapse">
         	<ul class="nav navbar-nav navbar-right">		
 				<li ng-show="authenticated"><a href="#/books/list">Books</a></li>
-				<li ng-show="authenticated"><a href="#/readers/view">My Profile</a></li>
+				<li ng-show="authenticated"><a href="#/readers/view/{{currentReader.id}}">My Profile</a></li>
 				<li ng-show="authenticated"><a href="#/readers/list">Admin</a></li>
 				<li ng-show="!authenticated"><a href="#/login">Login</a></li>
 				<li ng-show="!authenticated"><a href="#/register">Register</a></li>

@@ -31,8 +31,9 @@ app.config(function($routeProvider, $httpProvider) {
 				templateUrl : URLS.readersList					
 			}).when('/readers/search', {
 				templateUrl : URLS.readersSearch
-			}).when('/readers/view', {
-				templateUrl : URLS.readersView					
+			}).when('/readers/view/:readerId', {
+				templateUrl : URLS.readersView,
+				controller: 'ReaderController'
 			}).when('/readers/edit', {
 				templateUrl : URLS.readersEdit					
 			}).when('/notes/view', {
@@ -69,6 +70,7 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 		}).success(function(data) {
 			if (data.name) {
 				$rootScope.authenticated = true;
+				$rootScope.currentReader = data.principal;
 			} else {
 				$rootScope.authenticated = false;
 			}
@@ -135,6 +137,23 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 	}
 
 });
+
+app.controller("ReaderController", function ($scope, $http, BookFactory, $location, $routeParams) {
+    
+	function init() {
+		if ($routeParams.readerId) {
+			$http.get('/rest/readers/' + $routeParams.readerId, { }).success(function(data, status, headers, config) {
+				$scope.reader = data;
+			}).error(function(data, status, headers, config) {
+				$rootScope.messageError = data.message;
+			});
+		}
+    }
+	
+    init();
+    
+});
+
 
 
 app.controller('home', function($scope, $http) {
