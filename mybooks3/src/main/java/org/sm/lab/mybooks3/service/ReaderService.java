@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.sm.lab.mybooks3.domain.Reader;
+import org.springframework.data.domain.Page;
 
 public interface ReaderService {
 
@@ -24,7 +25,7 @@ public interface ReaderService {
 	public abstract List<Reader> findAllReaders();
 
 
-	public abstract List<Reader> findReaderEntries(int firstResult, int maxResults);
+	public abstract Page<Reader> findReaderEntries(int firstResult, int maxResults);
 	
 	
 	public abstract List<Reader> search(String keyword, int firstResult, int maxResults);

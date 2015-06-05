@@ -46,8 +46,8 @@ public class ReaderServiceImpl implements ReaderService {
         return readerRepository.findAll();
     }
 
-	public List<Reader> findReaderEntries(int firstResult, int maxResults) {
-        return readerRepository.findAll(new PageRequest(firstResult / maxResults, maxResults)).getContent();
+	public Page<Reader> findReaderEntries(int pageNumber, int pageSize) {
+        return readerRepository.findAll(new PageRequest(pageNumber, pageSize));
     }
 	
 	public List<Reader> search(String keyword, int firstResult, int maxResults) {

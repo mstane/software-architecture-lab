@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.sm.lab.mybooks3.domain.Reader;
 import org.sm.lab.mybooks3.service.ReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,10 +28,10 @@ public class ReaderRestController {
 	public Reader create(@RequestBody @Valid Reader reader) {
 		return this.readerService.saveReader(reader);
 	}
-
+	
 	@RequestMapping(method=RequestMethod.GET)
-	public List<Reader> list() {
-		return this.readerService.findAllReaders();
+	public Page<Reader> list(@RequestParam(value = "pageNumber", required = false) Integer pageNumber, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+		return this.readerService.findReaderEntries(pageNumber, pageSize);
 	}
 
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)

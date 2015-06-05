@@ -142,16 +142,13 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 });
 
 app.controller("ReaderController", function ($scope, $http, BookFactory, $location, $routeParams, $rootScope) {
-    
+	var pageSize = 5;
+	
 	function init() {
 		var path = $location.$$path;
 		
 		if (path == URLS.readersList) {
-			$http.get('/rest/readers/').success(function(data, status, headers, config) {
-				$scope.readers = data;
-			}).error(function(data, status, headers, config) {
-				$rootScope.messageError = data.message;
-			});
+			$scope.getPage(0);
 		} else if ($routeParams.readerId) {
 			$http.get('/rest/readers/' + $routeParams.readerId, { }).success(function(data, status, headers, config) {
 				$scope.reader = data;
@@ -160,6 +157,21 @@ app.controller("ReaderController", function ($scope, $http, BookFactory, $locati
 			});
 		}
     }
+	
+	$scope.getPage = function (pageNumber) {
+		$http.get('/rest/readers/', { params: { pageNumber: pageNumber , pageSize : pageSize} }).success(function(data, status, headers, config) {
+			$scope.page = data;
+			
+            var pages = [];
+            for(var i = 0; i <= data.totalPages - 1; i++) {
+                pages.push(i);
+            }
+            $scope.range = pages;
+			
+		}).error(function(data, status, headers, config) {
+			$rootScope.messageError = data.message;
+		});
+	}
 	
 	$scope.update = function() {
 		var idSufix = $routeParams.readerId;

@@ -66,7 +66,7 @@
 						</tr>
 					</thead>
 					<tbody th:remove="all-but-first">
-						<tr ng-repeat="reader in readers">
+						<tr ng-repeat="reader in page.content">
 							<td><a th:text="'{{reader.firstName}}'" th:href="'#/readers/view/{{reader.id}}'" href="#/readers/view/">First Name 1</a></td>
 							<td><a th:text="'{{reader.lastName}}'" th:href="'#/readers/view/{{reader.id}}'" href="#/readers/view/">Last Name 1</a></td>
 							<td><a th:text="'{{reader.lastName}}'" th:href="'#/readers/view/{{reader.id}}'" href="#/readers/view/">Username 1</a></td>
@@ -87,6 +87,24 @@
 					</tbody>
 				</table>
 			</div>
+			
+			<ul class="pagination">
+		         <li ng-show="page.number == 0" class="disabled"><a>&#8810;</a></li>
+		         <li ng-show="page.number == 0" class="disabled"><a>&#60;</a></li>
+		         <li ng-show="page.number != 0"><a href="javascript:void(0)" ng-click="getPage(0)">&#8810;</a></li>
+		         <li ng-show="page.number != 0"><a href="javascript:void(0)" ng-click="getPage(page.number-1)">&#60;</a></li>
+		  
+		         <li ng-repeat="i in range" ng-class="{active : page.number == i}">
+		             <a href="javascript:void(0)" ng-click="getPage(i)">{{i + 1}}</a>
+		         </li>
+		  
+		         <li ng-show="page.number == page.totalPages - 1" class="disabled"><a>&#62;</a></li>
+		         <li ng-show="page.number == page.totalPages - 1" class="disabled"><a>&#8811;</a></li>
+		         <li ng-show="page.number != page.totalPages - 1"><a href="javascript:void(0)" ng-click="getPage(page.number + 1)">&#62;</a></li>
+		         <li ng-show="page.number != page.totalPages - 1"><a href="javascript:void(0)" ng-click="getPage(page.totalPages - 1)">&#8811;</a></li>
+			</ul>
+			
+			
 			
 		</div>
 
