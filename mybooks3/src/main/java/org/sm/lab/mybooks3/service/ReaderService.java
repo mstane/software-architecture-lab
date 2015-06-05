@@ -25,8 +25,11 @@ public interface ReaderService {
 
 
 	public abstract List<Reader> findReaderEntries(int firstResult, int maxResults);
+	
+	
+	public abstract List<Reader> search(String keyword, int firstResult, int maxResults);
 
-
+	
 	public abstract Reader saveReader(Reader reader);
 
 

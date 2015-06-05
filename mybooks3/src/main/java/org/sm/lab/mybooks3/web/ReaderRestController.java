@@ -38,6 +38,11 @@ public class ReaderRestController {
 		return this.readerService.findReader(id);
 	}
 	
+	@RequestMapping(method=RequestMethod.PUT)
+	public Reader update(@RequestBody @Valid Reader reader) {
+		return readerService.saveReader(reader);
+	}
+	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public Reader update(@PathVariable("id") long id, @RequestBody @Valid Reader reader) {
 		return readerService.saveReader(reader);
@@ -48,5 +53,12 @@ public class ReaderRestController {
 		this.readerService.deleteReader(id);
 		return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value="/search/{keyword}", method=RequestMethod.GET)
+	public List<Reader> get(@PathVariable("keyword") String keyword) {
+		List<Reader> resultReaders = readerService.search(keyword, 0, 10);
+		return resultReaders;
+	}
+
 	
 }

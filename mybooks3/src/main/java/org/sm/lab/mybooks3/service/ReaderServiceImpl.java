@@ -6,6 +6,8 @@ import java.util.Optional;
 import org.sm.lab.mybooks3.domain.Reader;
 import org.sm.lab.mybooks3.repository.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,8 +47,12 @@ public class ReaderServiceImpl implements ReaderService {
     }
 
 	public List<Reader> findReaderEntries(int firstResult, int maxResults) {
-        return readerRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
+        return readerRepository.findAll(new PageRequest(firstResult / maxResults, maxResults)).getContent();
     }
+	
+	public List<Reader> search(String keyword, int firstResult, int maxResults) {
+		return readerRepository.search(keyword.toLowerCase(), new PageRequest(firstResult / maxResults, maxResults)).getContent();
+	}
 
 	public Reader saveReader(Reader reader) {
 		encodePassword(reader);

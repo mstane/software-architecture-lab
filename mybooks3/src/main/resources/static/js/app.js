@@ -31,11 +31,12 @@ app.config(function($routeProvider, $httpProvider) {
 				templateUrl : URLS.readersList,
 				controller: 'ReaderController'
 			}).when('/readers/search', {
-				templateUrl : URLS.readersSearch
+				templateUrl : URLS.readersSearch,
+				controller: 'ReaderController'
 			}).when('/readers/view/:readerId', {
 				templateUrl : URLS.readersView,
 				controller: 'ReaderController'
-			}).when('/readers/edit/:readerId', {
+			}).when('/readers/edit/:readerId?', {
 				templateUrl : URLS.readersEdit,
 				controller: 'ReaderController'					
 			}).when('/notes/view', {
@@ -140,7 +141,7 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 
 });
 
-app.controller("ReaderController", function ($scope, $http, BookFactory, $location, $routeParams) {
+app.controller("ReaderController", function ($scope, $http, BookFactory, $location, $routeParams, $rootScope) {
     
 	function init() {
 		var path = $location.$$path;
@@ -150,7 +151,7 @@ app.controller("ReaderController", function ($scope, $http, BookFactory, $locati
 				$scope.readers = data;
 			}).error(function(data, status, headers, config) {
 				$rootScope.messageError = data.message;
-			});			
+			});
 		} else if ($routeParams.readerId) {
 			$http.get('/rest/readers/' + $routeParams.readerId, { }).success(function(data, status, headers, config) {
 				$scope.reader = data;
@@ -161,12 +162,29 @@ app.controller("ReaderController", function ($scope, $http, BookFactory, $locati
     }
 	
 	$scope.update = function() {
-		$http.put('/rest/readers/' + $routeParams.readerId, $scope.reader).success(function(data, status, headers, config) {
-			$rootScope.messageSuccess = "You have successfully updated your profile.";
-			$location.path("/readers/view/" + $routeParams.readerId);
+		var idSufix = $routeParams.readerId;
+		if (!idSufix) idSufix = "";
+		$http.put('/rest/readers/' + idSufix, $scope.reader).success(function(data, status, headers, config) {
+			if (idSufix) {
+				$rootScope.messageSuccess = "You have successfully updated the profile.";
+				$location.path("/readers/view/" + $routeParams.readerId);
+			} else {
+				$rootScope.messageSuccess = "You have successfully created the profile.";
+				$location.path("/readers/view/" + data.id);
+			}
 		}).error(function(data, status, headers, config) {
 			$rootScope.messageError = data.message;
 		});
+	}
+	
+	$scope.search = function() {
+		if ($scope.keyword) {
+			$http.get('/rest/readers/search/' + $scope.keyword).success(function(data, status, headers, config) {
+				$scope.readers = data;
+			}).error(function (data, status, headers, config) {
+				$rootScope.messageError = data.message;
+			}); 
+		}
 	}
 	
 	
