@@ -225,7 +225,7 @@ app.factory("BookFactory", function ($resource) {
 
 app.controller("BookController", function ($scope, BookFactory, $location) {
 	
-	$scope.genres=["Comedy", "Drama", "Epic"];
+	$scope.genres = ["Comedy", "Drama", "Epic", "Erotic", "Lyric", "Mythopoeia", "Nonsense", "Other", "Romance", "Satire", "Tragedy", "Tragicomedy"];
 	
 	function init() {
         $scope.getBooks();
@@ -244,15 +244,11 @@ app.controller("BookController", function ($scope, BookFactory, $location) {
     };
 
     $scope.createBook = function () {
-		if($scope.book == null || $scope.book.title == null || $scope.book.author == null || $scope.book.url == null || $scope.book.genre == null){
-			alert("Insufficient Data! Please provide valid values.");
-		} else {
-	        var book = new BookFactory($scope.book);
-	        book.$save({}, function() {
-	            $location.path("/books/list");
-	            alert("Successfully created.");
-	        });
-		}    	
+        var book = new BookFactory($scope.book);
+        book.$save({}, function() {
+            $location.path("/books/list");
+            alert("Successfully created.");
+        });
     };
     
     
@@ -266,11 +262,18 @@ app.controller("BookController", function ($scope, BookFactory, $location) {
       $scope.dt = null;
     };
 
-    $scope.open = function($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
+    $scope.openStartReadingDate = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
 
-      $scope.opened = true;
+        $scope.openedStartReadingDate = true;
+    };
+
+    $scope.openEndReadingDate = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.openedEndReadingDate = true;
     };
 
 
@@ -284,7 +287,7 @@ app.controller("BookController", function ($scope, BookFactory, $location) {
 
 app.controller("BookEditController", function ($scope, BookFactory, $location, $routeParams) {
 	
-	$scope.genres=["Comedy", "Drama", "Epic"];
+	$scope.genres=["Comedy", "Drama", "Epic", "Erotic", "Lyric", "Mythopoeia", "Nonsense", "Other", "Romance", "Satire", "Tragedy", "Tragicomedy"];
 	
     function init() {
     	$scope.book = BookFactory.get({id:$routeParams.bookId})
