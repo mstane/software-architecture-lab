@@ -19,8 +19,9 @@ app.config(function($routeProvider, $httpProvider) {
 				controller : 'BookController'
 			}).when('/books/search', {
 				templateUrl : URLS.booksSearch
-			}).when('/books/view', {
-				templateUrl : URLS.booksView
+			}).when('/books/view/:bookId?', {
+				templateUrl : URLS.booksView,
+				controller : 'BookEditController'
 			}).when('/books/edit/:bookId', {
 				templateUrl : URLS.booksEdit,
 				controller : 'BookEditController'
@@ -234,7 +235,10 @@ app.controller("BookController", function ($scope, BookFactory, $location) {
 	function init() {
         $scope.getBooks();
     }
-
+	
+	$scope.showView = function(id) {
+		$location.path("/books/view/" + id);
+	}
 
     $scope.getBooks = function () {
         $scope.books = BookFactory.query();

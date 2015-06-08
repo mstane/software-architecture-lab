@@ -52,7 +52,7 @@
 			<div class="row container-form-style">	
 				<h2 class="sub-header pull-left">Book View</h2> 
 				<div class="btn-toolbar pull-right">
-					<a href="./edit.html" th:href="@{#/books/edit/1}" class="btn btn-default">Edit Book</a>
+					<a th:href="@{#/books/edit/{{book.id}} }" href="./edit.html" class="btn btn-primary">Edit Book</a>
 					<a th:href="@{#/notes/edit}" href="../notes/edit.html" class="btn btn-default">New Note</a>
 				</div>
 			</div>
@@ -65,31 +65,31 @@
 						<tbody>
 							<tr>
 								<td>Title:</td>
-								<td>Title1</td>
+								<td th:text="'{{book.title}}'">Title1</td>
 							</tr>
 							<tr>
 								<td>Author:</td>
-								<td>Author1</td>
+								<td th:text="'{{book.author}}'">Author1</td>
 							</tr>
 							<tr>
 								<td>URL:</td>
-								<td>url1</td>
+								<td th:text="'{{book.url}}'">URL 1</td>
 							</tr>
 							<tr>
 								<td>Genre</td>
-								<td>Comedy1</td>
+								<td th:text="'{{book.genre}}'">Genre 1</td>
 							</tr>
 							<tr>
 								<td>Start Reading Date:</td>
-								<td>03/20/2015</td>
+								<td th:text="'{{book.startReadingDate}}'">Start Reading Date 1</td>
 							</tr>
 							<tr>
 								<td>End Reading Date:</td>
-								<td>04/28/2015</td>
+								<td th:text="'{{book.endReadingDate}}'">End Reading Date 1</td>
 							</tr>
 							<tr>
 								<td>Rating:</td>
-								<td>5</td>
+								<td th:text="'{{book.rating}}'">Rating 1</td>
 							</tr>
 							<tr>
 								<td>Review:</td>
