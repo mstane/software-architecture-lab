@@ -66,11 +66,11 @@
 						</tr>
 					</thead>
 					<tbody th:remove="all-but-first">
-						<tr ng-repeat="reader in page.content">
-							<td><a th:text="'{{reader.firstName}}'" th:href="'#/readers/view/{{reader.id}}'" href="#/readers/view/">First Name 1</a></td>
-							<td><a th:text="'{{reader.lastName}}'" th:href="'#/readers/view/{{reader.id}}'" href="#/readers/view/">Last Name 1</a></td>
-							<td><a th:text="'{{reader.lastName}}'" th:href="'#/readers/view/{{reader.id}}'" href="#/readers/view/">Username 1</a></td>
-							<td><a th:text="'{{reader.email}}'" th:href="'#/readers/view/{{reader.id}}'" href="#/readers/view/">Email 1</a></td>
+						<tr ng-repeat="reader in page.content" ng-click="showView(reader.id)">
+							<td th:text="'{{reader.firstName}}'">First Name 1</td>
+							<td th:text="'{{reader.lastName}}'">Last Name 1</td>
+							<td th:text="'{{reader.username}}'">Username 1</td>
+							<td th:text="'{{reader.email}}'">Email 1</td>
 						</tr>
 						<tr th:onclick="'document.location = \'#/readers/view\';'" onclick="document.location = './view.html';">
 							<td>First Name 2</td>

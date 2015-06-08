@@ -33,7 +33,7 @@ app.config(function($routeProvider, $httpProvider) {
 			}).when('/readers/search', {
 				templateUrl : URLS.readersSearch,
 				controller: 'ReaderController'
-			}).when('/readers/view/:readerId', {
+			}).when('/readers/view/:readerId?', {
 				templateUrl : URLS.readersView,
 				controller: 'ReaderController'
 			}).when('/readers/edit/:readerId?', {
@@ -143,6 +143,10 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 
 app.controller("ReaderController", function ($scope, $http, BookFactory, $location, $routeParams, $rootScope) {
 	var pageSize = 5;
+	
+	$scope.showView = function(id) {
+		$location.path("/readers/view/" + id);
+	}
 	
 	function init() {
 		var path = $location.$$path;
