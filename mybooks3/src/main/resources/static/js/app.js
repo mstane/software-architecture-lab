@@ -1,4 +1,4 @@
-var app = angular.module('hello', [ 'ngRoute', 'ngResource' ]);
+var app = angular.module('hello', [ 'ngRoute', 'ngResource', 'ui.bootstrap' ]);
 
 
 app.config(function($routeProvider, $httpProvider) {
@@ -254,7 +254,31 @@ app.controller("BookController", function ($scope, BookFactory, $location) {
 	        });
 		}    	
     };
+    
+    
+    
+    $scope.today = function() {
+        $scope.dt = new Date();
+    };
+    $scope.today();
 
+    $scope.clear = function () {
+      $scope.dt = null;
+    };
+
+    $scope.open = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope.opened = true;
+    };
+
+
+    $scope.format = 'dd-MMMM-yyyy';
+
+    
+    
+    
     init();
 });
 
