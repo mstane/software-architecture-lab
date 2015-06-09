@@ -35,101 +35,98 @@
 	</nav>    
 	
 	<div class="container">
-
-			<div th:fragment="content" class="container-form-style">
-
-				<br/>
-			
-				<ol class="breadcrumb">
-					<li><a href="../home.html" th:href="@{#/home}">Home</a></li>
-					<li class="active">Books</li>
-				</ol>
+	
+		<br/>
+		
+		<div th:fragment="content" class="container-form-style">
 				
-				<div class="row container-form-style">	
+			<ol class="breadcrumb">
+				<li><a href="../home.html" th:href="@{#/home}">Home</a></li>
+				<li class="active">Books</li>
+			</ol>
+				
+            <form name='bookForm' role="form" novalidate="" ng-submit="updateBook()">
+		            
+		        <div class="row container-form-style">	
 					<h2 class="sub-header pull-left">Book Edit</h2> 
 					<div class="btn-toolbar pull-right">
-			             <a class="btn btn-default" ng-click="updateBook()">Save</a>
-<!-- 								<button type="submit" class="btn btn-primary">Save</button> -->
+						<button type="submit" ng-disabled='bookForm.$invalid' class="btn btn-primary"><span class="glyphicon glyphicon-save"></span></button>
+						<button type="reset" class="btn">Reset</button>
 						<button type="submit" class="btn">Delete</button>
 					</div>
 				</div>
 				
-				<hr/>
-
-			    <div class="row">
-			        <div class="col-xs-12">
-			            <form class="form-horizontal">
-			                <div class="form-group">
-			                    <label for="title" class="col-xs-3">Title</label>
-			
-			                    <div class="col-xs-6">
-			                        <input class="form-control" placeholder="Title" value="Title1" ng-model="book.title"/>
-			                    </div>
-			                </div>
-			                <div class="form-group">
-			                    <label for="Author" class="col-xs-3">Author</label>
-			
-			                    <div class="col-xs-6">
-			                        <input class="form-control" placeholder="Author" value="Author1" ng-model="book.author"/>
-			                    </div>
-			                </div>
-			                <div class="form-group">
-			                    <label for="url" class="col-xs-3">URL</label>
-			
-			                    <div class="col-xs-6">
-			                        <input class="form-control" placeholder="URL" value="url1" ng-model="book.url"/>
-			                    </div>
-			                </div>
-			                
-			                <div class="form-group">
-			                    <label for="genre" class="col-xs-3">Genre</label>
-			
-			                    <div class="col-xs-6">
-			                    	<select class="form-control" placeholder="Genre" ng-model="book.genre" ng-options="genre as genre for genre in genres">
-										<option value="">-- Select --</option>		
-										<option th:remove="all" value="">Comedy1</option>
-										<option th:remove="all" value="">Drama1</option>
-										<option th:remove="all" value="">Epic1</option>															
-									</select>
-			                    </div>
-			                </div>  
-			                
-			                <div class="form-group">
-			                    <label for="startReadingDate" class="col-xs-3">Start Reading Date</label>
-			
-			                    <div class="col-xs-6">
-			                        <input class="form-control" placeholder="Start Reading Date" value="Start Reading Date 1"/>
-			                    </div>
-			                </div>
-			                <div class="form-group">
-			                    <label for="endReadingDate" class="col-xs-3">End Reading Date</label>
-			
-			                    <div class="col-xs-6">
-			                        <input class="form-control" placeholder="End Reading Date" value="End Reading Date 1"/>
-			                    </div>
-			                </div>
-			                <div class="form-group">
-			                    <label for="rating" class="col-xs-3">Rating</label>
-			
-			                    <div class="col-xs-6">
-			                        <input class="form-control" placeholder="Rating" value="Rating 1"/>
-			                    </div>
-			                </div>
-			                <div class="form-group">
-			                    <label for="Review" class="col-xs-3">Review</label>
-			
-			                    <div class="col-xs-6">
-			                    	<textarea class="form-control" placeholder="Review">Review 1</textarea>
-			                    </div>
-			                </div>				                                
-			                
-			            </form>
-			        </div>
-			    </div>
-			</div>
-			
-
-
+				<br/>
+		            
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" ng-model="book.title" required="" ng-minlength="2" />
+					<span class='help-block' ng-show='bookForm.title.$error.required'>Title is required</span>
+					<span class='help-block' ng-show='bookForm.title.$error.minlength'>Too short</span>                    
+                </div>
+                <div class="form-group">
+                    <label for="author">Author</label>
+                    <input type="text" class="form-control" id="author" name="author" ng-model="book.author"/>
+                </div>
+                <div class="form-group">
+                    <label for="url">URL</label>
+                    <input type="text" class="form-control" id="url" name="url" ng-model="book.url"/>
+                </div>
+                <div class="form-group">
+                    <label for="genre">Genre</label>
+                   	<select class="form-control" id="genre" name="genre" ng-model="book.genre" ng-options="genre as genre for genre in genres">
+						<option value="">-- Select --</option>						
+					</select>
+                </div>                
+                <div class="form-group">
+                    <label for="rating">Rating</label>
+                    <input type="text" class="form-control" id="rating" name="rating" ng-model="book.rating"/>
+                </div>
+                <div class="form-group">
+                	<label for="startReadingDate">Start Reading Date</label>
+       				<p class="input-group">
+          				<input
+          					type="text"
+          					class="form-control"
+          					id="startReadingDate"
+          					name="startReadingDate" 
+          					datepicker-popup="{{format}}" 
+          					ng-model="book.startReadingDate" 
+          					is-open="openedStartReadingDate" 
+          				/>
+          				<span class="input-group-btn">
+            				<button type="button" class="btn btn-default" ng-click="openStartReadingDate($event)">
+            					<i class="glyphicon glyphicon-calendar"></i>
+            				</button>
+          				</span>
+       				</p>
+  				</div>
+                <div class="form-group">
+                	<label for="endReadingDate">End Reading Date</label>
+       				<p class="input-group">
+          				<input 
+          					type="text"
+          					class="form-control"
+          					id="endReadingDate"
+          					name="endReadingDate" 
+          					datepicker-popup="{{format}}" 
+          					ng-model="book.endReadingDate" 
+          					is-open="openedEndReadingDate" 
+          				/>
+          				<span class="input-group-btn">
+            				<button type="button" class="btn btn-default" ng-click="openEndReadingDate($event)">
+            					<i class="glyphicon glyphicon-calendar"></i>
+            				</button>
+          				</span>
+       				</p>
+   				</div>
+                <div class="form-group">
+                    <label for="review">Review</label>
+                    <textarea class="form-control" id="review" name="review" ng-model="book.review">Review 1</textarea>
+                </div>
+            </form>
+		</div>
+		
 	</div>
 
 	<script src="../../../../../target/generated-resources/static/js/bundle.js"></script>

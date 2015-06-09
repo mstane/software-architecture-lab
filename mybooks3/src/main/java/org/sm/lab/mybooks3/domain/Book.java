@@ -55,6 +55,8 @@ public class Book implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Genre genre;
+    
+    private String review;
 
     @ManyToOne
     private Reader reader;
@@ -125,6 +127,14 @@ public class Book implements Serializable {
 	public void setGenre(Genre genre) {
 		this.genre = genre;
 	}
+	
+	public String getReview() {
+		return review;
+	}
+
+	public void setReview(String review) {
+		this.review = review;
+	}
 
 	public Reader getReader() {
 		return reader;
@@ -141,10 +151,6 @@ public class Book implements Serializable {
 	public void setNotes(List<Note> notes) {
 		this.notes = notes;
 	}
-
-    
-    
-    
     
 	
 }
