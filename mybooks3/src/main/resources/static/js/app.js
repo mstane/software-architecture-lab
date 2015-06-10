@@ -40,10 +40,12 @@ app.config(function($routeProvider, $httpProvider) {
 			}).when('/readers/edit/:readerId?', {
 				templateUrl : URLS.readersEdit,
 				controller: 'ReaderController'					
-			}).when('/notes/view', {
-				templateUrl : URLS.notesView					
-			}).when('/notes/edit', {
-				templateUrl : URLS.notesEdit					
+			}).when('/notes/view/:noteId?', {
+				templateUrl : URLS.notesView,
+				controller: 'NoteController'					
+			}).when('/notes/edit/:noteId?', {
+				templateUrl : URLS.notesEdit,
+				controller: 'NoteController'					
 			}).otherwise('/home');
 
 			$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -309,6 +311,10 @@ app.controller("BookEditController", function ($scope, BookFactory, $location, $
        }) ;
     }
     
+	$scope.showNoteView = function(id) {
+		$location.path("/notes/view/" + id);
+	}
+    
     
     
     $scope.today = function() {
@@ -340,6 +346,53 @@ app.controller("BookEditController", function ($scope, BookFactory, $location, $
     
     init();
 });
+
+
+app.controller("NoteController", function ($scope, $http, $location, $routeParams, $rootScope) {
+
+	$scope.showView = function(id) {
+		$location.path("/notes/view/" + id);
+	}
+	
+	function init() {
+		if ($routeParams.noteId) {
+			$http.get('/rest/notes/' + $routeParams.noteId, { }).success(function(data, status, headers, config) {
+				$scope.note = data;
+			}).error(function(data, status, headers, config) {
+				$rootScope.messageError = data.message;
+			});
+		}
+    }
+	
+	$scope.update = function() {
+		var idSufix = $routeParams.noteId;
+		if (!idSufix) idSufix = "";
+		$http.put('/rest/notes/' + idSufix, $scope.note).success(function(data, status, headers, config) {
+			if (idSufix) {
+				$rootScope.messageSuccess = "You have successfully updated the profile.";
+				$location.path("/notes/view/" + $routeParams.noteId);
+			} else {
+				$rootScope.messageSuccess = "You have successfully created the profile.";
+				$location.path("/notes/view/" + data.id);
+			}
+		}).error(function(data, status, headers, config) {
+			$rootScope.messageError = data.message;
+		});
+	}	
+	
+	$scope.deleteNote = function (id) {
+		$http.delete('/rest/notes/' + id).success(function(data, status, headers, config) {
+			$rootScope.messageSuccess = "You have successfully deleted the note.";
+			$location.path("/notes/view/" + $routeParams.noteId);
+		}).error(function(data, status, headers, config) {
+			$rootScope.messageError = data.message;
+		});
+	}
+	
+	init();
+	
+});
+
 
 
 //app Directive for confirm dialog box

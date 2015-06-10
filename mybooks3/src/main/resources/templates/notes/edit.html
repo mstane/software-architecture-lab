@@ -46,37 +46,29 @@
 				<li class="active">Note View</li>
 			</ol>
 			
-			<div class="row container-form-style">	
-				<h2 class="sub-header pull-left">Note Edit</h2> 
-				<div class="btn-toolbar pull-right">
-					<button type="submit" class="btn btn-primary">Save</button>
-					<button type="submit" class="btn">Delete</button>
+
+			<form name='noteForm' role="form" novalidate="" ng-submit="update()">
+
+				<div class="row container-form-style">	
+					<h2 class="sub-header pull-left">Note Edit</h2> 
+					<div class="btn-toolbar pull-right">
+						<button type="submit" ng-disabled='noteForm.$invalid' class="btn btn-primary">Save</button>
+					</div>
 				</div>
-			</div>
+				
+				<div class="form-group">
+					<label for="title">Title</label> 
+					<input type="text" class="form-control" id="title" name="title" ng-model="note.title" />
+				</div>	
+				
+				<div class="form-group">
+                    <label for="content">Content</label>
+                    <textarea class="form-control" id="content" name="content" ng-model="note.content" required="" ></textarea>
+                    <span class='help-block' ng-show='noteForm.content.$error.required'>Content is required</span>
+                </div>
+
+			</form>
 			
-			<hr/>
-	
-		    <div class="row">
-		        <div class="col-xs-12">
-		            <form class="form-horizontal">
-		                <div class="form-group">
-		                    <label for="title" class="col-xs-3">Title</label>
-		
-		                    <div class="col-xs-6">
-		                        <input class="form-control" placeholder="Title" value="Title1" />
-		                    </div>
-		                </div>
-		                <div class="form-group">
-		                    <label for="Content" class="col-xs-3">Content</label>
-		
-		                    <div class="col-xs-6">
-		                    	<textarea class="form-control" placeholder="Content">Content 1</textarea>
-		                    </div>
-		                </div>
-	
-					</form>
-		        </div>
-		    </div>
 
 		</div>
 

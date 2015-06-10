@@ -22,8 +22,8 @@ public class NoteServiceImpl implements NoteService {
         return noteRepository.count();
     }
 
-	public void deleteNote(Note note) {
-        noteRepository.delete(note);
+	public void deleteNote(Long id) {
+        noteRepository.delete(id);
     }
 
 	public Note findNote(Long id) {
@@ -38,8 +38,8 @@ public class NoteServiceImpl implements NoteService {
         return noteRepository.findAll(new PageRequest(firstResult / maxResults, maxResults)).getContent();
     }
 
-	public void saveNote(Note note) {
-        noteRepository.save(note);
+	public Note saveNote(Note note) {
+        return noteRepository.save(note);
     }
 
 	public Note updateNote(Note note) {
@@ -53,5 +53,9 @@ public class NoteServiceImpl implements NoteService {
 	public List<Note> findByKeyword(String keyword, int firstResult, int maxResults) {
         return noteRepository.findByKeyword(keyword, new PageRequest(firstResult / maxResults, maxResults, new Sort("title"))).getContent();
     }
+	
+	public List<Note> search(String keyword, int firstResult, int maxResults) {
+		return noteRepository.search(keyword.toLowerCase(), new PageRequest(firstResult / maxResults, maxResults)).getContent();
+	}
 	
 }

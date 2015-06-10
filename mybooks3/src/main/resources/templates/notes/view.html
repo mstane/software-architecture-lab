@@ -49,7 +49,8 @@
 			<div class="row container-form-style">	
 				<h2 class="sub-header pull-left">Note View</h2> 
 				<div class="btn-toolbar pull-right">
-					<a href="./edit.html" class="btn btn-default">Edit</a>
+					<a th:href="@{#/notes/edit/{{note.id}} }" href="./edit.html" class="btn btn-primary">Edit</a>
+					<a confirmed-click="deleteNote(note.id)" ng-confirm-click="Are you sure?" class="btn btn-default">Delete</a>
 				</div>
 			</div>
 			
@@ -61,11 +62,11 @@
 						<tbody>
 							<tr>
 								<td>Title:</td>
-								<td>Title1</td>
+								<td th:text="'{{note.title}}'">Title 1</td>
 							</tr>
 							<tr>
 								<td>Content:</td>
-								<td>Content 1</td>
+								<td th:text="'{{note.content}}'">Content 1</td>
 							</tr>
 						</tbody>
 					</table>

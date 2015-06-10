@@ -81,11 +81,11 @@
 							</tr>
 							<tr>
 								<td>Start Reading Date:</td>
-								<td th:text="'{{book.startReadingDate}}'">Start Reading Date 1</td>
+								<td th:text="'{{book.startReadingDate | date : \'dd-MMM-yyyy\' }}'">Start Reading Date 1</td>
 							</tr>
 							<tr>
 								<td>End Reading Date:</td>
-								<td th:text="'{{book.endReadingDate}}'">End Reading Date 1</td>
+								<td th:text="'{{book.endReadingDate | date : \'dd-MMM-yyyy\'}}'">End Reading Date 1</td>
 							</tr>
 							<tr>
 								<td>Rating:</td>
@@ -114,17 +114,18 @@
 							<th>Title</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody th:remove="all-but-first">
+						<tr ng-repeat="note in book.notes" ng-click="showNoteView(note.id)">
+							<td th:text="'{{note.id}}'">id0</td>
+							<td th:text="'{{note.title}}'">title0</td>
+						</tr>
 						<tr th:onclick="'document.location = \'#/notes/view\';'" onclick="document.location = '../notes/view.html';">
-							<td>id1</td>
 							<td>title1</td>
 						</tr>
 						<tr th:onclick="'document.location = \'#/notes/view\';'" onclick="document.location = '../notes/view.html';">
-							<td>id2</td>
 							<td>title2</td>
 						</tr>
 						<tr th:onclick="'document.location = \'#/notes/view\';'" onclick="document.location = '../notes/view.html';">
-							<td>id3</td>
 							<td>title3</td>
 						</tr>
 					</tbody>

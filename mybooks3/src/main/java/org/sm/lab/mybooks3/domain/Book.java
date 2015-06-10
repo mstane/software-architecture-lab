@@ -23,7 +23,11 @@ import javax.validation.constraints.Size;
 import org.sm.lab.mybooks3.enums.Genre;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@jsonId")
 public class Book implements Serializable {
 
 	private static final long serialVersionUID = 1L;

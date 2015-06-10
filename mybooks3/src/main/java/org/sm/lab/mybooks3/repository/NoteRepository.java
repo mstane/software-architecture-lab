@@ -16,6 +16,12 @@ public interface NoteRepository extends JpaRepository<Note, Long>, JpaSpecificat
 
 	@Query("SELECT n FROM Note n WHERE LOWER(n.title) = LOWER(:keyword) OR  LOWER(n.content) = LOWER(:keyword)")
 	Page<Note> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
+	
+	@Query("SELECT n FROM Note n WHERE "
+			+ "LOWER(n.title) LIKE %:keyword%"
+			+ " OR LOWER(n.content) LIKE %:keyword%"
+			)
+	Page<Note> search(@Param("keyword") String keyword, Pageable pageable);
 
 	
 }

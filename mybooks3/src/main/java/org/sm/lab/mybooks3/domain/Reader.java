@@ -19,9 +19,11 @@ import javax.validation.constraints.Size;
 
 import org.sm.lab.mybooks3.enums.SystemRole;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@jsonId")
 public class Reader implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -50,7 +52,6 @@ public class Reader implements Serializable {
     @Enumerated(EnumType.STRING)
     private SystemRole systemRole;
 
-    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "reader")
     private List<Book> books = new ArrayList<Book>();
     
