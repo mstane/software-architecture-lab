@@ -295,12 +295,14 @@ app.controller("BookController", function ($scope, BookFactory, $location) {
     init();
 });
 
-app.controller("BookEditController", function ($scope, BookFactory, $location, $routeParams) {
+app.controller("BookEditController", function ($scope, BookFactory, NoteService, $location, $routeParams) {
 	
 	$scope.genres=["Comedy", "Drama", "Epic", "Erotic", "Lyric", "Mythopoeia", "Nonsense", "Other", "Romance", "Satire", "Tragedy", "Tragicomedy"];
 	
     function init() {
-    	$scope.book = BookFactory.get({id:$routeParams.bookId})
+    	var book = BookFactory.get({id:$routeParams.bookId});
+    	NoteService.setCurrentBook(book);
+    	$scope.book = book;
     }
 
     $scope.updateBook = function() {
@@ -348,6 +350,13 @@ app.controller("BookEditController", function ($scope, BookFactory, $location, $
 });
 
 app.service("NoteService", function($http, $rootScope){
+	
+	var currentBook;
+	
+	this.setCurrentBook = function(book) {
+		currentBook = book;
+	};
+	
 	this.get = function(id, callback) { 
 		$http.get('/rest/notes/' + id, { }).success(function(data, status, headers, config) {
 			callback && callback(data);
@@ -357,7 +366,14 @@ app.service("NoteService", function($http, $rootScope){
     };
     
     this.update = function(idSufix, note) {
-		$http.put('/rest/notes/' + idSufix, note).success(function(data, status, headers, config) {
+    	var request = {
+    			method: 'PUT',
+    			url: '/rest/notes/' + idSufix,
+    			params: { bookId: currentBook.id },
+    			data: note
+    		}
+    	
+		$http(request).success(function(data, status, headers, config) {
 			if (idSufix) {
 				$rootScope.messageSuccess = "You have successfully updated the profile.";
 				$location.path("/notes/view/" + $routeParams.noteId);
