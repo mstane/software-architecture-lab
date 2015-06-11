@@ -347,27 +347,17 @@ app.controller("BookEditController", function ($scope, BookFactory, $location, $
     init();
 });
 
-
-app.controller("NoteController", function ($scope, $http, $location, $routeParams, $rootScope) {
-
-	$scope.showView = function(id) {
-		$location.path("/notes/view/" + id);
-	}
-	
-	function init() {
-		if ($routeParams.noteId) {
-			$http.get('/rest/notes/' + $routeParams.noteId, { }).success(function(data, status, headers, config) {
-				$scope.note = data;
-			}).error(function(data, status, headers, config) {
-				$rootScope.messageError = data.message;
-			});
-		}
-    }
-	
-	$scope.update = function() {
-		var idSufix = $routeParams.noteId;
-		if (!idSufix) idSufix = "";
-		$http.put('/rest/notes/' + idSufix, $scope.note).success(function(data, status, headers, config) {
+app.service("NoteService", function($http, $rootScope){
+	this.get = function(id, callback) { 
+		$http.get('/rest/notes/' + id, { }).success(function(data, status, headers, config) {
+			callback && callback(data);
+		}).error(function(data, status, headers, config) {
+			$rootScope.messageError = data.message;
+		});
+    };
+    
+    this.update = function(idSufix, note) {
+		$http.put('/rest/notes/' + idSufix, note).success(function(data, status, headers, config) {
 			if (idSufix) {
 				$rootScope.messageSuccess = "You have successfully updated the profile.";
 				$location.path("/notes/view/" + $routeParams.noteId);
@@ -378,15 +368,43 @@ app.controller("NoteController", function ($scope, $http, $location, $routeParam
 		}).error(function(data, status, headers, config) {
 			$rootScope.messageError = data.message;
 		});
-	}	
-	
-	$scope.deleteNote = function (id) {
+    };
+    
+    this.delete = function(id) {
 		$http.delete('/rest/notes/' + id).success(function(data, status, headers, config) {
 			$rootScope.messageSuccess = "You have successfully deleted the note.";
 			$location.path("/notes/view/" + $routeParams.noteId);
 		}).error(function(data, status, headers, config) {
 			$rootScope.messageError = data.message;
 		});
+    };
+ 
+});
+
+
+app.controller("NoteController", function ($scope, $http, $location, $routeParams, $rootScope, NoteService) {
+
+	$scope.showView = function(id) {
+		$location.path("/notes/view/" + id);
+	}
+	
+	function init() {
+		if ($routeParams.noteId) {
+			 NoteService.get($routeParams.noteId, function(data) { 
+				 $scope.note = data; 
+			 });
+		}
+    }
+	
+	$scope.update = function() {
+		var idSufix = $routeParams.noteId;
+		if (!idSufix) idSufix = "";
+		NoteService.update(idSufix, $scope.note);
+
+	}	
+	
+	$scope.deleteNote = function (id) {
+		NoteService.delete(id);
 	}
 	
 	init();
