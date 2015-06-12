@@ -15,6 +15,7 @@ import javax.persistence.criteria.Root;
 
 import org.sm.lab.mybooks3.domain.Book;
 import org.sm.lab.mybooks3.domain.Reader;
+import org.sm.lab.mybooks3.domain.SearchItem;
 import org.sm.lab.mybooks3.enums.Genre;
 import org.springframework.data.domain.Pageable;
 
@@ -149,6 +150,78 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 		
 		return filterQuery.getResultList();
 	}
+	
+	
+	
+	@Override
+	public List<SearchItem> search(String keyword, Genre genre) {
+		List<SearchItem> bookSearchItems = searchBooks(keyword, genre);
+		List<SearchItem> noteSearchItems = searchNotes(keyword, genre);
+		bookSearchItems.addAll(noteSearchItems);
+		return bookSearchItems;
+	}
+		
+	private List<SearchItem> searchBooks(String keyword, Genre genre) {
+		StringBuilder queryBuilder = new StringBuilder();
+		queryBuilder.append(" WHERE (");
+		queryBuilder.append("LOWER(o.title) LIKE :keyword");
+		queryBuilder.append(" OR ");
+		queryBuilder.append("LOWER(o.author) LIKE :keyword");
+		queryBuilder.append(" OR ");
+		queryBuilder.append("LOWER(o.review) LIKE :keyword");
+		queryBuilder.append(")");
+		if (genre != null) {
+			queryBuilder.append(" AND ");
+			queryBuilder.append("o.genre = :genre");
+		}
+
+		TypedQuery<SearchItem> q = entityManager
+				.createQuery(
+						"SELECT NEW org.sm.lab.mybooks3.domain.SearchItem(o) FROM Book AS o" + queryBuilder.toString(),
+						SearchItem.class);
+
+		q.setParameter("keyword", "%"  +keyword + "%");
+		if (genre != null) {
+			q.setParameter("genre", genre);
+		}
+
+		return q.getResultList();
+
+	}
+	
+	private List<SearchItem> searchNotes(String keyword, Genre genre) {
+		StringBuilder queryBuilder = new StringBuilder();
+		queryBuilder.append(" WHERE (");
+		queryBuilder.append("LOWER(o.title) LIKE :keyword");
+		queryBuilder.append(" OR ");
+		queryBuilder.append("LOWER(o.content) LIKE :keyword");
+		queryBuilder.append(")");
+		if (genre != null) {
+			queryBuilder.append(" AND ");
+			queryBuilder.append("o.book.genre = :genre");
+		}
+
+		TypedQuery<SearchItem> q = entityManager
+				.createQuery(
+						"SELECT NEW org.sm.lab.mybooks3.domain.SearchItem(o) FROM Note AS o" + queryBuilder.toString(),
+						SearchItem.class);
+
+		q.setParameter("keyword", "%"  +keyword + "%");
+		if (genre != null) {
+			q.setParameter("genre", genre);
+		}
+
+		return q.getResultList();
+
+	}
+
+	@Override
+	public Long countSearch(String keyword, Genre genre) {
+		List<SearchItem> list = search(keyword, genre);
+		return Long.valueOf(list.size());
+	}
+	
+	
 	
 
 }

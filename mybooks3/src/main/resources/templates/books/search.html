@@ -47,42 +47,48 @@
 			<div class="jumbotron">	
 				<div class="form-group row">
 	                <div class="col-md-7">
-	                    <input type="text" class="form-control" id="inputKey" placeholder="Keyword"/>
+	                    <input type="text" class="form-control" id="keyword" placeholder="Keyword" ng-model="keyword"/>
 	                </div>
 	                <div class="col-md-3">
-                  		<select class="form-control">
-							<option value="">-Genre-</option>		
-							<option value="">Comedy1</option>
-							<option value="">Drama1</option>
-							<option value="">Epic1</option>															
+	                	<select class="form-control" id="genre" name="genre" ng-model="genre" ng-options="genre as genre for genre in genres">
+							<option value="">--Genre--</option>						
 						</select>
 	                </div>
 	                <div class="col-md-2">
-	                	<a href="./search.html" th:href="@{#/books/search}" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></a>
+<!-- 	                	<a href="./search.html" th:href="@{#/books/search}" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></a> -->
+						<a ng-click="search()" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></a>
 	                </div>
             	</div>
 			</div>
 
 			
-			<table class="table table-bordered">    
-	      		<tr>
-	        		<td>
-	        			<p><a th:href="@{#/books/view}" href="./view.html">Link to Book</a></p>
-	        			Part of the text which matches <b>keywords</b>... Tastes giving in passed direct me valley as supply... End great stood boy noisy often way taken short... Rent the size our more door.... 
-	        		</td>
-	      		</tr>
-	      		<tr>
-	        		<td>
-	        			<p><a th:href="@{#/notes/view}" href="../notes/view.html">Link to Note of a Book</a></p>
-	        			Part of the text which matches <b>keywords</b>... Tastes giving in passed direct me valley as supply... End great stood boy noisy often way taken short... Rent the size our more door.... 
-	        		</td>
-	      		</tr>
-	      		<tr>
-	        		<td>
-	        			<p><a th:href="@{#/books/view}" href="./view.html">Link to Book</a></p>
-	        			Part of the text which matches <b>keywords</b>... Tastes giving in passed direct me valley as supply... End great stood boy noisy often way taken short... Rent the size our more door.... 
-	        		</td>
-	      		</tr>
+			<table class="table table-bordered">
+				<tbody th:remove="all-but-first">
+					<tr ng-repeat="searchItem in searchItems">
+		        		<td>
+		        			<p><a th:href="'{{searchItem.link}}'" href="./view.html" th:text="'{{searchItem.title}}'">Link to Book</a></p>
+		        			{{searchItem.shortContent}}
+		        		</td>
+					</tr>
+		      		<tr>
+		        		<td>
+		        			<p><a th:href="@{#/books/view}" href="./view.html">Link to Book</a></p>
+		        			Part of the text which matches <b>keywords</b>... Tastes giving in passed direct me valley as supply... End great stood boy noisy often way taken short... Rent the size our more door.... 
+		        		</td>
+		      		</tr>
+		      		<tr>
+		        		<td>
+		        			<p><a th:href="@{#/notes/view}" href="../notes/view.html">Link to Note of a Book</a></p>
+		        			Part of the text which matches <b>keywords</b>... Tastes giving in passed direct me valley as supply... End great stood boy noisy often way taken short... Rent the size our more door.... 
+		        		</td>
+		      		</tr>
+		      		<tr>
+		        		<td>
+		        			<p><a th:href="@{#/books/view}" href="./view.html">Link to Book</a></p>
+		        			Part of the text which matches <b>keywords</b>... Tastes giving in passed direct me valley as supply... End great stood boy noisy often way taken short... Rent the size our more door.... 
+		        		</td>
+		      		</tr>
+		      	</tbody>
   			</table>			
 		</div>
 

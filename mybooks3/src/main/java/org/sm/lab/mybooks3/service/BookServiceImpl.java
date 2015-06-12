@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.sm.lab.mybooks3.domain.Book;
 import org.sm.lab.mybooks3.domain.Reader;
+import org.sm.lab.mybooks3.domain.SearchItem;
+import org.sm.lab.mybooks3.enums.Genre;
 import org.sm.lab.mybooks3.repository.BookRepository;
 import org.sm.lab.mybooks3.repository.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +82,16 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public Long countSearch(String title, String author, String url, String startReadingDate, String endReadingDate, String rating, String genre) {
 		return bookRepository.countSearch(title, author, url, startReadingDate, endReadingDate, rating, genre);
+	}
+	
+	@Override
+	public List<SearchItem> search(String keyword, Genre genre) {
+		return bookRepository.search(keyword, genre);
+	}
+	
+	@Override
+	public Long countSearch(String keyword, Genre genre) {
+		return bookRepository.countSearch(keyword, genre);
 	}
 	
 }

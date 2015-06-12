@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.sm.lab.mybooks3.domain.Book;
+import org.sm.lab.mybooks3.domain.SearchItem;
+import org.sm.lab.mybooks3.enums.Genre;
 import org.sm.lab.mybooks3.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -47,5 +50,11 @@ public class BookRestController {
 	public ResponseEntity<Boolean> delete(@PathVariable("id") long id) {
 		this.bookService.deleteBook(id);
 		return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/search/{keyword}", method=RequestMethod.GET)
+	public List<SearchItem> get(@PathVariable("keyword") String keyword, @RequestParam(value = "genre", required = false) Genre genre) {
+		List<SearchItem> result = bookService.search(keyword, genre);
+		return result;
 	}
 }
