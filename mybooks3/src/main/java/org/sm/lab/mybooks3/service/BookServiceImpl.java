@@ -2,6 +2,7 @@ package org.sm.lab.mybooks3.service;
 
 import java.util.List;
 
+import org.sm.lab.mybooks3.CurrentUser;
 import org.sm.lab.mybooks3.domain.Book;
 import org.sm.lab.mybooks3.domain.Reader;
 import org.sm.lab.mybooks3.domain.SearchItem;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,10 +30,6 @@ public class BookServiceImpl implements BookService {
 	@Autowired
 	AuthorizationService authorizationService;
 
-	public long countAllBooks() {
-        return bookRepository.count();
-    }
-
 	public void deleteBook(Long id) {
         bookRepository.delete(id);
     }
@@ -40,13 +38,10 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findOne(id);
     }
 
-	public List<Book> findAllBooks() {
-        return bookRepository.findAll();
-    }
-
 	@PreAuthorize("@authorizationService.canAccessUser(principal, #readerId)")
 	public List<Book> findReadersBooks(Long readerId) {
-        return bookRepository.findAll();
+		List<Book> books = bookRepository.findByReaderId(readerId);
+		return books;
     }
 
 	public List<Book> findBookEntries(int firstResult, int maxResults) {
@@ -54,9 +49,12 @@ public class BookServiceImpl implements BookService {
     }
 
 	public Book saveBook(Book book) {
-//        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        Reader reader = readerRepository.findOne(userDetails.getId());
-//        book.setReader(reader);
+		if (book.getReader() == null) {
+			CurrentUser currentUser = (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	        Reader reader = readerRepository.findOne(currentUser.getId());
+	        book.setReader(reader);
+		}
+		
         return bookRepository.save(book);
     }
 

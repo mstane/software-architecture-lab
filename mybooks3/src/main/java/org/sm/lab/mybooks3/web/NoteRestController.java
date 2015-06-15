@@ -46,7 +46,9 @@ public class NoteRestController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public Note update(@PathVariable("id") long id, @RequestBody @Valid Note note) {
+	public Note update(@PathVariable("id") long id, @RequestBody @Valid Note note, @RequestParam(value = "bookId") long bookId) {
+		Book book = bookService.findBook(bookId);
+		note.setBook(book);
 		return noteService.saveNote(note);
 	}
 	

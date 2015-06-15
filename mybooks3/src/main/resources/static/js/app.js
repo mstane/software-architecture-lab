@@ -207,6 +207,23 @@ app.controller("ReaderController", function ($scope, $http, BookFactory, $locati
 		}
 	}
 	
+    $scope.deleteReader = function () {
+    	var bookFactory = new BookFactory($scope.book);
+        return bookFactory.$delete({}, function () {
+            alert("Successfully deleted.");
+        });
+    };
+    
+    $scope.deleteReader = function(id) {
+		$http.delete('/rest/readers/' + id).success(function(data, status, headers, config) {
+			$rootScope.messageSuccess = "You have successfully deleted the reader.";
+			$location.path("/readers/list/");
+		}).error(function(data, status, headers, config) {
+			$rootScope.messageError = data.message;
+		});
+    };
+
+	
 	
     init();
     
@@ -237,6 +254,7 @@ app.controller("BookController", function ($scope, BookFactory, $location, $http
 	
 	function init() {
         $scope.getBooks();
+        var i = 0;
     }
 	
 	$scope.showView = function(id) {

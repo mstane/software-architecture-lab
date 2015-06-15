@@ -21,7 +21,7 @@ public class ReaderServiceImpl implements ReaderService {
 	
     @Autowired
     PasswordEncoder passwordEncoder;
-
+    
 	public long countAllReaders() {
         return readerRepository.count();
     }

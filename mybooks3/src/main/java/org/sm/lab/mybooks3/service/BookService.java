@@ -8,14 +8,10 @@ import org.sm.lab.mybooks3.enums.Genre;
 
 public interface BookService {
 
-	public abstract long countAllBooks();
-
 	public abstract void deleteBook(Long id);
 
 	public abstract Book findBook(Long id);
 
-	public abstract List<Book> findAllBooks();
-	
 	public List<Book> findReadersBooks(Long readerId);
 
 	public abstract List<Book> findBookEntries(int firstResult, int maxResults);
