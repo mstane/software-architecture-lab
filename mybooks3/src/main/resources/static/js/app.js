@@ -46,10 +46,11 @@ app.config(function($routeProvider, $httpProvider) {
 				controller: 'NoteController'					
 			}).when('/notes/edit/:noteId?', {
 				templateUrl : URLS.notesEdit,
-				controller: 'NoteController'					
+				controller: 'NoteController'
 			}).otherwise('/home');
 
 			$httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+						
 		});
 
 
@@ -57,9 +58,6 @@ app.config(function($routeProvider, $httpProvider) {
 
 
 app.controller('navigation', function($rootScope, $scope, $http, $location, $route) {
-	
-	$rootScope.messageSuccess = null;
-	$rootScope.messageError = null;
 
 	$scope.tab = function(route) {
 		return $route.current && route === $route.current.controller;
@@ -95,12 +93,12 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 	$scope.login = function() {
 		authenticate($scope.credentials, function(authenticated, message) {
 			if (authenticated) {
-				console.log("Login succeeded")
+				console.log("Login succeeded");
 				$location.path("/");
 				$rootScope.messageError = null;
 				$rootScope.authenticated = true;
 			} else {
-				console.log("Login failed")
+				console.log("Login failed");
 				$location.path("/login");
 				if (message) {
 					$rootScope.messageError = message;
@@ -142,6 +140,12 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 			console.log("Register failed");
 		});
 	}
+	
+	$rootScope.$on("$routeChangeStart", function (event, next, current) {
+		$rootScope.messageSuccess = null;
+		$rootScope.messageError = null;
+	});
+
 
 });
 
@@ -420,18 +424,22 @@ app.service("NoteService", function($http, $rootScope){
     };
     
     this.delete = function(id) {
-		$http.delete('/rest/notes/' + id).success(function(data, status, headers, config) {
-			$rootScope.messageSuccess = "You have successfully deleted the note.";
-			$location.path("/notes/view/" + $routeParams.noteId);
-		}).error(function(data, status, headers, config) {
-			$rootScope.messageError = data.message;
-		});
+		return $http.delete('/rest/notes/' + id)
+		.then(function (status) {
+            return status.data;
+        });
+//		.success(function(data, status, headers, config) {
+//			$rootScope.messageSuccess = "You have successfully deleted the note.";
+//			$location.path("/notes/view/" + $routeParams.noteId);
+//		}).error(function(data, status, headers, config) {
+//			$rootScope.messageError = data.message;
+//		});
     };
  
 });
 
 
-app.controller("NoteController", function ($scope, $http, $location, $routeParams, $rootScope, NoteService) {
+app.controller("NoteController", function ($scope, $http, $location, $routeParams, $rootScope, NoteService, ModalService) {
 
 	$scope.showView = function(id) {
 		$location.path("/notes/view/" + id);
@@ -452,15 +460,93 @@ app.controller("NoteController", function ($scope, $http, $location, $routeParam
 
 	}	
 	
-	$scope.deleteNote = function (id) {
-		NoteService.delete(id);
+	$scope.deleteNote = function () {
+		NoteService.delete($scope.note.id);
 	}
 	
 	init();
 	
+	 
+    $scope.deleteWithModal = function () {
+
+        var custName = $scope.note.title + ' ' + $scope.note.content;
+
+        var modalOptions = {
+            closeButtonText: 'Cancel',
+            actionButtonText: 'Delete Note',
+            headerText: 'Delete ' + custName + '?',
+            bodyText: 'Are you sure you want to delete this customer?'
+        };
+
+        ModalService.showModal({}, modalOptions).then(function (result) {
+        	NoteService.delete($scope.note.id).then(function () {
+                $location.path(URLS.booksList);
+            }, processError);
+        });
+    }
+    
+    function processError(error) {
+    	console.log(error.message);
+    }
+	
+	
+	
 });
 
 
+app.service('ModalService', ['$modal',
+
+    function ($modal) {
+        var modalDefaults = {
+        		backdrop: true,
+        		keyboard: true,
+        		modalFade: true,
+        		templateUrl: 'modal'
+        };
+
+        var modalOptions = {
+        		closeButtonText: 'Close',
+        		actionButtonText: 'OK',
+        		headerText: 'Proceed?',
+        		bodyText: 'Perform this action?'
+        };
+
+      this.showModal = function (customModalDefaults, customModalOptions) {
+          if (!customModalDefaults) customModalDefaults = {};
+          customModalDefaults.backdrop = 'static';
+          return this.show(customModalDefaults, customModalOptions);
+      };
+
+      this.show = function (customModalDefaults, customModalOptions) {
+          //Create temp objects to work with since we're in a singleton service
+          var tempModalDefaults = {};
+          var tempModalOptions = {};
+
+          //Map angular-ui modal custom defaults to modal defaults defined in service
+          angular.extend(tempModalDefaults, modalDefaults, customModalDefaults);
+
+          //Map modal.html $scope custom properties to defaults defined in service
+          angular.extend(tempModalOptions, modalOptions, customModalOptions);
+
+          if (!tempModalDefaults.controller) {
+              tempModalDefaults.controller = function ($scope, $modalInstance) {
+                  $scope.modalOptions = tempModalOptions;
+                  $scope.modalOptions.ok = function (result) {
+                      $modalInstance.close(result);
+                  };
+                  $scope.modalOptions.close = function (result) {
+                      $modalInstance.dismiss('cancel');
+                  };
+              }
+          }
+
+          return $modal.open(tempModalDefaults).result;
+      };
+
+  }]);
+          
+          
+          
 
 //app Directive for confirm dialog box
 app.directive('ngConfirmClick', [

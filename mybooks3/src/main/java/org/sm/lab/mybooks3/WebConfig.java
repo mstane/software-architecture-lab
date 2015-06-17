@@ -14,6 +14,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/login").setViewName("login::content");
 		registry.addViewController("/register").setViewName("register::content");
 		registry.addViewController("/forgotten_password").setViewName("forgotten_password::content");
+		registry.addViewController("/partialmodal").setViewName("partialmodal::content");
+		registry.addViewController("/myModalContent").setViewName("myModalContent::content");
+		registry.addViewController("/modal").setViewName("modal::content");
 		
 		registry.addViewController("/books/list").setViewName("books/list::content");
 		registry.addViewController("/books/search").setViewName("books/search::content");
