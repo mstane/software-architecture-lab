@@ -141,11 +141,6 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 		});
 	}
 	
-	$rootScope.$on("$routeChangeStart", function (event, next, current) {
-		$rootScope.messageSuccess = null;
-		$rootScope.messageError = null;
-	});
-
 
 });
 
@@ -386,7 +381,7 @@ app.controller("BookEditController", function ($scope, BookFactory, NoteService,
     init();
 });
 
-app.service("NoteService", function($http, $rootScope){
+app.service("NoteService", function($http, $rootScope, $location){
 	
 	var currentBook;
 	
@@ -439,7 +434,7 @@ app.service("NoteService", function($http, $rootScope){
 });
 
 
-app.controller("NoteController", function ($scope, $http, $location, $routeParams, $rootScope, NoteService, ModalService) {
+app.controller("NoteController", function ($scope, $http, $location, $routeParams, $rootScope, NoteService, NotificationService) {
 
 	$scope.showView = function(id) {
 		$location.path("/notes/view/" + id);
@@ -459,15 +454,8 @@ app.controller("NoteController", function ($scope, $http, $location, $routeParam
 		NoteService.update(idSufix, $scope.note);
 
 	}	
-	
-	$scope.deleteNote = function () {
-		NoteService.delete($scope.note.id);
-	}
-	
-	init();
-	
 	 
-    $scope.deleteWithModal = function () {
+    $scope.deleteNote = function () {
 
         var custName = $scope.note.title + ' ' + $scope.note.content;
 
@@ -478,9 +466,10 @@ app.controller("NoteController", function ($scope, $http, $location, $routeParam
             bodyText: 'Are you sure you want to delete this customer?'
         };
 
-        ModalService.showModal({}, modalOptions).then(function (result) {
+        NotificationService.showModal({}, modalOptions).then(function (result) {
         	NoteService.delete($scope.note.id).then(function () {
                 $location.path(URLS.booksList);
+                NotificationService.statusBarSuccessNextPage("You have successfully deleted the note.");
             }, processError);
         });
     }
@@ -489,14 +478,15 @@ app.controller("NoteController", function ($scope, $http, $location, $routeParam
     	console.log(error.message);
     }
 	
-	
+    init();
+    
 	
 });
 
 
-app.service('ModalService', ['$modal',
+app.service('NotificationService', ['$modal', '$rootScope',
 
-    function ($modal) {
+    function ($modal, $rootScope) {
         var modalDefaults = {
         		backdrop: true,
         		keyboard: true,
@@ -542,7 +532,38 @@ app.service('ModalService', ['$modal',
 
           return $modal.open(tempModalDefaults).result;
       };
+      
+	  	$rootScope.$on("$routeChangeStart", function (event, next, current) {
+			if ($rootScope.messageSuccessOnNextPage) {
+				$rootScope.messageSuccessOnNextPage = null;
+			} else {
+				$rootScope.messageSuccess = null;
+			}
+			if ($rootScope.messageErrorOnNextPage) {
+				$rootScope.messageErrorOnNextPage = null;
+			} else {
+				$rootScope.messageError = null;
+			}
+		});
 
+	  	this.statusBarSuccess = function (message) {
+	  		$rootScope.messageSuccess = message;
+	  	}
+	  	
+	  	this.statusBarSuccessNextPage = function (message) {
+	  		$rootScope.messageSuccessOnNextPage = true;
+            $rootScope.messageSuccess = message;
+	  	}
+	  	
+	  	this.statusBarError = function (message) {
+	  		$rootScope.messageError = message;
+	  	}
+	  	
+	  	this.statusBarErrorNextPage = function (message) {
+	  		$rootScope.messageErrorOnNextPage = true;
+            $rootScope.messageError = message;
+	  	}
+	  	
   }]);
           
           
