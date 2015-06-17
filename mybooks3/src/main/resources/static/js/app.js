@@ -57,7 +57,7 @@ app.config(function($routeProvider, $httpProvider) {
 
 
 
-app.controller('navigation', function($rootScope, $scope, $http, $location, $route) {
+app.controller('navigation', function($rootScope, $scope, $http, $location, $route, NotificationService) {
 
 	$scope.tab = function(route) {
 		return $route.current && route === $route.current.controller;
@@ -95,15 +95,14 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 			if (authenticated) {
 				console.log("Login succeeded");
 				$location.path("/");
-				$rootScope.messageError = null;
 				$rootScope.authenticated = true;
 			} else {
 				console.log("Login failed");
 				$location.path("/login");
 				if (message) {
-					$rootScope.messageError = message;
+					NotificationService.statusBarError(message);
 				} else {
-					$rootScope.messageError = "There was a problem logging in. Please try again.";
+					NotificationService.statusBarError("There was a problem logging in. Please try again.");
 				}
 				$rootScope.authenticated = false;
 			}
@@ -122,22 +121,19 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 	
 	$scope.forgottenPasswordSend = function() {
 		$http.get('/forgotten_password_send', { params : { emailOrUsername : $scope.emailOrUsername } }).success(function(data, status, headers, config) {
-			$rootScope.messageSuccess = data.message;
+			NotificationService.statusBarSuccess(data.message);
 			console.log("Forgotten password succeeded");
 		}).error(function(data, status, headers, config) {
-			$rootScope.messageError = data.message;
+			NotificationService.statusBarError(data.message);
 			console.log("Forgotten password failed");
 		});
 	}
 	
 	$scope.register = function() {
 		$http.post('/register_reader', $scope.reader).success(function(data, status, headers, config) {
-			$rootScope.messageSuccess = data.message;
-			console.log("Register succeeded");
-			$location.path("/");
+			NotificationService.statusBarSuccessNextPage("You have successfully registered.");
 		}).error(function(data, status, headers, config) {
-			$rootScope.messageError = data.message;
-			console.log("Register failed");
+			NotificationService.statusBarError(data.message);
 		});
 	}
 	
@@ -463,13 +459,13 @@ app.controller("NoteController", function ($scope, $http, $location, $routeParam
             closeButtonText: 'Cancel',
             actionButtonText: 'Delete Note',
             headerText: 'Delete ' + custName + '?',
-            bodyText: 'Are you sure you want to delete this customer?'
+            bodyText: 'Are you sure you want to delete this note?'
         };
 
         NotificationService.showModal({}, modalOptions).then(function (result) {
         	NoteService.delete($scope.note.id).then(function () {
                 $location.path(URLS.booksList);
-                NotificationService.statusBarSuccessNextPage("You have successfully deleted the note.");
+                NotificationService.dialogBoxInfo("You have successfully deleted the note.");
             }, processError);
         });
     }
@@ -496,8 +492,8 @@ app.service('NotificationService', ['$modal', '$rootScope',
 
         var modalOptions = {
         		closeButtonText: 'Close',
-        		actionButtonText: 'OK',
-        		headerText: 'Proceed?',
+//        		actionButtonText: 'OK',
+        		headerText: 'MyBooks3',
         		bodyText: 'Perform this action?'
         };
 
@@ -533,6 +529,16 @@ app.service('NotificationService', ['$modal', '$rootScope',
           return $modal.open(tempModalDefaults).result;
       };
       
+      
+      this.dialogBoxInfo = function (message) {
+          var customModalOptions = {
+          		closeButtonText: 'Close',
+          		bodyText: message
+          };
+    	  
+          return this.showModal({}, customModalOptions);
+      };
+                  
 	  	$rootScope.$on("$routeChangeStart", function (event, next, current) {
 			if ($rootScope.messageSuccessOnNextPage) {
 				$rootScope.messageSuccessOnNextPage = null;
