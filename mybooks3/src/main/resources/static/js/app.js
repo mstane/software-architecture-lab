@@ -243,7 +243,7 @@ app.factory("BookFactory", function ($resource) {
 });
 
 
-app.controller("BookController", function ($scope, BookFactory, $location, $http, $rootScope) {
+app.controller("BookController", function ($scope, BookFactory, $location, $http, $rootScope, NotificationService) {
 	
 	$scope.genres = ["Comedy", "Drama", "Epic", "Erotic", "Lyric", "Mythopoeia", "Nonsense", "Other", "Romance", "Satire", "Tragedy", "Tragicomedy"];
 	
@@ -264,7 +264,7 @@ app.controller("BookController", function ($scope, BookFactory, $location, $http
         var book = new BookFactory($scope.book);
         book.$save({}, function() {
             $location.path("/books/list");
-            alert("Successfully created.");
+            NotificationService.dialogBoxInfo("Successfully created the book.");
         });
     };
     
@@ -316,7 +316,7 @@ app.controller("BookController", function ($scope, BookFactory, $location, $http
     init();
 });
 
-app.controller("BookEditController", function ($scope, BookFactory, NoteService, $location, $routeParams) {
+app.controller("BookEditController", function ($scope, BookFactory, NoteService, NotificationService, $location, $routeParams) {
 	
 	$scope.genres=["Comedy", "Drama", "Epic", "Erotic", "Lyric", "Mythopoeia", "Nonsense", "Other", "Romance", "Satire", "Tragedy", "Tragicomedy"];
 	
@@ -329,16 +329,31 @@ app.controller("BookEditController", function ($scope, BookFactory, NoteService,
     $scope.updateBook = function() {
        var book = new BookFactory($scope.book);
        book.$update().then(function() {
-    	   $location.path("/books/list");
-    	   alert("Successfully updated.");
+    	   $location.path("/books/view/" + $scope.book.id);
+    	   NotificationService.statusBarSuccessNextPage("Successfully updated the book.");
        }) ;
     }
     
     $scope.deleteBook = function () {
-    	var bookFactory = new BookFactory($scope.book);
-        return bookFactory.$delete({}, function () {
-            alert("Successfully deleted.");
+        var custName = $scope.book.title;
+
+        var modalOptions = {
+            closeButtonText: 'Cancel',
+            actionButtonText: 'Delete Book',
+            headerText: 'Delete ' + custName + '?',
+            bodyText: 'Are you sure you want to delete this book?'
+        };
+
+        NotificationService.showModal({}, modalOptions).then(function (result) {
+        	var bookFactory = new BookFactory($scope.book);
+        	return bookFactory.$delete({}, function () {
+        		$location.path(URLS.booksList);
+                NotificationService.dialogBoxInfo("You have successfully deleted the book.");
+            });
         });
+    	
+    	
+        
     };
     
 	$scope.showNoteView = function(id) {
@@ -383,6 +398,10 @@ app.service("NoteService", function($http, $rootScope, $location){
 	
 	this.setCurrentBook = function(book) {
 		currentBook = book;
+	};
+	
+	this.getCurrentBook = function() {
+		return currentBook;
 	};
 	
 	this.get = function(id, callback) { 
@@ -434,6 +453,10 @@ app.controller("NoteController", function ($scope, $http, $location, $routeParam
 
 	$scope.showView = function(id) {
 		$location.path("/notes/view/" + id);
+	}
+	
+	$scope.getCurrentBook = function() {
+		return NoteService.getCurrentBook();
 	}
 	
 	function init() {

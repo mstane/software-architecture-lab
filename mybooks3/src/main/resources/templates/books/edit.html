@@ -42,7 +42,9 @@
 				
 			<ol class="breadcrumb">
 				<li><a href="../home.html" th:href="@{#/home}">Home</a></li>
-				<li class="active">Books</li>
+				<li><a href="./list.html" th:href="@{#/books/list}">Books</a></li>
+				<li><a href="./view.html" th:href="@{#/books/view/{{book.id}}}">Book View</a></li>			
+				<li class="active">Book Edit</li>
 			</ol>
 				
             <form name='bookForm' role="form" novalidate="" ng-submit="updateBook()">
