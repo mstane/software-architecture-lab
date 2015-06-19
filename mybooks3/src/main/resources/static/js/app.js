@@ -14,6 +14,12 @@ app.config(function($routeProvider, $httpProvider) {
 			}).when('/forgotten_password', {
 				templateUrl : URLS.forgotten_password,
 				controller : 'navigation'
+			}).when('/profiles/view/:profileId?', {
+				templateUrl : URLS.profilesView,
+				controller: 'ProfileController'
+			}).when('/profiles/edit/:profileId?', {
+				templateUrl : URLS.profilesEdit,
+				controller: 'ProfileController'										
 			}).when('/books/list', {
 				templateUrl : URLS.booksList,
 				controller : 'BookController'
@@ -140,6 +146,36 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 	
 
 });
+
+
+app.controller("ProfileController", function ($scope, $http, BookFactory, $location, $routeParams, $rootScope, NotificationService) {
+	
+	$scope.showView = function(id) {
+		$location.path("/profiles/view/" + id);
+	}
+	
+	function init() {
+		$http.get('/rest/profiles/' + $routeParams.profileId, { }).success(function(data, status, headers, config) {
+			$scope.profile = data;
+		}).error(function(data, status, headers, config) {
+			NotificationService.statusBarError(data.message);
+		});
+    }
+	
+	$scope.update = function() {
+		$http.put('/rest/profiles/', $scope.profile).success(function(data, status, headers, config) {
+			$rootScope.messageSuccess = "You have successfully updated your profile.";
+			$location.path("/profiles/view/" + $routeParams.profileId);
+		}).error(function(data, status, headers, config) {
+			NotificationService.statusBarError(data.message);
+		});
+	}	
+	
+    init();
+    
+});
+
+
 
 app.controller("ReaderController", function ($scope, $http, BookFactory, $location, $routeParams, $rootScope) {
 	var pageSize = 5;
