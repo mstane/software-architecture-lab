@@ -33,6 +33,7 @@ public class Note implements Serializable {
     private String title;
 
     @Lob
+    @Column(length = 65535)
     private String content;
 
     @Temporal(TemporalType.TIMESTAMP)

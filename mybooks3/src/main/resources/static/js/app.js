@@ -463,13 +463,13 @@ app.controller("NoteController", function ($scope, $http, $location, $routeParam
 	$scope.update = function() {
 		var idSufix = $routeParams.noteId;
 		if (!idSufix) idSufix = "";
-		NoteService.update(idSufix, $scope.note).then(function () {
+		NoteService.update(idSufix, $scope.note).then(function (result) {
 			if (idSufix) {
 				NotificationService.statusBarSuccessNextPage("You have successfully updated the note.");
 				$location.path("/notes/view/" + $routeParams.noteId);
 			} else {
 				NotificationService.statusBarSuccessNextPage("You have successfully created the note.");
-				$location.path("/notes/view/" + data.id);
+				$location.path("/notes/view/" + result.id);
 			}
         }, processError);
 

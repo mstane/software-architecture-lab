@@ -58,6 +58,7 @@ public class Book implements Serializable {
     private Genre genre;
     
     @Lob
+    @Column(length = 65535)
     private String review;
 
     @ManyToOne
