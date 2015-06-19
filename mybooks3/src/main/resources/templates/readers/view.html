@@ -42,11 +42,11 @@
 	
 			<ol class="breadcrumb">
 				<li><a href="../home.html" th:href="@{#/home}">Home</a></li>
-				<li class="active">My Profile</li>
+				<li class="active">Reader</li>
 			</ol>
 			
 			<div class="row container-form-style">	
-				<h2 class="sub-header pull-left">My Profile</h2> 
+				<h2 class="sub-header pull-left">Reader</h2> 
 				<div class="btn-toolbar pull-right">
 					<a th:href="@{#/readers/edit/{{reader.id}} }" href="./edit.html" class="btn btn-primary">Edit</a>
 					<a confirmed-click="deleteReader(reader.id)" ng-confirm-click="Are you sure?" class="btn btn-default">Delete</a>
