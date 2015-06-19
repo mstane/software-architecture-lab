@@ -53,43 +53,34 @@
 				</div>
 			</div>
 			
-			<hr/>
-		
 			<div class="table-responsive">
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>Title</th>
-							<th>Author</th>
-							<th>Genre</th>
-<!-- 							<th>Action</th> -->
+							<th class="col-md-6">Title</th>
+							<th class="col-md-6">Author</th>
 						</tr>
 					</thead>
 					<tbody th:remove="all-but-first">
 						<tr ng-repeat="book in books" ng-click="showView(book.id)">
 							<td th:text="'{{book.title}}'">title0</td>
 							<td th:text="'{{book.author}}'">author0</td>
-							<td th:text="'{{book.genre}}'">genre0</td>
 						</tr>
 						<tr onclick="document.location = './view.html';">
 							<td>title1</td>
 							<td>author1</td>
-							<td>genre1</td>
 						</tr>
 						<tr onclick="document.location = './view.html';">
 							<td>title2</td>
 							<td>author2</td>
-							<td>genre2</td>
 						</tr>
 						<tr onclick="document.location = './view.html';">
 							<td>title3</td>
 							<td>author3</td>
-							<td>genre3</td>
 						</tr>
 						<tr onclick="document.location = './view.html';">
 							<td>title4</td>
 							<td>author4</td>
-							<td>genre4</td>
 						</tr>						
 					</tbody>
 				</table>

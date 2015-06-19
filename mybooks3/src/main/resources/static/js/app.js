@@ -131,7 +131,8 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 	
 	$scope.register = function() {
 		$http.post('/register_reader', $scope.reader).success(function(data, status, headers, config) {
-			NotificationService.statusBarSuccessNextPage("You have successfully registered.");
+			$location.path("/");
+			NotificationService.dialogBoxInfo("You have successfully registered.");
 		}).error(function(data, status, headers, config) {
 			NotificationService.statusBarError(data.message);
 		});
@@ -420,17 +421,9 @@ app.service("NoteService", function($http, $rootScope, $location){
     			data: note
     		}
     	
-		$http(request).success(function(data, status, headers, config) {
-			if (idSufix) {
-				$rootScope.messageSuccess = "You have successfully updated the profile.";
-				$location.path("/notes/view/" + $routeParams.noteId);
-			} else {
-				$rootScope.messageSuccess = "You have successfully created the profile.";
-				$location.path("/notes/view/" + data.id);
-			}
-		}).error(function(data, status, headers, config) {
-			$rootScope.messageError = data.message;
-		});
+		return $http(request).then(function (status) {
+            return status.data;
+        });
     };
     
     this.delete = function(id) {
@@ -470,7 +463,15 @@ app.controller("NoteController", function ($scope, $http, $location, $routeParam
 	$scope.update = function() {
 		var idSufix = $routeParams.noteId;
 		if (!idSufix) idSufix = "";
-		NoteService.update(idSufix, $scope.note);
+		NoteService.update(idSufix, $scope.note).then(function () {
+			if (idSufix) {
+				NotificationService.statusBarSuccessNextPage("You have successfully updated the note.");
+				$location.path("/notes/view/" + $routeParams.noteId);
+			} else {
+				NotificationService.statusBarSuccessNextPage("You have successfully created the note.");
+				$location.path("/notes/view/" + data.id);
+			}
+        }, processError);
 
 	}	
 	 
@@ -487,7 +488,7 @@ app.controller("NoteController", function ($scope, $http, $location, $routeParam
 
         NotificationService.showModal({}, modalOptions).then(function (result) {
         	NoteService.delete($scope.note.id).then(function () {
-                $location.path(URLS.booksList);
+        		$location.path("/books/view/" + NoteService.getCurrentBook().id);
                 NotificationService.dialogBoxInfo("You have successfully deleted the note.");
             }, processError);
         });
