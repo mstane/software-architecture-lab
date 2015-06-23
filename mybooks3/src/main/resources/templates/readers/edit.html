@@ -43,7 +43,9 @@
 	
 			<ol class="breadcrumb">
 				<li><a href="../home.html" th:href="@{#/home}">Home</a></li>
-				<li class="active">My Profile</li>
+				<li><a href="./list.html" th:href="@{#/readers/list}">Readers</a></li>
+				<li><a href="./view.html" th:href="@{#/readers/view/{{reader.id}}}">Reader View</a></li>			
+				<li class="active">Reader Edit</li>
 			</ol>
 			
 			<form name='readerForm' role="form" novalidate="" ng-submit="update()">
@@ -74,18 +76,12 @@
 					<span class='help-block' ng-show='readerForm.email.$error.required'>Email is required</span>
 					<span class='help-block' ng-show="readerForm.email.$error.email">Invalid email address.</span>
 				</div>
-				<div class="form-group">
-					<label for="password">Password</label> 
-					<input type="password" class="form-control" id="password" name="password" ng-model="reader.password" required="" ng-minlength="3" />
-					<span class='help-block' ng-show='readerForm.password.$error.required'>Password is required</span>
-					<span class='help-block' ng-show='readerForm.password.$error.minlength'>Too short</span>
-				</div>
-				<div class="form-group">
-					<label for="confirmPassword">Confirm Password</label> 
-					<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" ng-model="reader.confirmPassword" required="" compare-to="reader.password"/>
-					<span class='help-block' ng-show='readerForm.confirmPassword.$error.required'>Confirm Password is required</span>
-					<span class='help-block' ng-show='readerForm.confirmPassword.$error.compareTo'>Must match the previous entry</span>					
-				</div>
+                <div class="form-group">
+                    <label for="systemRole">System Role</label>
+                   	<select class="form-control" id="systemRole" name="systemRole" ng-model="reader.systemRole" ng-options="systemRole as systemRole for systemRole in systemRoles">
+						<option value="">-- Select --</option>						
+					</select>
+                </div>				
 
 			</form>
 			

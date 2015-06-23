@@ -42,6 +42,7 @@
 	
 			<ol class="breadcrumb">
 				<li><a href="../home.html" th:href="@{#/home}">Home</a></li>
+				<li><a href="./list.html" th:href="@{#/readers/list}">Readers</a></li>
 				<li class="active">Reader</li>
 			</ol>
 			
@@ -65,13 +66,17 @@
                    <td th:text="'{{reader.lastName}}'">Last Name 1</td>
                  </tr>
                  <tr>
-                   <td>Username</td>
+                   <td>Username:</td>
                    <td th:text="'{{reader.username}}'">Username1</td>
                  </tr>
                  <tr>
-                   <td>Email</td>
+                   <td>Email:</td>
                    <td><a th:text="'{{reader.email}}'" th:href="'mailto:{{reader.email}}'" href="mailto:info@mybooks3.com">info@mybooks3.com</a></td>
                  </tr>                  
+                 <tr>
+                   <td>System Role:</td>
+                   <td th:text="'{{reader.systemRole}}'">Common</td>
+                 </tr>
                </tbody>
              </table>
              

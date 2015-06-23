@@ -177,7 +177,9 @@ app.controller("ProfileController", function ($scope, $http, BookFactory, $locat
 
 
 
-app.controller("ReaderController", function ($scope, $http, BookFactory, $location, $routeParams, $rootScope) {
+app.controller("ReaderController", function ($scope, $http, BookFactory, NotificationService, $location, $routeParams, $rootScope) {
+	$scope.systemRoles = ["Admin", "Common"];
+	
 	var pageSize = 5;
 	
 	$scope.showView = function(id) {
@@ -218,11 +220,11 @@ app.controller("ReaderController", function ($scope, $http, BookFactory, $locati
 		if (!idSufix) idSufix = "";
 		$http.put('/rest/readers/' + idSufix, $scope.reader).success(function(data, status, headers, config) {
 			if (idSufix) {
-				$rootScope.messageSuccess = "You have successfully updated the profile.";
 				$location.path("/readers/view/" + $routeParams.readerId);
+		    	NotificationService.statusBarSuccessNextPage("You have successfully updated the reader.");
 			} else {
-				$rootScope.messageSuccess = "You have successfully created the profile.";
 				$location.path("/readers/view/" + data.id);
+				NotificationService.statusBarSuccessNextPage("You have successfully created the reader.");
 			}
 		}).error(function(data, status, headers, config) {
 			$rootScope.messageError = data.message;
