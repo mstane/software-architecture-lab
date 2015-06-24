@@ -19,9 +19,6 @@ public class ReaderServiceImpl implements ReaderService {
 	@Autowired
     ReaderRepository readerRepository;
 	
-    @Autowired
-    PasswordEncoder passwordEncoder;
-    
 	public long countAllReaders() {
         return readerRepository.count();
     }
@@ -55,21 +52,12 @@ public class ReaderServiceImpl implements ReaderService {
 	}
 
 	public Reader saveReader(Reader reader) {
-		encodePassword(reader);
         return readerRepository.save(reader);
     }
 
 	public Reader updateReader(Reader reader) {
-		encodePassword(reader);
 		return readerRepository.save(reader);
     }
 	
-	private void encodePassword(Reader reader) {
-		String password = reader.getPassword();
-		if (password != null) {
-			password  = passwordEncoder.encode(password);
-			reader.setPassword(password);
-		}
-		
-	}
+
 }

@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 
 import javax.validation.Valid;
@@ -16,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,6 +35,9 @@ public class AppRestController {
     
     @Autowired
     private ReaderService readerService;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     
 	
 	@RequestMapping("/user")
@@ -54,6 +59,7 @@ public class AppRestController {
 		String message = null;
 		try {
     		reader.setSystemRole(SystemRole.Common);
+    		reader.setPassword(encodePassword(reader.getPassword()));
     		readerService.saveReader(reader);
        		httpStatus = HttpStatus.OK;
        		message = "You have successfully registered.";
@@ -71,16 +77,20 @@ public class AppRestController {
 		HttpStatus httpStatus;
 		String message;
 		
-		Optional<Reader> reader = readerService.findByEmail(emailOrUsername);
-        if (!reader.isPresent()) {
-        	reader = readerService.findByUsername(emailOrUsername);
+		Optional<Reader> readerOpt = readerService.findByEmail(emailOrUsername);
+        if (!readerOpt.isPresent()) {
+        	readerOpt = readerService.findByUsername(emailOrUsername);
         }
-        if (!reader.isPresent()) {
+        if (!readerOpt.isPresent()) {
         	httpStatus = HttpStatus.NOT_FOUND;
         	message = String.format("User with emailOrUsername=%s was not found", emailOrUsername);
         } else {
         	try {
-        		sendMessage(reader.get().getEmail(), "Forgotten password", "Your password is: " + reader.get().getPassword());        		
+        		Reader reader = readerOpt.get();
+        		String generatedPassword = generatePassword(); 
+        		reader.setPassword(encodePassword(generatedPassword));
+        		readerService.saveReader(reader);
+        		sendMessage(reader.getEmail(), "Forgotten password", "Your password is: " + generatedPassword);        		
         		httpStatus = HttpStatus.OK;
         		message = "Your password has been successfully sent to your mail.";
 			} catch (MailException e) {
@@ -91,6 +101,19 @@ public class AppRestController {
         
         return getMessageResponse(httpStatus, message);
 
+	}
+	
+	private String generatePassword() {
+		Random r = new Random();
+		return String.valueOf(r.nextInt());
+	}
+	
+	private String encodePassword(String password) {
+		if (password != null) {
+			password  = passwordEncoder.encode(password);
+			return password;
+		}
+		return null;
 	}
 	
 	private ResponseEntity<String> getMessageResponse(HttpStatus httpStatus, String message) {
@@ -114,6 +137,6 @@ public class AppRestController {
         mailMessage.setText(message);
         mailTemplate.send(mailMessage);
     }
-	
+    
 	
 }

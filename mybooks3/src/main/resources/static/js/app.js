@@ -80,14 +80,13 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 			headers : headers
 		}).success(function(data) {
 			if (data.name) {
-				$rootScope.authenticated = true;
 				$rootScope.currentReader = data.principal;
 			} else {
-				$rootScope.authenticated = false;
+				$rootScope.currentReader = null;
 			}
-			callback && callback($rootScope.authenticated, data);
+			callback && callback($rootScope.currentReader, data);
 		}).error(function(data) {
-			$rootScope.authenticated = false;
+			$rootScope.currentReader = null;
 			callback && callback(false, data);
 		});
 
@@ -97,11 +96,10 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 
 	$scope.credentials = {};
 	$scope.login = function() {
-		authenticate($scope.credentials, function(authenticated, message) {
-			if (authenticated) {
+		authenticate($scope.credentials, function(currentReader, message) {
+			if (currentReader) {
 				console.log("Login succeeded");
 				$location.path("/");
-				$rootScope.authenticated = true;
 			} else {
 				console.log("Login failed");
 				$location.path("/login");
@@ -110,18 +108,18 @@ app.controller('navigation', function($rootScope, $scope, $http, $location, $rou
 				} else {
 					NotificationService.statusBarError("There was a problem logging in. Please try again.");
 				}
-				$rootScope.authenticated = false;
+				$rootScope.currentReader = null;
 			}
 		})
 	};
 
 	$scope.logout = function() {
 		$http.post('logout', {}).success(function() {
-			$rootScope.authenticated = false;
+			$rootScope.currentReader = null;
 			$location.path("/");
 		}).error(function(data) {
 			console.log("Logout failed");
-			$rootScope.authenticated = false;
+			$rootScope.currentReader = null;
 		});
 	}
 	
@@ -241,14 +239,14 @@ app.controller("ReaderController", function ($scope, $http, BookFactory, Notific
 		}
 	}
 	
-    $scope.deleteReader = function () {
+    $scope.deleteReaderOld = function () {
     	var bookFactory = new BookFactory($scope.book);
         return bookFactory.$delete({}, function () {
             alert("Successfully deleted.");
         });
     };
     
-    $scope.deleteReader = function(id) {
+    $scope.deleteReaderOld = function(id) {
 		$http.delete('/rest/readers/' + id).success(function(data, status, headers, config) {
 			$rootScope.messageSuccess = "You have successfully deleted the reader.";
 			$location.path("/readers/list/");
@@ -257,7 +255,28 @@ app.controller("ReaderController", function ($scope, $http, BookFactory, Notific
 		});
     };
 
-	
+    $scope.deleteReader = function () {
+        var custName = $scope.reader.firstName + ' ' + $scope.reader.lastName;
+
+        var modalOptions = {
+            closeButtonText: 'Cancel',
+            actionButtonText: 'Delete Reader',
+            headerText: 'Delete ' + custName + '?',
+            bodyText: 'Are you sure you want to delete this reader with all his data?'
+        };
+
+        NotificationService.showModal({}, modalOptions).then(function (result) {
+    		$http.delete('/rest/readers/' + $scope.reader.id).success(function(data, status, headers, config) {
+        		$location.path(URLS.readersList);
+                NotificationService.statusBarSuccessNextPage("You have successfully deleted the reader.");
+    		}).error(function(data, status, headers, config) {
+    			NotificationService.statusBarError(data.message);
+    		});
+        });
+        
+    };
+ 
+    
 	
     init();
     

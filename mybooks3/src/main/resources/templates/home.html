@@ -47,12 +47,12 @@
 				<p>Your book collection.</p>
 			</div>
 		
-			<div ng-show="authenticated">
+			<div ng-show="currentReader">
 				<p>Hello Reader!</p>
 				<p>The ID is {{greeting.id}}</p>
 				<p>The content is {{greeting.content}}</p>
 			</div>
-			<div ng-show="!authenticated">
+			<div ng-show="!currentReader">
 				<p>Welcome to MyBooks3</p>
 				<p>Login to see your greeting</p>
 			</div>
