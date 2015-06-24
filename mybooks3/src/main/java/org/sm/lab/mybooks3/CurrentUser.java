@@ -10,11 +10,13 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
 
 	private long id;
 	private SystemRole systemRole;
+	private String displayName;
 	
     public CurrentUser(Reader reader) {
         super(reader.getEmail(), reader.getPassword(), AuthorityUtils.createAuthorityList(reader.getSystemRole().toString()));
         this.id = reader.getId();
         this.systemRole = reader.getSystemRole();
+        setDisplayName(reader);
     }
 
     public Long getId() {
@@ -24,12 +26,17 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
     public SystemRole getSystemRole() {
         return systemRole;
     }
-
-    @Override
-    public String toString() {
-        return "CurrentUser{" +
-                "id=" + id +
-                "systemRole=" + systemRole +
-                "} " + super.toString();
+    
+    public String getDisplayName() {
+    	return displayName;
     }
+    
+    private void setDisplayName(Reader reader) {
+    	displayName = reader.getFirstName() + " " + reader.getLastName();
+    	displayName = displayName.trim();
+    	if (displayName.isEmpty()) {
+    		displayName = reader.getEmail();
+    	}
+    }
+
 }

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
-import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -43,14 +42,6 @@ public class AppRestController {
 	@RequestMapping("/user")
 	public Principal user(Principal user) {
 		return user;
-	}
-
-	@RequestMapping("/resource")
-	public Map<String, Object> home() {
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("id", UUID.randomUUID().toString());
-		model.put("content", "Hello!");
-		return model;
 	}
 	
 	@RequestMapping(value = "/register_reader", method = RequestMethod.POST)

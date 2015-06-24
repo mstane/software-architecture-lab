@@ -48,13 +48,11 @@
 			</div>
 		
 			<div ng-show="currentReader">
-				<p>Hello Reader!</p>
-				<p>The ID is {{greeting.id}}</p>
-				<p>The content is {{greeting.content}}</p>
+				<p>Hello {{currentReader.displayName}}!</p>
 			</div>
 			<div ng-show="!currentReader">
 				<p>Welcome to MyBooks3</p>
-				<p>Login to see your greeting</p>
+				<p>Login to see your Book's notes</p>
 			</div>
 		</div>
 

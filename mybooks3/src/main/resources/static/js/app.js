@@ -3,8 +3,7 @@ var app = angular.module('hello', [ 'ngRoute', 'ngResource', 'ui.bootstrap' ]);
 
 app.config(function($routeProvider, $httpProvider) {
 			$routeProvider.when('/home', {
-				templateUrl : URLS.home,
-				controller : 'home'
+				templateUrl : URLS.home
 			}).when('/login', {
 				templateUrl : URLS.login,
 				controller : 'navigation'
@@ -281,15 +280,6 @@ app.controller("ReaderController", function ($scope, $http, BookFactory, Notific
     init();
     
 });
-
-
-
-app.controller('home', function($scope, $http) {
-	$http.get('/resource/').success(function(data) {
-		$scope.greeting = data;
-	})
-});
-
 
 
 app.factory("BookFactory", function ($resource) {
