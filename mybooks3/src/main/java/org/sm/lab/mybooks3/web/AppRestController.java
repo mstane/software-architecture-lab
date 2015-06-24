@@ -8,6 +8,7 @@ import java.util.Random;
 
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.sm.lab.mybooks3.domain.Reader;
 import org.sm.lab.mybooks3.enums.SystemRole;
 import org.sm.lab.mybooks3.service.ReaderService;
@@ -95,8 +96,8 @@ public class AppRestController {
 	}
 	
 	private String generatePassword() {
-		Random r = new Random();
-		return String.valueOf(r.nextInt());
+		String password = RandomStringUtils.random(10, true, true);
+		return password;
 	}
 	
 	private String encodePassword(String password) {
