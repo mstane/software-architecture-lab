@@ -87,7 +87,7 @@
 				</table>
 			</div>
 			
-			<ul class="pagination">
+			<ul class="pagination" ng-show="page.totalPages > 1">
 		         <li ng-show="page.number == 0" class="disabled"><a>&#8810;</a></li>
 		         <li ng-show="page.number == 0" class="disabled"><a>&#60;</a></li>
 		         <li ng-show="page.number != 0"><a href="javascript:void(0)" ng-click="getPage(0)">&#8810;</a></li>

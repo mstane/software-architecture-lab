@@ -10,6 +10,7 @@ import org.sm.lab.mybooks3.enums.Genre;
 import org.sm.lab.mybooks3.repository.BookRepository;
 import org.sm.lab.mybooks3.repository.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -39,20 +40,29 @@ public class BookServiceImpl implements BookService {
     }
 
 	@PreAuthorize("@authorizationService.canAccessUser(principal, #readerId)")
-	public List<Book> findReadersBooks(Long readerId) {
-		List<Book> books = bookRepository.findByReaderId(readerId);
+	public Page<Book> findReadersBooks(Long readerId, int pageNumber, int pageSize) {
+		Page<Book> books = bookRepository.findByReaderId(readerId, new PageRequest(pageNumber, pageSize));
 		return books;
     }
 
-	public List<Book> findBookEntries(int firstResult, int maxResults) {
-        return bookRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / maxResults, maxResults)).getContent();
+	public Page<Book> findBookEntries(int pageNumber, int pageSize) {
+		return bookRepository.findAll(new PageRequest(pageNumber, pageSize));
     }
 
-	public Book saveBook(Book book) {
-		if (book.getReader() == null) {
+	public Book saveBook(Book receivedBook) {
+		if (receivedBook.getReader() == null) {
 			CurrentUser currentUser = (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	        Reader reader = readerRepository.findOne(currentUser.getId());
-	        book.setReader(reader);
+	        receivedBook.setReader(reader);
+		}
+		
+		Book book;
+		
+		if (receivedBook.getId() != null) {
+			book = bookRepository.findOne(receivedBook.getId());
+			book.copyFields(receivedBook); // to preserve relationship to notes
+		} else {
+			book = receivedBook;
 		}
 		
         return bookRepository.save(book);

@@ -295,18 +295,36 @@ app.controller("BookController", function ($scope, BookFactory, $location, $http
 	
 	$scope.genres = ["Comedy", "Drama", "Epic", "Erotic", "Lyric", "Mythopoeia", "Nonsense", "Other", "Romance", "Satire", "Tragedy", "Tragicomedy"];
 	
+	var pageSize = 5;
+	
 	function init() {
-        $scope.getBooks();
+//        $scope.getBooks();
+		$scope.getPage(0);
         var i = 0;
     }
+	
+	$scope.getPage = function (pageNumber) {
+		$http.get('/rest/books/', { params: { pageNumber: pageNumber , pageSize : pageSize} }).success(function(data, status, headers, config) {
+			$scope.page = data;
+			
+            var pages = [];
+            for(var i = 0; i <= data.totalPages - 1; i++) {
+                pages.push(i);
+            }
+            $scope.range = pages;
+			
+		}).error(function(data, status, headers, config) {
+			$rootScope.messageError = data.message;
+		});
+	}
+	
+    $scope.getBooks = function () {
+        $scope.books = BookFactory.query();
+    };
 	
 	$scope.showView = function(id) {
 		$location.path("/books/view/" + id);
 	}
-
-    $scope.getBooks = function () {
-        $scope.books = BookFactory.query();
-    };
 
     $scope.createBook = function () {
         var book = new BookFactory($scope.book);

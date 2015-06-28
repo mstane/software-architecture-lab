@@ -97,7 +97,7 @@
 			<p><strong>Notes:</strong></p>
 			
 			
-			<div class="table-responsive">
+			<div class="table-responsive" ng-show="book.notes.length">
 				<table class="table table-striped">
 					<tbody th:remove="all-but-first">
 						<tr ng-repeat="note in book.notes" ng-click="showNoteView(note.id)">
@@ -116,7 +116,10 @@
 				</table>
 			</div>
 	
-			<hr />
+			<div ng-show="!book.notes.length">
+				<p>There is no data for any note.</p>
+			</div>
+			
 			
 		</div>
 		

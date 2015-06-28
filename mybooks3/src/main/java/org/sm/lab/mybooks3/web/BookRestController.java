@@ -10,10 +10,10 @@ import org.sm.lab.mybooks3.domain.SearchItem;
 import org.sm.lab.mybooks3.enums.Genre;
 import org.sm.lab.mybooks3.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,10 +34,9 @@ public class BookRestController {
 	}
 
 	@RequestMapping(method=RequestMethod.GET)
-	public List<Book> list() {
-//		return this.bookService.findAllBooks();
+	public Page<Book> list(@RequestParam(value = "pageNumber", required = false) Integer pageNumber, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
 		CurrentUser currentUser = (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return this.bookService.findReadersBooks(currentUser.getId());
+		return this.bookService.findReadersBooks(currentUser.getId(), pageNumber, pageSize);
 	}
 
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)

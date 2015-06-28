@@ -25,10 +25,10 @@ public interface ReaderService {
 	public abstract List<Reader> findAllReaders();
 
 
-	public abstract Page<Reader> findReaderEntries(int firstResult, int maxResults);
+	public abstract Page<Reader> findReaderEntries(int pageNumber, int pageSize);
 	
 	
-	public abstract List<Reader> search(String keyword, int firstResult, int maxResults);
+	public abstract List<Reader> search(String keyword, int pageNumber, int pageSize);
 
 	
 	public abstract Reader saveReader(Reader reader);

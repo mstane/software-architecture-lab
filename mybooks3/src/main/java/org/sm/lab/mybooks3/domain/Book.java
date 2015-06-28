@@ -154,6 +154,18 @@ public class Book implements Serializable {
 	public void setNotes(List<Note> notes) {
 		this.notes = notes;
 	}
+	
+	public void copyFields(Book fromBook) {
+		this.id = fromBook.getId();
+		this.title = fromBook.getTitle();
+		this.author = fromBook.getAuthor();
+		this.url = fromBook.getUrl();
+		this.startReadingDate = fromBook.getStartReadingDate();
+		this.endReadingDate = fromBook.getEndReadingDate();
+		this.rating = fromBook.getRating();
+		this.genre = fromBook.getGenre();
+		this.review = fromBook.getReview();
+	}
     
 	
 }
