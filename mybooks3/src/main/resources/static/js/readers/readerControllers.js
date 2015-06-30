@@ -19,7 +19,7 @@ readerControllers.controller("ReaderController", function ($scope, $http, BookFa
 			$http.get('/rest/readers/' + $routeParams.readerId, { }).success(function(data, status, headers, config) {
 				$scope.reader = data;
 			}).error(function(data, status, headers, config) {
-				$rootScope.messageError = data.message;
+				NotificationService.statusBarHttpError(data, status);
 			});
 		}
     }
@@ -35,7 +35,7 @@ readerControllers.controller("ReaderController", function ($scope, $http, BookFa
             $scope.range = pages;
 			
 		}).error(function(data, status, headers, config) {
-			$rootScope.messageError = data.message;
+			NotificationService.statusBarHttpError(data, status);
 		});
 	}
 	
@@ -51,7 +51,7 @@ readerControllers.controller("ReaderController", function ($scope, $http, BookFa
 				NotificationService.statusBarSuccessNextPage("You have successfully created the reader.");
 			}
 		}).error(function(data, status, headers, config) {
-			$rootScope.messageError = data.message;
+			NotificationService.statusBarHttpError(data, status);
 		});
 	}
 	
@@ -60,7 +60,7 @@ readerControllers.controller("ReaderController", function ($scope, $http, BookFa
 			$http.get('/rest/readers/search/' + $scope.keyword).success(function(data, status, headers, config) {
 				$scope.readers = data;
 			}).error(function (data, status, headers, config) {
-				$rootScope.messageError = data.message;
+				NotificationService.statusBarHttpError(data, status);
 			}); 
 		}
 	}
@@ -77,7 +77,7 @@ readerControllers.controller("ReaderController", function ($scope, $http, BookFa
 			$rootScope.messageSuccess = "You have successfully deleted the reader.";
 			$location.path("/readers/list/");
 		}).error(function(data, status, headers, config) {
-			$rootScope.messageError = data.message;
+			NotificationService.statusBarHttpError(data, status);
 		});
     };
 
@@ -96,7 +96,7 @@ readerControllers.controller("ReaderController", function ($scope, $http, BookFa
         		$location.path(URLS.readersList);
                 NotificationService.statusBarSuccessNextPage("You have successfully deleted the reader.");
     		}).error(function(data, status, headers, config) {
-    			NotificationService.statusBarError(data.message);
+    			NotificationService.statusBarHttpError(data, status);
     		});
         });
         

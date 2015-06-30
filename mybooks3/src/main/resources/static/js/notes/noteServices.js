@@ -17,7 +17,7 @@ noteServices.service("NoteService", function($http, $rootScope, $location){
 		$http.get('/rest/notes/' + id, { }).success(function(data, status, headers, config) {
 			callback && callback(data);
 		}).error(function(data, status, headers, config) {
-			$rootScope.messageError = data.message;
+			NotificationService.statusBarHttpError(data, status);
 		});
     };
     

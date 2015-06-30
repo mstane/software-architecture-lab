@@ -24,7 +24,7 @@ bookControllers.controller("BookController", function ($scope, BookFactory, $loc
             $scope.range = pages;
 			
 		}).error(function(data, status, headers, config) {
-			$rootScope.messageError = data.message;
+			NotificationService.statusBarHttpError(data, status);
 		});
 	}
 	
@@ -53,7 +53,7 @@ bookControllers.controller("BookController", function ($scope, BookFactory, $loc
 			$http.get('/rest/books/search/' + $scope.keyword, params).success(function(data, status, headers, config) {
 				$scope.searchItems = data;
 			}).error(function (data, status, headers, config) {
-				$rootScope.messageError = data.message;
+				NotificationService.statusBarHttpError(data, status);
 			}); 
 		}
 	}

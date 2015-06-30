@@ -1,9 +1,9 @@
 var sharedServices = angular.module('sharedServices', ['ui.bootstrap']);
 
 
-sharedServices.service('NotificationService', ['$modal', '$rootScope',
+sharedServices.service('NotificationService', ['$modal', '$rootScope', '$location',
 
-    function ($modal, $rootScope) {
+    function ($modal, $rootScope, $location) {
         var modalDefaults = {
         		backdrop: true,
         		keyboard: true,
@@ -86,9 +86,16 @@ sharedServices.service('NotificationService', ['$modal', '$rootScope',
 	  		$rootScope.messageError = message;
 	  	}
 	  	
-	  	this.statusBarErrorNextPage = function (message) {
-	  		$rootScope.messageErrorOnNextPage = true;
-            $rootScope.messageError = message;
+	  	this.statusBarHttpError = function (data, status) {
+	  		if (!status) {
+	  			$rootScope.currentReader = null;
+//	  			$rootScope.messageErrorOnNextPage = true;
+//	  			$rootScope.messageError = "Connection Error.";
+	  			this.dialogBoxInfo("Connection Error.");
+	  			$location.path("/");
+	  		} else {
+	  			$rootScope.messageError = data.message;
+	  		}
 	  	}
 	  	
   }]);
