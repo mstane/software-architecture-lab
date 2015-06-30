@@ -48,7 +48,7 @@
     </script>
 </head>
 
-<body ng-app="hello" ng-cloak="" class="ng-cloak">
+<body ng-app="app" ng-cloak="" class="ng-cloak">
 
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container" ng-controller="navigation">
@@ -84,6 +84,15 @@
 	
 	<script th:src="@{/js/bundle.js}" src="../static/js/bundle.js"></script>
 	<script th:src="@{/js/app.js}" src="../static/js/app.js"></script>
+	<script th:src="@{/js/sharedServices.js}" src="../static/js/sharedServices.js"></script>
+	<script th:src="@{/js/sharedDirectives.js}" src="../static/js/sharedDirectives.js"></script>
+	<script th:src="@{/js/sharedControllers.js}" src="../static/js/sharedControllers.js"></script>
+	<script th:src="@{/js/books/bookControllers.js}" src="../static/js/books/bookControllers.js"></script>
+	<script th:src="@{/js/books/bookFactories.js}" src="../static/js/books/bookFactories.js"></script>
+	<script th:src="@{/js/profiles/profileControllers.js}" src="../static/js/profiles/profileControllers.js"></script>
+	<script th:src="@{/js/readers/readerControllers.js}" src="../static/js/readers/readerControllers.js"></script>
+	<script th:src="@{/js/notes/noteControllers.js}" src="../static/js/notes/noteControllers.js"></script>
+	<script th:src="@{/js/notes/noteServices.js}" src="../static/js/notes/noteServices.js"></script>
 
 </body>
 </html>
