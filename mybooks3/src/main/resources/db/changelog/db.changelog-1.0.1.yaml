@@ -1,0 +1,58 @@
+databaseChangeLog:
+- changeSet:
+    id: 2
+    author: stane
+    changes:
+    
+    - insert:
+        comment: User with Admin role and with password "root"
+        tableName: READER
+        columns:
+        - column:
+            name: ID
+            value: 1
+        - column:
+            name: USERNAME
+            value: root
+        - column:
+            name: EMAIL
+            value: root@root.com
+        - column:
+            name: FIRST_NAME
+            value: Root1
+        - column:
+            name: LAST_NAME
+            value: Root2
+        - column:
+            name: SYSTEM_ROLE
+            value: Admin 
+        - column:
+            name: PASSWORD
+            value: $2a$10$rPiF3TE5B0vnar4kNLO1deHU2hKcz/SYHvGRHdzzMSgkSBe4OOwKW
+    
+    - insert:
+        comment: User with Common role and with password "user"
+        tableName: READER
+        columns:
+        - column:
+            name: ID
+            value: 2
+        - column:
+            name: USERNAME
+            value: user
+        - column:
+            name: EMAIL
+            value: user@user.com
+        - column:
+            name: FIRST_NAME
+            value: User1
+        - column:
+            name: LAST_NAME
+            value: User2
+        - column:
+            name: SYSTEM_ROLE
+            value: Common 
+        - column:
+            name: PASSWORD
+            value: $2a$10$FgH6fuZGutkbAQY96Vyb9eWG3Kf1WZNEjuk9Ur8g47JfqLXHRoOR6
+            

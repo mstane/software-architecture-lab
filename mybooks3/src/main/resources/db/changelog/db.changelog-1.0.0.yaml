@@ -1,0 +1,176 @@
+databaseChangeLog:
+- changeSet:
+    id: 1
+    author: stane
+    changes:
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              constraints:
+                primaryKey: true
+                primaryKeyName: BOOK_PK
+                nullable: false
+            name: ID
+            type: BIGINT
+        - column:
+            name: AUTHOR
+            type: VARCHAR(255)
+        - column:
+            name: END_READING_DATE
+            type: TIMESTAMP
+        - column:
+            name: GENRE
+            type: VARCHAR(255)
+        - column:
+            name: RATING
+            type: BIGINT
+        - column:
+            name: REVIEW
+            type: CLOB
+        - column:
+            name: START_READING_DATE
+            type: TIMESTAMP
+        - column:
+            constraints:
+              constraints:
+                nullable: false
+            name: TITLE
+            type: VARCHAR(255)
+        - column:
+            name: URL
+            type: VARCHAR(255)
+        - column:
+            name: READER_ID
+            type: BIGINT
+        tableName: BOOK
+
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              constraints:
+                primaryKey: true
+                primaryKeyName: NOTE_PK
+                nullable: false
+            name: ID
+            type: BIGINT
+        - column:
+            name: CONTENT
+            type: CLOB
+        - column:
+            name: CREATED_TIME
+            type: TIMESTAMP
+        - column:
+            name: MODIFIED_TIME
+            type: TIMESTAMP
+        - column:
+            constraints:
+              constraints:
+                nullable: false
+            name: TITLE
+            type: VARCHAR(255)
+        - column:
+            name: BOOK_ID
+            type: BIGINT
+        tableName: NOTE
+
+    - createTable:
+        columns:
+        - column:
+            autoIncrement: true
+            constraints:
+              constraints:
+                primaryKey: true
+                primaryKeyName: READER_PK
+                nullable: false
+            name: ID
+            type: BIGINT
+        - column:
+            name: EMAIL
+            type: VARCHAR(255)
+        - column:
+            name: FIRST_NAME
+            type: VARCHAR(255)
+        - column:
+            name: LAST_NAME
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              constraints:
+                nullable: false
+            name: PASSWORD
+            type: VARCHAR(255)
+        - column:
+            name: SYSTEM_ROLE
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              constraints:
+                nullable: false
+            name: USERNAME
+            type: VARCHAR(255)
+        tableName: READER
+
+    - addUniqueConstraint:
+        columnNames: ID
+        constraintName: BOOK_ID_UK
+        tableName: BOOK
+
+    - addUniqueConstraint:
+        columnNames: ID
+        constraintName: READER_ID_UK
+        tableName: READER
+
+    - addUniqueConstraint:
+        columnNames: ID
+        constraintName: NOTE_ID_UK
+        tableName: NOTE
+
+    - addUniqueConstraint:
+        columnNames: EMAIL
+        constraintName: READER_EMAIL_UK
+        tableName: READER
+
+    - addUniqueConstraint:
+        columnNames: USERNAME
+        constraintName: READER_USERNAME_UK
+        tableName: READER
+
+    - createIndex:
+        columns:
+        - column:
+            name: BOOK_ID
+        indexName: NOTE_BOOK_ID_IDX
+        tableName: NOTE
+
+    - createIndex:
+        columns:
+        - column:
+            name: READER_ID
+        indexName: BOOK_READER_ID_IDX
+        tableName: BOOK
+
+    - addForeignKeyConstraint:
+        baseColumnNames: READER_ID
+        baseTableName: BOOK
+        constraintName: BOOK_READER_ID_FK
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: ID
+        referencedTableName: READER
+
+    - addForeignKeyConstraint:
+        baseColumnNames: BOOK_ID
+        baseTableName: NOTE
+        constraintName: NOTE_BOOK_ID_FK
+        deferrable: false
+        initiallyDeferred: false
+        onDelete: NO ACTION
+        onUpdate: NO ACTION
+        referencedColumnNames: ID
+        referencedTableName: BOOK
