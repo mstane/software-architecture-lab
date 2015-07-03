@@ -11,7 +11,7 @@ profileControllers.controller("ProfileController", function ($scope, $http, Book
 		$http.get('/rest/profiles/' + $routeParams.profileId, { }).success(function(data, status, headers, config) {
 			$scope.profile = data;
 		}).error(function(data, status, headers, config) {
-			NotificationService.statusBarHttpError(data, status);
+			NotificationService.statusBarError(data.message);
 		});
     }
 	
@@ -20,7 +20,7 @@ profileControllers.controller("ProfileController", function ($scope, $http, Book
 			$rootScope.messageSuccess = "You have successfully updated your profile.";
 			$location.path("/profiles/view/" + $routeParams.profileId);
 		}).error(function(data, status, headers, config) {
-			NotificationService.statusBarHttpError(data, status);
+			NotificationService.statusBarError(data.message);
 		});
 	}	
 	

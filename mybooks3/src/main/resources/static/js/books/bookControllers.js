@@ -24,7 +24,22 @@ bookControllers.controller("BookController", function ($scope, BookFactory, $loc
             $scope.range = pages;
 			
 		}).error(function(data, status, headers, config) {
-			NotificationService.statusBarHttpError(data, status);
+			NotificationService.statusBarError(data.message);
+		});
+	}
+	
+	$scope.getPageNew = function (pageNumber) {
+		$http.get('/rest/books/', { params: { pageNumber: pageNumber , pageSize : pageSize} }).success(function(data, status, headers, config) {
+			$scope.page = data;
+			
+            var pages = [];
+            for(var i = 0; i <= data.totalPages - 1; i++) {
+                pages.push(i);
+            }
+            $scope.range = pages;
+			
+		}).error(function(data, status, headers, config) {
+			NotificationService.statusBarError(data.message);
 		});
 	}
 	
@@ -53,7 +68,7 @@ bookControllers.controller("BookController", function ($scope, BookFactory, $loc
 			$http.get('/rest/books/search/' + $scope.keyword, params).success(function(data, status, headers, config) {
 				$scope.searchItems = data;
 			}).error(function (data, status, headers, config) {
-				NotificationService.statusBarHttpError(data, status);
+				NotificationService.statusBarError(data.message);
 			}); 
 		}
 	}

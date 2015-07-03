@@ -70,3 +70,22 @@ app.config(function($routeProvider, $httpProvider) {
 						
 		});
 
+/*
+	Error handler when server doesn't respond
+ */
+app.config(['$httpProvider', function($httpProvider) {
+    $httpProvider.interceptors.push(['$q', '$location', '$rootScope', function($q, $location, $rootScope) {
+       return {
+         responseError: function(rejection) {
+               if(rejection.status == 0) {
+            	   $rootScope.currentReader = null;
+//                   window.location = "#/";
+            	   $location.path('/');
+            	   alert("Connection with the server was lost.");
+                   return;
+               }
+               return $q.reject(rejection);
+           }
+       };
+   }]);
+}]);

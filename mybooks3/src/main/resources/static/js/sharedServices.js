@@ -86,18 +86,6 @@ sharedServices.service('NotificationService', ['$modal', '$rootScope', '$locatio
 	  		$rootScope.messageError = message;
 	  	}
 	  	
-	  	this.statusBarHttpError = function (data, status) {
-	  		if (!status) {
-	  			$rootScope.currentReader = null;
-//	  			$rootScope.messageErrorOnNextPage = true;
-//	  			$rootScope.messageError = "Connection Error.";
-	  			this.dialogBoxInfo("Connection Error.");
-	  			$location.path("/");
-	  		} else {
-	  			$rootScope.messageError = data.message;
-	  		}
-	  	}
-	  	
   }]);
           
           

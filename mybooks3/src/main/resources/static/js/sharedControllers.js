@@ -67,7 +67,7 @@ sharedControllers.controller('navigation', function($rootScope, $scope, $http, $
 			NotificationService.statusBarSuccess(data.message);
 			console.log("Forgotten password succeeded");
 		}).error(function(data, status, headers, config) {
-			NotificationService.statusBarHttpError(data, status);
+			NotificationService.statusBarError(data.message);
 			console.log("Forgotten password failed");
 		});
 	}
@@ -77,7 +77,7 @@ sharedControllers.controller('navigation', function($rootScope, $scope, $http, $
 			$location.path("/");
 			NotificationService.dialogBoxInfo("You have successfully registered.");
 		}).error(function(data, status, headers, config) {
-			NotificationService.statusBarHttpError(data, status);
+			NotificationService.statusBarError(data.message);
 		});
 	}
 	
