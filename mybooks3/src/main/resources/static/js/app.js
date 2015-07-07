@@ -39,10 +39,10 @@ app.config(function($routeProvider, $httpProvider) {
 				controller: 'BookController'
 			}).when('/books/view/:bookId?', {
 				templateUrl : URLS.booksView,
-				controller : 'BookEditController'
+				controller : 'BookController'
 			}).when('/books/edit/:bookId', {
 				templateUrl : URLS.booksEdit,
-				controller : 'BookEditController'
+				controller : 'BookController'
 			}).when('/books/create', {
 				templateUrl : URLS.booksCreate,
 				controller : 'BookController'
