@@ -1,50 +1,29 @@
 var bookControllers = angular.module('bookControllers', ['bookFactories']);
 
 
-bookControllers.controller("BookController", function ($scope, BookFactory, $location, $http, $rootScope, NotificationService) {
+bookControllers.controller("BookController", function ($scope, BookFactory, $location, $rootScope, NotificationService) {
 	
 	$scope.genres = ["Comedy", "Drama", "Epic", "Erotic", "Lyric", "Mythopoeia", "Nonsense", "Other", "Romance", "Satire", "Tragedy", "Tragicomedy"];
 	
 	var pageSize = 5;
 	
 	function init() {
-//        $scope.getBooks();
 		$scope.getPage(0);
         var i = 0;
     }
 	
-	$scope.getPage = function (pageNumber) {
-		$http.get('/rest/books/', { params: { pageNumber: pageNumber , pageSize : pageSize} }).success(function(data, status, headers, config) {
-			$scope.page = data;
-			
-            var pages = [];
-            for(var i = 0; i <= data.totalPages - 1; i++) {
-                pages.push(i);
-            }
-            $scope.range = pages;
-			
-		}).error(function(data, status, headers, config) {
-			NotificationService.statusBarError(data.message);
-		});
-	}
-	
-	$scope.getPageNew = function (pageNumber) {
-		$http.get('/rest/books/', { params: { pageNumber: pageNumber , pageSize : pageSize} }).success(function(data, status, headers, config) {
-			$scope.page = data;
-			
-            var pages = [];
-            for(var i = 0; i <= data.totalPages - 1; i++) {
-                pages.push(i);
-            }
-            $scope.range = pages;
-			
-		}).error(function(data, status, headers, config) {
-			NotificationService.statusBarError(data.message);
-		});
-	}
-	
-    $scope.getBooks = function () {
-        $scope.books = BookFactory.query();
+    $scope.getPage = function (pageNumber) {
+    	$scope.page = BookFactory.query({
+        		pageNumber: pageNumber, pageSize : pageSize
+        	}, function(data) {
+                var pages = [];
+                for(var i = 0; i <= data.totalPages - 1; i++) {
+                    pages.push(i);
+                }
+                $scope.range = pages;
+        	}, function(error) {
+        		NotificationService.statusBarError(error.message);
+        	});
     };
 	
 	$scope.showView = function(id) {
@@ -61,15 +40,19 @@ bookControllers.controller("BookController", function ($scope, BookFactory, $loc
     
 	$scope.search = function() {
 		if ($scope.keyword) {
+			var params = { search: $scope.keyword };
+
 			var genre = $scope.genre;
+			if (genre) {
+				params.genre = genre;
+			}
 			
-			var params = genre ? { params: { genre: genre } } : {};
-			
-			$http.get('/rest/books/search/' + $scope.keyword, params).success(function(data, status, headers, config) {
+			BookFactory.search(params, function(data) {
 				$scope.searchItems = data;
-			}).error(function (data, status, headers, config) {
-				NotificationService.statusBarError(data.message);
-			}); 
+        	}, function(error) {
+        		NotificationService.statusBarError(error.statusText);
+        	});
+			
 		}
 	}
     

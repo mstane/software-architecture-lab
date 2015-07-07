@@ -28,11 +28,6 @@ public class BookRestController {
 	@Autowired
 	BookService bookService;
 	
-	@RequestMapping(method=RequestMethod.POST)
-	public Book create(@RequestBody @Valid Book book) {
-		return this.bookService.saveBook(book);
-	}
-
 	@RequestMapping(method=RequestMethod.GET)
 	public Page<Book> list(@RequestParam(value = "pageNumber", required = false) Integer pageNumber, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
 		CurrentUser currentUser = (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -42,6 +37,17 @@ public class BookRestController {
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public Book get(@PathVariable("id") long id) {
 		return this.bookService.findBook(id);
+	}
+	
+	@RequestMapping(params = "search", method=RequestMethod.GET)
+	public List<SearchItem> get(@RequestParam("search") String keyword, @RequestParam(value = "genre", required = false) Genre genre) {
+		List<SearchItem> result = bookService.search(keyword, genre);
+		return result;
+	}
+	
+	@RequestMapping(method=RequestMethod.POST)
+	public Book create(@RequestBody @Valid Book book) {
+		return this.bookService.saveBook(book);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
@@ -55,9 +61,5 @@ public class BookRestController {
 		return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/search/{keyword}", method=RequestMethod.GET)
-	public List<SearchItem> get(@PathVariable("keyword") String keyword, @RequestParam(value = "genre", required = false) Genre genre) {
-		List<SearchItem> result = bookService.search(keyword, genre);
-		return result;
-	}
+
 }
