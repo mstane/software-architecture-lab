@@ -71,7 +71,7 @@ app.config(function($routeProvider, $httpProvider) {
 		});
 
 /*
-	Error handler when server doesn't respond
+	Error handler when server doesn't respond and for all http client and server errors
  */
 app.config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push(['$q', '$location', '$rootScope', function($q, $location, $rootScope) {
@@ -83,6 +83,11 @@ app.config(['$httpProvider', function($httpProvider) {
             	   $location.path('/');
             	   alert("Connection with the server was lost.");
                    return;
+               } else if(rejection.status > 399 && rejection.status < 600) {
+            	   $rootScope.currentReader = null;
+            	   $location.path('/');
+            	   alert(rejection.statusText);
+            	   return;
                }
                return $q.reject(rejection);
            }

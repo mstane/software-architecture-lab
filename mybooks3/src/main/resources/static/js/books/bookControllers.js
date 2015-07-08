@@ -59,7 +59,7 @@ bookControllers.controller("BookController", function ($scope, BookFactory, $loc
         book.$update().then(function() {
      	   $location.path("/books/view/" + $scope.book.id);
      	   NotificationService.statusBarSuccessNextPage("Successfully updated the book.");
-        }) ;
+        });
      }
      
      $scope.deleteBook = function () {

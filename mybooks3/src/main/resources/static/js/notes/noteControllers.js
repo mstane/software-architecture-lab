@@ -1,7 +1,7 @@
 var noteControllers = angular.module('noteControllers', ['noteServices']);
 
 
-noteControllers.controller("NoteController", function ($scope, $http, $location, $routeParams, $rootScope, NoteService, NotificationService) {
+noteControllers.controller("NoteController", function ($scope, $location, $routeParams, $rootScope, NoteService, NoteFactory, NotificationService) {
 
 	$scope.showView = function(id) {
 		$location.path("/notes/view/" + id);
@@ -13,16 +13,16 @@ noteControllers.controller("NoteController", function ($scope, $http, $location,
 	
 	function init() {
 		if ($routeParams.noteId) {
-			 NoteService.get($routeParams.noteId, function(data) { 
-				 $scope.note = data; 
-			 });
+			$scope.note = NoteFactory.get({id:$routeParams.noteId});
 		}
     }
 	
 	$scope.update = function() {
 		var idSufix = $routeParams.noteId;
 		if (!idSufix) idSufix = "";
-		NoteService.update(idSufix, $scope.note).then(function (result) {
+		
+        var noteFactory = new NoteFactory($scope.note);
+        noteFactory.$update({ bookId: NoteService.getCurrentBook().id }).then(function(result) {
 			if (idSufix) {
 				NotificationService.statusBarSuccessNextPage("You have successfully updated the note.");
 				$location.path("/notes/view/" + $routeParams.noteId);
@@ -31,6 +31,7 @@ noteControllers.controller("NoteController", function ($scope, $http, $location,
 				$location.path("/notes/view/" + result.id);
 			}
         }, processError);
+		
 
 	}	
 	 
@@ -46,10 +47,11 @@ noteControllers.controller("NoteController", function ($scope, $http, $location,
         };
 
         NotificationService.showModal({}, modalOptions).then(function (result) {
-        	NoteService.delete($scope.note.id).then(function () {
+         	var noteFactory = new NoteFactory($scope.note);
+         	return noteFactory.$delete({}, function () {
         		$location.path("/books/view/" + NoteService.getCurrentBook().id);
                 NotificationService.dialogBoxInfo("You have successfully deleted the note.");
-            }, processError);
+             }, processError);
         });
     }
     

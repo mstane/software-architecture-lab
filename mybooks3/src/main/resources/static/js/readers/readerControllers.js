@@ -1,10 +1,11 @@
 var readerControllers = angular.module('readerControllers', []);
 
+var systemRoles = ["Admin", "Common"];
+
+var pageSize = 5;
 
 readerControllers.controller("ReaderController", function ($scope, $http, BookFactory, NotificationService, $location, $routeParams, $rootScope) {
-	$scope.systemRoles = ["Admin", "Common"];
-	
-	var pageSize = 5;
+	$scope.systemRoles = systemRoles;
 	
 	$scope.showView = function(id) {
 		$location.path("/readers/view/" + id);
