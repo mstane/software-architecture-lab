@@ -27,8 +27,8 @@ public class ProfileRestController {
 		return this.readerService.findReader(id);
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT)
-	public Reader update(@RequestBody @Valid Reader reader) {
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public Reader update(@PathVariable("id") long id, @RequestBody @Valid Reader reader) {
 		reader.setPassword(encodePassword(reader.getPassword()));
 		return readerService.saveReader(reader);
 	}

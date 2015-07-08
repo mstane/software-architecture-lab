@@ -1,7 +1,5 @@
 package org.sm.lab.mybooks3.web;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.sm.lab.mybooks3.domain.Book;
@@ -56,12 +54,6 @@ public class NoteRestController {
 	public ResponseEntity<Boolean> delete(@PathVariable("id") long id) {
 		this.noteService.deleteNote(id);
 		return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
-	}
-	
-	@RequestMapping(value="/search/{keyword}", method=RequestMethod.GET)
-	public List<Note> get(@PathVariable("keyword") String keyword) {
-		List<Note> resultNotes = noteService.search(keyword, 0, 10);
-		return resultNotes;
 	}
 
 	

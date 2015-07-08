@@ -1,28 +1,30 @@
-var profileControllers = angular.module('profileControllers', ['bookFactories']);
+var profileControllers = angular.module('profileControllers', ['profileFactories']);
 
 
-profileControllers.controller("ProfileController", function ($scope, $http, BookFactory, $location, $routeParams, $rootScope, NotificationService) {
+profileControllers.controller("ProfileController", function ($scope, ProfileFactory, $location, $routeParams, $rootScope, NotificationService) {
 	
 	$scope.showView = function(id) {
 		$location.path("/profiles/view/" + id);
 	}
 	
 	function init() {
-		$http.get('/rest/profiles/' + $routeParams.profileId, { }).success(function(data, status, headers, config) {
-			$scope.profile = data;
-		}).error(function(data, status, headers, config) {
-			NotificationService.statusBarError(data.message);
-		});
+		if ($routeParams.profileId) {
+			$scope.profile = ProfileFactory.get({id:$routeParams.profileId});
+		}
     }
 	
 	$scope.update = function() {
-		$http.put('/rest/profiles/', $scope.profile).success(function(data, status, headers, config) {
+        var profileFactory = new ProfileFactory($scope.profile);
+        profileFactory.$update().then(function(result) {
 			$rootScope.messageSuccess = "You have successfully updated your profile.";
 			$location.path("/profiles/view/" + $routeParams.profileId);
-		}).error(function(data, status, headers, config) {
-			NotificationService.statusBarError(data.message);
-		});
-	}	
+        }, processError);
+	}
+	
+	
+    function processError(error) {
+    	console.log(error.message);
+    }
 	
     init();
     
