@@ -1,10 +1,10 @@
-var readerControllers = angular.module('readerControllers', []);
+var readerControllers = angular.module('readerControllers', ['readerFactories']);
 
 var systemRoles = ["Admin", "Common"];
 
 var pageSize = 5;
 
-readerControllers.controller("ReaderController", function ($scope, $http, BookFactory, NotificationService, $location, $routeParams, $rootScope) {
+readerControllers.controller("ReaderController", function ($scope, ReaderFactory, NotificationService, $location, $routeParams, $rootScope) {
 	$scope.systemRoles = systemRoles;
 	
 	$scope.showView = function(id) {
@@ -16,71 +16,48 @@ readerControllers.controller("ReaderController", function ($scope, $http, BookFa
 		
 		if (path == URLS.readersList) {
 			$scope.getPage(0);
+		} else if (path == URLS.readersSearch) {
+						
 		} else if ($routeParams.readerId) {
-			$http.get('/rest/readers/' + $routeParams.readerId, { }).success(function(data, status, headers, config) {
-				$scope.reader = data;
-			}).error(function(data, status, headers, config) {
-				NotificationService.statusBarError(data.message);
-			});
+	    	var reader = ReaderFactory.get({id:$routeParams.readerId});
+	    	$scope.reader = reader;
 		}
     }
-	
-	$scope.getPage = function (pageNumber) {
-		$http.get('/rest/readers/', { params: { pageNumber: pageNumber , pageSize : pageSize} }).success(function(data, status, headers, config) {
-			$scope.page = data;
-			
-            var pages = [];
-            for(var i = 0; i <= data.totalPages - 1; i++) {
-                pages.push(i);
-            }
-            $scope.range = pages;
-			
-		}).error(function(data, status, headers, config) {
-			NotificationService.statusBarError(data.message);
-		});
-	}
-	
-	$scope.update = function() {
-		var idSufix = $routeParams.readerId;
-		if (!idSufix) idSufix = "";
-		$http.put('/rest/readers/' + idSufix, $scope.reader).success(function(data, status, headers, config) {
-			if (idSufix) {
-				$location.path("/readers/view/" + $routeParams.readerId);
-		    	NotificationService.statusBarSuccessNextPage("You have successfully updated the reader.");
-			} else {
-				$location.path("/readers/view/" + data.id);
-				NotificationService.statusBarSuccessNextPage("You have successfully created the reader.");
-			}
-		}).error(function(data, status, headers, config) {
-			NotificationService.statusBarError(data.message);
-		});
-	}
-	
+
+    $scope.getPage = function (pageNumber) {
+    	$scope.page = ReaderFactory.query({
+        		pageNumber: pageNumber, pageSize : pageSize
+        	}, function(data) {
+                var pages = [];
+                for(var i = 0; i <= data.totalPages - 1; i++) {
+                    pages.push(i);
+                }
+                $scope.range = pages;
+        	}, function(error) {
+        		NotificationService.statusBarError(error.message);
+        	});
+    };
+		
+    $scope.update = function() {
+        var reader = new ReaderFactory($scope.reader);
+        reader.$update().then(function() {
+     	   $location.path("/readers/view/" + $scope.reader.id);
+     	   NotificationService.statusBarSuccessNextPage("Successfully updated the reader.");
+        });
+    }
+
 	$scope.search = function() {
 		if ($scope.keyword) {
-			$http.get('/rest/readers/search/' + $scope.keyword).success(function(data, status, headers, config) {
+			var params = { search: $scope.keyword };
+			
+			ReaderFactory.search(params, function(data) {
 				$scope.readers = data;
-			}).error(function (data, status, headers, config) {
-				NotificationService.statusBarError(data.message);
-			}); 
+        	}, function(error) {
+        		NotificationService.statusBarError(error.statusText);
+        	});
+			
 		}
 	}
-	
-    $scope.deleteReaderOld = function () {
-    	var bookFactory = new BookFactory($scope.book);
-        return bookFactory.$delete({}, function () {
-            alert("Successfully deleted.");
-        });
-    };
-    
-    $scope.deleteReaderOld = function(id) {
-		$http.delete('/rest/readers/' + id).success(function(data, status, headers, config) {
-			$rootScope.messageSuccess = "You have successfully deleted the reader.";
-			$location.path("/readers/list/");
-		}).error(function(data, status, headers, config) {
-			NotificationService.statusBarError(data.message);
-		});
-    };
 
     $scope.deleteReader = function () {
         var custName = $scope.reader.firstName + ' ' + $scope.reader.lastName;
@@ -93,17 +70,14 @@ readerControllers.controller("ReaderController", function ($scope, $http, BookFa
         };
 
         NotificationService.showModal({}, modalOptions).then(function (result) {
-    		$http.delete('/rest/readers/' + $scope.reader.id).success(function(data, status, headers, config) {
-        		$location.path(URLS.readersList);
-                NotificationService.statusBarSuccessNextPage("You have successfully deleted the reader.");
-    		}).error(function(data, status, headers, config) {
-    			NotificationService.statusBarError(data.message);
-    		});
+        	var readerFactory = new ReaderFactory($scope.reader);
+         	return readerFactory.$delete({}, function () {
+         		$location.path(URLS.readersList);
+                 NotificationService.dialogBoxInfo("Successfully deleted the reader.");
+             });
         });
         
     };
- 
-    
 	
     init();
     

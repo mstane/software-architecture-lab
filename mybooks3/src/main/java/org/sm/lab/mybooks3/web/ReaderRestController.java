@@ -23,12 +23,7 @@ public class ReaderRestController {
 	
 	@Autowired
 	ReaderService readerService;
-	
-	@RequestMapping(method=RequestMethod.POST)
-	public Reader create(@RequestBody @Valid Reader reader) {
-		return this.readerService.saveReader(reader);
-	}
-	
+
 	@RequestMapping(method=RequestMethod.GET)
 	public Page<Reader> list(@RequestParam(value = "pageNumber", required = false) Integer pageNumber, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
 		return this.readerService.findReaderEntries(pageNumber, pageSize);
@@ -39,6 +34,18 @@ public class ReaderRestController {
 		return this.readerService.findReader(id);
 	}
 	
+//	@RequestMapping(value="/search/{keyword}", method=RequestMethod.GET)
+	@RequestMapping(params = "search", method=RequestMethod.GET)
+	public List<Reader> get(@RequestParam("search") String keyword) {
+		List<Reader> resultReaders = readerService.search(keyword, 0, 10);
+		return resultReaders;
+	}
+	
+	@RequestMapping(method=RequestMethod.POST)
+	public Reader create(@RequestBody @Valid Reader reader) {
+		return this.readerService.saveReader(reader);
+	}
+		
 	@RequestMapping(method=RequestMethod.PUT)
 	public Reader update(@RequestBody @Valid Reader reader) {
 		return readerService.saveReader(reader);
@@ -55,11 +62,5 @@ public class ReaderRestController {
 		return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value="/search/{keyword}", method=RequestMethod.GET)
-	public List<Reader> get(@PathVariable("keyword") String keyword) {
-		List<Reader> resultReaders = readerService.search(keyword, 0, 10);
-		return resultReaders;
-	}
-
 	
 }
