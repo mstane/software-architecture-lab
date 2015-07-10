@@ -1,5 +1,46 @@
 var sharedServices = angular.module('sharedServices', ['ui.bootstrap']);
 
+sharedServices.service("AppService", function($rootScope, $location, $http){
+	
+	var genres;
+	var systemRoles;
+	var pageSize = 5;
+	
+	this.init = function() {
+		alert('Data initialization');
+		
+		$http.get('/app_data').success(function(data, status, headers, config) {
+			if (data.genres) {
+				genres = data.genres;
+			} else {
+				console.log("No Genres data.");
+			}
+			if (data.systemRoles) {
+				systemRoles = data.systemRoles;
+			} else {
+				console.log("No SystemRoles data.");
+			}
+		}).error(function(data, status, headers, config) {
+			NotificationService.statusBarError(data.message);
+			console.log("Data initialization failed");
+		});
+		
+	};
+	
+	this.getGenres = function() {
+		return genres;
+	};
+	
+	this.getSystemRoles = function() {
+		return systemRoles;
+	};
+	
+	this.getPageSize = function() {
+		return pageSize;
+	};
+ 
+});
+
 
 sharedServices.service('NotificationService', ['$modal', '$rootScope', '$location',
 

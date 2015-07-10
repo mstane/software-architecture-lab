@@ -94,3 +94,10 @@ app.config(['$httpProvider', function($httpProvider) {
        };
    }]);
 }]);
+
+/*
+ * Data initialization
+ */
+app.run(function (AppService) {
+	AppService.init();
+});

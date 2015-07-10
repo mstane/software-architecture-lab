@@ -1,12 +1,8 @@
 var bookControllers = angular.module('bookControllers', ['bookFactories']);
 
-var genres = ["Comedy", "Drama", "Epic", "Erotic", "Lyric", "Mythopoeia", "Nonsense", "Other", "Romance", "Satire", "Tragedy", "Tragicomedy"];
-var pageSize = 5;
-
-
-bookControllers.controller("BookController", function ($scope, BookFactory, $location, $rootScope, NoteService, NotificationService, $routeParams) {
+bookControllers.controller("BookController", function ($scope, BookFactory, $location, $rootScope, NoteService, NotificationService, AppService, $routeParams) {
 	
-	$scope.genres = genres;
+	$scope.genres = AppService.getGenres();
 	
 	function init() {
 		var path = $location.$$path;
@@ -25,7 +21,7 @@ bookControllers.controller("BookController", function ($scope, BookFactory, $loc
 	
     $scope.getPage = function (pageNumber) {
     	$scope.page = BookFactory.query({
-        		pageNumber: pageNumber, pageSize : pageSize
+        		pageNumber: pageNumber, pageSize : AppService.getPageSize()
         	}, function(data) {
                 var pages = [];
                 for(var i = 0; i <= data.totalPages - 1; i++) {

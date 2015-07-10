@@ -1,7 +1,7 @@
 var noteServices = angular.module('noteServices', ['ngResource']);
 
 
-noteServices.service("NoteService", function($rootScope, $location){
+noteServices.service("NoteService", function() {
 	
 	var currentBook;
 	

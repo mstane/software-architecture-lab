@@ -2,14 +2,15 @@ package org.sm.lab.mybooks3.web;
 
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Random;
 
 import javax.validation.Valid;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.sm.lab.mybooks3.domain.Reader;
+import org.sm.lab.mybooks3.enums.Genre;
 import org.sm.lab.mybooks3.enums.SystemRole;
 import org.sm.lab.mybooks3.service.ReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,6 +130,16 @@ public class AppRestController {
         mailMessage.setText(message);
         mailTemplate.send(mailMessage);
     }
+    
+	@RequestMapping(value = "/app_data")
+	public ResponseEntity<Map<String, List<String>>> appData() {
+		
+		Map<String, List<String>> appData = new HashMap<String, List<String>>();
+		appData.put("genres", Genre.names());
+		appData.put("systemRoles", SystemRole.names());
+		
+		return new ResponseEntity<Map<String, List<String>>>(appData, HttpStatus.OK);
+	}
     
 	
 }

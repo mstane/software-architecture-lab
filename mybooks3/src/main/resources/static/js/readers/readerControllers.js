@@ -1,11 +1,8 @@
 var readerControllers = angular.module('readerControllers', ['readerFactories']);
 
-var systemRoles = ["Admin", "Common"];
-
-var pageSize = 5;
-
-readerControllers.controller("ReaderController", function ($scope, ReaderFactory, NotificationService, $location, $routeParams, $rootScope) {
-	$scope.systemRoles = systemRoles;
+readerControllers.controller("ReaderController", function ($scope, ReaderFactory, NotificationService, AppService, $location, $routeParams, $rootScope) {
+	
+	$scope.systemRoles = AppService.getSystemRoles();
 	
 	$scope.showView = function(id) {
 		$location.path("/readers/view/" + id);
@@ -26,7 +23,7 @@ readerControllers.controller("ReaderController", function ($scope, ReaderFactory
 
     $scope.getPage = function (pageNumber) {
     	$scope.page = ReaderFactory.query({
-        		pageNumber: pageNumber, pageSize : pageSize
+        		pageNumber: pageNumber, pageSize : AppService.getPageSize()
         	}, function(data) {
                 var pages = [];
                 for(var i = 0; i <= data.totalPages - 1; i++) {
