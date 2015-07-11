@@ -7,8 +7,6 @@ sharedServices.service("AppService", function($rootScope, $location, $http){
 	var pageSize = 5;
 	
 	this.init = function() {
-		alert('Data initialization');
-		
 		$http.get('/app_data').success(function(data, status, headers, config) {
 			if (data.genres) {
 				genres = data.genres;

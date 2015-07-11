@@ -28,7 +28,7 @@ public interface ReaderService {
 	public abstract Page<Reader> findReaderEntries(int pageNumber, int pageSize);
 	
 	
-	public abstract List<Reader> search(String keyword, int pageNumber, int pageSize);
+	public abstract Page<Reader> search(String keyword, int pageNumber, int pageSize);
 
 	
 	public abstract Reader saveReader(Reader reader);

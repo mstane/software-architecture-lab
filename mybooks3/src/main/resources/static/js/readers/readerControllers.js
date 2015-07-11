@@ -1,6 +1,6 @@
 var readerControllers = angular.module('readerControllers', ['readerFactories']);
 
-readerControllers.controller("ReaderController", function ($scope, ReaderFactory, NotificationService, AppService, $location, $routeParams, $rootScope) {
+readerControllers.controller("ReaderController", function ($scope, ReaderFactory, ReaderService, NotificationService, AppService, $location, $routeParams, $rootScope) {
 	
 	$scope.systemRoles = AppService.getSystemRoles();
 	
@@ -9,6 +9,8 @@ readerControllers.controller("ReaderController", function ($scope, ReaderFactory
 	}
 	
 	function init() {
+		ReaderService.setSearchString(null);
+		
 		var path = $location.$$path;
 		
 		if (path == URLS.readersList) {
@@ -22,19 +24,30 @@ readerControllers.controller("ReaderController", function ($scope, ReaderFactory
     }
 
     $scope.getPage = function (pageNumber) {
-    	$scope.page = ReaderFactory.query({
-        		pageNumber: pageNumber, pageSize : AppService.getPageSize()
-        	}, function(data) {
-                var pages = [];
-                for(var i = 0; i <= data.totalPages - 1; i++) {
-                    pages.push(i);
-                }
-                $scope.range = pages;
-        	}, function(error) {
-        		NotificationService.statusBarError(error.message);
-        	});
+    	var params = { pageNumber: pageNumber, pageSize : AppService.getPageSize() };
+    	if (ReaderService.getSearchString()) {
+    		params.search = ReaderService.getSearchString();
+    	}
+    	
+    	$scope.page = ReaderFactory.query(params, function(data) {
+            var pages = [];
+            for(var i = 0; i <= data.totalPages - 1; i++) {
+                pages.push(i);
+            }
+            $scope.range = pages;
+    	}, function(error) {
+    		NotificationService.statusBarError(error.message);
+    	});
     };
-		
+    
+	$scope.search = function() {
+		if ($scope.keyword) {
+			ReaderService.setSearchString($scope.keyword);
+			
+			$scope.getPage(0);
+		}
+	}
+   
     $scope.update = function() {
         var reader = new ReaderFactory($scope.reader);
         reader.$update().then(function() {
@@ -42,19 +55,6 @@ readerControllers.controller("ReaderController", function ($scope, ReaderFactory
      	   NotificationService.statusBarSuccessNextPage("Successfully updated the reader.");
         });
     }
-
-	$scope.search = function() {
-		if ($scope.keyword) {
-			var params = { search: $scope.keyword };
-			
-			ReaderFactory.search(params, function(data) {
-				$scope.readers = data;
-        	}, function(error) {
-        		NotificationService.statusBarError(error.statusText);
-        	});
-			
-		}
-	}
 
     $scope.deleteReader = function () {
         var custName = $scope.reader.firstName + ' ' + $scope.reader.lastName;

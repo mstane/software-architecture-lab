@@ -46,8 +46,8 @@ public class ReaderServiceImpl implements ReaderService {
         return readerRepository.findAll(new PageRequest(pageNumber, pageSize));
     }
 	
-	public List<Reader> search(String keyword, int pageNumber, int pageSize) {
-		return readerRepository.search(keyword.toLowerCase(), new PageRequest(pageNumber, pageSize)).getContent();
+	public Page<Reader> search(String keyword, int pageNumber, int pageSize) {
+		return readerRepository.search(keyword.toLowerCase(), new PageRequest(pageNumber, pageSize));
 	}
 
 	public Reader saveReader(Reader reader) {

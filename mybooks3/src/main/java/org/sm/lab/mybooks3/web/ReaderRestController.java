@@ -1,7 +1,5 @@
 package org.sm.lab.mybooks3.web;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.sm.lab.mybooks3.domain.Reader;
@@ -34,11 +32,9 @@ public class ReaderRestController {
 		return this.readerService.findReader(id);
 	}
 	
-//	@RequestMapping(value="/search/{keyword}", method=RequestMethod.GET)
 	@RequestMapping(params = "search", method=RequestMethod.GET)
-	public List<Reader> get(@RequestParam("search") String keyword) {
-		List<Reader> resultReaders = readerService.search(keyword, 0, 10);
-		return resultReaders;
+	public Page<Reader> get(@RequestParam("search") String keyword, @RequestParam(value = "pageNumber", required = false) Integer pageNumber, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+		return readerService.search(keyword, pageNumber, pageSize);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
