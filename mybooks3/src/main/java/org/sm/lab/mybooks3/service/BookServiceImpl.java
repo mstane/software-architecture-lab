@@ -2,13 +2,14 @@ package org.sm.lab.mybooks3.service;
 
 import java.util.List;
 
-import org.sm.lab.mybooks3.CurrentUser;
 import org.sm.lab.mybooks3.domain.Book;
 import org.sm.lab.mybooks3.domain.Reader;
 import org.sm.lab.mybooks3.domain.SearchItem;
 import org.sm.lab.mybooks3.enums.Genre;
 import org.sm.lab.mybooks3.repository.BookRepository;
 import org.sm.lab.mybooks3.repository.ReaderRepository;
+import org.sm.lab.mybooks3.security.AuthorizationService;
+import org.sm.lab.mybooks3.security.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

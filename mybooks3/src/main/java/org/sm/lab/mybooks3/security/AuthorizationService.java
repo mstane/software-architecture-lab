@@ -1,6 +1,5 @@
-package org.sm.lab.mybooks3.service;
+package org.sm.lab.mybooks3.security;
 
-import org.sm.lab.mybooks3.CurrentUser;
 
 
 public interface AuthorizationService {

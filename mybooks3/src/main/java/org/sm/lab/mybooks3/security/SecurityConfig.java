@@ -1,4 +1,4 @@
-package org.sm.lab.mybooks3;
+package org.sm.lab.mybooks3.security;
 
 import java.io.IOException;
 

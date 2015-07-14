@@ -1,8 +1,7 @@
-package org.sm.lab.mybooks3.service;
+package org.sm.lab.mybooks3.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sm.lab.mybooks3.CurrentUser;
 import org.sm.lab.mybooks3.enums.SystemRole;
 import org.springframework.stereotype.Service;
 

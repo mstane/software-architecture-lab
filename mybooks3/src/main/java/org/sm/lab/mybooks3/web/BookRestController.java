@@ -2,10 +2,10 @@ package org.sm.lab.mybooks3.web;
 
 import javax.validation.Valid;
 
-import org.sm.lab.mybooks3.CurrentUser;
 import org.sm.lab.mybooks3.domain.Book;
 import org.sm.lab.mybooks3.domain.SearchItem;
 import org.sm.lab.mybooks3.enums.Genre;
+import org.sm.lab.mybooks3.security.CurrentUser;
 import org.sm.lab.mybooks3.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
