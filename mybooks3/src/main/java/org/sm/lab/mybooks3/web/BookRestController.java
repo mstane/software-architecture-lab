@@ -5,7 +5,7 @@ import javax.validation.Valid;
 import org.sm.lab.mybooks3.domain.Book;
 import org.sm.lab.mybooks3.domain.SearchItem;
 import org.sm.lab.mybooks3.enums.Genre;
-import org.sm.lab.mybooks3.security.CurrentUser;
+import org.sm.lab.mybooks3.security.UserDetailsImpl;
 import org.sm.lab.mybooks3.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,7 +28,7 @@ public class BookRestController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public Page<Book> list(@RequestParam(value = "pageNumber", required = false) Integer pageNumber, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
-		CurrentUser currentUser = (CurrentUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserDetailsImpl currentUser = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return this.bookService.findReadersBooks(currentUser.getId(), pageNumber, pageSize);
 	}
 

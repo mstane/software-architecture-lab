@@ -4,7 +4,7 @@ import org.sm.lab.mybooks3.domain.Reader;
 import org.sm.lab.mybooks3.enums.SystemRole;
 import org.springframework.security.core.authority.AuthorityUtils;
 
-public class CurrentUser extends org.springframework.security.core.userdetails.User {
+public class UserDetailsImpl extends org.springframework.security.core.userdetails.User {
 
 	private static final long serialVersionUID = 1L;
 
@@ -12,7 +12,7 @@ public class CurrentUser extends org.springframework.security.core.userdetails.U
 	private SystemRole systemRole;
 	private String displayName;
 	
-    public CurrentUser(Reader reader) {
+    public UserDetailsImpl(Reader reader) {
         super(reader.getEmail(), reader.getPassword(), AuthorityUtils.createAuthorityList(reader.getSystemRole().toString()));
         this.id = reader.getId();
         this.systemRole = reader.getSystemRole();
