@@ -17,6 +17,8 @@ import org.sm.lab.mybooks3.domain.Book;
 import org.sm.lab.mybooks3.domain.Reader;
 import org.sm.lab.mybooks3.domain.SearchItem;
 import org.sm.lab.mybooks3.enums.Genre;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
 public class BookRepositoryImpl implements BookRepositoryCustom {
@@ -151,10 +153,20 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 		return filterQuery.getResultList();
 	}
 	
-	
-	
 	@Override
-	public List<SearchItem> search(String keyword, Genre genre) {
+	public Page<SearchItem> searchContents(String keyword, Genre genre, Pageable pageable) {
+		List<SearchItem> totalContents = searchContents(keyword, genre);
+		
+		int firstResult = pageable.getPageNumber() * pageable.getPageSize();
+		List<SearchItem> pageContent = new ArrayList<SearchItem>();
+        for (int i = firstResult; i < totalContents.size() && i < firstResult + pageable.getPageSize(); i++) {
+        	pageContent.add(totalContents.get(i));
+        }
+		
+		return new PageImpl<SearchItem>(pageContent, pageable, totalContents.size());
+	}
+	
+	public List<SearchItem> searchContents(String keyword, Genre genre) {
 		List<SearchItem> bookSearchItems = searchBooks(keyword, genre);
 		List<SearchItem> noteSearchItems = searchNotes(keyword, genre);
 		bookSearchItems.addAll(noteSearchItems);
@@ -217,7 +229,7 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 
 	@Override
 	public Long countSearch(String keyword, Genre genre) {
-		List<SearchItem> list = search(keyword, genre);
+		List<SearchItem> list = searchContents(keyword, genre);
 		return Long.valueOf(list.size());
 	}
 	

@@ -1,10 +1,13 @@
 var bookControllers = angular.module('bookControllers', ['bookFactories']);
 
-bookControllers.controller("BookController", function ($scope, BookFactory, $location, $rootScope, NoteService, NotificationService, AppService, $routeParams) {
+bookControllers.controller("BookController", function ($scope, BookFactory, BookService, $location, $rootScope, NoteService, NotificationService, AppService, $routeParams) {
 	
 	$scope.genres = AppService.getGenres();
 	
 	function init() {
+		BookService.setSearchString(null);
+		BookService.setSearchGenre(null);
+		
 		var path = $location.$$path;
 		
 		if (path == URLS.booksList) {
@@ -20,18 +23,32 @@ bookControllers.controller("BookController", function ($scope, BookFactory, $loc
     }
 	
     $scope.getPage = function (pageNumber) {
-    	$scope.page = BookFactory.query({
-        		pageNumber: pageNumber, pageSize : AppService.getPageSize()
-        	}, function(data) {
-                var pages = [];
-                for(var i = 0; i <= data.totalPages - 1; i++) {
-                    pages.push(i);
-                }
-                $scope.range = pages;
-        	}, function(error) {
-        		NotificationService.statusBarError(error.message);
-        	});
+    	var params = { pageNumber: pageNumber, pageSize : AppService.getPageSize() };
+    	if (BookService.getSearchString()) {
+    		params.search = BookService.getSearchString();
+    		params.genre = BookService.getSearchGenre();
+    	}
+    	
+    	$scope.page = BookFactory.query(params, function(data) {
+            var pages = [];
+            for(var i = 0; i <= data.totalPages - 1; i++) {
+                pages.push(i);
+            }
+            $scope.range = pages;
+    	}, function(error) {
+    		NotificationService.statusBarError(error.message);
+    	});
     };
+    
+	$scope.search = function() {
+		if ($scope.keyword) {
+			BookService.setSearchString($scope.keyword);
+			BookService.setSearchGenre($scope.genre);
+			
+			$scope.getPage(0);
+		}
+	}
+
 	
 	$scope.showView = function(id) {
 		$location.path("/books/view/" + id);
@@ -77,27 +94,6 @@ bookControllers.controller("BookController", function ($scope, BookFactory, $loc
          });
          
      };
-    
-    
-    
-	$scope.search = function() {
-		if ($scope.keyword) {
-			var params = { search: $scope.keyword };
-
-			var genre = $scope.genre;
-			if (genre) {
-				params.genre = genre;
-			}
-			
-			BookFactory.search(params, function(data) {
-				$scope.searchItems = data;
-        	}, function(error) {
-        		NotificationService.statusBarError(error.statusText);
-        	});
-			
-		}
-	}
-    
     
     
     $scope.today = function() {

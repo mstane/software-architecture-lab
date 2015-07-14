@@ -1,7 +1,5 @@
 package org.sm.lab.mybooks3.web;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.sm.lab.mybooks3.CurrentUser;
@@ -40,8 +38,8 @@ public class BookRestController {
 	}
 	
 	@RequestMapping(params = "search", method=RequestMethod.GET)
-	public List<SearchItem> get(@RequestParam("search") String keyword, @RequestParam(value = "genre", required = false) Genre genre) {
-		List<SearchItem> result = bookService.search(keyword, genre);
+	public Page<SearchItem> get(@RequestParam("search") String keyword, @RequestParam(value = "genre", required = false) Genre genre, @RequestParam(value = "pageNumber", required = false) Integer pageNumber, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+		Page<SearchItem> result = bookService.search(keyword, genre, pageNumber, pageSize);
 		return result;
 	}
 	

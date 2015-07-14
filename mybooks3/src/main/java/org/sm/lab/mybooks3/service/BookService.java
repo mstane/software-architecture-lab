@@ -31,7 +31,7 @@ public interface BookService {
 
 	public abstract  Long countSearch(String title, String author, String url, String startReadingDate, String endReadingDate, String rating, String genre);
 
-	public abstract List<SearchItem> search(String keyword, Genre genre);
+	public abstract Page<SearchItem> search(String keyword, Genre genre, int pageNumber, int pageSize);
 
 	public Long countSearch(String keyword, Genre genre);
 

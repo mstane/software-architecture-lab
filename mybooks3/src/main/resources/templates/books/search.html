@@ -65,7 +65,7 @@
 			
 			<table class="table table-bordered">
 				<tbody th:remove="all-but-first">
-					<tr ng-repeat="searchItem in searchItems">
+					<tr ng-repeat="searchItem in page.content">
 		        		<td>
 		        			<p><a th:href="'{{searchItem.link}}'" href="./view.html" th:text="'{{searchItem.title}}'">Link to Book</a></p>
 		        			{{searchItem.shortContent}}
@@ -90,7 +90,26 @@
 		        		</td>
 		      		</tr>
 		      	</tbody>
-  			</table>			
+  			</table>
+  			
+  			<ul class="pagination" ng-show="page.totalPages > 1">
+		         <li ng-show="page.number == 0" class="disabled"><a>&#8810;</a></li>
+		         <li ng-show="page.number == 0" class="disabled"><a>&#60;</a></li>
+		         <li ng-show="page.number != 0"><a href="javascript:void(0)" ng-click="getPage(0)">&#8810;</a></li>
+		         <li ng-show="page.number != 0"><a href="javascript:void(0)" ng-click="getPage(page.number-1)">&#60;</a></li>
+		  
+		         <li ng-repeat="i in range" ng-class="{active : page.number == i}">
+		             <a href="javascript:void(0)" ng-click="getPage(i)">{{i + 1}}</a>
+		         </li>
+		  
+		         <li ng-show="page.number == page.totalPages - 1" class="disabled"><a>&#62;</a></li>
+		         <li ng-show="page.number == page.totalPages - 1" class="disabled"><a>&#8811;</a></li>
+		         <li ng-show="page.number != page.totalPages - 1"><a href="javascript:void(0)" ng-click="getPage(page.number + 1)">&#62;</a></li>
+		         <li ng-show="page.number != page.totalPages - 1"><a href="javascript:void(0)" ng-click="getPage(page.totalPages - 1)">&#8811;</a></li>
+			</ul>
+  			
+  			
+  						
 		</div>
 
 

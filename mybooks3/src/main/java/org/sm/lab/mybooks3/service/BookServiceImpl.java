@@ -93,8 +93,8 @@ public class BookServiceImpl implements BookService {
 	}
 	
 	@Override
-	public List<SearchItem> search(String keyword, Genre genre) {
-		return bookRepository.search(keyword, genre);
+	public Page<SearchItem> search(String keyword, Genre genre, int pageNumber, int pageSize) {
+		return bookRepository.searchContents(keyword, genre, new PageRequest(pageNumber, pageSize));
 	}
 	
 	@Override
