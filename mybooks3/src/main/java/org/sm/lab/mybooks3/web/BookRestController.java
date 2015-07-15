@@ -5,13 +5,12 @@ import javax.validation.Valid;
 import org.sm.lab.mybooks3.domain.Book;
 import org.sm.lab.mybooks3.domain.SearchItem;
 import org.sm.lab.mybooks3.enums.Genre;
-import org.sm.lab.mybooks3.security.UserDetailsImpl;
 import org.sm.lab.mybooks3.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +27,7 @@ public class BookRestController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public Page<Book> list(@RequestParam(value = "pageNumber", required = false) Integer pageNumber, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
-		UserDetailsImpl currentUser = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return this.bookService.findReadersBooks(currentUser.getId(), pageNumber, pageSize);
+		return this.bookService.findReadersBooks(new PageRequest(pageNumber, pageSize));
 	}
 
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
@@ -39,7 +37,7 @@ public class BookRestController {
 	
 	@RequestMapping(params = "search", method=RequestMethod.GET)
 	public Page<SearchItem> get(@RequestParam("search") String keyword, @RequestParam(value = "genre", required = false) Genre genre, @RequestParam(value = "pageNumber", required = false) Integer pageNumber, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
-		Page<SearchItem> result = bookService.search(keyword, genre, pageNumber, pageSize);
+		Page<SearchItem> result = bookService.search(keyword, genre, new PageRequest(pageNumber, pageSize));
 		return result;
 	}
 	

@@ -154,8 +154,8 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 	}
 	
 	@Override
-	public Page<SearchItem> searchContents(String keyword, Genre genre, Pageable pageable) {
-		List<SearchItem> totalContents = searchContents(keyword, genre);
+	public Page<SearchItem> searchContents(Long readerId, String keyword, Genre genre, Pageable pageable) {
+		List<SearchItem> totalContents = searchContents(readerId, keyword, genre);
 		
 		int firstResult = pageable.getPageNumber() * pageable.getPageSize();
 		List<SearchItem> pageContent = new ArrayList<SearchItem>();
@@ -166,16 +166,17 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 		return new PageImpl<SearchItem>(pageContent, pageable, totalContents.size());
 	}
 	
-	public List<SearchItem> searchContents(String keyword, Genre genre) {
-		List<SearchItem> bookSearchItems = searchBooks(keyword, genre);
-		List<SearchItem> noteSearchItems = searchNotes(keyword, genre);
+	public List<SearchItem> searchContents(Long readerId, String keyword, Genre genre) {
+		List<SearchItem> bookSearchItems = searchBooks(readerId, keyword, genre);
+		List<SearchItem> noteSearchItems = searchNotes(readerId, keyword, genre);
 		bookSearchItems.addAll(noteSearchItems);
 		return bookSearchItems;
 	}
 		
-	private List<SearchItem> searchBooks(String keyword, Genre genre) {
+	private List<SearchItem> searchBooks(Long readerId, String keyword, Genre genre) {
 		StringBuilder queryBuilder = new StringBuilder();
-		queryBuilder.append(" WHERE (");
+		queryBuilder.append(" WHERE o.reader.id = :readerId");
+		queryBuilder.append(" AND (");
 		queryBuilder.append("LOWER(o.title) LIKE :keyword");
 		queryBuilder.append(" OR ");
 		queryBuilder.append("LOWER(o.author) LIKE :keyword");
@@ -192,6 +193,7 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 						"SELECT NEW org.sm.lab.mybooks3.domain.SearchItem(o) FROM Book AS o" + queryBuilder.toString(),
 						SearchItem.class);
 
+		q.setParameter("readerId", readerId);
 		q.setParameter("keyword", "%"  +keyword + "%");
 		if (genre != null) {
 			q.setParameter("genre", genre);
@@ -201,9 +203,10 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 
 	}
 	
-	private List<SearchItem> searchNotes(String keyword, Genre genre) {
+	private List<SearchItem> searchNotes(Long readerId, String keyword, Genre genre) {
 		StringBuilder queryBuilder = new StringBuilder();
-		queryBuilder.append(" WHERE (");
+		queryBuilder.append(" WHERE o.book.reader.id = :readerId");
+		queryBuilder.append(" AND (");
 		queryBuilder.append("LOWER(o.title) LIKE :keyword");
 		queryBuilder.append(" OR ");
 		queryBuilder.append("LOWER(o.content) LIKE :keyword");
@@ -218,6 +221,7 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 						"SELECT NEW org.sm.lab.mybooks3.domain.SearchItem(o) FROM Note AS o" + queryBuilder.toString(),
 						SearchItem.class);
 
+		q.setParameter("readerId", readerId);
 		q.setParameter("keyword", "%"  +keyword + "%");
 		if (genre != null) {
 			q.setParameter("genre", genre);
@@ -228,8 +232,8 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 	}
 
 	@Override
-	public Long countSearch(String keyword, Genre genre) {
-		List<SearchItem> list = searchContents(keyword, genre);
+	public Long countSearch(Long readerId, String keyword, Genre genre) {
+		List<SearchItem> list = searchContents(readerId, keyword, genre);
 		return Long.valueOf(list.size());
 	}
 	

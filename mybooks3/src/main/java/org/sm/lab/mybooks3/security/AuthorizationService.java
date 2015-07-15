@@ -6,8 +6,8 @@ public interface AuthorizationService {
 
     boolean canAccessUser(UserDetailsImpl userDetails, Long userId);
     
-    boolean canUpdateBook(UserDetailsImpl userDetails, Book book);
+    boolean canAccessBook(UserDetailsImpl userDetails, Book book);
     
-    boolean canUpdateBook(UserDetailsImpl userDetails, Long bookId);
+    boolean canAccessBook(UserDetailsImpl userDetails, Long bookId);
 
 }

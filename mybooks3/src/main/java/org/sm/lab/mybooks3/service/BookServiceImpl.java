@@ -6,10 +6,12 @@ import org.sm.lab.mybooks3.enums.Genre;
 import org.sm.lab.mybooks3.repository.BookRepository;
 import org.sm.lab.mybooks3.repository.ReaderRepository;
 import org.sm.lab.mybooks3.security.AuthorizationService;
+import org.sm.lab.mybooks3.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,24 +29,26 @@ public class BookServiceImpl implements BookService {
 	AuthorizationService authorizationService;
 	
 	@Override
-	@PreAuthorize("@authorizationService.canAccessUser(principal, #readerId)")
-	public Page<Book> findReadersBooks(Long readerId, int pageNumber, int pageSize) {
-		Page<Book> books = bookRepository.findByReaderId(readerId, new PageRequest(pageNumber, pageSize));
+	public Page<Book> findReadersBooks(PageRequest pageRequest) {
+		UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Page<Book> books = bookRepository.findByReaderId(userDetails.getId(), pageRequest);
 		return books;
     }
 	
 	@Override
+	@PreAuthorize("@authorizationService.canAccessBook(principal, #id)")
 	public Book findBook(Long id) {
         return bookRepository.findOne(id);
     }
 	
 	@Override
-	public Page<SearchItem> search(String keyword, Genre genre, int pageNumber, int pageSize) {
-		return bookRepository.searchContents(keyword, genre, new PageRequest(pageNumber, pageSize));
+	public Page<SearchItem> search(String keyword, Genre genre, PageRequest pageRequest) {
+		UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return bookRepository.searchContents(userDetails.getId(), keyword, genre, pageRequest);
 	}
 
 	@Override
-	@PreAuthorize("@authorizationService.canUpdateBook(principal, #receivedBook)")
+	@PreAuthorize("@authorizationService.canAccessBook(principal, #receivedBook)")
 	public Book saveBook(Book receivedBook) {
 		Book book = null;
 		
@@ -59,7 +63,7 @@ public class BookServiceImpl implements BookService {
     }
 	
 	@Override
-	@PreAuthorize("@authorizationService.canUpdateBook(principal, #id)")
+	@PreAuthorize("@authorizationService.canAccessBook(principal, #id)")
 	public void deleteBook(Long id) {
         bookRepository.delete(id);
     }

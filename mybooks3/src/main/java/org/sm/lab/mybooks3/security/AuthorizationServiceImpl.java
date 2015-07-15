@@ -31,7 +31,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     }
 
 	@Override
-	public boolean canUpdateBook(UserDetailsImpl userDetails, Book book) {
+	public boolean canAccessBook(UserDetailsImpl userDetails, Book book) {
 		if (book.getReader() == null) {
 	        Reader reader = readerRepository.findOne(userDetails.getId());
 	        book.setReader(reader);
@@ -42,7 +42,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	}
 
 	@Override
-	public boolean canUpdateBook(UserDetailsImpl userDetails, Long bookId) {
+	public boolean canAccessBook(UserDetailsImpl userDetails, Long bookId) {
 		if (bookId == null || userDetails == null) return false;
 		
 		Book book = bookRepository.findOne(bookId);

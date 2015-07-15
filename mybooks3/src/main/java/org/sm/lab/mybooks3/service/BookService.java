@@ -3,14 +3,15 @@ import org.sm.lab.mybooks3.domain.Book;
 import org.sm.lab.mybooks3.domain.SearchItem;
 import org.sm.lab.mybooks3.enums.Genre;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 public interface BookService {
 	
-	public Page<Book> findReadersBooks(Long readerId, int pageNumber, int pageSize);
+	public Page<Book> findReadersBooks(PageRequest pageRequest);
 
 	public abstract Book findBook(Long id);
 	
-	public abstract Page<SearchItem> search(String keyword, Genre genre, int pageNumber, int pageSize);
+	public abstract Page<SearchItem> search(String keyword, Genre genre, PageRequest pageRequest);
 	
 	public abstract Book saveBook(Book book);
 
