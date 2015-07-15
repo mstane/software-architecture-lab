@@ -2,9 +2,7 @@ package org.sm.lab.mybooks3.web;
 
 import javax.validation.Valid;
 
-import org.sm.lab.mybooks3.domain.Book;
 import org.sm.lab.mybooks3.domain.Note;
-import org.sm.lab.mybooks3.service.BookService;
 import org.sm.lab.mybooks3.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,32 +21,20 @@ public class NoteRestController {
 	@Autowired
 	NoteService noteService;
 	
-	@Autowired
-	BookService bookService;
-	
-	@RequestMapping(method=RequestMethod.POST)
-	public Note create(@RequestBody @Valid Note note) {
-		return this.noteService.saveNote(note);
-	}
-
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public Note get(@PathVariable("id") long id) {
 		return this.noteService.findNote(id);
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT)
-	public Note update(@RequestBody @Valid Note note, @RequestParam(value = "bookId") long bookId) {
-		Book book = bookService.findBook(bookId);
-		note.setBook(book);
-		return noteService.saveNote(note);
+	@RequestMapping(method=RequestMethod.POST)
+	public Note create(@RequestBody @Valid Note note, @RequestParam(value = "bookId") long bookId) {
+		return noteService.saveNote(bookId, note);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public Note update(@PathVariable("id") long id, @RequestBody @Valid Note note, @RequestParam(value = "bookId") long bookId) {
-		Book book = bookService.findBook(bookId);
-		note.setBook(book);
-		return noteService.saveNote(note);
-	}
+		return noteService.saveNote(bookId, note);
+	}	
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Boolean> delete(@PathVariable("id") long id) {

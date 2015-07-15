@@ -18,20 +18,19 @@ noteControllers.controller("NoteController", function ($scope, $location, $route
     }
 	
 	$scope.update = function() {
-		var idSufix = $routeParams.noteId;
-		if (!idSufix) idSufix = "";
-		
         var noteFactory = new NoteFactory($scope.note);
-        noteFactory.$update({ bookId: NoteService.getCurrentBook().id }).then(function(result) {
-			if (idSufix) {
+        
+        if ($routeParams.noteId) {
+            noteFactory.$update({ bookId: NoteService.getCurrentBook().id }).then(function(result) {
 				NotificationService.statusBarSuccessNextPage("You have successfully updated the note.");
 				$location.path("/notes/view/" + $routeParams.noteId);
-			} else {
+            }, processError);
+        } else {
+            noteFactory.$save({ bookId: NoteService.getCurrentBook().id }).then(function(result) {
 				NotificationService.statusBarSuccessNextPage("You have successfully created the note.");
 				$location.path("/notes/view/" + result.id);
-			}
-        }, processError);
-		
+            }, processError);
+        }
 
 	}	
 	 

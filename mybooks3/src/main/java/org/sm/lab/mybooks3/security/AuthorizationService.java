@@ -9,5 +9,7 @@ public interface AuthorizationService {
     boolean canAccessBook(UserDetailsImpl userDetails, Book book);
     
     boolean canAccessBook(UserDetailsImpl userDetails, Long bookId);
+    
+    boolean canAccessNote(UserDetailsImpl userDetails, Long noteId);
 
 }
