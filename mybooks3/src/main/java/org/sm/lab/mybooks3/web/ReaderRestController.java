@@ -24,7 +24,7 @@ public class ReaderRestController {
 
 	@RequestMapping(method=RequestMethod.GET)
 	public Page<Reader> list(@RequestParam(value = "pageNumber", required = false) Integer pageNumber, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
-		return this.readerService.findReaderEntries(pageNumber, pageSize);
+		return this.readerService.findAllReaders(pageNumber, pageSize);
 	}
 
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
@@ -35,16 +35,6 @@ public class ReaderRestController {
 	@RequestMapping(params = "search", method=RequestMethod.GET)
 	public Page<Reader> get(@RequestParam("search") String keyword, @RequestParam(value = "pageNumber", required = false) Integer pageNumber, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
 		return readerService.search(keyword, pageNumber, pageSize);
-	}
-	
-	@RequestMapping(method=RequestMethod.POST)
-	public Reader create(@RequestBody @Valid Reader reader) {
-		return this.readerService.saveReader(reader);
-	}
-		
-	@RequestMapping(method=RequestMethod.PUT)
-	public Reader update(@RequestBody @Valid Reader reader) {
-		return readerService.saveReader(reader);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)

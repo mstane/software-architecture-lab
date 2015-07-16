@@ -18,7 +18,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,9 +36,6 @@ public class AppRestController {
     @Autowired
     private ReaderService readerService;
     
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    
 	
 	@RequestMapping("/user")
 	public Principal user(Principal user) {
@@ -51,9 +47,7 @@ public class AppRestController {
 		HttpStatus httpStatus = null;
 		String message = null;
 		try {
-    		reader.setSystemRole(SystemRole.Common);
-    		reader.setPassword(encodePassword(reader.getPassword()));
-    		readerService.saveReader(reader);
+    		readerService.registerReader(reader);
        		httpStatus = HttpStatus.OK;
        		message = "You have successfully registered.";
 		} catch (Exception e) {
@@ -81,8 +75,7 @@ public class AppRestController {
         	try {
         		Reader reader = readerOpt.get();
         		String generatedPassword = generatePassword(); 
-        		reader.setPassword(encodePassword(generatedPassword));
-        		readerService.saveReader(reader);
+        		readerService.changePassword(generatedPassword, reader);
         		sendMessage(reader.getEmail(), "Forgotten password", "Your password is: " + generatedPassword);        		
         		httpStatus = HttpStatus.OK;
         		message = "Your password has been successfully sent to your mail.";
@@ -95,20 +88,19 @@ public class AppRestController {
         return getMessageResponse(httpStatus, message);
 
 	}
+
 	
-	private String generatePassword() {
-		String password = RandomStringUtils.random(10, true, true);
-		return password;
+	@RequestMapping(value = "/app_data")
+	public ResponseEntity<Map<String, List<String>>> appData() {
+		
+		Map<String, List<String>> appData = new HashMap<String, List<String>>();
+		appData.put("genres", Genre.names());
+		appData.put("systemRoles", SystemRole.names());
+		
+		return new ResponseEntity<Map<String, List<String>>>(appData, HttpStatus.OK);
 	}
-	
-	private String encodePassword(String password) {
-		if (password != null) {
-			password  = passwordEncoder.encode(password);
-			return password;
-		}
-		return null;
-	}
-	
+ 
+		
 	private ResponseEntity<String> getMessageResponse(HttpStatus httpStatus, String message) {
 		Map<String, Object> messageJson = new HashMap<String, Object>();
 		messageJson.put("message", message);
@@ -131,15 +123,10 @@ public class AppRestController {
         mailTemplate.send(mailMessage);
     }
     
-	@RequestMapping(value = "/app_data")
-	public ResponseEntity<Map<String, List<String>>> appData() {
-		
-		Map<String, List<String>> appData = new HashMap<String, List<String>>();
-		appData.put("genres", Genre.names());
-		appData.put("systemRoles", SystemRole.names());
-		
-		return new ResponseEntity<Map<String, List<String>>>(appData, HttpStatus.OK);
+	private String generatePassword() {
+		String password = RandomStringUtils.random(10, true, true);
+		return password;
 	}
-    
+   
 	
 }

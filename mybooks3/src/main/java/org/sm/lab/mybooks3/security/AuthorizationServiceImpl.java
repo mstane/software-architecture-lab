@@ -25,14 +25,27 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     
 	@Autowired
 	NoteRepository noteRepository;
-    
+	
+	@Override
+	public boolean isAdmin(UserDetailsImpl userDetails) {
+		return userDetails != null && userDetails.getSystemRole() == SystemRole.Admin;
+	}
+
+	@Override
+	public boolean canAccessReader(UserDetailsImpl userDetails, Reader reader) {
+		if (reader == null || userDetails == null) {
+			return false;
+		} else if (reader.getId() == null) {
+	        return true;
+		} else {
+			return canAccessReader(userDetails, reader.getId());
+		}
+	}	
+	
     @Override
-    public boolean canAccessUser(UserDetailsImpl userDetails, Long userId) {
+    public boolean canAccessReader(UserDetailsImpl userDetails, Long userId) {
         LOGGER.debug("Checking if user={} has access to user={}", userDetails, userId);
-        return userDetails != null
-                && (userDetails.getSystemRole() == SystemRole.Admin 
-                	|| userDetails.getId().equals(userId)
-                	);
+        return userDetails != null && (userDetails.getId().equals(userId) || isAdmin(userDetails));
     }
 
 	@Override
@@ -44,7 +57,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	        book.setReader(reader);
 	        return true;
 		} else {
-			return canAccessUser(userDetails, book.getReader().getId());
+			return canAccessReader(userDetails, book.getReader().getId());
 		}
 	}
 
@@ -57,7 +70,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 		if (book == null) {
 			return false;
 		} else {
-			return canAccessUser(userDetails, book.getReader().getId());
+			return canAccessReader(userDetails, book.getReader().getId());
 		}
 
 	}
