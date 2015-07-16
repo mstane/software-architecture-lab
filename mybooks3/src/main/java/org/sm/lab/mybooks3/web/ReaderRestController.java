@@ -33,7 +33,7 @@ public class ReaderRestController {
 	}
 	
 	@RequestMapping(params = "search", method=RequestMethod.GET)
-	public Page<Reader> get(@RequestParam("search") String keyword, @RequestParam(value = "pageNumber", required = false) Integer pageNumber, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+	public Page<Reader> search(@RequestParam("search") String keyword, @RequestParam(value = "pageNumber", required = false) Integer pageNumber, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
 		return readerService.search(keyword, pageNumber, pageSize);
 	}
 	

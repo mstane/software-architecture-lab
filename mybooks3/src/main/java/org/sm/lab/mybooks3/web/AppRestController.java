@@ -37,7 +37,7 @@ public class AppRestController {
     private ReaderService readerService;
     
 	
-	@RequestMapping("/user")
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public Principal user(Principal user) {
 		return user;
 	}
@@ -59,7 +59,7 @@ public class AppRestController {
 		
 	}
 	
-	@RequestMapping(value = "/forgotten_password_send")
+	@RequestMapping(value = "/forgotten_password_send", method = RequestMethod.GET)
 	public ResponseEntity<String> forgottenPassword(@RequestParam(value = "emailOrUsername", required = true) String emailOrUsername) {
 		HttpStatus httpStatus;
 		String message;
@@ -90,7 +90,7 @@ public class AppRestController {
 	}
 
 	
-	@RequestMapping(value = "/app_data")
+	@RequestMapping(value = "/app_data", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, List<String>>> appData() {
 		
 		Map<String, List<String>> appData = new HashMap<String, List<String>>();

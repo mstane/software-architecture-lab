@@ -34,6 +34,7 @@ sharedControllers.controller('navigation', function($rootScope, $scope, $http, $
 	authenticate();
 
 	$scope.credentials = {};
+	
 	$scope.login = function() {
 		authenticate($scope.credentials, function(currentReader, message) {
 			if (currentReader) {

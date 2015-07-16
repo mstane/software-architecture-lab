@@ -36,7 +36,7 @@ public class BookRestController {
 	}
 	
 	@RequestMapping(params = "search", method=RequestMethod.GET)
-	public Page<SearchItem> get(@RequestParam("search") String keyword, @RequestParam(value = "genre", required = false) Genre genre, @RequestParam(value = "pageNumber", required = false) Integer pageNumber, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
+	public Page<SearchItem> searchContent(@RequestParam("search") String keyword, @RequestParam(value = "genre", required = false) Genre genre, @RequestParam(value = "pageNumber", required = false) Integer pageNumber, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
 		Page<SearchItem> result = bookService.search(keyword, genre, new PageRequest(pageNumber, pageSize));
 		return result;
 	}
