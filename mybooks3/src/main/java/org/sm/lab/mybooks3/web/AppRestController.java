@@ -51,7 +51,7 @@ public class AppRestController {
        		httpStatus = HttpStatus.OK;
        		message = "You have successfully registered.";
 		} catch (Exception e) {
-			httpStatus = HttpStatus.BAD_REQUEST;
+			httpStatus = HttpStatus.SERVICE_UNAVAILABLE;
 			message = e.getMessage();
 		}
 		
