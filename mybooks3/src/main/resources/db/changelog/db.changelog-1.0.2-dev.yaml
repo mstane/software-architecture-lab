@@ -33,5 +33,11 @@ databaseChangeLog:
         - column:
             name: READER_ID
             value: 1
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
 
             
