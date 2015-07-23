@@ -1,0 +1,37 @@
+databaseChangeLog:
+- changeSet:
+    id: 3
+    author: stane
+    context: dev
+    changes:
+    
+    - insert:
+        comment: Test data for book
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 1
+        - column:
+            name: TITLE
+            value: dev-title
+        - column:
+            name: AUTHOR
+            value: dev-author
+        - column:
+            name: URL
+            value: dev-url
+        - column:
+            name: RATING
+            value: 3
+        - column:
+            name: GENRE
+            value: Comedy
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 1
+
+            

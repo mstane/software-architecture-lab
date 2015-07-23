@@ -28,6 +28,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.codec.Base64;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.util.LinkedMultiValueMap;
@@ -38,6 +39,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringApplicationConfiguration(classes = MyBooks3Application.class)
 @WebAppConfiguration
 @IntegrationTest("server.port:0")
+@ActiveProfiles("test")
 public class ApplicationTests {
 
 	@Value("${local.server.port}")
@@ -102,12 +104,6 @@ public class ApplicationTests {
 	}
 	
 	@Test
-	public void forgottenPasswordSend() {
-		ResponseEntity<String> response = new TestRestTemplate().getForEntity("http://localhost:" + port + "/forgotten_password_send?emailOrUsername=aaaa", String.class);
-		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-	}
-	
-	@Test
 	public void registerReader() {
 		TestRestTemplate registerReaderTemplate = new TestRestTemplate();
 		ResponseEntity<String> response = registerReaderTemplate.getForEntity("http://localhost:" + port + "/", String.class);
@@ -124,6 +120,12 @@ public class ApplicationTests {
 				newReader, headers, HttpMethod.POST, URI.create("http://localhost:" + port + "/register_reader"));
 		response = registerReaderTemplate.exchange(request, String.class);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
+	}
+	
+	@Test
+	public void forgottenPasswordSend() {
+		ResponseEntity<String> response = new TestRestTemplate().getForEntity("http://localhost:" + port + "/forgotten_password_send?emailOrUsername=aaaa", String.class);
+		assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
 	}
 	
 	
@@ -174,7 +176,7 @@ public class ApplicationTests {
 		
 	}
 	
-	private HttpHeaders getHttpHeaders(ResponseEntity<String> response) {
+	private HttpHeaders getHttpHeaders(ResponseEntity<?> response) {
 		String csrf = getCsrf(response.getHeaders());
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("X-XSRF-TOKEN", csrf);

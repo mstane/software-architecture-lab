@@ -5,3 +5,10 @@ databaseChangeLog:
 - include:
     relativeToChangelogFile: true
     file: db.changelog-1.0.1.yaml
+- include:
+    relativeToChangelogFile: true
+    file: db.changelog-1.0.2-test.yaml
+- include:
+    relativeToChangelogFile: true
+    file: db.changelog-1.0.2-dev.yaml
+    
