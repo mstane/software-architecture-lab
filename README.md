@@ -34,7 +34,7 @@ The purpose of this repository is to research and compare different technologies
  
 ## User requirements ##
  
-They are simplified to the level to have point but not to overwhelm the main goal which are technologies stack and its implementation.
+They are simplified to the level to have point but not to overwhelm the main goal which are technology stack and its implementation.
 
 This web application keeps track of your read books. 
  - You can register yourself, create and update data about the book and to record your notes or quotations. You can update your profile and search your completely content on the site.
@@ -42,8 +42,8 @@ This web application keeps track of your read books.
  
 ## Technologies ##
 
- - MyBooks: GWT, MGWT, MVP, Guice, GIN, JPA, EclipseLink, EasyMock, Maven
- - MyBooks2: Spring MVC, JSP, JPA, Hibernate, Maven
- - MyBooks3: Spring MVC, Spring Boot, JPA, Hibernate, AngularJS, Bootstrap, Maven
+ - [MyBooks](https://github.com/mstane/lab/tree/master/mybooks): GWT, MGWT, MVP, Guice, GIN, JPA, EclipseLink, EasyMock, Maven
+ - [MyBooks2](https://github.com/mstane/lab/tree/master/mybooks2): Spring MVC, JSP, JPA, Hibernate, Maven
+ - [MyBooks3](https://github.com/mstane/lab/tree/master/mybooks3): Spring MVC, Spring Boot, JPA, Hibernate, AngularJS, Bootstrap, Maven
  
  
