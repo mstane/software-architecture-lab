@@ -37,12 +37,13 @@ The purpose of this repository is to research and compare different technologies
 
 ## User requirements ##
  
-They are simplified to the level to have point but not to overwhelm the main goal which are technology stack and its implementation.
+They are simplified to the level to have point but not to overwhelm the main goal which is researching technology stack and its implementation.
 
 This web application keeps track of your read books. 
  - You can register yourself, create and update data about the book and to record your notes or quotations. You can update your profile and search your completely content on the site.
  - Apart for common use, there is also administration part which has all of these functionalities and have ability to administrate other users.
 
+Details of requirements are in [Product Requirements Document] (https://github.com/mstane/lab/wiki/Product-Requirements-Document)
 
 ## Technologies ##
 
