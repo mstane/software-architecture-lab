@@ -1,0 +1,392 @@
+databaseChangeLog:
+- changeSet:
+    id: 5
+    author: stane
+    context: dev
+    changes:    
+
+    - insert:
+        comment: Fictional demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 12
+        - column:
+            name: TITLE
+            value: Priamos Damokles Hyacinthus Deimos
+        - column:
+            name: AUTHOR
+            value: Tuth Jeggregh K'gassen
+        - column:
+            name: RATING
+            value: 5
+        - column:
+            name: GENRE
+            value: Mythopoeia
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 2
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Fictional demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 13
+        - column:
+            name: TITLE
+            value: Raven With White Hair
+        - column:
+            name: AUTHOR
+            value: Kruga Hekush Naroc
+        - column:
+            name: RATING
+            value: 3
+        - column:
+            name: GENRE
+            value: Tragedy
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 2
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Fictional demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 14
+        - column:
+            name: TITLE
+            value: Ladyloves Of Paradise
+        - column:
+            name: AUTHOR
+            value: Odayro G'gerterv Sarrar
+        - column:
+            name: RATING
+            value: 8
+        - column:
+            name: GENRE
+            value: Romance
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 2
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Fictional demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 15
+        - column:
+            name: TITLE
+            value: Dog Of Bad News
+        - column:
+            name: AUTHOR
+            value: Rerf Estror G'ardoh
+        - column:
+            name: RATING
+            value: 4
+        - column:
+            name: GENRE
+            value: Epic
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 3
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Fictional demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 16
+        - column:
+            name: TITLE
+            value: Achilleus Midas
+        - column:
+            name: AUTHOR
+            value: Okras K'tissod Ganjah
+        - column:
+            name: RATING
+            value: 8
+        - column:
+            name: GENRE
+            value: Mythopoeia
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 3
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Fictional demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 17
+        - column:
+            name: TITLE
+            value: Lycurgus Melanthios Icarus Hyacinth
+        - column:
+            name: AUTHOR
+            value: Tholak Nath Walt
+        - column:
+            name: RATING
+            value: 8
+        - column:
+            name: GENRE
+            value: Mythopoeia
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 3
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Fictional demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 18
+        - column:
+            name: TITLE
+            value: Weight Of My Idea
+        - column:
+            name: AUTHOR
+            value: Goruwi Mnot Kixo
+        - column:
+            name: RATING
+            value: 8
+        - column:
+            name: GENRE
+            value: Satire
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 4
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Fictional demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 19
+        - column:
+            name: TITLE
+            value: Chicken Of The Country
+        - column:
+            name: AUTHOR
+            value: Dakush Zon Klonn
+        - column:
+            name: RATING
+            value: 8
+        - column:
+            name: GENRE
+            value: Comedy
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 4
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Fictional demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 20
+        - column:
+            name: TITLE
+            value: Buffoon Project
+        - column:
+            name: AUTHOR
+            value: Krutho G'anjeth Alloct
+        - column:
+            name: RATING
+            value: 8
+        - column:
+            name: GENRE
+            value: Comedy
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 5
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Fictional demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 21
+        - column:
+            name: TITLE
+            value: Peasant Of Remorse
+        - column:
+            name: AUTHOR
+            value: Kralkas Khog Pach
+        - column:
+            name: RATING
+            value: 9
+        - column:
+            name: GENRE
+            value: Drama
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 6
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Fictional demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 22
+        - column:
+            name: TITLE
+            value: Inventors And Saviors
+        - column:
+            name: AUTHOR
+            value: Oponna Genuzh Idumi
+        - column:
+            name: RATING
+            value: 7
+        - column:
+            name: GENRE
+            value: Drama
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 6
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Fictional demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 23
+        - column:
+            name: TITLE
+            value: Founder Of The Lost Ones
+        - column:
+            name: AUTHOR
+            value: Utruc Mvershurra Thunkenn
+        - column:
+            name: RATING
+            value: 8
+        - column:
+            name: GENRE
+            value: Drama
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 7
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+            

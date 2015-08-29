@@ -1,0 +1,359 @@
+databaseChangeLog:
+- changeSet:
+    id: 4
+    author: stane
+    context: dev
+    changes:    
+        
+    - insert:
+        comment: Demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 1
+        - column:
+            name: TITLE
+            value: Animal Farm
+        - column:
+            name: AUTHOR
+            value: George Orwell
+        - column:
+            name: RATING
+            value: 10
+        - column:
+            name: GENRE
+            value: Satire
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 1
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 2
+        - column:
+            name: TITLE
+            value: Brave New World
+        - column:
+            name: AUTHOR
+            value: Aldous Huxley
+        - column:
+            name: RATING
+            value: 10
+        - column:
+            name: GENRE
+            value: Satire
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 1
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 3
+        - column:
+            name: TITLE
+            value: Oblomov
+        - column:
+            name: AUTHOR
+            value: Ivan Goncharov
+        - column:
+            name: RATING
+            value: 10
+        - column:
+            name: GENRE
+            value: Drama
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 1
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 4
+        - column:
+            name: TITLE
+            value: The Hitchhiker's Guide to the Galaxy
+        - column:
+            name: AUTHOR
+            value: Douglas Adams
+        - column:
+            name: RATING
+            value: 10
+        - column:
+            name: GENRE
+            value: Comedy
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 2
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 5
+        - column:
+            name: TITLE
+            value: Catch-22
+        - column:
+            name: AUTHOR
+            value: Joseph Heller
+        - column:
+            name: RATING
+            value: 10
+        - column:
+            name: GENRE
+            value: Satire
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 2
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 6
+        - column:
+            name: TITLE
+            value: 1984
+        - column:
+            name: AUTHOR
+            value: George Orwell
+        - column:
+            name: RATING
+            value: 10
+        - column:
+            name: GENRE
+            value: Satire
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 2
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 7
+        - column:
+            name: TITLE
+            value: The Good Soldier Švejk
+        - column:
+            name: AUTHOR
+            value: Jaroslav Hašek
+        - column:
+            name: RATING
+            value: 10
+        - column:
+            name: GENRE
+            value: Comedy
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 2
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 8
+        - column:
+            name: TITLE
+            value: The Trial
+        - column:
+            name: AUTHOR
+            value: Franz Kafka
+        - column:
+            name: RATING
+            value: 10
+        - column:
+            name: GENRE
+            value: Satire
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 2
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 9
+        - column:
+            name: TITLE
+            value: Candide, or Optimism
+        - column:
+            name: AUTHOR
+            value: Voltaire
+        - column:
+            name: RATING
+            value: 10
+        - column:
+            name: GENRE
+            value: Satire
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 2
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 10
+        - column:
+            name: TITLE
+            value: The Stranger
+        - column:
+            name: AUTHOR
+            value: Albert Camus
+        - column:
+            name: RATING
+            value: 10
+        - column:
+            name: GENRE
+            value: Drama
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 2
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Demo data for book entity
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            value: 11
+        - column:
+            name: TITLE
+            value: The Surprising Adventures of Baron Munchausen
+        - column:
+            name: AUTHOR
+            value: Rudolf Erich Raspe
+        - column:
+            name: RATING
+            value: 10
+        - column:
+            name: GENRE
+            value: Comedy
+        - column:
+            name: REVIEW
+            value: dev-review dev-review
+        - column:
+            name: READER_ID
+            value: 2
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
