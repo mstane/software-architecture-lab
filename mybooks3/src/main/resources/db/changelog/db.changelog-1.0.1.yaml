@@ -5,7 +5,7 @@ databaseChangeLog:
     changes:
     
     - insert:
-        comment: User with Admin role and with password "root"
+        comment: User with Admin role and with password "Mb.1234"
         tableName: READER
         columns:
         - column:
@@ -13,25 +13,25 @@ databaseChangeLog:
             value: 1
         - column:
             name: USERNAME
-            value: root
+            value: agarf.rac
         - column:
             name: EMAIL
-            value: root@root.com
+            value: agarf.rac@example.com
         - column:
             name: FIRST_NAME
-            value: Root1
+            value: Agarf
         - column:
             name: LAST_NAME
-            value: Root2
+            value: Rac
         - column:
             name: SYSTEM_ROLE
             value: Admin 
         - column:
             name: PASSWORD
-            value: $2a$10$rPiF3TE5B0vnar4kNLO1deHU2hKcz/SYHvGRHdzzMSgkSBe4OOwKW
+            value: $2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC
     
     - insert:
-        comment: User with Common role and with password "user"
+        comment: User with Common role and with password "Mb.1234"
         tableName: READER
         columns:
         - column:
@@ -39,20 +39,20 @@ databaseChangeLog:
             value: 2
         - column:
             name: USERNAME
-            value: user
+            value: juk.bag
         - column:
             name: EMAIL
-            value: user@user.com
+            value: juk.bag@example.com
         - column:
             name: FIRST_NAME
-            value: User1
+            value: Juk
         - column:
             name: LAST_NAME
-            value: User2
+            value: Bag
         - column:
             name: SYSTEM_ROLE
             value: Common 
         - column:
             name: PASSWORD
-            value: $2a$10$FgH6fuZGutkbAQY96Vyb9eWG3Kf1WZNEjuk9Ur8g47JfqLXHRoOR6
+            value: $2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC
             
