@@ -53,7 +53,7 @@ sharedServices.service('NotificationService', ['$modal', '$rootScope', '$locatio
         var modalOptions = {
         		closeButtonText: 'Close',
 //        		actionButtonText: 'OK',
-        		headerText: 'MyBooks3',
+        		headerText: 'MyBooks',
         		bodyText: 'Perform this action?'
         };
 

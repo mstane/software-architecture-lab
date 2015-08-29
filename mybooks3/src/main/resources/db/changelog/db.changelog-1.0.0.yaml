@@ -39,9 +39,6 @@ databaseChangeLog:
             name: TITLE
             type: VARCHAR(255)
         - column:
-            name: URL
-            type: VARCHAR(255)
-        - column:
             name: READER_ID
             type: BIGINT
         tableName: BOOK

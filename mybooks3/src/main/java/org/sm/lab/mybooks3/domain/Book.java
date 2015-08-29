@@ -40,8 +40,6 @@ public class Book implements Serializable {
 
     private String author;
 
-    private String url;
-
     @Column(nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
@@ -89,14 +87,6 @@ public class Book implements Serializable {
 
 	public void setAuthor(String author) {
 		this.author = author;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
 	}
 
 	public Date getStartReadingDate() {
@@ -159,7 +149,6 @@ public class Book implements Serializable {
 		this.id = fromBook.getId();
 		this.title = fromBook.getTitle();
 		this.author = fromBook.getAuthor();
-		this.url = fromBook.getUrl();
 		this.startReadingDate = fromBook.getStartReadingDate();
 		this.endReadingDate = fromBook.getEndReadingDate();
 		this.rating = fromBook.getRating();

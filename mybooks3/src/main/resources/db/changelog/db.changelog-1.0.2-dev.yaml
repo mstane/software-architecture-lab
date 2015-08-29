@@ -19,9 +19,6 @@ databaseChangeLog:
             name: AUTHOR
             value: dev-author
         - column:
-            name: URL
-            value: dev-url
-        - column:
             name: RATING
             value: 3
         - column:

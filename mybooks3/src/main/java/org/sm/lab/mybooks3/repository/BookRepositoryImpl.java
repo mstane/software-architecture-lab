@@ -27,7 +27,7 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 	EntityManager entityManager;
 
 	@Override
-	public List<Book> search(String title, String author, String url,
+	public List<Book> search(String title, String author,
 			String startReadingDate, String endReadingDate, String rating,
 			String genre) {
 
@@ -41,13 +41,6 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 			else
 				queryBuilder.append(" AND ");
 			queryBuilder.append("o.author = :author");
-		}
-		if (url != null && url.length() > 0) {
-			if (queryBuilder.length() < 1)
-				queryBuilder.append(" WHERE ");
-			else
-				queryBuilder.append(" AND ");
-			queryBuilder.append("o.url = :url");
 		}
 		if (startReadingDate != null && startReadingDate.length() > 0) {
 			if (queryBuilder.length() < 1)
@@ -87,8 +80,6 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 			q.setParameter("title", title);
 		if (author != null && author.length() > 0)
 			q.setParameter("author", author);
-		if (url != null && url.length() > 0)
-			q.setParameter("url", url);
 		if (startReadingDate != null && startReadingDate.length() > 0)
 			q.setParameter("startReadingDate", startReadingDate);
 		if (endReadingDate != null && endReadingDate.length() > 0)
@@ -103,10 +94,10 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 	}
 
 	@Override
-	public Long countSearch(String title, String author, String url,
+	public Long countSearch(String title, String author,
 			String startReadingDate, String endReadingDate, String rating,
 			String genre) {
-		List<Book> list = search(title, author, url, startReadingDate,
+		List<Book> list = search(title, author, startReadingDate,
 				endReadingDate, rating, genre);
 		return Long.valueOf(list.size());
 	}
