@@ -1,0 +1,32 @@
+databaseChangeLog:
+- changeSet:
+    id: 6
+    author: stane
+    context: dev
+    changes:    
+        
+    - insert:
+        comment: Demo data for note entity
+        tableName: NOTE
+        columns:
+        - column:
+            name: ID
+            value: 1
+        - column:
+            name: BOOK_ID
+            value: 1
+        - column:
+            name: TITLE
+            value: Test real note title
+        - column:
+            name: CONTENT
+            value: Test real note content
+        - column:
+            name: CREATED_TIME
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: MODIFIED_TIME
+            value: '2015-07-20 00:00:00.000'
+
+
+

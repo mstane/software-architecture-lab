@@ -26,7 +26,7 @@ databaseChangeLog:
             value: Satire
         - column:
             name: REVIEW
-            value: dev-review dev-review
+            value: The book reflects events leading up to the Russian Revolution of 1917 and then on into the Stalin era in the Soviet Union.
         - column:
             name: READER_ID
             value: 1
@@ -58,7 +58,7 @@ databaseChangeLog:
             value: Satire
         - column:
             name: REVIEW
-            value: dev-review dev-review
+            value: Set in London of AD 2540 (632 A.F.—"After Ford"—in the book), the novel anticipates developments in reproductive technology, sleep-learning, psychological manipulation, and classical conditioning that combine profoundly to change society.
         - column:
             name: READER_ID
             value: 1
@@ -90,7 +90,7 @@ databaseChangeLog:
             value: Drama
         - column:
             name: REVIEW
-            value: dev-review dev-review
+            value: Oblomov is a young, generous nobleman who seems incapable of making important decisions or undertaking any significant actions. Throughout the novel he rarely leaves his room or bed and just manages to move from his bed to a chair in the first 50 pages.
         - column:
             name: READER_ID
             value: 1
@@ -122,7 +122,7 @@ databaseChangeLog:
             value: Comedy
         - column:
             name: REVIEW
-            value: dev-review dev-review
+            value: Seconds before the Earth is demolished to make way for a galactic freeway, Arthur Dent is plucked off the planet by his friend Ford Prefect, a researcher for the revised edition of The Hitchhiker's Guide to the Galaxy who, for the last fifteen years, has been posing as an out-of-work actor.
         - column:
             name: READER_ID
             value: 2
@@ -154,7 +154,7 @@ databaseChangeLog:
             value: Satire
         - column:
             name: REVIEW
-            value: dev-review dev-review
+            value: The novel is set during World War II, from 1942 to 1944. It mainly follows the life of Captain John Yossarian, a U.S. Army Air Forces B-25 bombardier. Most of the events in the book occur while the fictional 256th Squadron is based on the island of Pianosa, in the Mediterranean Sea, west of Italy. The novel looks into the experiences of Yossarian and the other airmen in the camp, who attempt to maintain their sanity while fulfilling their service requirements so that they may return home.
         - column:
             name: READER_ID
             value: 2
@@ -186,7 +186,7 @@ databaseChangeLog:
             value: Satire
         - column:
             name: REVIEW
-            value: dev-review dev-review
+            value: The tyranny is epitomised by Big Brother, the Party leader who enjoys an intense cult of personality but who may not even exist. The Party "seeks power entirely for its own sake. It is not interested in the good of others; it is interested solely in power.
         - column:
             name: READER_ID
             value: 2
@@ -218,7 +218,7 @@ databaseChangeLog:
             value: Comedy
         - column:
             name: REVIEW
-            value: dev-review dev-review
+            value: The novel is set during World War I in Austria-Hungary, a multi-ethnic empire full of long-standing tensions. Fifteen million people died in the War, one million of them Austro-Hungarian soldiers of whom around 140,000 were Czechs. Jaroslav Hašek participated in this conflict and examined it in The Good Soldier Švejk.
         - column:
             name: READER_ID
             value: 2
@@ -250,7 +250,7 @@ databaseChangeLog:
             value: Satire
         - column:
             name: REVIEW
-            value: dev-review dev-review
+            value: This is the story of a man arrested and prosecuted by a remote, inaccessible authority, with the nature of his crime revealed neither to him nor to the reader.
         - column:
             name: READER_ID
             value: 2
@@ -282,7 +282,7 @@ databaseChangeLog:
             value: Satire
         - column:
             name: REVIEW
-            value: dev-review dev-review
+            value: It begins with a young man, Candide, who is living a sheltered life in an Edenic paradise and being indoctrinated with Leibnizian optimism (or simply "optimism") by his mentor, Professor Pangloss. The work describes the abrupt cessation of this lifestyle, followed by Candide's slow, painful disillusionment as he witnesses and experiences great hardships in the world.
         - column:
             name: READER_ID
             value: 2
@@ -314,7 +314,7 @@ databaseChangeLog:
             value: Drama
         - column:
             name: REVIEW
-            value: dev-review dev-review
+            value: The story of a man living an absurd life.
         - column:
             name: READER_ID
             value: 2
@@ -346,7 +346,7 @@ databaseChangeLog:
             value: Comedy
         - column:
             name: REVIEW
-            value: dev-review dev-review
+            value: Baron Munchausen is a fictional German nobleman in literature and film, loosely based on a real baron, Hieronymus Karl Friedrich, Freiherr von Münchhausen. The real-life Münchhausen became a minor celebrity for telling outrageous tall tales based on his military service in the Russo-Turkish War.
         - column:
             name: READER_ID
             value: 2

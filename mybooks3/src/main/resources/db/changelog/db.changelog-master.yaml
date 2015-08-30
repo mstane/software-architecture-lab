@@ -17,4 +17,8 @@ databaseChangeLog:
 - include:
     relativeToChangelogFile: true
     file: db.changelog-1.0.2-dev-books-fictional.yaml
+- include:
+    relativeToChangelogFile: true
+    file: db.changelog-1.0.2-dev-notes.yaml
+
     
