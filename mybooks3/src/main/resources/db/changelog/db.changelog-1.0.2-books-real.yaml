@@ -2,7 +2,7 @@ databaseChangeLog:
 - changeSet:
     id: 4
     author: stane
-    context: dev
+    context: dev, prod
     changes:    
         
     - insert:
