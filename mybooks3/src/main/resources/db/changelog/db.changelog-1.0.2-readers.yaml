@@ -1,137 +1,52 @@
 databaseChangeLog:
 - changeSet:
-    id: 3
+    id: 2
     author: stane
-    context: dev, prod
     changes:
     
     - insert:
-        comment: User with Common role and with password "Mb.1234"
+        comment: User with Admin role and with password "Mb.1234" and ID=1
         tableName: READER
         columns:
         - column:
-            name: ID
-            value: 3
-        - column:
             name: USERNAME
-            value: pighalo.bortroka
+            value: agarf.rac
         - column:
             name: EMAIL
-            value: pighalo.bortroka@example.com
+            value: agarf.rac@example.com
         - column:
             name: FIRST_NAME
-            value: Pighalo
+            value: Agarf
         - column:
             name: LAST_NAME
-            value: Bortroka
+            value: Rac
         - column:
             name: SYSTEM_ROLE
-            value: Common 
+            value: Admin 
         - column:
             name: PASSWORD
             value: $2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC
-        
+    
     - insert:
-        comment: User with Common role and with password "Mb.1234"
+        comment: User with Common role and with password "Mb.1234" and ID=2
         tableName: READER
         columns:
         - column:
-            name: ID
-            value: 4
-        - column:
             name: USERNAME
-            value: poli.mussav
+            value: juk.bag
         - column:
             name: EMAIL
-            value: poli.mussav@example.com
+            value: juk.bag@example.com
         - column:
             name: FIRST_NAME
-            value: Poli
+            value: Juk
         - column:
             name: LAST_NAME
-            value: Mussav
+            value: Bag
         - column:
             name: SYSTEM_ROLE
             value: Common 
         - column:
             name: PASSWORD
             value: $2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC
-        
-    - insert:
-        comment: User with Common role and with password "Mb.1234"
-        tableName: READER
-        columns:
-        - column:
-            name: ID
-            value: 5
-        - column:
-            name: USERNAME
-            value: trelan.vraz
-        - column:
-            name: EMAIL
-            value: trelan.vraz@example.com
-        - column:
-            name: FIRST_NAME
-            value: Trelan
-        - column:
-            name: LAST_NAME
-            value: Vraz
-        - column:
-            name: SYSTEM_ROLE
-            value: Common 
-        - column:
-            name: PASSWORD
-            value: $2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC
-        
-    - insert:
-        comment: User with Common role and with password "Mb.1234"
-        tableName: READER
-        columns:
-        - column:
-            name: ID
-            value: 6
-        - column:
-            name: USERNAME
-            value: urila.korpora
-        - column:
-            name: EMAIL
-            value: urila.korpora@example.com
-        - column:
-            name: FIRST_NAME
-            value: Urila
-        - column:
-            name: LAST_NAME
-            value: Korpora
-        - column:
-            name: SYSTEM_ROLE
-            value: Common 
-        - column:
-            name: PASSWORD
-            value: $2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC
-        
-    - insert:
-        comment: User with Common role and with password "Mb.1234"
-        tableName: READER
-        columns:
-        - column:
-            name: ID
-            value: 7
-        - column:
-            name: USERNAME
-            value: melogo.olto
-        - column:
-            name: EMAIL
-            value: melogo.olto@example.com
-        - column:
-            name: FIRST_NAME
-            value: Melogo
-        - column:
-            name: LAST_NAME
-            value: Olto
-        - column:
-            name: SYSTEM_ROLE
-            value: Common 
-        - column:
-            name: PASSWORD
-            value: $2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC
-        
+            

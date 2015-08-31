@@ -10,9 +10,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 1
-        - column:
             name: BOOK_ID
             value: 4
         - column:
@@ -32,9 +29,6 @@ databaseChangeLog:
         comment: Demo data for note entity
         tableName: NOTE
         columns:
-        - column:
-            name: ID
-            value: 2
         - column:
             name: BOOK_ID
             value: 4
@@ -56,9 +50,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 3
-        - column:
             name: BOOK_ID
             value: 4
         - column:
@@ -78,9 +69,6 @@ databaseChangeLog:
         comment: Demo data for note entity
         tableName: NOTE
         columns:
-        - column:
-            name: ID
-            value: 4
         - column:
             name: BOOK_ID
             value: 4
@@ -102,9 +90,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 5
-        - column:
             name: BOOK_ID
             value: 4
         - column:
@@ -124,9 +109,6 @@ databaseChangeLog:
         comment: Demo data for note entity
         tableName: NOTE
         columns:
-        - column:
-            name: ID
-            value: 6
         - column:
             name: BOOK_ID
             value: 4
@@ -148,9 +130,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 7
-        - column:
             name: BOOK_ID
             value: 4
         - column:
@@ -170,9 +149,6 @@ databaseChangeLog:
         comment: Demo data for note entity
         tableName: NOTE
         columns:
-        - column:
-            name: ID
-            value: 8
         - column:
             name: BOOK_ID
             value: 4
@@ -194,9 +170,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 9
-        - column:
             name: BOOK_ID
             value: 4
         - column:
@@ -216,9 +189,6 @@ databaseChangeLog:
         comment: Demo data for note entity
         tableName: NOTE
         columns:
-        - column:
-            name: ID
-            value: 10
         - column:
             name: BOOK_ID
             value: 4
@@ -240,9 +210,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 11
-        - column:
             name: BOOK_ID
             value: 4
         - column:
@@ -262,9 +229,6 @@ databaseChangeLog:
         comment: Demo data for note entity
         tableName: NOTE
         columns:
-        - column:
-            name: ID
-            value: 12
         - column:
             name: BOOK_ID
             value: 5
@@ -286,9 +250,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 13
-        - column:
             name: BOOK_ID
             value: 5
         - column:
@@ -309,9 +270,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 14
-        - column:
             name: BOOK_ID
             value: 5
         - column:
@@ -331,9 +289,6 @@ databaseChangeLog:
         comment: Demo data for note entity
         tableName: NOTE
         columns:
-        - column:
-            name: ID
-            value: 15
         - column:
             name: BOOK_ID
             value: 5
@@ -355,9 +310,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 16
-        - column:
             name: BOOK_ID
             value: 6
         - column:
@@ -377,9 +329,6 @@ databaseChangeLog:
         comment: Demo data for note entity
         tableName: NOTE
         columns:
-        - column:
-            name: ID
-            value: 17
         - column:
             name: BOOK_ID
             value: 6
@@ -401,9 +350,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 18
-        - column:
             name: BOOK_ID
             value: 6
         - column:
@@ -423,9 +369,6 @@ databaseChangeLog:
         comment: Demo data for note entity
         tableName: NOTE
         columns:
-        - column:
-            name: ID
-            value: 19
         - column:
             name: BOOK_ID
             value: 7
@@ -447,9 +390,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 20
-        - column:
             name: BOOK_ID
             value: 7
         - column:
@@ -469,9 +409,6 @@ databaseChangeLog:
         comment: Demo data for note entity
         tableName: NOTE
         columns:
-        - column:
-            name: ID
-            value: 21
         - column:
             name: BOOK_ID
             value: 7
@@ -493,9 +430,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 22
-        - column:
             name: BOOK_ID
             value: 8
         - column:
@@ -516,9 +450,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 23
-        - column:
             name: BOOK_ID
             value: 8
         - column:
@@ -538,9 +469,6 @@ databaseChangeLog:
         comment: Demo data for note entity
         tableName: NOTE
         columns:
-        - column:
-            name: ID
-            value: 24
         - column:
             name: BOOK_ID
             value: 8
@@ -562,9 +490,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 25
-        - column:
             name: BOOK_ID
             value: 9
         - column:
@@ -584,9 +509,6 @@ databaseChangeLog:
         comment: Demo data for note entity
         tableName: NOTE
         columns:
-        - column:
-            name: ID
-            value: 26
         - column:
             name: BOOK_ID
             value: 9
@@ -608,9 +530,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 27
-        - column:
             name: BOOK_ID
             value: 10
         - column:
@@ -630,9 +549,6 @@ databaseChangeLog:
         comment: Demo data for note entity
         tableName: NOTE
         columns:
-        - column:
-            name: ID
-            value: 28
         - column:
             name: BOOK_ID
             value: 11
@@ -654,9 +570,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 29
-        - column:
             name: BOOK_ID
             value: 11
         - column:
@@ -676,9 +589,6 @@ databaseChangeLog:
         comment: Demo data for note entity
         tableName: NOTE
         columns:
-        - column:
-            name: ID
-            value: 30
         - column:
             name: BOOK_ID
             value: 11
@@ -700,9 +610,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 31
-        - column:
             name: BOOK_ID
             value: 1
         - column:
@@ -722,9 +629,6 @@ databaseChangeLog:
         comment: Demo data for note entity
         tableName: NOTE
         columns:
-        - column:
-            name: ID
-            value: 32
         - column:
             name: BOOK_ID
             value: 1
@@ -746,9 +650,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 33
-        - column:
             name: BOOK_ID
             value: 1
         - column:
@@ -768,9 +669,6 @@ databaseChangeLog:
         comment: Demo data for note entity
         tableName: NOTE
         columns:
-        - column:
-            name: ID
-            value: 34
         - column:
             name: BOOK_ID
             value: 2
@@ -792,9 +690,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 35
-        - column:
             name: BOOK_ID
             value: 2
         - column:
@@ -815,9 +710,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 36
-        - column:
             name: BOOK_ID
             value: 2
         - column:
@@ -838,9 +730,6 @@ databaseChangeLog:
         tableName: NOTE
         columns:
         - column:
-            name: ID
-            value: 37
-        - column:
             name: BOOK_ID
             value: 3
         - column:
@@ -860,9 +749,6 @@ databaseChangeLog:
         comment: Demo data for note entity
         tableName: NOTE
         columns:
-        - column:
-            name: ID
-            value: 38
         - column:
             name: BOOK_ID
             value: 3

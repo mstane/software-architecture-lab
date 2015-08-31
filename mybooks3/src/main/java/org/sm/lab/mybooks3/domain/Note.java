@@ -16,6 +16,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Type;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -33,7 +35,7 @@ public class Note implements Serializable {
     private String title;
 
     @Lob
-    @Column(length = 65535)
+    @Type(type = "org.hibernate.type.TextType")
     private String content;
 
     @Temporal(TemporalType.TIMESTAMP)

@@ -21,6 +21,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Type;
 import org.sm.lab.mybooks3.enums.Genre;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -56,7 +57,7 @@ public class Book implements Serializable {
     private Genre genre;
     
     @Lob
-    @Column(length = 65535)
+    @Type(type = "org.hibernate.type.TextType")
     private String review;
 
     @ManyToOne

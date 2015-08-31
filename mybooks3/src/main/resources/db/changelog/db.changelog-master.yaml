@@ -1,23 +1,23 @@
 databaseChangeLog:
 - include:
     relativeToChangelogFile: true
-    file: db.changelog-1.0.0.yaml
-- include:
-    relativeToChangelogFile: true
-    file: db.changelog-1.0.1-readers.yaml
+    file: db.changelog-1.0.1-data-definition.yaml
 - include:
     relativeToChangelogFile: true
     file: db.changelog-1.0.2-readers.yaml
 - include:
     relativeToChangelogFile: true
-    file: db.changelog-1.0.2-books-real.yaml
+    file: db.changelog-1.0.3-readers.yaml
 - include:
     relativeToChangelogFile: true
-    file: db.changelog-1.0.2-books-fictional.yaml
+    file: db.changelog-1.0.4-books-real.yaml
 - include:
     relativeToChangelogFile: true
-    file: db.changelog-1.0.2-notes.yaml
+    file: db.changelog-1.0.5-books-fictional.yaml
 - include:
     relativeToChangelogFile: true
-    file: db.changelog-1.0.2-test.yaml
+    file: db.changelog-1.0.6-notes.yaml
+- include:
+    relativeToChangelogFile: true
+    file: db.changelog-1.0.7-test.yaml
     

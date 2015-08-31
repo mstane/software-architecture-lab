@@ -1,0 +1,122 @@
+databaseChangeLog:
+- changeSet:
+    id: 3
+    author: stane
+    context: dev, prod
+    changes:
+    
+    - insert:
+        comment: User with Common role and with password "Mb.1234" and ID=3
+        tableName: READER
+        columns:
+        - column:
+            name: USERNAME
+            value: pighalo.bortroka
+        - column:
+            name: EMAIL
+            value: pighalo.bortroka@example.com
+        - column:
+            name: FIRST_NAME
+            value: Pighalo
+        - column:
+            name: LAST_NAME
+            value: Bortroka
+        - column:
+            name: SYSTEM_ROLE
+            value: Common 
+        - column:
+            name: PASSWORD
+            value: $2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC
+        
+    - insert:
+        comment: User with Common role and with password "Mb.1234" and ID=4
+        tableName: READER
+        columns:
+        - column:
+            name: USERNAME
+            value: poli.mussav
+        - column:
+            name: EMAIL
+            value: poli.mussav@example.com
+        - column:
+            name: FIRST_NAME
+            value: Poli
+        - column:
+            name: LAST_NAME
+            value: Mussav
+        - column:
+            name: SYSTEM_ROLE
+            value: Common 
+        - column:
+            name: PASSWORD
+            value: $2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC
+        
+    - insert:
+        comment: User with Common role and with password "Mb.1234" and ID=5
+        tableName: READER
+        columns:
+        - column:
+            name: USERNAME
+            value: trelan.vraz
+        - column:
+            name: EMAIL
+            value: trelan.vraz@example.com
+        - column:
+            name: FIRST_NAME
+            value: Trelan
+        - column:
+            name: LAST_NAME
+            value: Vraz
+        - column:
+            name: SYSTEM_ROLE
+            value: Common 
+        - column:
+            name: PASSWORD
+            value: $2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC
+        
+    - insert:
+        comment: User with Common role and with password "Mb.1234" and ID=6
+        tableName: READER
+        columns:
+        - column:
+            name: USERNAME
+            value: urila.korpora
+        - column:
+            name: EMAIL
+            value: urila.korpora@example.com
+        - column:
+            name: FIRST_NAME
+            value: Urila
+        - column:
+            name: LAST_NAME
+            value: Korpora
+        - column:
+            name: SYSTEM_ROLE
+            value: Common 
+        - column:
+            name: PASSWORD
+            value: $2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC
+        
+    - insert:
+        comment: User with Common role and with password "Mb.1234" and ID=7
+        tableName: READER
+        columns:
+        - column:
+            name: USERNAME
+            value: melogo.olto
+        - column:
+            name: EMAIL
+            value: melogo.olto@example.com
+        - column:
+            name: FIRST_NAME
+            value: Melogo
+        - column:
+            name: LAST_NAME
+            value: Olto
+        - column:
+            name: SYSTEM_ROLE
+            value: Common 
+        - column:
+            name: PASSWORD
+            value: $2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC
+        

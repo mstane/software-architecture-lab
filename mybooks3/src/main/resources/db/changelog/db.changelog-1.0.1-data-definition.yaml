@@ -3,23 +3,60 @@ databaseChangeLog:
     id: 1
     author: stane
     changes:
+    
     - createTable:
+        tableName: READER
         columns:
         - column:
-            autoIncrement: true
-            constraints:
-              constraints:
-                primaryKey: true
-                primaryKeyName: BOOK_PK
-                nullable: false
             name: ID
             type: BIGINT
+            constraints:
+              primaryKey: true
+              primaryKeyName: READER_PK
+              nullable: false
+        - column:
+            name: EMAIL
+            type: VARCHAR(255)
+            constraints:
+              nullable: false
+        - column:
+            name: USERNAME
+            type: VARCHAR(255)
+            constraints:
+              nullable: false
+        - column:
+            name: FIRST_NAME
+            type: VARCHAR(255)
+        - column:
+            name: LAST_NAME
+            type: VARCHAR(255)
+        - column:
+            name: PASSWORD
+            type: VARCHAR(255)
+            constraints:
+              nullable: false
+        - column:
+            name: SYSTEM_ROLE
+            type: VARCHAR(255)
+    
+    - createTable:
+        tableName: BOOK
+        columns:
+        - column:
+            name: ID
+            type: BIGINT        
+            constraints:
+              primaryKey: true
+              primaryKeyName: BOOK_PK
+              nullable: false
+        - column:
+            name: TITLE
+            type: VARCHAR(255)
+            constraints:
+              nullable: false
         - column:
             name: AUTHOR
             type: VARCHAR(255)
-        - column:
-            name: END_READING_DATE
-            type: TIMESTAMP
         - column:
             name: GENRE
             type: VARCHAR(255)
@@ -33,27 +70,27 @@ databaseChangeLog:
             name: START_READING_DATE
             type: TIMESTAMP
         - column:
-            constraints:
-              constraints:
-                nullable: false
-            name: TITLE
-            type: VARCHAR(255)
+            name: END_READING_DATE
+            type: TIMESTAMP            
         - column:
             name: READER_ID
             type: BIGINT
-        tableName: BOOK
 
     - createTable:
+        tableName: NOTE
         columns:
         - column:
-            autoIncrement: true
-            constraints:
-              constraints:
-                primaryKey: true
-                primaryKeyName: NOTE_PK
-                nullable: false
             name: ID
             type: BIGINT
+            constraints:
+              primaryKey: true
+              primaryKeyName: NOTE_PK
+              nullable: false
+        - column:
+            name: TITLE
+            type: VARCHAR(255)
+            constraints:
+              nullable: false
         - column:
             name: CONTENT
             type: CLOB
@@ -64,66 +101,28 @@ databaseChangeLog:
             name: MODIFIED_TIME
             type: TIMESTAMP
         - column:
-            constraints:
-              constraints:
-                nullable: false
-            name: TITLE
-            type: VARCHAR(255)
-        - column:
             name: BOOK_ID
             type: BIGINT
-        tableName: NOTE
 
-    - createTable:
-        columns:
-        - column:
-            autoIncrement: true
-            constraints:
-              constraints:
-                primaryKey: true
-                primaryKeyName: READER_PK
-                nullable: false
-            name: ID
-            type: BIGINT
-        - column:
-            name: EMAIL
-            type: VARCHAR(255)
-        - column:
-            name: FIRST_NAME
-            type: VARCHAR(255)
-        - column:
-            name: LAST_NAME
-            type: VARCHAR(255)
-        - column:
-            constraints:
-              constraints:
-                nullable: false
-            name: PASSWORD
-            type: VARCHAR(255)
-        - column:
-            name: SYSTEM_ROLE
-            type: VARCHAR(255)
-        - column:
-            constraints:
-              constraints:
-                nullable: false
-            name: USERNAME
-            type: VARCHAR(255)
+    - addAutoIncrement:
+        columnDataType: BIGINT
+        columnName: ID
+        incrementBy: 1
+        startWith: 1
         tableName: READER
 
-    - addUniqueConstraint:
-        columnNames: ID
-        constraintName: BOOK_ID_UK
+    - addAutoIncrement:
+        columnDataType: BIGINT
+        columnName: ID
+        incrementBy: 1
+        startWith: 1
         tableName: BOOK
 
-    - addUniqueConstraint:
-        columnNames: ID
-        constraintName: READER_ID_UK
-        tableName: READER
-
-    - addUniqueConstraint:
-        columnNames: ID
-        constraintName: NOTE_ID_UK
+    - addAutoIncrement:
+        columnDataType: BIGINT
+        columnName: ID
+        incrementBy: 1
+        startWith: 1
         tableName: NOTE
 
     - addUniqueConstraint:

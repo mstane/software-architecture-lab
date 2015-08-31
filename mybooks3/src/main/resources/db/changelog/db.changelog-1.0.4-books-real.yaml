@@ -1,227 +1,32 @@
 databaseChangeLog:
 - changeSet:
-    id: 5
+    id: 4
     author: stane
     context: dev, prod
     changes:    
-
+        
     - insert:
-        comment: Fictional demo data for book entity
+        comment: Demo data for book entity ID=1
         tableName: BOOK
         columns:
         - column:
-            name: ID
-            value: 12
-        - column:
             name: TITLE
-            value: Priamos Damokles Hyacinthus Deimos
+            value: Animal Farm
         - column:
             name: AUTHOR
-            value: Tuth Jeggregh K'gassen
+            value: George Orwell
         - column:
             name: RATING
-            value: 5
-        - column:
-            name: GENRE
-            value: Mythopoeia
-        - column:
-            name: REVIEW
-            value: The book is fictional, it doesn't exist and the data are used as placeholder names.
-        - column:
-            name: READER_ID
-            value: 2
-        - column:
-            name: START_READING_DATE
-            value: '2015-07-16 14:39:04.000'
-        - column:
-            name: END_READING_DATE
-            value: '2015-07-20 00:00:00.000'
-
-    - insert:
-        comment: Fictional demo data for book entity
-        tableName: BOOK
-        columns:
-        - column:
-            name: ID
-            value: 13
-        - column:
-            name: TITLE
-            value: Raven With White Hair
-        - column:
-            name: AUTHOR
-            value: Kruga Hekush Naroc
-        - column:
-            name: RATING
-            value: 3
-        - column:
-            name: GENRE
-            value: Tragedy
-        - column:
-            name: REVIEW
-            value: The book is fictional, it doesn't exist and the data are used as placeholder names.
-        - column:
-            name: READER_ID
-            value: 2
-        - column:
-            name: START_READING_DATE
-            value: '2015-07-16 14:39:04.000'
-        - column:
-            name: END_READING_DATE
-            value: '2015-07-20 00:00:00.000'
-
-    - insert:
-        comment: Fictional demo data for book entity
-        tableName: BOOK
-        columns:
-        - column:
-            name: ID
-            value: 14
-        - column:
-            name: TITLE
-            value: Ladyloves Of Paradise
-        - column:
-            name: AUTHOR
-            value: Odayro G'gerterv Sarrar
-        - column:
-            name: RATING
-            value: 8
-        - column:
-            name: GENRE
-            value: Romance
-        - column:
-            name: REVIEW
-            value: The book is fictional, it doesn't exist and the data are used as placeholder names.
-        - column:
-            name: READER_ID
-            value: 2
-        - column:
-            name: START_READING_DATE
-            value: '2015-07-16 14:39:04.000'
-        - column:
-            name: END_READING_DATE
-            value: '2015-07-20 00:00:00.000'
-
-    - insert:
-        comment: Fictional demo data for book entity
-        tableName: BOOK
-        columns:
-        - column:
-            name: ID
-            value: 15
-        - column:
-            name: TITLE
-            value: Dog Of Bad News
-        - column:
-            name: AUTHOR
-            value: Rerf Estror G'ardoh
-        - column:
-            name: RATING
-            value: 4
-        - column:
-            name: GENRE
-            value: Epic
-        - column:
-            name: REVIEW
-            value: The book is fictional, it doesn't exist and the data are used as placeholder names.
-        - column:
-            name: READER_ID
-            value: 3
-        - column:
-            name: START_READING_DATE
-            value: '2015-07-16 14:39:04.000'
-        - column:
-            name: END_READING_DATE
-            value: '2015-07-20 00:00:00.000'
-
-    - insert:
-        comment: Fictional demo data for book entity
-        tableName: BOOK
-        columns:
-        - column:
-            name: ID
-            value: 16
-        - column:
-            name: TITLE
-            value: Achilleus Midas
-        - column:
-            name: AUTHOR
-            value: Okras K'tissod Ganjah
-        - column:
-            name: RATING
-            value: 8
-        - column:
-            name: GENRE
-            value: Mythopoeia
-        - column:
-            name: REVIEW
-            value: The book is fictional, it doesn't exist and the data are used as placeholder names.
-        - column:
-            name: READER_ID
-            value: 3
-        - column:
-            name: START_READING_DATE
-            value: '2015-07-16 14:39:04.000'
-        - column:
-            name: END_READING_DATE
-            value: '2015-07-20 00:00:00.000'
-
-    - insert:
-        comment: Fictional demo data for book entity
-        tableName: BOOK
-        columns:
-        - column:
-            name: ID
-            value: 17
-        - column:
-            name: TITLE
-            value: Lycurgus Melanthios Icarus Hyacinth
-        - column:
-            name: AUTHOR
-            value: Tholak Nath Walt
-        - column:
-            name: RATING
-            value: 8
-        - column:
-            name: GENRE
-            value: Mythopoeia
-        - column:
-            name: REVIEW
-            value: The book is fictional, it doesn't exist and the data are used as placeholder names.
-        - column:
-            name: READER_ID
-            value: 3
-        - column:
-            name: START_READING_DATE
-            value: '2015-07-16 14:39:04.000'
-        - column:
-            name: END_READING_DATE
-            value: '2015-07-20 00:00:00.000'
-
-    - insert:
-        comment: Fictional demo data for book entity
-        tableName: BOOK
-        columns:
-        - column:
-            name: ID
-            value: 18
-        - column:
-            name: TITLE
-            value: Weight Of My Idea
-        - column:
-            name: AUTHOR
-            value: Goruwi Mnot Kixo
-        - column:
-            name: RATING
-            value: 8
+            value: 10
         - column:
             name: GENRE
             value: Satire
         - column:
             name: REVIEW
-            value: The book is fictional, it doesn't exist and the data are used as placeholder names.
+            value: The book reflects events leading up to the Russian Revolution of 1917 and then on into the Stalin era in the Soviet Union.
         - column:
             name: READER_ID
-            value: 4
+            value: 1
         - column:
             name: START_READING_DATE
             value: '2015-07-16 14:39:04.000'
@@ -230,30 +35,85 @@ databaseChangeLog:
             value: '2015-07-20 00:00:00.000'
 
     - insert:
-        comment: Fictional demo data for book entity
+        comment: Demo data for book entity ID=2
         tableName: BOOK
         columns:
         - column:
-            name: ID
-            value: 19
-        - column:
             name: TITLE
-            value: Chicken Of The Country
+            value: Brave New World
         - column:
             name: AUTHOR
-            value: Dakush Zon Klonn
+            value: Aldous Huxley
         - column:
             name: RATING
-            value: 8
+            value: 10
+        - column:
+            name: GENRE
+            value: Satire
+        - column:
+            name: REVIEW
+            value: Set in London of AD 2540 (632 A.F.—"After Ford"—in the book), the novel anticipates developments in reproductive technology, sleep-learning, psychological manipulation, and classical conditioning that combine profoundly to change society.
+        - column:
+            name: READER_ID
+            value: 1
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Demo data for book entity ID=3
+        tableName: BOOK
+        columns:
+        - column:
+            name: TITLE
+            value: Oblomov
+        - column:
+            name: AUTHOR
+            value: Ivan Goncharov
+        - column:
+            name: RATING
+            value: 10
+        - column:
+            name: GENRE
+            value: Drama
+        - column:
+            name: REVIEW
+            value: Oblomov is a young, generous nobleman who seems incapable of making important decisions or undertaking any significant actions. Throughout the novel he rarely leaves his room or bed and just manages to move from his bed to a chair in the first 50 pages.
+        - column:
+            name: READER_ID
+            value: 1
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Demo data for book entity ID=4
+        tableName: BOOK
+        columns:
+        - column:
+            name: TITLE
+            value: The Hitchhiker's Guide to the Galaxy
+        - column:
+            name: AUTHOR
+            value: Douglas Adams
+        - column:
+            name: RATING
+            value: 10
         - column:
             name: GENRE
             value: Comedy
         - column:
             name: REVIEW
-            value: The book is fictional, it doesn't exist and the data are used as placeholder names.
+            value: Seconds before the Earth is demolished to make way for a galactic freeway, Arthur Dent is plucked off the planet by his friend Ford Prefect, a researcher for the revised edition of The Hitchhiker's Guide to the Galaxy who, for the last fifteen years, has been posing as an out-of-work actor.
         - column:
             name: READER_ID
-            value: 4
+            value: 2
         - column:
             name: START_READING_DATE
             value: '2015-07-16 14:39:04.000'
@@ -262,30 +122,85 @@ databaseChangeLog:
             value: '2015-07-20 00:00:00.000'
 
     - insert:
-        comment: Fictional demo data for book entity
+        comment: Demo data for book entity ID=5
         tableName: BOOK
         columns:
         - column:
-            name: ID
-            value: 20
-        - column:
             name: TITLE
-            value: Buffoon Project
+            value: Catch-22
         - column:
             name: AUTHOR
-            value: Krutho G'anjeth Alloct
+            value: Joseph Heller
         - column:
             name: RATING
-            value: 8
+            value: 10
+        - column:
+            name: GENRE
+            value: Satire
+        - column:
+            name: REVIEW
+            value: The novel is set during World War II, from 1942 to 1944. It mainly follows the life of Captain John Yossarian, a U.S. Army Air Forces B-25 bombardier. Most of the events in the book occur while the fictional 256th Squadron is based on the island of Pianosa, in the Mediterranean Sea, west of Italy. The novel looks into the experiences of Yossarian and the other airmen in the camp, who attempt to maintain their sanity while fulfilling their service requirements so that they may return home.
+        - column:
+            name: READER_ID
+            value: 2
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Demo data for book entity ID=6
+        tableName: BOOK
+        columns:
+        - column:
+            name: TITLE
+            value: 1984
+        - column:
+            name: AUTHOR
+            value: George Orwell
+        - column:
+            name: RATING
+            value: 10
+        - column:
+            name: GENRE
+            value: Satire
+        - column:
+            name: REVIEW
+            value: The tyranny is epitomised by Big Brother, the Party leader who enjoys an intense cult of personality but who may not even exist. The Party "seeks power entirely for its own sake. It is not interested in the good of others; it is interested solely in power.
+        - column:
+            name: READER_ID
+            value: 2
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
+    - insert:
+        comment: Demo data for book entity ID=7
+        tableName: BOOK
+        columns:
+        - column:
+            name: TITLE
+            value: The Good Soldier Švejk
+        - column:
+            name: AUTHOR
+            value: Jaroslav Hašek
+        - column:
+            name: RATING
+            value: 10
         - column:
             name: GENRE
             value: Comedy
         - column:
             name: REVIEW
-            value: The book is fictional, it doesn't exist and the data are used as placeholder names.
+            value: The novel is set during World War I in Austria-Hungary, a multi-ethnic empire full of long-standing tensions. Fifteen million people died in the War, one million of them Austro-Hungarian soldiers of whom around 140,000 were Czechs. Jaroslav Hašek participated in this conflict and examined it in The Good Soldier Švejk.
         - column:
             name: READER_ID
-            value: 5
+            value: 2
         - column:
             name: START_READING_DATE
             value: '2015-07-16 14:39:04.000'
@@ -294,30 +209,27 @@ databaseChangeLog:
             value: '2015-07-20 00:00:00.000'
 
     - insert:
-        comment: Fictional demo data for book entity
+        comment: Demo data for book entity ID=8
         tableName: BOOK
         columns:
         - column:
-            name: ID
-            value: 21
-        - column:
             name: TITLE
-            value: Peasant Of Remorse
+            value: The Trial
         - column:
             name: AUTHOR
-            value: Kralkas Khog Pach
+            value: Franz Kafka
         - column:
             name: RATING
-            value: 9
+            value: 10
         - column:
             name: GENRE
-            value: Drama
+            value: Satire
         - column:
             name: REVIEW
-            value: The book is fictional, it doesn't exist and the data are used as placeholder names.
+            value: This is the story of a man arrested and prosecuted by a remote, inaccessible authority, with the nature of his crime revealed neither to him nor to the reader.
         - column:
             name: READER_ID
-            value: 6
+            value: 2
         - column:
             name: START_READING_DATE
             value: '2015-07-16 14:39:04.000'
@@ -326,30 +238,27 @@ databaseChangeLog:
             value: '2015-07-20 00:00:00.000'
 
     - insert:
-        comment: Fictional demo data for book entity
+        comment: Demo data for book entity ID=9
         tableName: BOOK
         columns:
         - column:
-            name: ID
-            value: 22
-        - column:
             name: TITLE
-            value: Inventors And Saviors
+            value: Candide, or Optimism
         - column:
             name: AUTHOR
-            value: Oponna Genuzh Idumi
+            value: Voltaire
         - column:
             name: RATING
-            value: 7
+            value: 10
         - column:
             name: GENRE
-            value: Drama
+            value: Satire
         - column:
             name: REVIEW
-            value: The book is fictional, it doesn't exist and the data are used as placeholder names.
+            value: It begins with a young man, Candide, who is living a sheltered life in an Edenic paradise and being indoctrinated with Leibnizian optimism (or simply "optimism") by his mentor, Professor Pangloss. The work describes the abrupt cessation of this lifestyle, followed by Candide's slow, painful disillusionment as he witnesses and experiences great hardships in the world.
         - column:
             name: READER_ID
-            value: 6
+            value: 2
         - column:
             name: START_READING_DATE
             value: '2015-07-16 14:39:04.000'
@@ -358,30 +267,27 @@ databaseChangeLog:
             value: '2015-07-20 00:00:00.000'
 
     - insert:
-        comment: Fictional demo data for book entity
+        comment: Demo data for book entity ID=10
         tableName: BOOK
         columns:
         - column:
-            name: ID
-            value: 23
-        - column:
             name: TITLE
-            value: Founder Of The Lost Ones
+            value: The Stranger
         - column:
             name: AUTHOR
-            value: Utruc Mvershurra Thunkenn
+            value: Albert Camus
         - column:
             name: RATING
-            value: 8
+            value: 10
         - column:
             name: GENRE
             value: Drama
         - column:
             name: REVIEW
-            value: The book is fictional, it doesn't exist and the data are used as placeholder names.
+            value: The story of a man living an absurd life.
         - column:
             name: READER_ID
-            value: 7
+            value: 2
         - column:
             name: START_READING_DATE
             value: '2015-07-16 14:39:04.000'
@@ -389,4 +295,32 @@ databaseChangeLog:
             name: END_READING_DATE
             value: '2015-07-20 00:00:00.000'
 
-            
+    - insert:
+        comment: Demo data for book entity ID=11
+        tableName: BOOK
+        columns:
+        - column:
+            name: TITLE
+            value: The Surprising Adventures of Baron Munchausen
+        - column:
+            name: AUTHOR
+            value: Rudolf Erich Raspe
+        - column:
+            name: RATING
+            value: 10
+        - column:
+            name: GENRE
+            value: Comedy
+        - column:
+            name: REVIEW
+            value: Baron Munchausen is a fictional German nobleman in literature and film, loosely based on a real baron, Hieronymus Karl Friedrich, Freiherr von Münchhausen. The real-life Münchhausen became a minor celebrity for telling outrageous tall tales based on his military service in the Russo-Turkish War.
+        - column:
+            name: READER_ID
+            value: 2
+        - column:
+            name: START_READING_DATE
+            value: '2015-07-16 14:39:04.000'
+        - column:
+            name: END_READING_DATE
+            value: '2015-07-20 00:00:00.000'
+
