@@ -36,7 +36,7 @@ noteControllers.controller("NoteController", function ($scope, $location, $route
 	 
     $scope.deleteNote = function () {
 
-        var custName = $scope.note.title + ' ' + $scope.note.content;
+        var custName = $scope.note.title;
 
         var modalOptions = {
             closeButtonText: 'Cancel',
