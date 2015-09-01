@@ -1,8 +1,11 @@
-# Design Application Architecture Research #
+# Design Software Architecture Research #
 
 
 The purpose of this repository is to research and compare different technologies by implementing the same user requirements with architecture designed for production ready web application.
 
+Deployed up and running MyBooks service is [here](https://mybookscloud.herokuapp.com/).
+
+The most recent source of implementation is [here](https://github.com/mstane/lab/tree/master/mybooks3).
 
 ## Application Architecture supports ##
 
@@ -17,6 +20,7 @@ The purpose of this repository is to research and compare different technologies
    - change management
  - i18n
  - Configuration
+   - Externalize
  - Server independence
  - IDE independence
  - Responsive UI

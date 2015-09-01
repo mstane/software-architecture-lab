@@ -1,5 +1,6 @@
 # MyBooks3 - Spring + AngularJS implementation #
 
+Deployed up and running MyBooks service is [here](https://mybookscloud.herokuapp.com/).
 
 ## Technology stack ##
 
@@ -40,7 +41,7 @@ The application showing how to use Spring Boot with Spring Security for common n
 * [Apache Maven 3.x](http://maven.apache.org/)
 
 ### Quick start ###
-1. `mvn spring-boot:run`
+1. `mvn spring-boot:run -Dspring.profiles.active=demo`
 3. Point your browser to [http://localhost:8080/](http://localhost:8080/)
 
 
