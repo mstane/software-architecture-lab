@@ -7,6 +7,8 @@ Deployed up and running MyBooks service is [here](https://mybookscloud.herokuapp
 
 The most recent source of implementation is [here](https://github.com/mstane/lab/tree/master/mybooks3).
 
+Wiki pages about the project are [here](https://github.com/mstane/lab/wiki).
+
 ## Application Architecture supports ##
 
  - Security
