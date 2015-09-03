@@ -10,16 +10,10 @@ databaseChangeLog:
         columns:
         - column:
             name: USERNAME
-            value: agarf.rac
+            value: Agarf Rac
         - column:
             name: EMAIL
             value: agarf.rac@example.com
-        - column:
-            name: FIRST_NAME
-            value: Agarf
-        - column:
-            name: LAST_NAME
-            value: Rac
         - column:
             name: SYSTEM_ROLE
             value: Admin 
@@ -33,16 +27,10 @@ databaseChangeLog:
         columns:
         - column:
             name: USERNAME
-            value: juk.bag
+            value: Juk Bag
         - column:
             name: EMAIL
             value: juk.bag@example.com
-        - column:
-            name: FIRST_NAME
-            value: Juk
-        - column:
-            name: LAST_NAME
-            value: Bag
         - column:
             name: SYSTEM_ROLE
             value: Common 

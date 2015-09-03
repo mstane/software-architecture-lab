@@ -57,7 +57,7 @@ readerControllers.controller("ReaderController", function ($scope, ReaderFactory
     }
 
     $scope.deleteReader = function () {
-        var custName = $scope.reader.firstName + ' ' + $scope.reader.lastName;
+        var custName = $scope.reader.username;
 
         var modalOptions = {
             closeButtonText: 'Cancel',

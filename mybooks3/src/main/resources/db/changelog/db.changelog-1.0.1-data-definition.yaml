@@ -25,12 +25,6 @@ databaseChangeLog:
             constraints:
               nullable: false
         - column:
-            name: FIRST_NAME
-            type: VARCHAR(255)
-        - column:
-            name: LAST_NAME
-            type: VARCHAR(255)
-        - column:
             name: PASSWORD
             type: VARCHAR(255)
             constraints:

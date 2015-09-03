@@ -61,28 +61,20 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>First Name</th>
-							<th>Last Name</th>
 							<th>Username</th>
 							<th>Email</th>
 						</tr>
 					</thead>
 					<tbody th:remove="all-but-first">
 						<tr ng-repeat="reader in page.content" ng-click="showView(reader.id)">
-							<td th:text="'{{reader.firstName}}'">First Name 1</td>
-							<td th:text="'{{reader.lastName}}'">Last Name 1</td>
 							<td th:text="'{{reader.username}}'">Username 1</td>
 							<td th:text="'{{reader.email}}'">Email 1</td>
 						</tr>
 						<tr th:onclick="'document.location = \'#/readers/view\';'" onclick="document.location = './view.html';">
-							<td>First Name 2</td>
-							<td>Last Name 2</td>
 							<td>Username 2</td>
 							<td>Email 2</td>
 						</tr>
 						<tr th:onclick="'document.location = \'#/readers/view\';'" onclick="document.location = './view.html';">
-							<td>First Name 3</td>
-							<td>Last Name 3</td>
 							<td>Username 3</td>
 							<td>Email 3</td>
 						</tr>

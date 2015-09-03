@@ -111,8 +111,6 @@ public class ApplicationTests {
 		HttpHeaders headers = getHttpHeaders(response);
 		
 		Map<String, String> newReader = new HashMap<String, String>();
-		newReader.put("firstName", "aaaa");
-		newReader.put("lastName", "aaaa");
 		newReader.put("username", "aaaa");
 		newReader.put("email", "aaaa@aaaa.aaaa");
 		newReader.put("password", "aaaa");

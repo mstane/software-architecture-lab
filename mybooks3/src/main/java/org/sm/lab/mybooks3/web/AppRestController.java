@@ -60,17 +60,14 @@ public class AppRestController {
 	}
 	
 	@RequestMapping(value = "/forgotten_password_send", method = RequestMethod.GET)
-	public ResponseEntity<String> forgottenPassword(@RequestParam(value = "emailOrUsername", required = true) String emailOrUsername) {
+	public ResponseEntity<String> forgottenPassword(@RequestParam(value = "email", required = true) String email) {
 		HttpStatus httpStatus;
 		String message;
 		
-		Optional<Reader> readerOpt = readerService.findByEmail(emailOrUsername);
-        if (!readerOpt.isPresent()) {
-        	readerOpt = readerService.findByUsername(emailOrUsername);
-        }
+		Optional<Reader> readerOpt = readerService.findByEmail(email);
         if (!readerOpt.isPresent()) {
         	httpStatus = HttpStatus.NOT_FOUND;
-        	message = String.format("User with emailOrUsername=%s was not found", emailOrUsername);
+        	message = String.format("User with email=%s was not found", email);
         } else {
         	try {
         		Reader reader = readerOpt.get();

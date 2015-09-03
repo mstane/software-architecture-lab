@@ -32,11 +32,7 @@ public class UserDetailsImpl extends org.springframework.security.core.userdetai
     }
     
     private void setDisplayName(Reader reader) {
-    	displayName = reader.getFirstName() + " " + reader.getLastName();
-    	displayName = displayName.trim();
-    	if (displayName.isEmpty()) {
-    		displayName = reader.getEmail();
-    	}
+    	displayName = reader.getUsername();
     }
 
 }

@@ -11,16 +11,10 @@ databaseChangeLog:
         columns:
         - column:
             name: USERNAME
-            value: pighalo.bortroka
+            value: Pighalo Bortroka
         - column:
             name: EMAIL
             value: pighalo.bortroka@example.com
-        - column:
-            name: FIRST_NAME
-            value: Pighalo
-        - column:
-            name: LAST_NAME
-            value: Bortroka
         - column:
             name: SYSTEM_ROLE
             value: Common 
@@ -34,16 +28,10 @@ databaseChangeLog:
         columns:
         - column:
             name: USERNAME
-            value: poli.mussav
+            value: Poli Mussav
         - column:
             name: EMAIL
             value: poli.mussav@example.com
-        - column:
-            name: FIRST_NAME
-            value: Poli
-        - column:
-            name: LAST_NAME
-            value: Mussav
         - column:
             name: SYSTEM_ROLE
             value: Common 
@@ -57,16 +45,10 @@ databaseChangeLog:
         columns:
         - column:
             name: USERNAME
-            value: trelan.vraz
+            value: Trelan Vraz
         - column:
             name: EMAIL
             value: trelan.vraz@example.com
-        - column:
-            name: FIRST_NAME
-            value: Trelan
-        - column:
-            name: LAST_NAME
-            value: Vraz
         - column:
             name: SYSTEM_ROLE
             value: Common 
@@ -80,16 +62,10 @@ databaseChangeLog:
         columns:
         - column:
             name: USERNAME
-            value: urila.korpora
+            value: Urila Korpora
         - column:
             name: EMAIL
             value: urila.korpora@example.com
-        - column:
-            name: FIRST_NAME
-            value: Urila
-        - column:
-            name: LAST_NAME
-            value: Korpora
         - column:
             name: SYSTEM_ROLE
             value: Common 
@@ -103,16 +79,10 @@ databaseChangeLog:
         columns:
         - column:
             name: USERNAME
-            value: melogo.olto
+            value: Melogo Olto
         - column:
             name: EMAIL
             value: melogo.olto@example.com
-        - column:
-            name: FIRST_NAME
-            value: Melogo
-        - column:
-            name: LAST_NAME
-            value: Olto
         - column:
             name: SYSTEM_ROLE
             value: Common 

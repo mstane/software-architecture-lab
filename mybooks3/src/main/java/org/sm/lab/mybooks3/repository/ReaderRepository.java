@@ -19,8 +19,6 @@ public interface ReaderRepository extends JpaRepository<Reader, Long>, JpaSpecif
 	
 	@Query("SELECT r FROM Reader r WHERE "
 			+ "LOWER(r.username) LIKE %:keyword%"
-			+ " OR LOWER(r.firstName) LIKE %:keyword%"
-			+ " OR LOWER(r.lastName) LIKE %:keyword%"
 			+ " OR LOWER(r.email) LIKE %:keyword%"
 			)
 	Page<Reader> search(@Param("keyword") String keyword, Pageable pageable);

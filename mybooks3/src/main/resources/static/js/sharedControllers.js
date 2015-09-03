@@ -12,7 +12,7 @@ sharedControllers.controller('navigation', function($rootScope, $scope, $http, $
 
 		var headers = credentials ? {
 			authorization : "Basic "
-					+ btoa(credentials.username + ":" + credentials.password)
+					+ btoa(credentials.email + ":" + credentials.password)
 		} : {};
 
 		$http.get('user', {
@@ -64,7 +64,7 @@ sharedControllers.controller('navigation', function($rootScope, $scope, $http, $
 	}
 	
 	$scope.forgottenPasswordSend = function() {
-		$http.get('/forgotten_password_send', { params : { emailOrUsername : $scope.emailOrUsername } }).success(function(data, status, headers, config) {
+		$http.get('/forgotten_password_send', { params : { email : $scope.email } }).success(function(data, status, headers, config) {
 			NotificationService.statusBarSuccess(data.message);
 			console.log("Forgotten password succeeded");
 		}).error(function(data, status, headers, config) {
