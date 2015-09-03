@@ -60,20 +60,24 @@
 						<tr>
 							<th>Username</th>
 							<th>Email</th>
+							<th>System Role</th>
 						</tr>
 					</thead>
 					<tbody th:remove="all-but-first">
 						<tr ng-repeat="reader in page.content" ng-click="showView(reader.id)">
 							<td th:text="'{{reader.username}}'">Username 1</td>
 							<td th:text="'{{reader.email}}'">Email 1</td>
+							<td th:text="'{{reader.systemRole}}'">System Role 1</td>
 						</tr>
 						<tr th:onclick="'document.location = \'#/readers/view\';'" onclick="document.location = './view.html';">
 							<td>Username 2</td>
 							<td>Email 2</td>
+							<td>System Role 2</td>
 						</tr>
 						<tr th:onclick="'document.location = \'#/readers/view\';'" onclick="document.location = './view.html';">
 							<td>Username 3</td>
 							<td>Email 3</td>
+							<td>System Role 3</td>
 						</tr>
 					</tbody>
 				</table>
