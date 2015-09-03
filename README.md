@@ -5,9 +5,9 @@ The purpose of this repository is to research and compare different technologies
 
 Deployed up and running MyBooks service is [here](https://mybookscloud.herokuapp.com/).
 
-The most recent source of implementation is [here](https://github.com/mstane/lab/tree/master/mybooks3).
+The most recent source of implementation is [here](https://github.com/mstane/software-architecture-lab/tree/master/mybooks3).
 
-Wiki pages about the project are [here](https://github.com/mstane/lab/wiki).
+Wiki pages about the project are [here](https://github.com/mstane/software-architecture-lab/wiki).
 
 ## Application Architecture supports ##
 
@@ -53,9 +53,9 @@ Details of requirements are in [Product Requirements Document] (https://github.c
 
 ## Technologies ##
 
- - [MyBooks](https://github.com/mstane/lab/tree/master/mybooks): GWT, MGWT, MVP, Guice, GIN, JPA, EclipseLink, EasyMock, Maven
- - [MyBooks2](https://github.com/mstane/lab/tree/master/mybooks2): Spring MVC, JSP, JPA, Hibernate, Maven
- - [MyBooks3](https://github.com/mstane/lab/tree/master/mybooks3): Spring MVC, Spring Boot, JPA, Hibernate, AngularJS, Bootstrap, Maven
+ - [MyBooks](https://github.com/mstane/software-architecture-lab/tree/master/mybooks): GWT, MGWT, MVP, Guice, GIN, JPA, EclipseLink, EasyMock, Maven
+ - [MyBooks2](https://github.com/mstane/software-architecture-lab/tree/master/mybooks2): Spring MVC, JSP, JPA, Hibernate, Maven
+ - [MyBooks3](https://github.com/mstane/software-architecture-lab/tree/master/mybooks3): Spring MVC, Spring Boot, JPA, Hibernate, AngularJS, Bootstrap, Maven
 
 
  
