@@ -1,61 +1,50 @@
-# Design Software Architecture Research #
-
-
-The purpose of this repository is to research and compare different technologies by implementing the same user requirements with architecture designed for production ready web application.
+# MyBooks3 - MonogDB + Spring + AngularJS implementation #
 
 Deployed up and running MyBooks service is [here](https://mybookscloud.herokuapp.com/).
 
-The most recent source of implementation is [here](https://github.com/mstane/software-architecture-lab/tree/master/mybooks3).
-
-Wiki pages about the project are [here](https://github.com/mstane/software-architecture-lab/wiki).
-
-## Application Architecture supports ##
-
- - Security
-   - Authentication
-   - Authorization
-     - URL-based
-     - Method-level security
-   - HTTPS
- - Database 
-   - independence
-   - change management
- - i18n
- - Configuration
-   - Externalize
- - Server independence
- - IDE independence
- - Responsive UI
- - Scalability
- - Caching
- - Logging
- - Validation
-   - Client
-   - Server
- - Pagination
- - Tests
-   - Unit
-   - Integration
-   - Performance
- - Naming conventions
- - Best recommendation and proven solution
+## Technology stack ##
 
 
-## User requirements ##
+### Technology stack on the client side ###
+
+ - Twitter Bootstrap
+ - AngularJS
+ - Full internationalization support with Angular Translate
+ - Thymeleaf template engine
+ - Testing with Karma and PhantomJS
+
+### Technology stack on the server side ###
+
+ - Spring Boot for easy application configuration
+ - Maven configuration for building, testing and running the application
+ - "development", "production" and "demo" Maven profiles
+ - Spring Security
+ - Spring MVC REST + Jackson
+ - Spring Data for MonogDB + Bean Validation
+ - Mongeez - change management tool
+ - Log management with Logback
  
-They are simplified to the level to have point but not to overwhelm the main goal which is researching technology stack and its implementation.
-
-This web application keeps track of your read books. 
- - You can register yourself, create and update data about the book and to record your notes or quotations. You can update your profile and search your completely content on the site.
- - Apart for common use, there is also administration part which has all of these functionalities and have ability to administrate other users.
-
-Details of requirements are in [Product Requirements Document] (https://github.com/mstane/lab/wiki/Product-Requirements-Document)
-
-## Technologies ##
-
- - [MyBooks](https://github.com/mstane/software-architecture-lab/tree/master/mybooks): GWT, MGWT, MVP, Guice, GIN, JPA, EclipseLink, EasyMock, Maven
- - [MyBooks2](https://github.com/mstane/software-architecture-lab/tree/master/mybooks2): Spring MVC, JSP, JPA, Hibernate, Maven
- - [MyBooks3](https://github.com/mstane/software-architecture-lab/tree/master/mybooks3): Spring MVC, Spring Boot, JPA, Hibernate, AngularJS, Bootstrap, Maven
-
-
  
+ 
+
+### Security ###
+The application showing how to use Spring Boot with Spring Security for common needs, such as:
+
+* Customized login form
+* DAO-based authentication
+* Basic "remember me" authentication
+* URL-based security
+* Method-level security
+
+### Requirements ###
+* [Java Platform (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+* [Apache Maven 3.x](http://maven.apache.org/)
+
+### Quick start ###
+1. `mvn spring-boot:run -Dspring.profiles.active=demo`
+3. Point your browser to [http://localhost:8080/](http://localhost:8080/)
+
+
+
+### Testing ###
+mvn jasmine:bdd - visit http://localhost:8234 in your browser
