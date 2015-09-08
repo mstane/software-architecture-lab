@@ -1,4 +1,4 @@
-# MyBooks3 - MonogDB + Spring + AngularJS implementation #
+# MyBooks - MonogDB + Spring + AngularJS implementation #
 
 Deployed up and running MyBooks service is [here](https://mybookscloud.herokuapp.com/).
 
