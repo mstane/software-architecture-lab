@@ -1,2 +1,2 @@
-web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/mybooks3-0.1.0.jar
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/mybooks-1.0.0.jar
 

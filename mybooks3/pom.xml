@@ -3,12 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.sm.lab.mybooks3</groupId>
-	<artifactId>mybooks3</artifactId>
-	<version>0.1.0</version>
+	<groupId>org.sm.lab.mybooks</groupId>
+	<artifactId>mybooks</artifactId>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>mybooks3</name>
+	<name>mybooks</name>
 	<description>MyBooks with AngularJS, Bootstrap, Thymeleaf and Spring</description>
 	
 	<properties>
@@ -231,7 +231,7 @@
 					<mainClass>org.hsqldb.server.Server</mainClass>
 					<arguments>
 						<argument>--database.0</argument>
-						<argument>file:db/mybooks3.db</argument>
+						<argument>file:db/mybooks.db</argument>
 					</arguments>
 				</configuration>
 			</plugin>
