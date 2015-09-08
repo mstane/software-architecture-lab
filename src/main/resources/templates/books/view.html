@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="../img/favicon.ico" />
+<title>My Books 3</title>
+<link rel="stylesheet" href="../../../../../target/generated-resources/static/css/bundle.css" />
+<link rel="stylesheet" href="../../static/css/custom.css" />
+</head>
+
+<body>
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> 
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/home.html" title="MyBooks">MyBooks</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+        		<ul class="nav navbar-nav navbar-right">		
+					<li><a href="./list.html">Books</a></li>
+					<li><a href="../readers/view.html">My Profile</a></li>
+					<li><a href="../readers/list.html">Admin</a></li>
+					<li><a href="../login.html">Logout</a></li>				
+          		</ul>
+        	</div>
+		</div>
+	</nav>
+
+
+
+
+	<div class="container">
+	
+		<br />
+		
+		<div th:fragment="content" class="container-form-style">
+	
+			<ol class="breadcrumb">
+				<li><a href="../home.html" th:href="@{#/home}">Home</a></li>
+				<li><a href="./list.html" th:href="@{#/books/list}">Books</a></li>			
+				<li class="active">View</li>
+			</ol>
+	
+			<div class="row container-form-style">	
+				<h2 class="sub-header pull-left">Book View</h2> 
+				<div class="btn-toolbar pull-right">
+					<a th:href="@{#/books/edit/{{book.id}} }" href="./edit.html" class="btn btn-primary">Edit Book</a>
+<!-- 					<a confirmed-click="deleteBook()" ng-confirm-click="Are you sure?" class="btn btn-default">Delete</a> -->
+					<a ng-click="deleteBook()" class="btn btn-default">Delete Book</a>
+					<a th:href="@{#/notes/edit}" href="../notes/edit.html" class="btn btn-default">New Note</a>
+				</div>
+			</div>
+			
+				<table class="table">
+					<tbody>
+						<tr>
+							<td class="col-md-3"><strong>Title:</strong></td>
+							<td colspan="3" th:text="'{{book.title}}'">Title1</td>
+						</tr>
+						<tr>
+							<td><strong>Author:</strong></td>
+							<td colspan="3" th:text="'{{book.author}}'">Author1</td>
+						</tr>
+						<tr>
+							<td><strong>Genre</strong></td>
+							<td th:text="'{{book.genre}}'">Genre 1</td>
+							<td><strong>Rating:</strong></td>
+							<td th:text="'{{book.rating}}'">Rating 1</td>
+						</tr>
+						<tr>
+							<td><strong>Start Reading Date:</strong></td>
+							<td th:text="'{{book.startReadingDate | date : \'dd-MMM-yyyy\' }}'">Start Reading Date 1</td>						
+							<td><strong>End Reading Date:</strong></td>
+							<td th:text="'{{book.endReadingDate | date : \'dd-MMM-yyyy\'}}'">End Reading Date 1</td>
+						</tr>
+						<tr>
+							<td><strong>Review:</strong></td>
+							<td colspan="3" th:text="'{{book.review}}'">Review 1</td>
+						</tr>
+					</tbody>
+				</table>
+	
+			<hr />
+	
+			<p><strong>Notes:</strong></p>
+			
+			
+			<div class="table-responsive" ng-show="book.notes.length">
+				<table class="table table-striped">
+					<tbody th:remove="all-but-first">
+						<tr ng-repeat="note in book.notes" ng-click="showNoteView(note.id)">
+							<td th:text="'{{note.title}}'">title0</td>
+						</tr>
+						<tr th:onclick="'document.location = \'#/notes/view\';'" onclick="document.location = '../notes/view.html';">
+							<td>title1</td>
+						</tr>
+						<tr th:onclick="'document.location = \'#/notes/view\';'" onclick="document.location = '../notes/view.html';">
+							<td>title2</td>
+						</tr>
+						<tr th:onclick="'document.location = \'#/notes/view\';'" onclick="document.location = '../notes/view.html';">
+							<td>title3</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	
+			<div ng-show="!book.notes.length">
+				<p>There is no data for any note.</p>
+			</div>
+			
+			
+		</div>
+		
+	</div>
+	
+
+	<script src="../../../../../target/generated-resources/static/js/bundle.js"></script>
+	<script src="../../static/js/app.js"></script>
+
+</body>
+</html>
