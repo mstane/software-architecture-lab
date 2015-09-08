@@ -1,4 +1,4 @@
-# MyBooks3 - Spring + AngularJS implementation #
+# MyBooks - Spring + AngularJS implementation #
 
 Deployed up and running MyBooks service is [here](https://mybookscloud.herokuapp.com/).
 
