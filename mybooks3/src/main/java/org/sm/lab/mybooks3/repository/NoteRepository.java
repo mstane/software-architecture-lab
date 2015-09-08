@@ -3,14 +3,13 @@ import org.sm.lab.mybooks3.domain.Book;
 import org.sm.lab.mybooks3.domain.Note;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface NoteRepository extends JpaRepository<Note, Long>, JpaSpecificationExecutor<Note> {
+public interface NoteRepository extends MongoRepository<Note, String> {
 	
 	Page<Note> findByBook(Book book, Pageable pageable);
 

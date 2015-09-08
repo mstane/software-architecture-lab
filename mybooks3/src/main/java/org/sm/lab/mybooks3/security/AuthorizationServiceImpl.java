@@ -43,7 +43,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	}	
 	
     @Override
-    public boolean canAccessReader(UserDetailsImpl userDetails, Long userId) {
+    public boolean canAccessReader(UserDetailsImpl userDetails, String userId) {
         LOGGER.debug("Checking if user={} has access to user={}", userDetails, userId);
         return userDetails != null && (userDetails.getId().equals(userId) || isAdmin(userDetails));
     }
@@ -62,7 +62,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	}
 
 	@Override
-	public boolean canAccessBook(UserDetailsImpl userDetails, Long bookId) {
+	public boolean canAccessBook(UserDetailsImpl userDetails, String bookId) {
 		if (bookId == null || userDetails == null) return false;
 		
 		Book book = bookRepository.findOne(bookId);
@@ -76,7 +76,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	}
 
 	@Override
-	public boolean canAccessNote(UserDetailsImpl userDetails, Long noteId) {
+	public boolean canAccessNote(UserDetailsImpl userDetails, String noteId) {
 		if (noteId == null || userDetails == null) return false;
 		
 		Note note = noteRepository.findOne(noteId);

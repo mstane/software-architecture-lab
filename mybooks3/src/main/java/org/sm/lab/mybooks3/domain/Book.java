@@ -4,36 +4,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.Type;
 import org.sm.lab.mybooks3.enums.Genre;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@Entity
+@Document
 public class Book implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+    private String id;
 
     @NotNull
     @Size(min = 2)
@@ -41,36 +26,27 @@ public class Book implements Serializable {
 
     private String author;
 
-    @Column(nullable = true)
-    @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
     private Date startReadingDate;
 
-    @Column(nullable = true)
-    @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
     private Date endReadingDate;
 
     private Long rating;
 
-    @Enumerated(EnumType.STRING)
     private Genre genre;
     
-    @Lob
-    @Type(type = "org.hibernate.type.TextType")
     private String review;
 
-    @ManyToOne
     private Reader reader;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "book")
     private List<Note> notes = new ArrayList<Note>();
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

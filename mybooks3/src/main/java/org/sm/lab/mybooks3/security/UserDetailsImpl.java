@@ -8,7 +8,7 @@ public class UserDetailsImpl extends org.springframework.security.core.userdetai
 
 	private static final long serialVersionUID = 1L;
 
-	private long id;
+	private String id;
 	private SystemRole systemRole;
 	private String displayName;
 	
@@ -19,7 +19,7 @@ public class UserDetailsImpl extends org.springframework.security.core.userdetai
         setDisplayName(reader);
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

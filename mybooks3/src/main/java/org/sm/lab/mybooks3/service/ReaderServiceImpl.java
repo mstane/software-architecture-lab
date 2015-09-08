@@ -32,7 +32,7 @@ public class ReaderServiceImpl implements ReaderService {
 	
 	@Override
 	@PreAuthorize("@authorizationService.canAccessReader(principal, #id)")
-	public Reader findReader(Long id) {
+	public Reader findReader(String id) {
         return readerRepository.findOne(id);
     }
 	
@@ -50,7 +50,7 @@ public class ReaderServiceImpl implements ReaderService {
 	
 	@Override
 	@PreAuthorize("@authorizationService.canAccessReader(principal, #id)")
-	public void deleteReader(Long id) {
+	public void deleteReader(String id) {
         readerRepository.delete(id);
     }
 

@@ -1,0 +1,23 @@
+<mongoChangeLog>
+    <changeSet changeId="2" author="stane">
+        <script>
+            db.READER.ensureIndex({"EMAIL" : 1});
+            db.READER.insert(
+            {
+                "_ID" : "1",
+                "USERNAME" : "Agarf Rac",
+                "EMAIL" : "agarf.rac@example.com",
+                "SYSTEM_ROLE": "Admin",
+                "PASSWORD": "$2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC"
+            });
+            db.READER.insert(
+            {
+                "_ID" : "2",
+                "USERNAME" : "Juk Bag",
+                "EMAIL" : "juk.bag@example.com",
+                "SYSTEM_ROLE": "Common",
+                "PASSWORD": "$2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC"
+            });
+        </script>
+    </changeSet>
+</mongoChangeLog>

@@ -22,22 +22,22 @@ public class NoteRestController {
 	NoteService noteService;
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public Note get(@PathVariable("id") long id) {
+	public Note get(@PathVariable("id") String id) {
 		return this.noteService.findNote(id);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public Note create(@RequestBody @Valid Note note, @RequestParam(value = "bookId") long bookId) {
+	public Note create(@RequestBody @Valid Note note, @RequestParam(value = "bookId") String bookId) {
 		return noteService.saveNote(bookId, note);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public Note update(@PathVariable("id") long id, @RequestBody @Valid Note note, @RequestParam(value = "bookId") long bookId) {
+	public Note update(@PathVariable("id") String id, @RequestBody @Valid Note note, @RequestParam(value = "bookId") String bookId) {
 		return noteService.saveNote(bookId, note);
 	}	
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Boolean> delete(@PathVariable("id") long id) {
+	public ResponseEntity<Boolean> delete(@PathVariable("id") String id) {
 		this.noteService.deleteNote(id);
 		return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
 	}

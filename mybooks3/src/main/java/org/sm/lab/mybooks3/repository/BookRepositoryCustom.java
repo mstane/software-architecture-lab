@@ -14,8 +14,8 @@ public interface BookRepositoryCustom {
 
 	public Long countSearch(String title, String author, String startReadingDate, String endReadingDate, String rating, String genre);
 
-	public Page<SearchItem> searchContents(Long readerId, String keyword, Genre genre, Pageable pageable);
+	public Page<SearchItem> searchContents(String readerId, String keyword, Genre genre, Pageable pageable);
 
-	public Long countSearch(Long readerId, String keyword, Genre genre);
+	public Long countSearch(String readerId, String keyword, Genre genre);
 	
 }

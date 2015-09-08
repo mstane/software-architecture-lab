@@ -23,7 +23,7 @@ public class ProfileRestController {
 	PasswordEncoder passwordEncoder;
 
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public Reader get(@PathVariable("id") long id) {
+	public Reader get(@PathVariable("id") String id) {
 		return this.readerService.findReader(id);
 	}
 	

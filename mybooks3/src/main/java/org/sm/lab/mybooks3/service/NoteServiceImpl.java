@@ -21,13 +21,13 @@ public class NoteServiceImpl implements NoteService {
 	
 	@Override
 	@PreAuthorize("@authorizationService.canAccessNote(principal, #id)")
-	public Note findNote(Long id) {
+	public Note findNote(String id) {
         return noteRepository.findOne(id);
     }
 	
 	@Override
 	@PreAuthorize("@authorizationService.canAccessBook(principal, #bookId)")
-	public Note saveNote(Long bookId, Note note) {
+	public Note saveNote(String bookId, Note note) {
 		Book book = bookRepository.findOne(bookId);
 		note.setBook(book);
         return noteRepository.save(note);
@@ -35,7 +35,7 @@ public class NoteServiceImpl implements NoteService {
 
 	@Override
 	@PreAuthorize("@authorizationService.canAccessNote(principal, #id)")
-	public void deleteNote(Long id) {
+	public void deleteNote(String id) {
         noteRepository.delete(id);
     }
 	

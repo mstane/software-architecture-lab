@@ -8,13 +8,13 @@ public interface ReaderService {
 	
 	public abstract Page<Reader> findAllReaders(int pageNumber, int pageSize);
 	
-	public abstract Reader findReader(Long id);
+	public abstract Reader findReader(String id);
 	
 	public abstract Page<Reader> search(String keyword, int pageNumber, int pageSize);
 	
 	public abstract Reader saveReader(Reader reader);
 	
-	public abstract void deleteReader(Long id);
+	public abstract void deleteReader(String id);
 	
 	
 	

@@ -37,7 +37,7 @@ public class BookServiceImpl implements BookService {
 	
 	@Override
 	@PreAuthorize("@authorizationService.canAccessBook(principal, #id)")
-	public Book findBook(Long id) {
+	public Book findBook(String id) {
         return bookRepository.findOne(id);
     }
 	
@@ -64,7 +64,7 @@ public class BookServiceImpl implements BookService {
 	
 	@Override
 	@PreAuthorize("@authorizationService.canAccessBook(principal, #id)")
-	public void deleteBook(Long id) {
+	public void deleteBook(String id) {
         bookRepository.delete(id);
     }
 
