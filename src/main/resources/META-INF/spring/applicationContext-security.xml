@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+        
+    <beans:bean id="appAuthenticationSuccessHandler" class="org.sm.lab.mybooks.security.AppAuthenticationSuccessHandler"/>
+    <beans:bean id="appLogoutSuccessHandler" class="org.sm.lab.mybooks.security.AppLogoutSuccessHandler"/>          
+        
+	<!-- HTTP security configurations -->
+	<http auto-config="true" use-expressions="true" path-type="regex">
+		<form-login login-processing-url="/resources/j_spring_security_check"
+			login-page="/login" authentication-failure-url="/login?login_error=t"
+			authentication-success-handler-ref="appAuthenticationSuccessHandler" />
+		<logout logout-url="/resources/j_spring_security_logout"
+			success-handler-ref="appLogoutSuccessHandler" />
+		<!-- Configure these elements to secure URIs in your application -->
+        <access-denied-handler error-page="/access-denied"/>
+        <intercept-url pattern=".*register.*" access="permitAll" />	
+        <intercept-url pattern=".*(note|book).*" access="isAuthenticated()" />
+        <intercept-url pattern="/admin.*" access="hasRole('Admin')" />
+        <intercept-url pattern=".*" access="permitAll" />
+	</http>
+	<!-- Configure Authentication mechanism -->
+	<!-- SHA-256 values can be produced using 'echo -n your_desired_password 
+		| sha256sum' (using normal *nix environments) -->
+<!-- 	<authentication-manager alias="authenticationManager"> -->
+<!-- 		<authentication-provider> -->
+<!-- 			<password-encoder hash="sha-256" /> -->
+<!-- 			<user-service> -->
+<!-- 				<user name="admin" -->
+<!-- 					password="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918" -->
+<!-- 					authorities="ROLE_ADMIN" /> -->
+<!-- 				<user name="user" -->
+<!-- 					password="04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb" -->
+<!-- 					authorities="ROLE_USER" /> -->
+<!-- 			</user-service> -->
+<!-- 		</authentication-provider> -->
+<!-- 	</authentication-manager> -->
+
+    <authentication-manager>
+        <authentication-provider user-service-ref="appUserDetailService">
+            <password-encoder ref="passwordEncoder"/>
+        </authentication-provider>
+    </authentication-manager>
+    
+    <beans:bean id="loggerListener"
+                class="org.springframework.security.authentication.event.LoggerListener" />    
+
+	<beans:bean id='passwordEncoder' class='org.springframework.security.crypto.password.StandardPasswordEncoder'/>
+	
+	<!-- enable support for Expression-based annotations in Spring Security -->
+    <global-method-security pre-post-annotations="enabled" >
+        <expression-handler ref="expressionHandler" />
+    </global-method-security>
+    
+    <beans:bean id="expressionHandler"
+                class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler">
+        <beans:property name="permissionEvaluator" ref="permissionEvaluator" />
+    </beans:bean>
+    
+    <beans:bean id="permissionEvaluator"
+                class="org.sm.lab.mybooks.security.AppPermissionEvaluator">
+        <beans:constructor-arg index="0">
+            <beans:map key-type="java.lang.String" value-type="org.sm.lab.mybooks.security.AppPermission">
+                <beans:entry key="isProfileOwner" value-ref="profileOwnerPermission" />
+                <beans:entry key="isBookNotesAuthor" value-ref="bookNotesAuthorPermission" />
+            </beans:map>
+        </beans:constructor-arg>
+    </beans:bean>
+    
+    <beans:bean id="profileOwnerPermission" class="org.sm.lab.mybooks.security.permission.ProfileOwnerPermission" />
+    <beans:bean id="bookNotesAuthorPermission" class="org.sm.lab.mybooks.security.permission.BookNotesAuthorPermission" />    
+        
+
+</beans:beans>

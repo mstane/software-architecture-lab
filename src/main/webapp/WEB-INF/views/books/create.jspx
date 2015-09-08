@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_org_sm_lab_mybooks_domain_Book" modelAttribute="book" path="/books" render="${empty dependencies}" z="W+buRdNhfn7W2ppVhqpLJjUS2E0=">
+        <field:input field="title" id="c_org_sm_lab_mybooks_domain_Book_title" min="2" required="true" z="91AXu4f0CAlpZq/LXbDuFeu18ro="/>
+        <field:input field="author" id="c_org_sm_lab_mybooks_domain_Book_author" z="ttr0jn20f3fJ50NwK60qRQH+W/E="/>
+        <field:input field="url" id="c_org_sm_lab_mybooks_domain_Book_url" z="xdXox6CaEuEC3q43GEGkuOlPJ0w="/>
+        <field:datetime dateTimePattern="${book_startreadingdate_date_format}" field="startReadingDate" id="c_org_sm_lab_mybooks_domain_Book_startReadingDate" z="KCcO4yqM4ji2qekfXrj5Tckyreg="/>
+        <field:datetime dateTimePattern="${book_endreadingdate_date_format}" field="endReadingDate" id="c_org_sm_lab_mybooks_domain_Book_endReadingDate" z="9orNqBJr6EPIqm/FuHN8akdthVM="/>
+        <field:input field="rating" id="c_org_sm_lab_mybooks_domain_Book_rating" validationMessageCode="field_invalid_integer" z="Vfr7pRu0/eV2sfwoDEGYffllR6M="/>
+        <field:select field="genre" id="c_org_sm_lab_mybooks_domain_Book_genre" items="${genres}" path="genres" z="yRaxJdm7njiWcXHyXkbU0x9NUwk="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_org_sm_lab_mybooks_domain_Book" render="${not empty dependencies}" z="DAVx6PJB0l+al8MPBPyOMaHY0K8="/>
+</div>

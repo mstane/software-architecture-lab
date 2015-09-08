@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+<link href="http://localhost:8080/" rel="selenium.base"/>
+<title>Selenium test for ReaderController</title>
+</head>
+<body>
+    <table border="1" cellpadding="1" cellspacing="1">
+        <thead>
+            <tr>
+                <td colspan="3" rowspan="1">Selenium test for ReaderController</td>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+                    <td>open</td>
+                    <td>http://localhost:8080/mybooks/readers?form&amp;lang=en_US</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>_username_id</td>
+                    <td>someUsername1</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>_password_id</td>
+                    <td>somePassword1</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>_firstName_id</td>
+                    <td>someFirstName1</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>_lastName_id</td>
+                    <td>someLastName1</td>
+                </tr>
+                <tr>
+                    <td>type</td>
+                    <td>_email_id</td>
+                    <td>some@email.com</td>
+                </tr>
+                <tr>
+                    <td>clickAndWait</td>
+                    <td>//input[@id = 'proceed']</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td>verifyText</td>
+                    <td>_s_org_sm_lab_mybooks_domain_Reader_username_username_id</td>
+                    <td>someUsername1</td>
+                </tr>
+                <tr>
+                    <td>verifyText</td>
+                    <td>_s_org_sm_lab_mybooks_domain_Reader_password_password_id</td>
+                    <td>somePassword1</td>
+                </tr>
+                <tr>
+                    <td>verifyText</td>
+                    <td>_s_org_sm_lab_mybooks_domain_Reader_firstName_firstName_id</td>
+                    <td>someFirstName1</td>
+                </tr>
+                <tr>
+                    <td>verifyText</td>
+                    <td>_s_org_sm_lab_mybooks_domain_Reader_lastName_lastName_id</td>
+                    <td>someLastName1</td>
+                </tr>
+                <tr>
+                    <td>verifyText</td>
+                    <td>_s_org_sm_lab_mybooks_domain_Reader_email_email_id</td>
+                    <td>some@email.com</td>
+                </tr>
+            </tbody>
+    </table>
+</body>
+</html>

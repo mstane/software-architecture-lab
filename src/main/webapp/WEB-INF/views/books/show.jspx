@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_org_sm_lab_mybooks_domain_Book" object="${book}" path="/books" create="false" list="false" z="Yx2MS64KY+hN+Y9kPxqZw2Hw+w0=">
+        <field:display field="title" id="s_org_sm_lab_mybooks_domain_Book_title" object="${book}" z="1dIzSOdpxYWjPtnpcTrOPoj2Rw0="/>
+        <field:display field="author" id="s_org_sm_lab_mybooks_domain_Book_author" object="${book}" z="axGWs6iMj9zR18rurcakiQZyOdw="/>
+        <field:display field="url" id="s_org_sm_lab_mybooks_domain_Book_url" object="${book}" z="tBNudpVlFgRJYvG+2CYrRBDC7xY="/>
+        <field:display date="true" dateTimePattern="${book_startreadingdate_date_format}" field="startReadingDate" id="s_org_sm_lab_mybooks_domain_Book_startReadingDate" object="${book}" z="5h1/re48b5MJqU1H0ScW6KO3Ktc="/>
+        <field:display date="true" dateTimePattern="${book_endreadingdate_date_format}" field="endReadingDate" id="s_org_sm_lab_mybooks_domain_Book_endReadingDate" object="${book}" z="OWrwacd7/y5pPNOXBEVvEHjDk1w="/>
+        <field:display field="rating" id="s_org_sm_lab_mybooks_domain_Book_rating" object="${book}" z="LKjAXXo4o7JxrhkyQwCl0Kepc1g="/>
+        <field:display field="genre" id="s_org_sm_lab_mybooks_domain_Book_genre" object="${book}" z="01tgSAN8+m2GprOaNY0F5HzWlD0="/>
+        <field:display field="reader" id="s_org_sm_lab_mybooks_domain_Book_reader" object="${book}" z="RenbkoXCWGEhlnvkYbNztByZbaE="/>
+    </page:show>
+    
+    <table:table data="${book.notes}" id="l_org_sm_lab_mybooks_domain_Note" path="/notes" z="G7KdHoeBonwLFfDgrh2Lg+DUaKI=">
+        <table:column id="c_org_sm_lab_mybooks_domain_Note_title" property="title" z="mhtKa3hZ1VkyF4ycl6j/yRIWHrA="/>
+        <table:column id="c_org_sm_lab_mybooks_domain_Note_content" property="content" z="MkpGxN3Q9q0LxUW97aKc+8P3HT0="/>
+    </table:table>
+        
+</div>
