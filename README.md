@@ -1,4 +1,4 @@
-# MyBooks2 - Spring + JSP implementation #
+# MyBooks - Spring + JSP implementation #
 
 
 ## Technology stack ##
