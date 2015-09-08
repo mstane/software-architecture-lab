@@ -53,9 +53,10 @@ Details of requirements are in [Product Requirements Document] (https://github.c
 
 ## Technologies ##
 
- - [MyBooks](https://github.com/mstane/software-architecture-lab/tree/master/mybooks): GWT, MGWT, MVP, Guice, GIN, JPA, EclipseLink, EasyMock, Maven
- - [MyBooks2](https://github.com/mstane/software-architecture-lab/tree/master/mybooks2): Spring MVC, JSP, JPA, Hibernate, Maven
- - [MyBooks3](https://github.com/mstane/software-architecture-lab/tree/master/mybooks3): Spring MVC, Spring Boot, JPA, Hibernate, AngularJS, Bootstrap, Maven
+ - [Branch gwt](https://github.com/mstane/software-architecture-lab/tree/gwt): GWT, MGWT, MVP, Guice, GIN, JPA, EclipseLink, EasyMock, Maven
+ - [Branch spring-jsp](https://github.com/mstane/software-architecture-lab/tree/spring-jsp): Spring MVC, JSP, JPA, Hibernate, Maven
+ - [Master Branch angular-spring](https://github.com/mstane/software-architecture-lab/tree/master/): Spring MVC, Spring Boot, JPA, Hibernate, AngularJS, Bootstrap, Maven
+ - [Branch mongodb](https://github.com/mstane/software-architecture-lab/tree/mongodb): Spring MVC, Spring Boot, MongoDB, AngularJS, Bootstrap, Maven
 
 
  
