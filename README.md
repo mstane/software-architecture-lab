@@ -1,6 +1,7 @@
 # MyBooks - Spring + AngularJS implementation #
 
-Deployed up and running MyBooks service is [here](https://mybookscloud.herokuapp.com/).
+Automatic deployed on every push on [Heroku platform](https://mybookscloud.herokuapp.com/). 
+This is documented on [wiki pages](https://github.com/mstane/software-architecture-lab/wiki).
 
 ## Technology stack ##
 
@@ -42,7 +43,8 @@ The application showing how to use Spring Boot with Spring Security for common n
 
 ### Quick start ###
 1. `mvn spring-boot:run -Dspring.profiles.active=demo`
-3. Point your browser to [http://localhost:8080/](http://localhost:8080/)
+2. Point your browser to [http://localhost:8080/](http://localhost:8080/)
+3. Demo user credentials: `username:juk.bag@example.com / password: Mb.1234`
 
 
 
