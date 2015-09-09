@@ -1,4 +1,4 @@
-package org.sm.lab.mybooks;
+package org.sm.lab.mybooks.config;
 
 import java.net.URI;
 import java.net.URISyntaxException;

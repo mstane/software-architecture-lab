@@ -21,6 +21,7 @@ import org.hibernate.annotations.Type;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Note implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
+//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Reader implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -49,6 +50,7 @@ public class Reader implements Serializable {
     private SystemRole systemRole;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "reader")
+//    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private List<Book> books = new ArrayList<Book>();
     
 	public Long getId() {
