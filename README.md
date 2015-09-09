@@ -1,6 +1,6 @@
 # MyBooks - Spring + AngularJS implementation #
 
-Automatic deployed on every push on [Heroku platform](https://mybookscloud.herokuapp.com/). 
+Automatically deployed on every push on [Heroku platform](https://mybookscloud.herokuapp.com/). 
 This is documented on [wiki pages](https://github.com/mstane/software-architecture-lab/wiki).
 
 ## Technology stack ##
