@@ -23,7 +23,6 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
 import org.sm.lab.mybooks.enums.Genre;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -44,12 +43,10 @@ public class Book implements Serializable {
 
     @Column(nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
     private Date startReadingDate;
 
     @Column(nullable = true)
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
     private Date endReadingDate;
 
     private Long rating;
