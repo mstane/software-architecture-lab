@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,6 +30,7 @@ public class Note implements Serializable {
     private Date modifiedTime;
 
     @JsonIgnore
+    @DBRef
     private Book book;
     
 	protected void onCreate() {

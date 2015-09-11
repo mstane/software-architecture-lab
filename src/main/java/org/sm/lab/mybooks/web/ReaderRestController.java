@@ -38,7 +38,7 @@ public class ReaderRestController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public Reader update(@PathVariable("id") long id, @RequestBody @Valid Reader reader) {
+	public Reader update(@PathVariable("id") String id, @RequestBody @Valid Reader reader) {
 		return readerService.saveReader(reader);
 	}
 	

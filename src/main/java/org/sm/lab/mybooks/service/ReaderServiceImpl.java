@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ReaderServiceImpl implements ReaderService {
 
 	@Autowired
-    ReaderRepository readerRepository;
+	private ReaderRepository readerRepository;
 	
     @Autowired
     private PasswordEncoder passwordEncoder;

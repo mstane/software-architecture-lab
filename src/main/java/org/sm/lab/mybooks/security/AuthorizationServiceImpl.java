@@ -72,7 +72,6 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 		} else {
 			return canAccessReader(userDetails, book.getReader().getId());
 		}
-
 	}
 
 	@Override

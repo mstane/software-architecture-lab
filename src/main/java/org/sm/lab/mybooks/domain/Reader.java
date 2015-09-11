@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
 import org.sm.lab.mybooks.enums.SystemRole;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -30,7 +31,7 @@ public class Reader implements Serializable {
 	@NotNull
     private String password;
 
-    @Pattern(regexp = "[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+")
+    @Email
     private String email;
 
     private SystemRole systemRole;

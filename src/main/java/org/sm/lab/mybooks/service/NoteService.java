@@ -1,4 +1,6 @@
 package org.sm.lab.mybooks.service;
+import java.util.List;
+
 import org.sm.lab.mybooks.domain.Note;
 
 public interface NoteService {
@@ -8,5 +10,7 @@ public interface NoteService {
 	public abstract Note saveNote(String bookId, Note note);
 	
 	public abstract void deleteNote(String id);
+
+	public abstract List<Note> findBooksNotes(String bookId);
 	
 }

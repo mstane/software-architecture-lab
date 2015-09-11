@@ -1,11 +1,15 @@
 package org.sm.lab.mybooks.web;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.sm.lab.mybooks.domain.Book;
+import org.sm.lab.mybooks.domain.Note;
 import org.sm.lab.mybooks.domain.SearchItem;
 import org.sm.lab.mybooks.enums.Genre;
 import org.sm.lab.mybooks.service.BookService;
+import org.sm.lab.mybooks.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,7 +27,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class BookRestController {
 	
 	@Autowired
-	BookService bookService;
+	private BookService bookService;
+	
+	@Autowired
+	private NoteService noteService;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public Page<Book> list(@RequestParam(value = "pageNumber", required = false) Integer pageNumber, @RequestParam(value = "pageSize", required = false) Integer pageSize) {
@@ -32,7 +39,10 @@ public class BookRestController {
 
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public Book get(@PathVariable("id") String id) {
-		return this.bookService.findBook(id);
+		Book book = this.bookService.findBook(id);
+		List<Note> notes = noteService.findBooksNotes(id);
+		book.setNotes(notes);
+		return book;
 	}
 	
 	@RequestMapping(params = "search", method=RequestMethod.GET)
@@ -47,7 +57,7 @@ public class BookRestController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public Book update(@PathVariable("id") long id, @RequestBody @Valid Book book) {
+	public Book update(@PathVariable("id") String id, @RequestBody @Valid Book book) {
 		return bookService.saveBook(book);
 	}
 	

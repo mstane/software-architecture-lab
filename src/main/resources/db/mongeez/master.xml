@@ -1,3 +1,7 @@
 <changeFiles>
-    <file path="db.changelog-1.0.2-readers.xml"/>   
+    <file path="db.changelog-1.0.2-readers.xml"/>
+    <file path="db.changelog-1.0.3-readers.xml"/>
+    <file path="db.changelog-1.0.4-books-real.xml"/>
+    <file path="db.changelog-1.0.5-books-fictional.xml"/>
+    <file path="db.changelog-1.0.6-notes.xml"/>
 </changeFiles>

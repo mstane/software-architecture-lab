@@ -1,22 +1,24 @@
 <mongoChangeLog>
     <changeSet changeId="2" author="stane">
         <script>
-            db.READER.ensureIndex({"EMAIL" : 1});
-            db.READER.insert(
+            db.reader.ensureIndex({"email" : 1});
+            db.reader.insert(
             {
-                "_ID" : "1",
-                "USERNAME" : "Agarf Rac",
-                "EMAIL" : "agarf.rac@example.com",
-                "SYSTEM_ROLE": "Admin",
-                "PASSWORD": "$2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC"
+                "_id" : "ObjectId(\"1\")",
+                "_class" : "org.sm.lab.mybooks.domain.Reader",
+                "username" : "Agarf Rac",
+                "password": "$2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC",
+                "email" : "agarf.rac@example.com",
+                "systemRole": "Admin"
             });
-            db.READER.insert(
+            db.reader.insert(
             {
-                "_ID" : "2",
-                "USERNAME" : "Juk Bag",
-                "EMAIL" : "juk.bag@example.com",
-                "SYSTEM_ROLE": "Common",
-                "PASSWORD": "$2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC"
+                "_id" : "ObjectId(\"2\")",
+                "_class" : "org.sm.lab.mybooks.domain.Reader",
+                "username" : "Juk Bag",
+                "password": "$2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC",
+                "email" : "juk.bag@example.com",
+                "systemRole": "Common"
             });
         </script>
     </changeSet>

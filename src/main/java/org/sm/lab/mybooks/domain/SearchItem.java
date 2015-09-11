@@ -19,7 +19,9 @@ public class SearchItem {
 		super();
 		this.title = "Note: " + note.getTitle();
 		this.link = "#/notes/view/" + note.getId();
-		this.shortContent = "For book: " + note.getBook().getTitle() + "; Content: " + getShortenContent(note.getContent());
+		this.shortContent = "For book: " 
+				+ note.getBook().getTitle() 
+				+ "; Content: " + getShortenContent(note.getContent());
 	}
 
 	public String getTitle() {

@@ -1,0 +1,51 @@
+<mongoChangeLog>
+    <changeSet changeId="3" author="stane">
+        <script>
+            db.reader.insert(
+            {
+                "_id" : "ObjectId(\"3\")",
+                "_class" : "org.sm.lab.mybooks.domain.Reader",
+                "username" : "Pighalo Bortroka",
+                "password": "$2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC",
+                "email" : "pighalo.bortroka@example.com",
+                "systemRole": "Common"
+            });
+            db.reader.insert(
+            {
+                "_id" : "ObjectId(\"4\")",
+                "_class" : "org.sm.lab.mybooks.domain.Reader",
+                "username" : "Poli Mussav",
+                "password": "$2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC",
+                "email" : "poli.mussav@example.com",
+                "systemRole": "Common"
+            });
+            db.reader.insert(
+            {
+                "_id" : "ObjectId(\"5\")",
+                "_class" : "org.sm.lab.mybooks.domain.Reader",
+                "username" : "Trelan Vraz",
+                "password": "$2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC",
+                "email" : "trelan.vraz@example.com",
+                "systemRole": "Common"
+            });
+            db.reader.insert(
+            {
+                "_id" : "ObjectId(\"6\")",
+                "_class" : "org.sm.lab.mybooks.domain.Reader",
+                "username" : "Urila Korpora",
+                "password": "$2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC",
+                "email" : "urila.korpora@example.com",
+                "systemRole": "Common"
+            });
+            db.reader.insert(
+            {
+                "_id" : "ObjectId(\"7\")",
+                "_class" : "org.sm.lab.mybooks.domain.Reader",
+                "username" : "Melogo Olto",
+                "password": "$2a$10$RYbVYpHsn/KZYOZq0jcAjOWyxVcwbZPPFqu0hIpYtiGmIftsYHRDC",
+                "email" : "melogo.olto@example.com",
+                "systemRole": "Common"
+            });
+        </script>
+    </changeSet>
+</mongoChangeLog>

@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 
 import org.sm.lab.mybooks.enums.Genre;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -38,6 +39,7 @@ public class Book implements Serializable {
     
     private String review;
 
+    @DBRef
     private Reader reader;
 
     private List<Note> notes = new ArrayList<Note>();
