@@ -42,10 +42,4 @@ public class NoteServiceImpl implements NoteService {
         noteRepository.delete(id);
     }
 	
-	@Override
-	@PreAuthorize("@authorizationService.canAccessBook(principal, #bookId)")
-	public List<Note> findBooksNotes(String bookId) {
-		return noteRepository.findByBookId(bookId);
-    }
-	
 }

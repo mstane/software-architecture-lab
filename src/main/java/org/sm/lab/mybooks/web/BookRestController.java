@@ -1,11 +1,8 @@
 package org.sm.lab.mybooks.web;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.sm.lab.mybooks.domain.Book;
-import org.sm.lab.mybooks.domain.Note;
 import org.sm.lab.mybooks.domain.SearchItem;
 import org.sm.lab.mybooks.enums.Genre;
 import org.sm.lab.mybooks.service.BookService;
@@ -40,8 +37,6 @@ public class BookRestController {
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public Book get(@PathVariable("id") String id) {
 		Book book = this.bookService.findBook(id);
-		List<Note> notes = noteService.findBooksNotes(id);
-		book.setNotes(notes);
 		return book;
 	}
 	

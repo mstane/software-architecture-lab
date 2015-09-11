@@ -8,17 +8,17 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.sm.lab.mybooks.enums.Genre;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.cassandra.mapping.PrimaryKey;
+import org.springframework.data.cassandra.mapping.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@Document
+
+@Table
 public class Book implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Id
+	@PrimaryKey
     private String id;
 
     @NotNull
@@ -39,7 +39,6 @@ public class Book implements Serializable {
     
     private String review;
 
-    @DBRef
     private Reader reader;
 
     private List<Note> notes = new ArrayList<Note>();

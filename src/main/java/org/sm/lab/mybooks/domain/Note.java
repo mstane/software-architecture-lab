@@ -5,18 +5,17 @@ import java.util.Date;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.cassandra.mapping.PrimaryKey;
+import org.springframework.data.cassandra.mapping.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Document
+@Table
 public class Note implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@PrimaryKey
     private String id;
 
     @NotNull
@@ -30,7 +29,6 @@ public class Note implements Serializable {
     private Date modifiedTime;
 
     @JsonIgnore
-    @DBRef
     private Book book;
     
 	protected void onCreate() {

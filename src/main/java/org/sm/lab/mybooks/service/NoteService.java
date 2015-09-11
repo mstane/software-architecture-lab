@@ -10,7 +10,5 @@ public interface NoteService {
 	public abstract Note saveNote(String bookId, Note note);
 	
 	public abstract void deleteNote(String id);
-
-	public abstract List<Note> findBooksNotes(String bookId);
 	
 }

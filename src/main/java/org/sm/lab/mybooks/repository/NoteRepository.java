@@ -1,21 +1,24 @@
 package org.sm.lab.mybooks.repository;
-import java.util.List;
-
+import org.sm.lab.mybooks.domain.Book;
 import org.sm.lab.mybooks.domain.Note;
+import org.springframework.data.cassandra.repository.Query;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
-public interface NoteRepository extends MongoRepository<Note, String> {
+public interface NoteRepository extends CrudRepository<Note, String> {
 	
-	List<Note> findByBookId(String bookId);
+	Page<Note> findByBook(Book book, Pageable pageable);
 
-	@Query("{ '$or': [ {'title' : {$regex : ?0}}, {'content' : {$regex : ?0}} ] }")
-	Page<Note> findByKeyword(String keyword, Pageable pageable);
+	@Query("SELECT n FROM Note n WHERE LOWER(n.title) = LOWER(:keyword) OR  LOWER(n.content) = LOWER(:keyword)")
+	Page<Note> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
 	
-	@Query("{ '$or': [ {'title' : {$regex : ?0}}, {'content' : {$regex : ?0}} ] }")
-	Page<Note> search(String keyword, Pageable pageable);
+	@Query("SELECT n FROM Note n WHERE "
+			+ "LOWER(n.title) LIKE %:keyword%"
+			+ " OR LOWER(n.content) LIKE %:keyword%"
+			)
+	Page<Note> search(@Param("keyword") String keyword, Pageable pageable);
 
 	
 }
