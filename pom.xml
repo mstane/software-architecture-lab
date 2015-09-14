@@ -260,6 +260,26 @@
 				</configuration>
 			</plugin>
 
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<groupId>org.yaml</groupId>
+						<artifactId>snakeyaml</artifactId>
+						<version>1.16</version>
+					</dependency>
+				</dependencies>
+				<version>3.4.1</version>
+					<configuration>
+						<changeLogFile>src/main/resources/db/changelog/db.changelog-master.yaml</changeLogFile>
+						<driver>org.hsqldb.jdbcDriver</driver>
+						<url>jdbc:hsqldb:hsql://localhost:9001/</url>
+						<username>sa</username>
+						<password></password>
+					</configuration>			
+			</plugin>
+
 		</plugins>
 
 
