@@ -39,9 +39,11 @@ The application showing how to use Spring Boot with Spring Security for common n
 ### Requirements ###
 * [Java Platform (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 * [Apache Maven 3.x](http://maven.apache.org/)
-* [mongoDB](https://www.mongodb.org/)
+* [Apache Cassandra](http://cassandra.apache.org/)
 
 ### Quick start ###
+1. Run all scripts from ./src/main/resources/db/cql directory
+   i.e `cqlsh -f /path/to/scripts/scipt.cql`
 1. `mvn spring-boot:run -Dspring.profiles.active=demo`
 2. Point your browser to [http://localhost:8080/](http://localhost:8080/)
 3. Demo user credentials: `username:juk.bag@example.com / password: Mb.1234`
