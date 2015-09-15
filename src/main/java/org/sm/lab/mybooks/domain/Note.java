@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.data.cassandra.mapping.Column;
 import org.springframework.data.cassandra.mapping.PrimaryKey;
 import org.springframework.data.cassandra.mapping.Table;
 
@@ -16,7 +17,7 @@ public class Note implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@PrimaryKey
-    private String id;
+    private Long id;
 
     @NotNull
     @Size(min = 2)
@@ -24,8 +25,10 @@ public class Note implements Serializable {
 
     private String content;
 
+    @Column("created_time")
     private Date createdTime;
 
+    @Column("modified_time")
     private Date modifiedTime;
 
     @JsonIgnore
@@ -42,11 +45,11 @@ public class Note implements Serializable {
 
 	
 	
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -8,6 +8,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.sm.lab.mybooks.enums.SystemRole;
+import org.springframework.data.cassandra.mapping.Column;
 import org.springframework.data.cassandra.mapping.PrimaryKey;
 import org.springframework.data.cassandra.mapping.Table;
 
@@ -21,7 +22,7 @@ public class Reader implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@PrimaryKey
-    private String id;
+    private Long id;
 
 	@NotNull
     @Size(min = 2)
@@ -33,15 +34,16 @@ public class Reader implements Serializable {
     @Email
     private String email;
 
+    @Column("system_role")
     private SystemRole systemRole;
 
     private List<Book> books = new ArrayList<Book>();
     
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -1,5 +1,7 @@
 package org.sm.lab.mybooks.service;
 
+import java.util.List;
+
 import org.sm.lab.mybooks.domain.Book;
 import org.sm.lab.mybooks.domain.SearchItem;
 import org.sm.lab.mybooks.enums.Genre;
@@ -9,6 +11,7 @@ import org.sm.lab.mybooks.security.AuthorizationService;
 import org.sm.lab.mybooks.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,13 +34,14 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public Page<Book> findReadersBooks(PageRequest pageRequest) {
 		UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Page<Book> books = bookRepository.findByReaderId(userDetails.getId(), pageRequest);
-		return books;
+		List<Book> books = bookRepository.findByReaderId(userDetails.getId());
+		Page<Book> page = new PageImpl<Book>(books);
+		return page;
     }
 	
 	@Override
 	@PreAuthorize("@authorizationService.canAccessBook(principal, #id)")
-	public Book findBook(String id) {
+	public Book findBook(Long id) {
         return bookRepository.findOne(id);
     }
 	
@@ -64,7 +68,7 @@ public class BookServiceImpl implements BookService {
 	
 	@Override
 	@PreAuthorize("@authorizationService.canAccessBook(principal, #id)")
-	public void deleteBook(String id) {
+	public void deleteBook(Long id) {
         bookRepository.delete(id);
     }
 

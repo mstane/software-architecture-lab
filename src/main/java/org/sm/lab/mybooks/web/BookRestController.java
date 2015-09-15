@@ -35,7 +35,7 @@ public class BookRestController {
 	}
 
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public Book get(@PathVariable("id") String id) {
+	public Book get(@PathVariable("id") Long id) {
 		Book book = this.bookService.findBook(id);
 		return book;
 	}
@@ -57,7 +57,7 @@ public class BookRestController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Boolean> delete(@PathVariable("id") String id) {
+	public ResponseEntity<Boolean> delete(@PathVariable("id") Long id) {
 		this.bookService.deleteBook(id);
 		return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
 	}

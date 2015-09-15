@@ -9,12 +9,12 @@ public interface AuthorizationService {
 	
 	boolean canAccessReader(UserDetailsImpl userDetails, Reader reader);
 	
-	boolean canAccessReader(UserDetailsImpl userDetails, String readerId);
+	boolean canAccessReader(UserDetailsImpl userDetails, Long readerId);
     
     boolean canAccessBook(UserDetailsImpl userDetails, Book book);
     
-    boolean canAccessBook(UserDetailsImpl userDetails, String bookId);
+    boolean canAccessBook(UserDetailsImpl userDetails, Long bookId);
     
-    boolean canAccessNote(UserDetailsImpl userDetails, String noteId);
+    boolean canAccessNote(UserDetailsImpl userDetails, Long noteId);
 
 }

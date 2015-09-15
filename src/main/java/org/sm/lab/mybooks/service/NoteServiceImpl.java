@@ -1,7 +1,5 @@
 package org.sm.lab.mybooks.service;
 
-import java.util.List;
-
 import org.sm.lab.mybooks.domain.Book;
 import org.sm.lab.mybooks.domain.Note;
 import org.sm.lab.mybooks.repository.BookRepository;
@@ -23,13 +21,13 @@ public class NoteServiceImpl implements NoteService {
 	
 	@Override
 	@PreAuthorize("@authorizationService.canAccessNote(principal, #id)")
-	public Note findNote(String id) {
+	public Note findNote(Long id) {
         return noteRepository.findOne(id);
     }
 	
 	@Override
 	@PreAuthorize("@authorizationService.canAccessBook(principal, #bookId)")
-	public Note saveNote(String bookId, Note note) {
+	public Note saveNote(Long bookId, Note note) {
 		Book book = bookRepository.findOne(bookId);
 		note.setBook(book);
         note = noteRepository.save(note);
@@ -38,7 +36,7 @@ public class NoteServiceImpl implements NoteService {
 
 	@Override
 	@PreAuthorize("@authorizationService.canAccessNote(principal, #id)")
-	public void deleteNote(String id) {
+	public void deleteNote(Long id) {
         noteRepository.delete(id);
     }
 	

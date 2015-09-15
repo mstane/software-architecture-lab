@@ -1,13 +1,13 @@
 package org.sm.lab.mybooks.service;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.sm.lab.mybooks.domain.Reader;
 import org.sm.lab.mybooks.enums.SystemRole;
 import org.sm.lab.mybooks.repository.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,19 +27,24 @@ public class ReaderServiceImpl implements ReaderService {
 	@Override
 	@PreAuthorize("@authorizationService.isAdmin(principal)")
 	public Page<Reader> findAllReaders(int pageNumber, int pageSize) {
-        return readerRepository.findAll(new PageRequest(pageNumber, pageSize));
+		List<Reader> list = readerRepository.findAll();
+		Page<Reader> page = new PageImpl<Reader>(list);
+        return page;
     }
 	
 	@Override
 	@PreAuthorize("@authorizationService.canAccessReader(principal, #id)")
-	public Reader findReader(String id) {
+	public Reader findReader(Long id) {
         return readerRepository.findOne(id);
     }
 	
 	@Override
 	@PreAuthorize("@authorizationService.isAdmin(principal)")
 	public Page<Reader> search(String keyword, int pageNumber, int pageSize) {
-		return readerRepository.search(keyword.toLowerCase(), new PageRequest(pageNumber, pageSize));
+//		List<Reader> list = readerRepository.search(keyword.toLowerCase());
+//		Page<Reader> page = new PageImpl<Reader>(list);
+//        return page;
+		return null;
 	}
 	
 	@Override
@@ -50,19 +55,12 @@ public class ReaderServiceImpl implements ReaderService {
 	
 	@Override
 	@PreAuthorize("@authorizationService.canAccessReader(principal, #id)")
-	public void deleteReader(String id) {
+	public void deleteReader(Long id) {
         readerRepository.delete(id);
     }
-
-
 	
 	@Override
-	public Optional<Reader> findByUsername(String username) {
-		return readerRepository.findByUsername(username);
-	}
-	
-	@Override
-	public Optional<Reader> findByEmail(String email) {
+	public Reader findByEmail(String email) {
 		return readerRepository.findByEmail(email);
 	}
 	

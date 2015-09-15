@@ -8,10 +8,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.sm.lab.mybooks.enums.Genre;
+import org.springframework.data.cassandra.mapping.Column;
 import org.springframework.data.cassandra.mapping.PrimaryKey;
 import org.springframework.data.cassandra.mapping.Table;
 import org.springframework.format.annotation.DateTimeFormat;
-
 
 @Table
 public class Book implements Serializable {
@@ -19,7 +19,7 @@ public class Book implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@PrimaryKey
-    private String id;
+    private Long id;
 
     @NotNull
     @Size(min = 2)
@@ -27,9 +27,11 @@ public class Book implements Serializable {
 
     private String author;
 
+    @Column("start_reading_date")
     @DateTimeFormat(style = "M-")
     private Date startReadingDate;
 
+    @Column("end_reading_date")
     @DateTimeFormat(style = "M-")
     private Date endReadingDate;
 
@@ -43,11 +45,11 @@ public class Book implements Serializable {
 
     private List<Note> notes = new ArrayList<Note>();
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

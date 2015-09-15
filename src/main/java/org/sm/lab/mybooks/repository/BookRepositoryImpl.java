@@ -37,7 +37,7 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 	}
 	
 	@Override
-	public Page<SearchItem> searchContents(String readerId, String keyword, Genre genre, Pageable pageable) {
+	public Page<SearchItem> searchContents(Long readerId, String keyword, Genre genre, Pageable pageable) {
 		List<SearchItem> totalContents = searchContents(readerId, keyword, genre);
 		
 		int firstResult = pageable.getPageNumber() * pageable.getPageSize();
@@ -49,23 +49,23 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 		return new PageImpl<SearchItem>(pageContent, pageable, totalContents.size());
 	}
 	
-	public List<SearchItem> searchContents(String readerId, String keyword, Genre genre) {
+	public List<SearchItem> searchContents(Long readerId, String keyword, Genre genre) {
 		List<SearchItem> bookSearchItems = searchBooks(readerId, keyword, genre);
 		List<SearchItem> noteSearchItems = searchNotes(readerId, keyword, genre);
 		bookSearchItems.addAll(noteSearchItems);
 		return bookSearchItems;
 	}
 		
-	private List<SearchItem> searchBooks(String readerId, String keyword, Genre genre) {
+	private List<SearchItem> searchBooks(Long readerId, String keyword, Genre genre) {
 		return null;
 	}
 	
-	private List<SearchItem> searchNotes(String readerId, String keyword, Genre genre) {
+	private List<SearchItem> searchNotes(Long readerId, String keyword, Genre genre) {
 		return null;
 	}
 
 	@Override
-	public Long countSearch(String readerId, String keyword, Genre genre) {
+	public Long countSearch(Long readerId, String keyword, Genre genre) {
 		List<SearchItem> list = searchContents(readerId, keyword, genre);
 		return Long.valueOf(list.size());
 	}

@@ -28,7 +28,7 @@ public class ReaderRestController {
 	}
 
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public Reader get(@PathVariable("id") String id) {
+	public Reader get(@PathVariable("id") Long id) {
 		return this.readerService.findReader(id);
 	}
 	
@@ -43,7 +43,7 @@ public class ReaderRestController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Boolean> delete(@PathVariable("id") String id) {
+	public ResponseEntity<Boolean> delete(@PathVariable("id") Long id) {
 		this.readerService.deleteReader(id);
 		return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
 	}

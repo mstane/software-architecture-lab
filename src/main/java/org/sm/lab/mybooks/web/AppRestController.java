@@ -64,13 +64,13 @@ public class AppRestController {
 		HttpStatus httpStatus;
 		String message;
 		
-		Optional<Reader> readerOpt = readerService.findByEmail(email);
-        if (!readerOpt.isPresent()) {
+		Reader readerOpt = readerService.findByEmail(email);
+        if (readerOpt == null) {
         	httpStatus = HttpStatus.NOT_FOUND;
         	message = String.format("User with email=%s was not found", email);
         } else {
         	try {
-        		Reader reader = readerOpt.get();
+        		Reader reader = readerOpt;
         		String generatedPassword = generatePassword(); 
         		readerService.changePassword(generatedPassword, reader);
         		sendMessage(reader.getEmail(), "Forgotten password", "Your password is: " + generatedPassword);        		
