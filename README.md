@@ -24,6 +24,8 @@ This is documented on [wiki pages](https://github.com/mstane/software-architectu
  - Spring Data JPA + Bean Validation
  - Database updates with Liquibase
  - Log management with Logback
+ - Elasticsearch as full-text search engine
+ - Hazelcast for distributed cache to use in a clustered environnement
  
  
  
