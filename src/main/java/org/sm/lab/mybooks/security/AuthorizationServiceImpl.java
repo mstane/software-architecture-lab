@@ -6,9 +6,9 @@ import org.sm.lab.mybooks.domain.Book;
 import org.sm.lab.mybooks.domain.Note;
 import org.sm.lab.mybooks.domain.Reader;
 import org.sm.lab.mybooks.enums.SystemRole;
-import org.sm.lab.mybooks.repository.BookRepository;
-import org.sm.lab.mybooks.repository.NoteRepository;
-import org.sm.lab.mybooks.repository.ReaderRepository;
+import org.sm.lab.mybooks.repository.data.BookRepository;
+import org.sm.lab.mybooks.repository.data.NoteRepository;
+import org.sm.lab.mybooks.repository.data.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

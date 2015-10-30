@@ -1,4 +1,4 @@
-package org.sm.lab.mybooks.repository;
+package org.sm.lab.mybooks.repository.data;
 
 import org.sm.lab.mybooks.domain.Book;
 import org.sm.lab.mybooks.domain.Reader;

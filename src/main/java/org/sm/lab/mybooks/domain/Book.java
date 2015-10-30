@@ -23,10 +23,12 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
 import org.sm.lab.mybooks.enums.Genre;
+import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Document(indexName="book")
 public class Book implements Serializable {
 
 	private static final long serialVersionUID = 1L;

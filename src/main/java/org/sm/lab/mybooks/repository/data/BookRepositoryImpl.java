@@ -1,4 +1,4 @@
-package org.sm.lab.mybooks.repository;
+package org.sm.lab.mybooks.repository.data;
 
 import java.util.ArrayList;
 import java.util.List;

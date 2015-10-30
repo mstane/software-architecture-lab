@@ -4,7 +4,8 @@ import java.util.Optional;
 
 import org.sm.lab.mybooks.domain.Reader;
 import org.sm.lab.mybooks.enums.SystemRole;
-import org.sm.lab.mybooks.repository.ReaderRepository;
+import org.sm.lab.mybooks.repository.data.ReaderRepository;
+import org.sm.lab.mybooks.repository.index.ReaderSearchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +23,9 @@ public class ReaderServiceImpl implements ReaderService {
 	
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    ReaderSearchRepository readerSearchRepository;
     
 	
 	@Override
@@ -45,13 +49,16 @@ public class ReaderServiceImpl implements ReaderService {
 	@Override
 	@PreAuthorize("@authorizationService.canAccessReader(principal, #reader)")
 	public Reader saveReader(Reader reader) {
-        return readerRepository.save(reader);
+        reader = readerRepository.save(reader);
+        readerSearchRepository.save(reader);
+        return reader;
     }
 	
 	@Override
 	@PreAuthorize("@authorizationService.canAccessReader(principal, #id)")
 	public void deleteReader(Long id) {
         readerRepository.delete(id);
+        readerSearchRepository.delete(id);
     }
 
 
