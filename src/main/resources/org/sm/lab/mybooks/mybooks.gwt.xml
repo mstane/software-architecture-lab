@@ -6,8 +6,6 @@
 	<inherits name="com.google.gwt.i18n.CldrLocales" />
 	<inherits name="com.google.gwt.user.theme.clean.Clean" />
 	
-	<inherits name="com.googlecode.mgwt.MGWT" />
-	
 	<!-- Built-in framework for browser history management -->
 	<inherits name="com.google.gwt.activity.Activity"/>
     <inherits name="com.google.gwt.place.Place"/>
@@ -65,15 +63,8 @@
 			class="com.google.gwt.validation.client.UserValidationMessagesResolver" />
 	</replace-with>
 	
-	<inherits name="org.sm.lab.mybooks.FormFactor" />
-
 	<replace-with class="org.sm.lab.mybooks.client.ui.desktop.ClientFactoryDesktopImpl">
 		<when-type-is class="org.sm.lab.mybooks.client.ClientFactory" />
-	</replace-with>
-
-	<replace-with class="org.sm.lab.mybooks.client.ui.phone.ClientFactoryPhoneImpl">
-		<when-type-is class="org.sm.lab.mybooks.client.ClientFactory" />
-		<when-property-is name="formfactor" value="phone" />
 	</replace-with>
 	
 

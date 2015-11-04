@@ -25,3 +25,12 @@
  - Log management with Log4j
  - Testing with JUnit
 
+### Requirements ###
+* [Java Platform (JDK) 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+* [Apache Maven 3.x](http://maven.apache.org/)
+
+### Start ###
+1. Open shell and type: `mvn exec:java`
+2, Open another shell and type: `mvn gwt:run`
+2. Point your browser to [http://127.0.0.1:8888/](http://127.0.0.1:8888/)
+3. Demo user credentials: `username:juk.bag@example.com / password: Mb.1234`

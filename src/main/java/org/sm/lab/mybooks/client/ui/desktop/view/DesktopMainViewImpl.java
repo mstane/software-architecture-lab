@@ -17,8 +17,6 @@ import com.google.gwt.user.client.ui.ResizeComposite;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.googlecode.mgwt.ui.client.widget.animation.AnimatableDisplay;
-
 
 /**
  * Application shell for MyBooks project.
@@ -76,12 +74,6 @@ public class DesktopMainViewImpl extends ResizeComposite implements LoginEventHa
 
 	@Override
 	public HasSelectionHandlers<Integer> getSelectionHandlers() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public AnimatableDisplay getAnimatableDisplay() {
 		// TODO Auto-generated method stub
 		return null;
 	}
