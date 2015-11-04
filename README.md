@@ -7,7 +7,7 @@
 ### Technology stack on the client side ###
 
  - GWT
- - MGWT - mobile support for GWT
+ - GwtBootstrap3 to build responsive application to work on Desktops, Tablets and Mobile device.
  - MVP (Model View Presenter)
  - GWT Internationalization (i18n) support
  - GIN/GUICE dependency injection

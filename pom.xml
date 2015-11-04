@@ -12,6 +12,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<gwtVersion>2.7.0</gwtVersion>
+		<gwtbootstrap3.version>0.9.1</gwtbootstrap3.version>
 		<jetty.version>9.2.1.v20140609</jetty.version>
 		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -35,7 +36,21 @@
 			<artifactId>gwt-codeserver</artifactId>
 			<version>${gwtVersion}</version>
 		</dependency>
+	
+		<dependency>
+			<groupId>org.gwtbootstrap3</groupId>
+			<artifactId>gwtbootstrap3</artifactId>
+			<version>${gwtbootstrap3.version}</version>
+			<scope>provided</scope>
+		</dependency>
 		
+		<dependency>
+            <groupId>org.gwtbootstrap3</groupId>
+            <artifactId>gwtbootstrap3-extras</artifactId>
+            <version>${gwtbootstrap3.version}</version>
+            <scope>provided</scope>
+        </dependency>
+			
 		<!-- Hibernate bean validation binary for the server -->
 		<dependency>
 			<groupId>javax.validation</groupId>

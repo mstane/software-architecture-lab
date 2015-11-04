@@ -9,6 +9,8 @@
 	<!-- Built-in framework for browser history management -->
 	<inherits name="com.google.gwt.activity.Activity"/>
     <inherits name="com.google.gwt.place.Place"/>
+    
+    <inherits name="org.gwtbootstrap3.GwtBootstrap3"/>
 	
 	<inherits name='org.hibernate.validator.HibernateValidator' />
 
