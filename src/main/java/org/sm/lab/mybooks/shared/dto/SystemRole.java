@@ -1,19 +1,19 @@
 package org.sm.lab.mybooks.shared.dto;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public enum Genre {
+public enum SystemRole {
 
-    Comedy, Drama, Epic, Erotic, Lyric, Mythopoeia, Nonsense, Other, Romance, Satire, Tragedy, Tragicomedy;
+    Admin, Common;
     
     public static List<String> names() {
 
         List<String> list = new ArrayList<String>();
-        for (Genre s : values()) {
+        for (SystemRole s : values()) {
             list.add(s.name());
         }
 
         return list;
     }
+
 }

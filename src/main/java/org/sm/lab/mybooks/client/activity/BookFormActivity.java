@@ -204,11 +204,11 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
         
         dto.setTitle(view.getBookTitle().getValue());        
         dto.setAuthor(view.getAuthor().getValue());
-        dto.setUrl(view.getUrl().getValue());
+        dto.setReview(view.getReview().getValue());
 //        dto.setStartReadingDate(view.getStartReadingDate());
 //        dto.setEndReadingDate(view.getEndReadingDate());
         try {
-            dto.setRating(Integer.valueOf(view.getRating().getValue()));
+            dto.setRating(Long.valueOf(view.getRating().getValue()));
         } catch (NumberFormatException e) {
         }
     }
@@ -216,10 +216,10 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
     private void setValues() {
         view.getBookTitle().setValue(dto.getTitle());
         view.getAuthor().setValue(dto.getAuthor());
-        view.getUrl().setValue(dto.getUrl());
+        view.getReview().setValue(dto.getReview());
 //        view.getStartReadingDate().setValue(dto.getStartReadingDate().toString());
 //        view.getEndReadingDate().setValue(dto.getEndReadingDate().toString());
-        Integer rating = dto.getRating();
+        Long rating = dto.getRating();
         if (rating != null && rating > 0) {
         	view.getRating().setValue(rating.toString());
         }

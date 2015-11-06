@@ -63,14 +63,6 @@
 						<g:TextBox ui:field='authorTextBox' />
 					</td>
 				</tr>
-				<tr>
-					<td class='{style.label}'>
-						<ui:msg key='bookFormUrl'>Url:</ui:msg>
-					</td>
-					<td>
-						<g:TextBox ui:field='urlTextBox' />
-					</td>
-				</tr>
                 <tr>
                     <td class='{style.label}'>
                         <ui:msg key='bookFormStartReadingDate'>Start Reading Date:</ui:msg>
@@ -95,6 +87,14 @@
                         <g:TextBox ui:field='ratingTextBox' />
                     </td>
                 </tr>
+				<tr>
+					<td class='{style.label}'>
+						<ui:msg key='bookFormReview'>Review:</ui:msg>
+					</td>
+					<td>
+						<g:TextBox ui:field='reviewTextBox' />
+					</td>
+				</tr>
 				<tr>
 					<td>
 						<br />

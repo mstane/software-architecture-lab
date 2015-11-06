@@ -1,47 +1,55 @@
 
 package org.sm.lab.mybooks.server.db;
 
-import org.sm.lab.mybooks.shared.dto.BookDto;
-import org.sm.lab.mybooks.shared.dto.ReaderDto;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.sm.lab.mybooks.shared.dto.BookDto;
+import org.sm.lab.mybooks.shared.dto.ReaderDto;
+import org.sm.lab.mybooks.shared.dto.SystemRole;
 
 @Entity
 public class Reader implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
-    @Column(name = "username")
+	@NotNull
+    @Size(min = 2)
+	@Column(unique = true)
     private String username;
 
-    @Column(name = "password")
+	@NotNull
     private String password;
 
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
-
-    @Column(name = "email")
+    @Pattern(regexp = "[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+")
+    @Column(unique = true)
     private String email;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "reader")
-    private List<Book> books = new ArrayList<Book>(0);
+    @Enumerated(EnumType.STRING)
+    private SystemRole systemRole;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "reader")
+    private List<Book> books = new ArrayList<Book>();
 
     public Reader() {
     }
@@ -54,9 +62,8 @@ public class Reader implements Serializable {
         this.id = readerDto.getId();
         this.username = readerDto.getUsername();
         this.password = readerDto.getPassword();
-        this.firstName = readerDto.getFirstName();
-        this.lastName = readerDto.getLastName();
         this.email = readerDto.getEmail();
+        this.systemRole = readerDto.getSystemRole();
     }
 
     public ReaderDto getDto() {
@@ -64,63 +71,57 @@ public class Reader implements Serializable {
         for (Book book : books) {
             bookDtoList.add(new BookDto(book.getId(), book.getTitle()));
         }
-        return new ReaderDto(this.id, this.username, this.password, this.firstName, this.lastName, this.email, bookDtoList);
+        return new ReaderDto(this.id, this.username, this.password, this.email, this.systemRole, bookDtoList);
     }
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public SystemRole getSystemRole() {
+		return systemRole;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setSystemRole(SystemRole systemRole) {
+		this.systemRole = systemRole;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public List<Book> getBooks() {
+		return books;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
 
-    public List<Book> getBooks() {
-        return books;
-    }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
 
 }

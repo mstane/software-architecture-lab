@@ -37,14 +37,14 @@ public class BookFormViewImpl extends Composite implements BookFormView {
 	TextBox titleTextBox;
 	@UiField
 	TextBox authorTextBox;
-	@UiField
-	TextBox urlTextBox;
     @UiField
     TextBox startReadingDateTextBox;
     @UiField
     TextBox endReadingDateTextBox;
 	@UiField
 	TextBox ratingTextBox;
+	@UiField
+	TextBox reviewTextBox;
 	@UiField
 	CellTable<NoteDto> noteTable;
     @UiField
@@ -108,8 +108,8 @@ public class BookFormViewImpl extends Composite implements BookFormView {
 	}
 
 	@Override
-	public HasValue<String> getUrl() {
-		return urlTextBox;
+	public HasValue<String> getReview() {
+		return reviewTextBox;
 	}
 
     @Override
@@ -141,7 +141,7 @@ public class BookFormViewImpl extends Composite implements BookFormView {
     public void clear() {
         titleTextBox.setValue("");
         authorTextBox.setValue("");
-        urlTextBox.setValue("");
+        reviewTextBox.setValue("");
         startReadingDateTextBox.setValue("");
         endReadingDateTextBox.setValue("");
         ratingTextBox.setValue("");

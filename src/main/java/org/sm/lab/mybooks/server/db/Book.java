@@ -7,16 +7,20 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.sm.lab.mybooks.shared.dto.BookDto;
 import org.sm.lab.mybooks.shared.dto.Genre;
@@ -32,22 +36,27 @@ public class Book implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+	@NotNull
+	@Size(min = 2)
 	private String title;
+	
     private String author;
-    private String url;
     
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "start_reading_date")
     private Date startReadingDate;
     
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "end_reading_date")
     private Date endReadingDate;
     
-    private Integer rating;
+    private Long rating;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Genre genre;
+    
+    @Lob
+    private String review;
     
     @ManyToOne
     @JoinColumn(name="reader_id", referencedColumnName="id")
@@ -69,11 +78,11 @@ public class Book implements Serializable {
         this.id = bookDto.getId();
         this.title = bookDto.getTitle();
         this.author = bookDto.getAuthor();
-        this.url = bookDto.getUrl();
         this.startReadingDate = bookDto.getStartReadingDate();
-        this.endReadingDate = bookDto.getModifiedDate();
+        this.endReadingDate = bookDto.getEndReadingDate();
         this.rating = bookDto.getRating();
         this.genre = bookDto.getGenre();
+        this.review = bookDto.getReview();
     }
     
     public BookDto getDto() {
@@ -86,7 +95,7 @@ public class Book implements Serializable {
     	readerDto.setId(readerDto.getId());
     	readerDto.setUsername(readerDto.getUsername());
     	
-    	BookDto bookDto = new BookDto(this.getId(), this.getTitle(), this.getAuthor(), this.getUrl(), this.getStartReadingDate(), this.getEndReadingDate(), this.getRating(), this.genre, readerDto, noteDtoList);
+    	BookDto bookDto = new BookDto(this.getId(), this.getTitle(), this.getAuthor(), this.getStartReadingDate(), this.getEndReadingDate(), this.getRating(), this.genre, this.review, readerDto, noteDtoList);
     	return bookDto;
     }
 
@@ -102,8 +111,8 @@ public class Book implements Serializable {
 		return title;
 	}
 
-	public void setTitle(String name) {
-		this.title = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getAuthor() {
@@ -114,14 +123,6 @@ public class Book implements Serializable {
 		this.author = author;
 	}
 
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	
 	public Date getStartReadingDate() {
 		return startReadingDate;
 	}
@@ -138,30 +139,38 @@ public class Book implements Serializable {
 		this.endReadingDate = endReadingDate;
 	}
 
-	public Integer getRating() {
+	public Long getRating() {
 		return rating;
 	}
 
-	public void setRating(Integer rating) {
+	public void setRating(Long rating) {
 		this.rating = rating;
 	}
-	
+
 	public Genre getGenre() {
-	    return this.genre;
+		return genre;
 	}
 
 	public void setGenre(Genre genre) {
-	    this.genre = genre;
+		this.genre = genre;
 	}
-	
-    public Reader getReader() {
-        return reader;
-    }
 
-    public void setReader(Reader reader) {
-        this.reader = reader;
-    }
-	
+	public String getReview() {
+		return review;
+	}
+
+	public void setReview(String review) {
+		this.review = review;
+	}
+
+	public Reader getReader() {
+		return reader;
+	}
+
+	public void setReader(Reader reader) {
+		this.reader = reader;
+	}
+
 	public List<Note> getNotes() {
 		return notes;
 	}
@@ -170,7 +179,6 @@ public class Book implements Serializable {
 		this.notes = notes;
 	}
 
-    
 
   }
 

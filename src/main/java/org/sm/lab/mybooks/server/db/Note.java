@@ -1,9 +1,6 @@
 
 package org.sm.lab.mybooks.server.db;
 
-import org.sm.lab.mybooks.shared.dto.BookDto;
-import org.sm.lab.mybooks.shared.dto.NoteDto;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,9 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.sm.lab.mybooks.shared.dto.BookDto;
+import org.sm.lab.mybooks.shared.dto.NoteDto;
 
 @Entity
 public class Note implements Serializable {
@@ -26,7 +29,11 @@ public class Note implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Size(min = 2)
     private String title;
+    
+    @Lob
     private String content;
 
     @Temporal(TemporalType.TIMESTAMP)

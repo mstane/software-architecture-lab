@@ -11,10 +11,8 @@ public class ReaderDto implements Serializable{
 	private Long id;
 	private String username;
 	private String password;
-	private String firstName;
-	private String lastName;
 	private String email;
-	
+	private SystemRole systemRole;
 
     private List<BookDto> books = new ArrayList<BookDto>(0);
 	
@@ -24,15 +22,14 @@ public class ReaderDto implements Serializable{
 		
 	}
 	
-	public ReaderDto(Long id, String username, String password, String firstName,
-			String lastName, String email, List<BookDto> books) {
+	public ReaderDto(Long id, String username, String password, String email, 
+			SystemRole systemRole, List<BookDto> books) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
 		this.email = email;
+		this.systemRole = systemRole;
 		this.books = books;
 	}
 
@@ -50,23 +47,7 @@ public class ReaderDto implements Serializable{
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	
+		
 	public String getPassword() {
 		return password;
 	}
@@ -81,9 +62,17 @@ public class ReaderDto implements Serializable{
     
     public void setEmail(String email) {
         this.email = email;
-    }	
+    }
     
-    public List<BookDto> getBooks() {
+    public SystemRole getSystemRole() {
+		return systemRole;
+	}
+
+	public void setSystemRole(SystemRole systemRole) {
+		this.systemRole = systemRole;
+	}
+
+	public List<BookDto> getBooks() {
         return books;
     }
 

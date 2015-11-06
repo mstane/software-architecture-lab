@@ -15,15 +15,15 @@ public class BookDto implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(min = 3, message = "{name_size_validation_message}")
+    @Size(min = 2, message = "{name_size_validation_message}")
     private String title;
     
     private String author;
-    private String url;
     private Date startReadingDate;
     private Date endReadingDate;
-    private Integer rating;
+    private Long rating;
     private Genre genre;
+    private String review;
     private ReaderDto reader;
     private List<NoteDto> notes = new ArrayList<NoteDto>(0);
     
@@ -37,21 +37,20 @@ public class BookDto implements Serializable {
     	this.title = title;
     }
 
-	public BookDto(Long id, String title, String author, String url,
-	        Date startReadingDate, Date endReadingDate, Integer rating,
-	        Genre genre, ReaderDto reader, List<NoteDto> notes) {
+	public BookDto(Long id, String title, String author, Date startReadingDate,
+			Date endReadingDate, Long rating, Genre genre, String review,
+			ReaderDto reader, List<NoteDto> notes) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.author = author;
-		this.url = url;
 		this.startReadingDate = startReadingDate;
 		this.endReadingDate = endReadingDate;
 		this.rating = rating;
 		this.genre = genre;
+		this.review = review;
 		this.reader = reader;
 		this.notes = notes;
-		
 	}
 
 	public Long getId() {
@@ -78,53 +77,45 @@ public class BookDto implements Serializable {
 		this.author = author;
 	}
 
-	public String getUrl() {
-		return url;
+	public Date getStartReadingDate() {
+		return startReadingDate;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setStartReadingDate(Date startReadingDate) {
+		this.startReadingDate = startReadingDate;
 	}
-	
-    public Date getStartReadingDate() {
-        return startReadingDate;
-    }
 
-    public void setStartReadingDate(Date startReadingDate) {
-        this.startReadingDate = startReadingDate;
-    }
-
-    public Date getEndReadingDate() {
-        return endReadingDate;
-    }
-
-    public void setEndReadingDate(Date endReadingDate) {
-        this.endReadingDate = endReadingDate;
-    }
-
-	public Date getModifiedDate() {
+	public Date getEndReadingDate() {
 		return endReadingDate;
 	}
 
-	public void setModifiedDate(Date endReadingDate) {
+	public void setEndReadingDate(Date endReadingDate) {
 		this.endReadingDate = endReadingDate;
 	}
 
-	public Integer getRating() {
+	public Long getRating() {
 		return rating;
 	}
 
-    public void setRating(Integer rating) {
-        this.rating = rating;
-    }
+	public void setRating(Long rating) {
+		this.rating = rating;
+	}
 
-    public Genre getGenre() {
-        return this.genre;
-    }
+	public Genre getGenre() {
+		return genre;
+	}
 
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
+
+	public String getReview() {
+		return review;
+	}
+
+	public void setReview(String review) {
+		this.review = review;
+	}
 
 	public ReaderDto getReader() {
 		return reader;
@@ -134,15 +125,16 @@ public class BookDto implements Serializable {
 		this.reader = reader;
 	}
 
-    public List<NoteDto> getNotes() {
-        return notes;
-    }
+	public List<NoteDto> getNotes() {
+		return notes;
+	}
 
-    public void setNotes(List<NoteDto> notes) {
-        this.notes = notes;
-    }
+	public void setNotes(List<NoteDto> notes) {
+		this.notes = notes;
+	}
 
-	
-	
+    
+    
+    
   }
 

@@ -20,7 +20,7 @@ public interface BookFormView extends IsWidget {
 
 	HasValue<String> getBookTitle();
 	HasValue<String> getAuthor();
-	HasValue<String> getUrl();
+	HasValue<String> getReview();
 	HasValue<String> getStartReadingDate();
 	HasValue<String> getEndReadingDate();
 	HasValue<String> getRating();

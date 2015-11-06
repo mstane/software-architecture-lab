@@ -66,8 +66,6 @@ public class ProfileFormActivity extends AbstractActivity implements ProfileForm
 		if (dto != null) {
 			view.getUsername().setValue(dto.getUsername());			
 			view.getPassword().setValue(dto.getPassword());
-			view.getFirstName().setValue(dto.getFirstName());
-			view.getLastName().setValue(dto.getLastName());
 			view.getEmail().setValue(dto.getEmail());
 		}
 
@@ -101,8 +99,6 @@ public class ProfileFormActivity extends AbstractActivity implements ProfileForm
 	private void doSave() {
 		dto.setUsername(view.getUsername().getValue());
 		dto.setPassword(view.getPassword().getValue());
-		dto.setFirstName(view.getFirstName().getValue());
-		dto.setLastName(view.getLastName().getValue());
 		dto.setEmail(view.getEmail().getValue());
 		
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
