@@ -62,15 +62,13 @@ public class BookFormViewImpl extends Composite implements BookFormView {
 	private Widget widget;
 
 	public BookFormViewImpl() {
-		onInitialize();
+		widget = onInitialize();
 	}
 	
-	public void onInitialize() {
+	public Widget onInitialize() {
 		
 		Binder uiBinder = GWT.create(Binder.class);
 		widget = uiBinder.createAndBindUi(this);
-		
-		initWidget(widget);
 		
 		TextColumn<NoteDto> nameColumn = new TextColumn<NoteDto>() {
 			@Override
@@ -89,6 +87,8 @@ public class BookFormViewImpl extends Composite implements BookFormView {
 				}
 			}
 		});		
+		
+		return widget;
 	}
 	
     public Widget asWidget() {
@@ -197,6 +197,7 @@ public class BookFormViewImpl extends Composite implements BookFormView {
 	public void setPresenter(Presenter presenter) {
 		this.presenter = presenter;
 	}
-
+	
+	
 
 }

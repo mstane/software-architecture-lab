@@ -21,8 +21,6 @@ import org.sm.lab.mybooks.client.place.NoteFormPlace;
 import org.sm.lab.mybooks.client.util.AppAsyncCallback;
 import org.sm.lab.mybooks.client.util.IAppDialogBox;
 import org.sm.lab.mybooks.client.view.BookFormView;
-import org.sm.lab.mybooks.client.view.BookListView;
-import org.sm.lab.mybooks.client.view.NoteFormView;
 import org.sm.lab.mybooks.shared.action.CreateBookAction;
 import org.sm.lab.mybooks.shared.action.CreateBookResult;
 import org.sm.lab.mybooks.shared.action.DeleteBookAction;
@@ -51,9 +49,7 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
 	
 	private final DispatchAsync dispatchRpcService;
 	private final EventBus eventBus;
-	private final BookListView listView;
 	private final BookFormView view;
-	private final NoteFormView noteFormView;
 	private final IAppDialogBox appDialogBox;
 	private final PlaceController placeController;
 
@@ -66,9 +62,7 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
         this.appDialogBox = injector.getAppDialogBox();
         this.placeController = injector.getPlaceController();
 		
-		this.listView = injector.getBookListView();
 		this.view = injector.getBookFormView();
-		this.noteFormView = injector.getNoteFormView();
         this.view.setPresenter(this);
 		
         noteTableDataProvider = new ListDataProvider<NoteDto>();
@@ -98,11 +92,9 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
             dto = new BookDto();
         }
         
-        view.setVisible(true);
-        
         setEnabled();  
         
-        container.setWidget(listView.asWidget());
+        container.setWidget(view.asWidget());
     }
 	
 	@Override
@@ -118,8 +110,6 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
 	@Override
 	public void onNewNoteButtonClicked() {
 	    Log.debug("BookFormActivity.onNewNoteButtonClicked()");
-	    noteFormView.clear();
-	    listView.add(noteFormView);
 	    
 	    NoteDto noteDto = new NoteDto();
 	    noteDto.setBook(dto);
@@ -130,7 +120,6 @@ public class BookFormActivity extends AbstractActivity implements BookFormView.P
     @Override
     public void onNoteItemClicked(NoteDto noteDto) {
         Log.debug("BookFormActivity.onNoteItemClicked()");
-        listView.add(noteFormView);
 
         noteDto.setBook(dto);
 

@@ -16,7 +16,6 @@ import org.sm.lab.mybooks.client.event.NoteChangedEvent.Action;
 import org.sm.lab.mybooks.client.place.NoteFormPlace;
 import org.sm.lab.mybooks.client.util.AppAsyncCallback;
 import org.sm.lab.mybooks.client.util.IAppDialogBox;
-import org.sm.lab.mybooks.client.view.BookListView;
 import org.sm.lab.mybooks.client.view.NoteFormView;
 import org.sm.lab.mybooks.shared.action.CreateNoteAction;
 import org.sm.lab.mybooks.shared.action.CreateNoteResult;
@@ -42,7 +41,6 @@ public class NoteFormActivity extends AbstractActivity implements NoteFormView.P
 
     private final DispatchAsync dispatchRpcService;
     private final EventBus eventBus;
-    private final BookListView parentView;
     private final NoteFormView view;
     private final IAppDialogBox appDialogBox;
     private final PlaceController placeController;
@@ -56,8 +54,6 @@ public class NoteFormActivity extends AbstractActivity implements NoteFormView.P
         this.appDialogBox = injector.getAppDialogBox();
         this.placeController = injector.getPlaceController();
 
-        this.parentView = injector.getBookListView();
-//        this.view = parentView.getNoteForm();
         this.view = injector.getNoteFormView();
         this.view.setPresenter(this);
 
@@ -88,7 +84,7 @@ public class NoteFormActivity extends AbstractActivity implements NoteFormView.P
             fetchNoteDetails();
         }
 
-        container.setWidget(parentView.asWidget());
+        container.setWidget(view.asWidget());
 
     }
 

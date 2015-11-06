@@ -1,14 +1,9 @@
 package org.sm.lab.mybooks.client.ui.desktop.view;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 import org.sm.lab.mybooks.client.MyBooks;
 import org.sm.lab.mybooks.client.ui.desktop.RangeLabelPager;
 import org.sm.lab.mybooks.client.ui.desktop.ShowMorePagerPanel;
-import org.sm.lab.mybooks.client.view.BookFormView;
 import org.sm.lab.mybooks.client.view.BookListView;
-import org.sm.lab.mybooks.client.view.NoteFormView;
 import org.sm.lab.mybooks.shared.dto.BookDto;
 
 import com.allen_sauer.gwt.log.client.Log;
@@ -27,8 +22,6 @@ import com.google.gwt.user.cellview.client.HasKeyboardSelectionPolicy.KeyboardSe
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.HasData;
 import com.google.gwt.view.client.ProvidesKey;
@@ -76,12 +69,6 @@ public class BookListViewImpl extends Composite implements BookListView {
 	}
 
 	@UiField
-	SimplePanel bookPanel;
-
-	@UiField
-	SimplePanel notePanel;
-
-	@UiField
 	ShowMorePagerPanel pagerPanel;
 
 	@UiField
@@ -125,7 +112,10 @@ public class BookListViewImpl extends Composite implements BookListView {
 		selectionModel
 				.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
 					public void onSelectionChange(SelectionChangeEvent event) {
-						presenter.onItemClicked(selectionModel.getSelectedObject());
+						BookDto selected = selectionModel.getSelectedObject();
+				        if (selected != null) {
+				        	presenter.onItemClicked(selected);
+				        }
 					}
 				});
 		
@@ -171,101 +161,6 @@ public class BookListViewImpl extends Composite implements BookListView {
         }
         
     }
-
-
-
-	@Override
-	public void add(Widget w) {
-		if (w instanceof BookFormView) {
-			bookPanel.remove(w);
-			bookPanel.add(w);
-		} else if (w instanceof NoteFormView) {
-			notePanel.remove(w);
-			notePanel.add(w);
-		}
-		
-	}
-
-
-
-	@Override
-	public void clear() {
-		bookPanel.clear();
-		notePanel.clear();
-	}
-
-
-	@Override
-	public Iterator<Widget> iterator() {
-		return new Iterator<Widget>() {
-			Widget returned = null;
-			int index = 0;
-
-			@Override
-			public boolean hasNext() {
-				if (index == 0) {
-					return bookPanel.getWidget() != null || notePanel.getWidget() != null;
-				} else if (index == 1) {
-					return bookPanel.getWidget() != null && notePanel.getWidget() != null;
-				}
-				return false;
-			}
-
-			@Override
-			public Widget next() {
-				if (index == 0) {
-					if (bookPanel.getWidget() != null) {
-						index = 1;
-						return (returned = bookPanel.getWidget());
-					} else if (notePanel.getWidget() != null) {
-						index = 1;
-						return (returned = notePanel.getWidget());
-					}
-				} else if (index == 1) {
-					if (notePanel.getWidget() != null) {
-						index = 2;
-						return (returned = notePanel.getWidget());
-					}
-				}
-				throw new NoSuchElementException();
-			}
-
-			@Override
-			public void remove() {
-				if (returned instanceof BookFormView) {
-					bookPanel.remove(returned);
-				} else if (returned instanceof NoteFormView) {
-					notePanel.remove(returned);
-				}
-
-			}
-
-		};
-	}
-
-	@Override
-	public boolean remove(Widget w) {
-		if (w instanceof BookFormView) {
-			return bookPanel.remove(w);
-		} else if (w instanceof NoteFormView) {
-			return notePanel.remove(w);
-		}
-		return false;
-	}
-
-
-
-	@Override
-	public void add(IsWidget w) {
-		add((Widget)w);
-	}
-
-
-
-	@Override
-	public boolean remove(IsWidget w) {
-		return remove((Widget)w);
-	}
 
 
 }

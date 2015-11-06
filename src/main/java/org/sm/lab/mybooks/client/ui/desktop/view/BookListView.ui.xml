@@ -41,14 +41,8 @@
 									<ui:msg key='bookListNewButton'>New book</ui:msg>
 								</g:Button>
 							</td>
-							<td class='{style.bookFormCell}' valign='top' align='left'>
-								<g:SimplePanel ui:field='bookPanel' />
-							</td>
 						</tr>
 					</table>
-				</td>
-				<td class='{style.noteFormCell}' valign='top' align='left'>
-					<g:SimplePanel ui:field='notePanel' />
 				</td>
 			</tr>
 		</table>
