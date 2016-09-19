@@ -44,7 +44,7 @@ public class Reader implements Serializable {
 	@NotNull
     private String password;
 
-    @Pattern(regexp = "[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+")
+    @Pattern(regexp = "[a-zA-Z0-9\\.]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+")
     @Column(unique = true)
     private String email;
 
