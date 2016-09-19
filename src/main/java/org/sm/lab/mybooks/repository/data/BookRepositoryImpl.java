@@ -158,8 +158,9 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 	}
 	
 	public List<SearchItem> searchContents(Long readerId, String keyword, Genre genre) {
-		List<SearchItem> bookSearchItems = searchBooks(readerId, keyword, genre);
-		List<SearchItem> noteSearchItems = searchNotes(readerId, keyword, genre);
+		String lowerCaseKeyword = keyword.toLowerCase();
+		List<SearchItem> bookSearchItems = searchBooks(readerId, lowerCaseKeyword, genre);
+		List<SearchItem> noteSearchItems = searchNotes(readerId, lowerCaseKeyword, genre);
 		bookSearchItems.addAll(noteSearchItems);
 		return bookSearchItems;
 	}

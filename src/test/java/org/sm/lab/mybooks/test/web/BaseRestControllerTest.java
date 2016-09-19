@@ -5,15 +5,11 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import javax.sql.DataSource;
-
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -26,7 +22,6 @@ import org.sm.lab.mybooks.enums.SystemRole;
 import org.sm.lab.mybooks.repository.data.BookRepository;
 import org.sm.lab.mybooks.repository.data.NoteRepository;
 import org.sm.lab.mybooks.repository.data.ReaderRepository;
-import org.sm.lab.mybooks.test.web.util.WithMockCustomUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
@@ -85,7 +80,7 @@ public class BaseRestControllerTest {
 
   @Before
   public void setup() throws Exception {
-    this.mockMvc = webAppContextSetup(webApplicationContext)
+	  this.mockMvc = webAppContextSetup(webApplicationContext)
         .apply(springSecurity())
         .build();
   }
