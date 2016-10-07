@@ -37,7 +37,6 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MyBooksApplication.class)
 @WebAppConfiguration
@@ -45,135 +44,157 @@ import org.springframework.web.context.WebApplicationContext;
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 public class BaseRestControllerTest {
 
-  protected MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
-      MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
+	protected MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
+			MediaType.APPLICATION_JSON.getSubtype(), Charset.forName("utf8"));
 
-  protected MockMvc mockMvc;
+	protected MockMvc mockMvc;
 
-  protected HttpMessageConverter mappingJackson2HttpMessageConverter;
-  
-  @Autowired
-  protected PasswordEncoder passwordEncoder;
+	protected HttpMessageConverter mappingJackson2HttpMessageConverter;
 
-  @Autowired
-  protected WebApplicationContext webApplicationContext;
+	@Autowired
+	protected PasswordEncoder passwordEncoder;
 
-  @Autowired
-  private BookRepository bookRepository;
+	@Autowired
+	protected WebApplicationContext webApplicationContext;
 
-  @Autowired
-  private ReaderRepository readerRepository;
+	@Autowired
+	private BookRepository bookRepository;
 
-  @Autowired
-  private NoteRepository noteRepository;
+	@Autowired
+	private ReaderRepository readerRepository;
 
+	@Autowired
+	private NoteRepository noteRepository;
 
-  @Autowired
-  protected void setConverters(HttpMessageConverter<?>[] converters) {
+	@Autowired
+	protected void setConverters(HttpMessageConverter<?>[] converters) {
 
-    this.mappingJackson2HttpMessageConverter = Arrays.asList(converters).stream()
-        .filter(hmc -> hmc instanceof MappingJackson2HttpMessageConverter).findAny().get();
+		this.mappingJackson2HttpMessageConverter = Arrays.asList(converters).stream()
+				.filter(hmc -> hmc instanceof MappingJackson2HttpMessageConverter).findAny().get();
 
-    Assert.assertNotNull("the JSON message converter must not be null",
-        this.mappingJackson2HttpMessageConverter);
-  }
+		Assert.assertNotNull("the JSON message converter must not be null", this.mappingJackson2HttpMessageConverter);
+	}
 
-  @Before
-  public void setup() throws Exception {
-	  this.mockMvc = webAppContextSetup(webApplicationContext)
-        .apply(springSecurity())
-        .build();
-  }
+	@Before
+	public void setup() throws Exception {
+		this.mockMvc = webAppContextSetup(webApplicationContext).apply(springSecurity()).build();
+	}
 
-  protected String json(Object o) throws IOException {
-    MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
-    this.mappingJackson2HttpMessageConverter.write(o, MediaType.APPLICATION_JSON,
-        mockHttpOutputMessage);
-    return mockHttpOutputMessage.getBodyAsString();
-  }
+	protected String json(Object o) throws IOException {
+		MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
+		this.mappingJackson2HttpMessageConverter.write(o, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
+		return mockHttpOutputMessage.getBodyAsString();
+	}
+	
+	protected String encodePassword(String password) {
+		if (password != null) {
+			password  = passwordEncoder.encode(password);
+			return password;
+		}
+		return null;
+	}
 
-  protected Book loadOneBook() {
-    return loadBooks(1).get(0);
-  }
+	protected Book loadOneBook() {
+		return loadBooks(1).get(0);
+	}
 
-  protected List<Book> loadBooks(int number) {
-    Reader reader = loadOneReader();
-    Book book;
-    List<Book> books = new ArrayList<Book>();
+	protected Book getOneBook() {
+		return getBooks(1).get(0);
+	}
 
-    for (int i = 0; i < number; i++) {
-      book = new Book();
-      book.setTitle("Priamos Damokles Hyacinthus Deimos" + i);
-      book.setAuthor("Tuth Jeggregh K'gassen" + i);
-      book.setRating((long) number);
-      book.setGenre(Genre.Satire);
-      book.setReview(
-          "The book is fictional, it doesn't exist and the data are used as placeholder names."
-              + i);
-      book.setStartReadingDate(new Date());
-      book.setEndReadingDate(new Date());
-      book.setReader(reader);
-      book = bookRepository.save(book);
-      books.add(book);
-    }
+	protected List<Book> loadBooks(int number) {
+		return bookRepository.save(getBooks(number));
+	}
 
-    return books;
-  }
+	protected List<Book> getBooks(int number) {
+		Reader reader = loadOneReader();
+		Book book;
+		List<Book> books = new ArrayList<Book>();
 
-  protected Reader loadOneReader() {
-    return loadReaders(1).get(0);
-  }
+		for (int i = 0; i < number; i++) {
+			book = new Book();
+			book.setTitle("Priamos Damokles Hyacinthus Deimos" + i);
+			book.setAuthor("Tuth Jeggregh K'gassen" + i);
+			book.setRating((long) number);
+			book.setGenre(Genre.Satire);
+			book.setReview("The book is fictional, it doesn't exist and the data are used as placeholder names." + i);
+			book.setStartReadingDate(new Date());
+			book.setEndReadingDate(new Date());
+			book.setReader(reader);
+			books.add(book);
+		}
 
-  protected List<Reader> loadReaders(int number) {
-    Reader reader;
-    List<Reader> readers = new ArrayList<Reader>();
+		return books;
+	}
 
-    for (int i = 0; i < number; i++) {
-      reader = new Reader();
-      reader.setUsername("Agarf Rac" + i);
-      reader.setEmail("agarf.rac" + i + "@example.com");
-      reader.setPassword("Mb.1234");
-      reader.setSystemRole(SystemRole.Common);
-      reader = readerRepository.save(reader);
-      readers.add(reader);
-    }
+	protected Reader loadOneReader() {
+		return loadReaders(1).get(0);
+	}
 
-    return readers;
-  }
+	protected Reader getOneReader() {
+		return getReaders(1).get(0);
+	}
 
-  protected Reader loadMainReader() {
-    Reader reader = new Reader();
-    reader.setUsername("Agarf Rac");
-    reader.setEmail("agarf.rac@example.com");
-    reader.setPassword("Mb.1234");
-    reader.setSystemRole(SystemRole.Common);
-    reader = readerRepository.save(reader);
-    return reader;
-  }
-  
-  protected Note loadOneNote() {
-    return loadNotes(1).get(0);
-  }
+	protected List<Reader> loadReaders(int number) {
+		return readerRepository.save(getReaders(number));
+	}
 
-  protected List<Note> loadNotes(int number) {
-    Book book = loadOneBook();
-    
-    Note note;
-    List<Note> notes = new ArrayList<>();
+	protected List<Reader> getReaders(int number) {
+		Reader reader;
+		List<Reader> readers = new ArrayList<Reader>();
 
-    for (int i = 0; i < number; i++) {
-      note = new Note();
-      note.setBook(book);
-      note.setTitle("Man and dolphins" + i);
-      note.setContent(
-          "The dolphins had always believed that they were far more intelligent than man ..." + i);
-      note.setCreatedTime(new Date());
-      note.setModifiedTime(new Date());
-      note = noteRepository.save(note);
-      notes.add(note);
-    }
+		for (int i = 0; i < number; i++) {
+			reader = new Reader();
+			reader.setUsername("Agarf Rac" + i);
+			reader.setEmail("agarf.rac" + i + "@example.com");
+			reader.setPassword(encodePassword("Mb.1234"));
+			reader.setSystemRole(SystemRole.Common);
+			readers.add(reader);
+		}
 
-    return notes;
-  }
+		return readers;
+	}
+
+	protected Reader loadMainReader() {
+		Reader reader = new Reader();
+		reader.setUsername("Agarf Rac");
+		reader.setEmail("agarf.rac@example.com");
+		reader.setPassword(encodePassword("Mb.1234"));
+		reader.setSystemRole(SystemRole.Common);
+		reader = readerRepository.save(reader);
+		return reader;
+	}
+
+	protected Note loadOneNote() {
+		return loadNotes(1).get(0);
+	}
+
+	protected Note getOneNote() {
+		return getNotes(1).get(0);
+	}
+
+	protected List<Note> loadNotes(int number) {
+		return noteRepository.save(getNotes(number));
+	}
+
+	protected List<Note> getNotes(int number) {
+		Book book = loadOneBook();
+
+		Note note;
+		List<Note> notes = new ArrayList<>();
+
+		for (int i = 0; i < number; i++) {
+			note = new Note();
+			note.setBook(book);
+			note.setTitle("Man and dolphins" + i);
+			note.setContent("The dolphins had always believed that they were far more intelligent than man ..." + i);
+			note.setCreatedTime(new Date());
+			note.setModifiedTime(new Date());
+			notes.add(note);
+		}
+
+		return notes;
+	}
+
 
 }

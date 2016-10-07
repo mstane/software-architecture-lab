@@ -18,40 +18,47 @@ public class ProfileRestControllerTest extends BaseRestControllerTest {
 
 	private final String RESOURCE_PATH = "/rest/profiles/";
 
-    @Before
-    public void setup() throws Exception {
-    	super.setup();    	
-    }
+	@Before
+	public void setup() throws Exception {
+		super.setup();
+	}
 
-    @Test
-    public void getProfile() throws Exception {
-      Reader reader = loadOneReader();
-      
-        mockMvc.perform(get(RESOURCE_PATH + reader.getId()))
-        		.andExpect(status().isOk())
-        		.andExpect(content().contentType(contentType))
-        		.andExpect(jsonPath("$.id", is(reader.getId().intValue())))
-        		.andExpect(jsonPath("$.username", is(reader.getUsername())))
-        		.andExpect(jsonPath("$.email", is(reader.getEmail())))
-        		.andExpect(jsonPath("$.password", is(reader.getPassword())));
-    }
+	@Test
+	public void getProfile() throws Exception {
+		Reader reader = loadOneReader();
 
-    @Test
-    public void updateProfile() throws Exception {
-      Reader reader = loadOneReader();
-    	String usernameUpdated = reader.getUsername() + "-updated";
-    	reader.setUsername(usernameUpdated);
-    	String readerJson = json(reader);
-    	
-        mockMvc.perform(put(RESOURCE_PATH + reader.getId()).with(csrf().asHeader())
-        		.contentType(contentType)
-        		.content(readerJson))
-        
-        		.andExpect(status().isOk())
-        		.andExpect(content().contentType(contentType))
-        		.andExpect(jsonPath("$.id", is(reader.getId().intValue())))
-        		.andExpect(jsonPath("$.username", is(usernameUpdated)));
-    }
+		mockMvc.perform(
+					get(RESOURCE_PATH + reader.getId())
+				)
+				
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(contentType))
+
+				.andExpect(jsonPath("$.id", is(reader.getId().intValue())))
+				.andExpect(jsonPath("$.username", is(reader.getUsername())))
+				.andExpect(jsonPath("$.email", is(reader.getEmail())))
+				.andExpect(jsonPath("$.password", is(reader.getPassword())));
+	}
+
+	@Test
+	public void updateProfile() throws Exception {
+		Reader reader = loadOneReader();
+		String usernameUpdated = reader.getUsername() + "-updated";
+		reader.setUsername(usernameUpdated);
+		String readerJson = json(reader);
+
+		mockMvc.perform(
+					put(RESOURCE_PATH + reader.getId())
+						.with(csrf().asHeader())
+						.contentType(contentType)
+						.content(readerJson)
+				)
+
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(contentType))
+				
+				.andExpect(jsonPath("$.id", is(reader.getId().intValue())))
+				.andExpect(jsonPath("$.username", is(usernameUpdated)));
+	}
 
 }
-

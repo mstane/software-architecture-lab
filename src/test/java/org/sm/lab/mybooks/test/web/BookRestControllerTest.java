@@ -6,6 +6,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -24,66 +25,94 @@ public class BookRestControllerTest extends BaseRestControllerTest {
   @Test
   public void list() throws Exception {
     List<Book> books = loadBooks(12);
-    mockMvc.perform(get(RESOURCE_PATH + "?pageNumber=2&pageSize=5")).andDo(print())
-
-        .andExpect(status().isOk()).andExpect(content().contentType(contentType))
-
-        .andExpect(jsonPath("$.number", is(2))).andExpect(jsonPath("$.last", is(true)))
-        .andExpect(jsonPath("$.size", is(5))).andExpect(jsonPath("$.numberOfElements", is(2)))
-        .andExpect(jsonPath("$.totalPages", is(3))).andExpect(jsonPath("$.first", is(false)))
-        .andExpect(jsonPath("$.totalElements", is(12)))
-
-        .andExpect(jsonPath("$.content", hasSize(2)))
-
-        .andExpect(jsonPath("$.content[0].id", is(books.get(10).getId().intValue())))
-        .andExpect(jsonPath("$.content[0].title", is(books.get(10).getTitle())))
-        .andExpect(jsonPath("$.content[0].author", is(books.get(10).getAuthor())))
-        .andExpect(jsonPath("$.content[1].id", is(books.get(11).getId().intValue())))
-        .andExpect(jsonPath("$.content[1].title", is(books.get(11).getTitle())))
-        .andExpect(jsonPath("$.content[1].author", is(books.get(11).getAuthor())))
-
-    ;
+    
+    mockMvc.perform(
+    			get(RESOURCE_PATH + "?pageNumber=2&pageSize=5")
+    		)    
+	    	.andDo(print())
+	
+	        .andExpect(status().isOk()).andExpect(content().contentType(contentType))
+	
+	        .andExpect(jsonPath("$.number", is(2))).andExpect(jsonPath("$.last", is(true)))
+	        .andExpect(jsonPath("$.size", is(5))).andExpect(jsonPath("$.numberOfElements", is(2)))
+	        .andExpect(jsonPath("$.totalPages", is(3))).andExpect(jsonPath("$.first", is(false)))
+	        .andExpect(jsonPath("$.totalElements", is(12)))
+	
+	        .andExpect(jsonPath("$.content", hasSize(2)))
+	
+	        .andExpect(jsonPath("$.content[0].id", is(books.get(10).getId().intValue())))
+	        .andExpect(jsonPath("$.content[0].title", is(books.get(10).getTitle())))
+	        .andExpect(jsonPath("$.content[0].author", is(books.get(10).getAuthor())))
+	        .andExpect(jsonPath("$.content[1].id", is(books.get(11).getId().intValue())))
+	        .andExpect(jsonPath("$.content[1].title", is(books.get(11).getTitle())))
+	        .andExpect(jsonPath("$.content[1].author", is(books.get(11).getAuthor())));
 
   }
 
   @Test
   public void getOne() throws Exception {
     Book book = loadOneBook();
-    mockMvc.perform(get(RESOURCE_PATH + book.getId())).andExpect(status().isOk())
-        .andExpect(content().contentType(contentType))
-        .andExpect(jsonPath("$.id", is(book.getId().intValue())))
-        .andExpect(jsonPath("$.title", is(book.getTitle())))
-        .andExpect(jsonPath("$.author", is(book.getAuthor())));
+    
+    mockMvc.perform(
+    			get(RESOURCE_PATH + book.getId()))
+    				.andExpect(status().isOk()
+    		)
+	        .andExpect(content().contentType(contentType))
+	        .andExpect(jsonPath("$.id", is(book.getId().intValue())))
+	        .andExpect(jsonPath("$.title", is(book.getTitle())))
+	        .andExpect(jsonPath("$.author", is(book.getAuthor())));
   }
 
   @Test
-  public void search() throws Exception {
-	   
+  public void search() throws Exception {	   
     loadBooks(12);
-    mockMvc.perform(get(RESOURCE_PATH + "?search=Deimos&pageNumber=2&pageSize=5")).andDo(print())
-
-        .andExpect(status().isOk()).andExpect(content().contentType(contentType))
-        
-        .andExpect(jsonPath("$.number", is(2)))
-        .andExpect(jsonPath("$.last", is(true)))
-        .andExpect(jsonPath("$.size", is(5)))
-        .andExpect(jsonPath("$.numberOfElements", is(2)))
-        .andExpect(jsonPath("$.totalPages", is(3)))
-        .andExpect(jsonPath("$.first", is(false)))
-        .andExpect(jsonPath("$.totalElements", is(12)))
-        
-        .andExpect(jsonPath("$.content", hasSize(2)))
-        
-        .andExpect(jsonPath("$.content[0].title", is("Book: Priamos Damokles Hyacinthus Deimos10")))
-
-        .andExpect(jsonPath("$.content[0].link", is("#/books/view/11")))
-        .andExpect(jsonPath("$.content[0].shortContent", is("Author: " + "Tuth Jeggregh K'gassen10" 
-        		+ "; Review: " + "The book is fictional, it doesn't exist and the data are used as placeholder names.10")))
-        
-    ;
+    mockMvc.perform(
+    			get(RESOURCE_PATH + "?search=Deimos&pageNumber=2&pageSize=5")
+    		)
+    	
+	    	.andDo(print())
+	
+	        .andExpect(status().isOk()).andExpect(content().contentType(contentType))
+	        
+	        .andExpect(jsonPath("$.number", is(2)))
+	        .andExpect(jsonPath("$.last", is(true)))
+	        .andExpect(jsonPath("$.size", is(5)))
+	        .andExpect(jsonPath("$.numberOfElements", is(2)))
+	        .andExpect(jsonPath("$.totalPages", is(3)))
+	        .andExpect(jsonPath("$.first", is(false)))
+	        .andExpect(jsonPath("$.totalElements", is(12)))
+	        
+	        .andExpect(jsonPath("$.content", hasSize(2)))
+	        
+	        .andExpect(jsonPath("$.content[0].title", is("Book: Priamos Damokles Hyacinthus Deimos10")))
+	
+	        .andExpect(jsonPath("$.content[0].link", is("#/books/view/11")))
+	        .andExpect(jsonPath("$.content[0].shortContent", is("Author: " + "Tuth Jeggregh K'gassen10" 
+	        		+ "; Review: " + "The book is fictional, it doesn't exist and the data are used as placeholder names.10")));
 
   }
   
+
+  @Test
+  public void create() throws Exception {
+    Book book = getOneBook();
+    String bookJson = json(book);
+    
+    mockMvc.perform(
+    			post(RESOURCE_PATH)
+    				.with(csrf().asHeader())
+    				.contentType(contentType)
+    				.content(bookJson)
+    		)
+    
+    		.andDo(print())
+        
+	        .andExpect(status().isOk())
+	        .andExpect(content().contentType(contentType))
+	        .andExpect(jsonPath("$.id", is(1)))
+	        .andExpect(jsonPath("$.title", is(book.getTitle())));
+    
+  }
   
   
   @Test
@@ -93,20 +122,31 @@ public class BookRestControllerTest extends BaseRestControllerTest {
     book.setTitle(titleUpdated);
     String bookJson = json(book);
 
-    mockMvc
-        .perform(put(RESOURCE_PATH + book.getId()).with(csrf().asHeader())
-        .contentType(contentType).content(bookJson)).andDo(print())
-        
-        .andExpect(status().isOk())
-        .andExpect(content().contentType(contentType))
-        .andExpect(jsonPath("$.id", is(book.getId().intValue())))
-        .andExpect(jsonPath("$.title", is(titleUpdated)));
+    mockMvc.perform(
+    			put(RESOURCE_PATH + book.getId())
+    				.with(csrf().asHeader())
+    				.contentType(contentType)
+    				.content(bookJson)
+    		)
+    			
+			.andDo(print())
+	        
+	        .andExpect(status().isOk())
+	        .andExpect(content().contentType(contentType))
+	        .andExpect(jsonPath("$.id", is(book.getId().intValue())))
+	        .andExpect(jsonPath("$.title", is(titleUpdated)));
   }
 
   @Test
   public void deleteReader() throws Exception {
     Book book = loadOneBook();
-    mockMvc.perform(delete(RESOURCE_PATH + book.getId()).with(csrf().asHeader())).andExpect(status().isOk());
+    
+    mockMvc.perform(
+    			delete(RESOURCE_PATH + book.getId())
+    				.with(csrf().asHeader())
+    		)
+    
+    		.andExpect(status().isOk());
   }
 
 
