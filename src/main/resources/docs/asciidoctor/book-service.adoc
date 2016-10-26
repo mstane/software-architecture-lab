@@ -1,0 +1,113 @@
+= Book service description
+Book service;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+
+The Book resource is used to create, modify and list books.
+
+
+[[resource-book-list]]
+== Listing book
+A `GET` request lists all of the service's book.
+
+=== Example CURL request
+
+include::{snippets}/book-rest-controller-test/list/curl-request.adoc[]
+
+=== Example HTTP request
+
+include::{snippets}/book-rest-controller-test/list/http-request.adoc[]
+
+=== Example response
+
+include::{snippets}/book-rest-controller-test/list/http-response.adoc[]
+
+
+[[resource-book-get-one]]
+== Fetching book
+A `GET` request fetches a specific book.
+
+=== Example CURL request
+
+include::{snippets}/book-rest-controller-test/get-one/curl-request.adoc[]
+
+=== Example HTTP request
+
+include::{snippets}/book-rest-controller-test/get-one/http-request.adoc[]
+
+=== Example response
+
+include::{snippets}/book-rest-controller-test/get-one/http-response.adoc[]
+
+
+[[resource-book-search]]
+== Searching books and notes
+A `GET` request with specific parameter `search` gets list of all books and notes which contain provided string in their title or body. 
+
+=== Example CURL request
+
+include::{snippets}/book-rest-controller-test/search/curl-request.adoc[]
+
+=== Example HTTP request
+
+include::{snippets}/book-rest-controller-test/search/http-request.adoc[]
+
+=== Example response
+
+include::{snippets}/book-rest-controller-test/search/http-response.adoc[]
+
+
+[[resource-book-create]]
+== Creating book
+A `POST` request creates a new book.
+
+=== Example CURL request
+
+include::{snippets}/book-rest-controller-test/create/curl-request.adoc[]
+
+=== Example HTTP request
+
+include::{snippets}/book-rest-controller-test/create/http-request.adoc[]
+
+=== Example response
+
+include::{snippets}/book-rest-controller-test/create/http-response.adoc[]
+
+
+[[resource-book-update]]
+== Updating book
+A `PUT` request updates an existing book.
+
+=== Example CURL request
+
+include::{snippets}/book-rest-controller-test/update/curl-request.adoc[]
+
+=== Example HTTP request
+
+include::{snippets}/book-rest-controller-test/update/http-request.adoc[]
+
+=== Example response
+
+include::{snippets}/book-rest-controller-test/update/http-response.adoc[]
+
+
+[[resource-book-delete-one]]
+== Deleting book
+A `DELETE` request deletes an existing book.
+
+=== Example CURL request
+
+include::{snippets}/book-rest-controller-test/delete-one/curl-request.adoc[]
+
+=== Example HTTP request
+
+include::{snippets}/book-rest-controller-test/delete-one/http-request.adoc[]
+
+=== Example response
+
+include::{snippets}/book-rest-controller-test/delete-one/http-response.adoc[]

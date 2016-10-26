@@ -5,14 +5,14 @@ import static org.hamcrest.Matchers.is;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.List;
+
 import org.junit.Test;
 import org.sm.lab.mybooks.domain.Book;
 import org.sm.lab.mybooks.test.web.util.WithMockCustomUser;
@@ -29,9 +29,7 @@ public class BookRestControllerTest extends BaseRestControllerTest {
     mockMvc.perform(
     			get(RESOURCE_PATH + "?pageNumber=2&pageSize=5")
     		)    
-	    	.andDo(print())
-	
-	        .andExpect(status().isOk()).andExpect(content().contentType(contentType))
+	        .andExpect(status().isOk()).andExpect(content().contentType(jsonContentType))
 	
 	        .andExpect(jsonPath("$.number", is(2))).andExpect(jsonPath("$.last", is(true)))
 	        .andExpect(jsonPath("$.size", is(5))).andExpect(jsonPath("$.numberOfElements", is(2)))
@@ -57,7 +55,7 @@ public class BookRestControllerTest extends BaseRestControllerTest {
     			get(RESOURCE_PATH + book.getId()))
     				.andExpect(status().isOk()
     		)
-	        .andExpect(content().contentType(contentType))
+	        .andExpect(content().contentType(jsonContentType))
 	        .andExpect(jsonPath("$.id", is(book.getId().intValue())))
 	        .andExpect(jsonPath("$.title", is(book.getTitle())))
 	        .andExpect(jsonPath("$.author", is(book.getAuthor())));
@@ -69,10 +67,7 @@ public class BookRestControllerTest extends BaseRestControllerTest {
     mockMvc.perform(
     			get(RESOURCE_PATH + "?search=Deimos&pageNumber=2&pageSize=5")
     		)
-    	
-	    	.andDo(print())
-	
-	        .andExpect(status().isOk()).andExpect(content().contentType(contentType))
+	        .andExpect(status().isOk()).andExpect(content().contentType(jsonContentType))
 	        
 	        .andExpect(jsonPath("$.number", is(2)))
 	        .andExpect(jsonPath("$.last", is(true)))
@@ -101,14 +96,11 @@ public class BookRestControllerTest extends BaseRestControllerTest {
     mockMvc.perform(
     			post(RESOURCE_PATH)
     				.with(csrf().asHeader())
-    				.contentType(contentType)
+    				.contentType(jsonContentType)
     				.content(bookJson)
     		)
-    
-    		.andDo(print())
-        
 	        .andExpect(status().isOk())
-	        .andExpect(content().contentType(contentType))
+	        .andExpect(content().contentType(jsonContentType))
 	        .andExpect(jsonPath("$.id", is(1)))
 	        .andExpect(jsonPath("$.title", is(book.getTitle())));
     
@@ -125,27 +117,25 @@ public class BookRestControllerTest extends BaseRestControllerTest {
     mockMvc.perform(
     			put(RESOURCE_PATH + book.getId())
     				.with(csrf().asHeader())
-    				.contentType(contentType)
+    				.contentType(jsonContentType)
     				.content(bookJson)
     		)
-    			
-			.andDo(print())
-	        
 	        .andExpect(status().isOk())
-	        .andExpect(content().contentType(contentType))
+	        .andExpect(content().contentType(jsonContentType))
 	        .andExpect(jsonPath("$.id", is(book.getId().intValue())))
 	        .andExpect(jsonPath("$.title", is(titleUpdated)));
   }
 
   @Test
-  public void deleteReader() throws Exception {
+  public void deleteOne() throws Exception {
     Book book = loadOneBook();
     
     mockMvc.perform(
     			delete(RESOURCE_PATH + book.getId())
     				.with(csrf().asHeader())
     		)
-    
+//    		.andDo(document("index"))
+    		
     		.andExpect(status().isOk());
   }
 

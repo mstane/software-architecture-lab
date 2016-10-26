@@ -6,7 +6,6 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,10 +29,8 @@ public class ReaderRestControllerTest extends BaseRestControllerTest {
     mockMvc.perform(
     			get(RESOURCE_PATH + "?pageNumber=2&pageSize=5")
 	    	)
-	    	.andDo(print())
-	
 	        .andExpect(status().isOk())
-	        .andExpect(content().contentType(contentType))
+	        .andExpect(content().contentType(jsonContentType))
 	
 	        .andExpect(jsonPath("$.number", is(2)))
 	        .andExpect(jsonPath("$.last", is(true)))
@@ -62,7 +59,7 @@ public class ReaderRestControllerTest extends BaseRestControllerTest {
     			get(RESOURCE_PATH + reader.getId())
     		)
 	    	.andExpect(status().isOk())
-	        .andExpect(content().contentType(contentType))
+	        .andExpect(content().contentType(jsonContentType))
 	        
 	        .andExpect(jsonPath("$.id", is(reader.getId().intValue())))
 	        .andExpect(jsonPath("$.username", is(reader.getUsername())))
@@ -77,10 +74,8 @@ public class ReaderRestControllerTest extends BaseRestControllerTest {
     mockMvc.perform(
     			get(RESOURCE_PATH + "?search=rac3&pageNumber=0&pageSize=5")
 	    	)
-	    	.andDo(print())
-	
 	        .andExpect(status().isOk())
-	        .andExpect(content().contentType(contentType))
+	        .andExpect(content().contentType(jsonContentType))
 	
 	        .andExpect(jsonPath("$.number", is(0)))
 	        .andExpect(jsonPath("$.last", is(true)))
@@ -105,18 +100,18 @@ public class ReaderRestControllerTest extends BaseRestControllerTest {
     mockMvc.perform(
     			put(RESOURCE_PATH + reader.getId())
     				.with(csrf().asHeader())
-    				.contentType(contentType)
+    				.contentType(jsonContentType)
     				.content(readerJson)
     		)
 	        .andExpect(status().isOk())
-	        .andExpect(content().contentType(contentType))
+	        .andExpect(content().contentType(jsonContentType))
 	        
 	        .andExpect(jsonPath("$.id", is(reader.getId().intValue())))
 	        .andExpect(jsonPath("$.username", is(usernameUpdated)));
   }
 
   @Test
-  public void deleteReader() throws Exception {
+  public void deleteOne() throws Exception {
     Reader reader = loadOneReader();
     
     mockMvc.perform(

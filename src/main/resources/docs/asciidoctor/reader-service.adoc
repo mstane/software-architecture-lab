@@ -1,0 +1,96 @@
+= Reader service description
+Reader service;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+
+The Reader resource is used to create, modify and list readers.
+
+
+[[resource-reader-list]]
+== Listing readers
+A `GET` request lists all of the service's reader.
+
+=== Example CURL request
+
+include::{snippets}/reader-rest-controller-test/list/curl-request.adoc[]
+
+=== Example HTTP request
+
+include::{snippets}/reader-rest-controller-test/list/http-request.adoc[]
+
+=== Example response
+
+include::{snippets}/reader-rest-controller-test/list/http-response.adoc[]
+
+
+[[resource-reader-get-one]]
+== Fetching a reader
+A `GET` request fetches a specific reader.
+
+=== Example CURL request
+
+include::{snippets}/reader-rest-controller-test/get-one/curl-request.adoc[]
+
+=== Example HTTP request
+
+include::{snippets}/reader-rest-controller-test/get-one/http-request.adoc[]
+
+=== Example response
+
+include::{snippets}/reader-rest-controller-test/get-one/http-response.adoc[]
+
+
+[[resource-reader-search]]
+== Searching readers
+A `GET` request with specific parameter `search` gets list of all readers which contain provided string in their first or last name. 
+
+=== Example CURL request
+
+include::{snippets}/reader-rest-controller-test/search/curl-request.adoc[]
+
+=== Example HTTP request
+
+include::{snippets}/reader-rest-controller-test/search/http-request.adoc[]
+
+=== Example response
+
+include::{snippets}/reader-rest-controller-test/search/http-response.adoc[]
+
+
+[[resource-reader-update]]
+== Updating reader
+A `PUT` request updates an existing reader.
+
+=== Example CURL request
+
+include::{snippets}/reader-rest-controller-test/update/curl-request.adoc[]
+
+=== Example HTTP request
+
+include::{snippets}/reader-rest-controller-test/update/http-request.adoc[]
+
+=== Example response
+
+include::{snippets}/reader-rest-controller-test/update/http-response.adoc[]
+
+
+[[resource-reader-delete-one]]
+== Deleting reader
+A `DELETE` request deletes an existing reader.
+
+=== Example CURL request
+
+include::{snippets}/reader-rest-controller-test/delete-one/curl-request.adoc[]
+
+=== Example HTTP request
+
+include::{snippets}/reader-rest-controller-test/delete-one/http-request.adoc[]
+
+=== Example response
+
+include::{snippets}/reader-rest-controller-test/delete-one/http-response.adoc[]

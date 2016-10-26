@@ -8,7 +8,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.sm.lab.mybooks.domain.Reader;
 import org.sm.lab.mybooks.test.web.util.WithMockCustomUser;
@@ -18,21 +17,15 @@ public class ProfileRestControllerTest extends BaseRestControllerTest {
 
 	private final String RESOURCE_PATH = "/rest/profiles/";
 
-	@Before
-	public void setup() throws Exception {
-		super.setup();
-	}
-
 	@Test
-	public void getProfile() throws Exception {
+	public void getOne() throws Exception {
 		Reader reader = loadOneReader();
 
 		mockMvc.perform(
 					get(RESOURCE_PATH + reader.getId())
 				)
-				
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(contentType))
+				.andExpect(content().contentType(jsonContentType))
 
 				.andExpect(jsonPath("$.id", is(reader.getId().intValue())))
 				.andExpect(jsonPath("$.username", is(reader.getUsername())))
@@ -41,7 +34,7 @@ public class ProfileRestControllerTest extends BaseRestControllerTest {
 	}
 
 	@Test
-	public void updateProfile() throws Exception {
+	public void update() throws Exception {
 		Reader reader = loadOneReader();
 		String usernameUpdated = reader.getUsername() + "-updated";
 		reader.setUsername(usernameUpdated);
@@ -50,12 +43,12 @@ public class ProfileRestControllerTest extends BaseRestControllerTest {
 		mockMvc.perform(
 					put(RESOURCE_PATH + reader.getId())
 						.with(csrf().asHeader())
-						.contentType(contentType)
+						.contentType(jsonContentType)
 						.content(readerJson)
 				)
 
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(contentType))
+				.andExpect(content().contentType(jsonContentType))
 				
 				.andExpect(jsonPath("$.id", is(reader.getId().intValue())))
 				.andExpect(jsonPath("$.username", is(usernameUpdated)));

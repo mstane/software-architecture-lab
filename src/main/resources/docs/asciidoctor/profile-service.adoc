@@ -1,0 +1,46 @@
+= Profile service description
+Profile service;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+
+The Profile resource is used to create, modify and list profiles.
+
+
+[[resource-profile-get-one]]
+== Fetching profile
+A `GET` request fetches a specific profile.
+
+=== Example CURL request
+
+include::{snippets}/profile-rest-controller-test/get-one/curl-request.adoc[]
+
+=== Example HTTP request
+
+include::{snippets}/profile-rest-controller-test/get-one/http-request.adoc[]
+
+=== Example response
+
+include::{snippets}/profile-rest-controller-test/get-one/http-response.adoc[]
+
+
+[[resource-profile-update]]
+== Updating profile
+A `PUT` request updates an existing profile.
+
+=== Example CURL request
+
+include::{snippets}/profile-rest-controller-test/update/curl-request.adoc[]
+
+=== Example HTTP request
+
+include::{snippets}/profile-rest-controller-test/update/http-request.adoc[]
+
+=== Example response
+
+include::{snippets}/profile-rest-controller-test/update/http-response.adoc[]
+

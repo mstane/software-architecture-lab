@@ -1,0 +1,98 @@
+= Application service description
+Book service;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+
+App resource is used for general purpose.
+
+
+[[resource-app-get-principal]]
+== Get principal
+A `GET` request fetches data for specific user.
+
+=== Example CURL request
+
+include::{snippets}/app-rest-controller-test/get-principal/curl-request.adoc[]
+
+=== Example HTTP request
+
+include::{snippets}/app-rest-controller-test/get-principal/http-request.adoc[]
+
+=== Example response
+
+include::{snippets}/app-rest-controller-test/get-principal/http-response.adoc[]
+
+
+[[resource-app-app-data]]
+== Get principal
+A `GET` request fetches data for general purpose.
+
+=== Example CURL request
+
+include::{snippets}/app-rest-controller-test/app-data/curl-request.adoc[]
+
+=== Example HTTP request
+
+include::{snippets}/app-rest-controller-test/app-data/http-request.adoc[]
+
+=== Example response
+
+include::{snippets}/app-rest-controller-test/app-data/http-response.adoc[]
+
+
+[[resource-app-register-reader]]
+== Register reader
+A `POST` request registers a new reader in the system.
+
+=== Example CURL request
+
+include::{snippets}/app-rest-controller-test/register-reader/curl-request.adoc[]
+
+=== Example HTTP request
+
+include::{snippets}/app-rest-controller-test/register-reader/http-request.adoc[]
+
+=== Example response
+
+include::{snippets}/app-rest-controller-test/register-reader/http-response.adoc[]
+
+
+[[resource-app-forgotten-password-send]]
+== Forgotten password
+A `GET` request for forgotten password functionality. 
+
+=== Example CURL request
+
+include::{snippets}/app-rest-controller-test/forgotten-password-send/curl-request.adoc[]
+
+=== Example HTTP request
+
+include::{snippets}/app-rest-controller-test/forgotten-password-send/http-request.adoc[]
+
+=== Example response
+
+include::{snippets}/app-rest-controller-test/forgotten-password-send/http-response.adoc[]
+
+
+[[resource-app-login-succeeds]]
+== Login
+A `GET` request for login. 
+
+=== Example CURL request
+
+include::{snippets}/app-rest-controller-test/login-succeeds/curl-request.adoc[]
+
+=== Example HTTP request
+
+include::{snippets}/app-rest-controller-test/login-succeeds/http-request.adoc[]
+
+=== Example response
+
+include::{snippets}/app-rest-controller-test/login-succeeds/http-response.adoc[]
+
+

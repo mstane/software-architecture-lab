@@ -1,13 +1,9 @@
 package org.sm.lab.mybooks.test.web;
 
-import static org.hamcrest.Matchers.is;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.nio.charset.Charset;
@@ -35,7 +31,6 @@ public class AppRestControllerTest extends BaseRestControllerTest {
 		mockMvc.perform(
 					get("/")
 				)
-				
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(htmlContentType));
 	}
@@ -46,10 +41,8 @@ public class AppRestControllerTest extends BaseRestControllerTest {
 		mockMvc.perform(
 				get("/user")
 			)
-			.andDo(print())
-			
 			.andExpect(status().isOk())
-			.andExpect(content().contentType(contentType));
+			.andExpect(content().contentType(jsonContentType));
 	}
 
 	@Test
@@ -57,10 +50,8 @@ public class AppRestControllerTest extends BaseRestControllerTest {
 		mockMvc.perform(
 				get("/app_data")
 			)
-			.andDo(print())
-			
 			.andExpect(status().isOk())
-			.andExpect(content().contentType(contentType));
+			.andExpect(content().contentType(jsonContentType));
 	}
 	
 	@Test
@@ -71,11 +62,9 @@ public class AppRestControllerTest extends BaseRestControllerTest {
 		mockMvc.perform(
 				post("/register_reader")
 					.with(csrf().asHeader())
-					.contentType(contentType)
+					.contentType(jsonContentType)
 					.content(readerJson)
 				)
-				.andDo(print())
-
 				.andExpect(status().isOk());
 		
 	}
@@ -85,8 +74,6 @@ public class AppRestControllerTest extends BaseRestControllerTest {
 		mockMvc.perform(
 				get("/forgotten_password_send?email=aaaa")
 			)
-			.andDo(print())
-			
 			.andExpect(status().isNotFound());
 	}
 	
@@ -100,10 +87,8 @@ public class AppRestControllerTest extends BaseRestControllerTest {
 		mockMvc.perform(
 				get("/user").header("Authorization", "Basic " + authStringEncoded)
 			)
-			.andDo(print())
-			
 			.andExpect(status().isOk())
-			.andExpect(content().contentType(contentType));
+			.andExpect(content().contentType(jsonContentType));
 	}
 
 	

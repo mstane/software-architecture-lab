@@ -2,6 +2,7 @@ package org.sm.lab.mybooks.config;
 
 import java.util.Properties;
 
+import org.hibernate.boot.spi.SessionFactoryOptions;
 import org.hibernate.cache.CacheException;
 import org.hibernate.cache.spi.CacheDataDescription;
 import org.hibernate.cache.spi.CollectionRegion;
@@ -112,4 +113,10 @@ public class HazelcastCacheRegionFactory implements RegionFactory {
     public long nextTimestamp() {
         return HazelcastTimestamper.nextTimestamp(hazelcastInstance);
     }
+
+	@Override
+	public void start(SessionFactoryOptions arg0, Properties arg1) throws CacheException {
+		// TODO Auto-generated method stub
+		
+	}
 }

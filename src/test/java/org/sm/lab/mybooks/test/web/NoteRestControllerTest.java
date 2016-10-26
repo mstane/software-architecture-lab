@@ -28,7 +28,7 @@ public class NoteRestControllerTest extends BaseRestControllerTest {
 					get(RESOURCE_PATH + note.getId())
 				)
 				.andExpect(status().isOk())
-				.andExpect(content().contentType(contentType)).andExpect(jsonPath("$.id", is(note.getId().intValue())))
+				.andExpect(content().contentType(jsonContentType)).andExpect(jsonPath("$.id", is(note.getId().intValue())))
 				.andExpect(jsonPath("$.title", is(note.getTitle())))
 				.andExpect(jsonPath("$.content", is(note.getContent())));
 	}
@@ -41,11 +41,10 @@ public class NoteRestControllerTest extends BaseRestControllerTest {
 		mockMvc.perform(
 					post(RESOURCE_PATH + "?bookId=" + note.getBook().getId())
 						.with(csrf().asHeader())
-						.contentType(contentType)
+						.contentType(jsonContentType)
 						.content(noteJson)
 				)
-				.andDo(print())
-				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
+				.andExpect(status().isOk()).andExpect(content().contentType(jsonContentType))
 				.andExpect(jsonPath("$.id", is(1)))
 				.andExpect(jsonPath("$.title", is(note.getTitle())));
 	}
@@ -60,15 +59,15 @@ public class NoteRestControllerTest extends BaseRestControllerTest {
 		mockMvc.perform(
 					put(RESOURCE_PATH + note.getId() + "?bookId=" + note.getBook().getId())
 						.with(csrf().asHeader())
-						.contentType(contentType).content(noteJson)).andDo(print()
+						.contentType(jsonContentType).content(noteJson)).andDo(print()
 				)
-				.andExpect(status().isOk()).andExpect(content().contentType(contentType))
+				.andExpect(status().isOk()).andExpect(content().contentType(jsonContentType))
 				.andExpect(jsonPath("$.id", is(note.getId().intValue())))
 				.andExpect(jsonPath("$.title", is(titleUpdated)));
 	}
 
 	@Test
-	public void deleteNote() throws Exception {
+	public void deleteOne() throws Exception {
 		Note note = loadOneNote();
 		
 		mockMvc.perform(
