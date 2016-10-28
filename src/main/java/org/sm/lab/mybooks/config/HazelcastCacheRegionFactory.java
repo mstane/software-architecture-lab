@@ -15,7 +15,6 @@ import org.hibernate.cache.spi.access.AccessType;
 import org.hibernate.cfg.Settings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sm.lab.mybooks.CacheConfiguration;
 import org.springframework.context.annotation.Profile;
 
 import com.hazelcast.core.HazelcastInstance;
@@ -41,7 +40,7 @@ public class HazelcastCacheRegionFactory implements RegionFactory {
 
     public HazelcastCacheRegionFactory() {
         super();
-        hazelcastInstance = CacheConfiguration.getHazelcastInstance();
+        hazelcastInstance = CacheConfig.getHazelcastInstance();
     }
 
     /**

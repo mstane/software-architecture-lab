@@ -1,4 +1,4 @@
-package org.sm.lab.mybooks;
+package org.sm.lab.mybooks.config;
 
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
@@ -23,9 +23,9 @@ import com.hazelcast.instance.HazelcastInstanceFactory;
 //@EnableCaching
 //@AutoConfigureAfter(value = {DataSourceConfig.class})
 @Profile("cache")
-public class CacheConfiguration {
+public class CacheConfig {
 
-    private final Logger log = LoggerFactory.getLogger(CacheConfiguration.class);
+    private final Logger log = LoggerFactory.getLogger(CacheConfig.class);
 
     private static HazelcastInstance hazelcastInstance;
 

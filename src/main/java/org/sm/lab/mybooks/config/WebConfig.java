@@ -1,4 +1,4 @@
-package org.sm.lab.mybooks.web;
+package org.sm.lab.mybooks.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
