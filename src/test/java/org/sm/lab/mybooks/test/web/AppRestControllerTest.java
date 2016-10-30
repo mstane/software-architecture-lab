@@ -25,15 +25,6 @@ public class AppRestControllerTest extends BaseRestControllerTest {
 	public void setup() throws Exception {
 		super.setup();
 	}
-
-	@Test
-	public void homePageLoads() throws Exception {
-		mockMvc.perform(
-					get("/")
-				)
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(htmlContentType));
-	}
 	
 	@Test
 	@WithMockCustomUser
