@@ -1,0 +1,62 @@
+<div class="container-form-style">
+
+	<ol class="breadcrumb">
+		<li><a href="#/home">Home</a></li>
+		<li><a href="#/list">Books</a></li>
+		<li class="active">Search Books</li>
+	</ol>
+	<div class="jumbotron">
+		<div class="form-group row">
+			<div class="col-md-7">
+				<input type="text" class="form-control" id="keyword"
+					placeholder="Keyword" ng-model="keyword" />
+			</div>
+			<div class="col-md-3">
+				<select class="form-control" id="genre" name="genre"
+					ng-model="genre" ng-options="genre as genre for genre in genres">
+					<option value="">--Genre--</option>
+				</select>
+			</div>
+			<div class="col-md-2">
+				<a ng-click="search()" class="btn btn-primary"><span
+					class="glyphicon glyphicon-search"></span></a>
+			</div>
+		</div>
+	</div>
+
+
+	<table class="table table-bordered">
+		<tbody>
+			<tr ng-repeat="searchItem in page.content">
+				<td>
+					<p>
+						<a href="{{searchItem.link}}">{{searchItem.title}}</a>
+					</p> {{searchItem.shortContent}}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<ul class="pagination" ng-show="page.totalPages > 1">
+		<li ng-show="page.number == 0" class="disabled"><a>&#8810;</a></li>
+		<li ng-show="page.number == 0" class="disabled"><a>&#60;</a></li>
+		<li ng-show="page.number != 0"><a href="javascript:void(0)"
+			ng-click="getPage(0)">&#8810;</a></li>
+		<li ng-show="page.number != 0"><a href="javascript:void(0)"
+			ng-click="getPage(page.number-1)">&#60;</a></li>
+
+		<li ng-repeat="i in range" ng-class="{active : page.number == i}">
+			<a href="javascript:void(0)" ng-click="getPage(i)">{{i + 1}}</a>
+		</li>
+
+		<li ng-show="page.number == page.totalPages - 1" class="disabled"><a>&#62;</a></li>
+		<li ng-show="page.number == page.totalPages - 1" class="disabled"><a>&#8811;</a></li>
+		<li ng-show="page.number != page.totalPages - 1"><a
+			href="javascript:void(0)" ng-click="getPage(page.number + 1)">&#62;</a></li>
+		<li ng-show="page.number != page.totalPages - 1"><a
+			href="javascript:void(0)" ng-click="getPage(page.totalPages - 1)">&#8811;</a></li>
+	</ul>
+
+
+
+</div>

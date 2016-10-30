@@ -1,0 +1,29 @@
+<div class="container-form-style">
+
+	<ol class="breadcrumb">
+		<li><a href="#/home">Home</a></li>
+		<li class="active">My Profile</li>
+	</ol>
+
+	<div class="row container-form-style">
+		<h2 class="sub-header pull-left">My Profile</h2>
+		<div class="btn-toolbar pull-right">
+			<a href="#/profiles/edit/{{profile.id}}" class="btn btn-primary">Edit</a>
+		</div>
+	</div>
+
+
+	<table class="table table-user-information">
+		<tbody>
+			<tr>
+				<td>Username</td>
+				<td>{{profile.username}}</td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td>{{profile.email}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

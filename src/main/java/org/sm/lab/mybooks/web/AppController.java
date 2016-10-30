@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class AppController {
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String list(Model model) {
-		return "index";
+	public String index() {
+		return "/static/app/html/index.html";
 	}
 	
 }

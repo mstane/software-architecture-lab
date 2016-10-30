@@ -1,0 +1,70 @@
+<div class="container-form-style">
+
+	<ol class="breadcrumb">
+		<li><a href="#/home">Home</a></li>
+		<li><a href="#/books/list">Books</a></li>
+		<li class="active">View</li>
+	</ol>
+
+	<div class="row container-form-style">
+		<h2 class="sub-header pull-left">Book View</h2>
+		<div class="btn-toolbar pull-right">
+			<a href="#/books/edit/{{book.id}}" class="btn btn-primary">Edit
+				Book</a> <a ng-click="deleteBook()" class="btn btn-default">Delete
+				Book</a> <a href="#/notes/edit" class="btn btn-default">New Note</a>
+		</div>
+	</div>
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<td class="col-md-3"><strong>Title:</strong></td>
+				<td colspan="3" text="'{{book.title}}'">{{book.title}}</td>
+			</tr>
+			<tr>
+				<td><strong>Author:</strong></td>
+				<td colspan="3" text="'{{book.author}}'">{{book.author}}</td>
+			</tr>
+			<tr>
+				<td><strong>Genre</strong></td>
+				<td text="'{{book.genre}}'">{{book.genre}}</td>
+				<td><strong>Rating:</strong></td>
+				<td text="'{{book.rating}}'">{{book.rating}}</td>
+			</tr>
+			<tr>
+				<td><strong>Start Reading Date:</strong></td>
+				<td>{{book.startReadingDate | date : 'dd-MMM-yyyy' }}</td>
+				<td><strong>End Reading Date:</strong></td>
+				<td>{{book.endReadingDate | date : 'dd-MMM-yyyy'}}</td>
+			</tr>
+			<tr>
+				<td><strong>Review:</strong></td>
+				<td colspan="3" text="'{{book.review}}'">{{book.review}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<hr />
+
+	<p>
+		<strong>Notes:</strong>
+	</p>
+
+
+	<div class="table-responsive" ng-show="book.notes.length">
+		<table class="table table-striped">
+			<tbody>
+				<tr class="mb-pointer" ng-repeat="note in book.notes"
+					ng-click="showNoteView(note.id)">
+					<td>{{note.title}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div ng-show="!book.notes.length">
+		<p>There is no data for any note.</p>
+	</div>
+
+
+</div>

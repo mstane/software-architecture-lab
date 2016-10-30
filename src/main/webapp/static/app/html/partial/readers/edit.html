@@ -1,0 +1,46 @@
+<div class="container-form-style">
+
+	<ol class="breadcrumb">
+		<li><a href="#/home">Home</a></li>
+		<li><a href="#/readers/list">Readers</a></li>
+		<li><a href="#/readers/view/{{reader.id}}">Reader View</a></li>
+		<li class="active">Reader Edit</li>
+	</ol>
+
+	<form name='readerForm' role="form" novalidate="" ng-submit="update()">
+
+		<div class="row container-form-style">
+			<h2 class="sub-header pull-left">Reader Edit</h2>
+			<div class="btn-toolbar pull-right">
+				<button type="submit" ng-disabled='readerForm.$invalid'
+					class="btn btn-primary">Save</button>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="username">Username</label> <input type="text"
+				class="form-control" id="username" name="username"
+				ng-model="reader.username" required="" /> <span class='help-block'
+				ng-show='readerForm.username.$error.required'>Username is
+				required</span>
+		</div>
+		<div class="form-group">
+			<label for="email">Email</label> <input type="email"
+				class="form-control" id="email" name="email" ng-model="reader.email"
+				required="" /> <span class='help-block'
+				ng-show='readerForm.email.$error.required'>Email is required</span>
+			<span class='help-block' ng-show="readerForm.email.$error.email">Invalid
+				email address.</span>
+		</div>
+		<div class="form-group">
+			<label for="systemRole">System Role</label> <select
+				class="form-control" id="systemRole" name="systemRole"
+				ng-model="reader.systemRole"
+				ng-options="systemRole as systemRole for systemRole in systemRoles">
+				<option value="">-- Select --</option>
+			</select>
+		</div>
+
+	</form>
+
+</div>

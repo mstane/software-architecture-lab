@@ -1,0 +1,61 @@
+<div class="container container-form-style">
+
+	<br />
+
+	<div class="container-form-style">
+
+		<form name='registerForm' role="form" novalidate=""
+			ng-submit="register()">
+
+			<div class="row container-form-style">
+				<h2 class="sub-header pull-left">Sign Up</h2>
+				<div class="btn-toolbar pull-right">
+					<button type="submit" ng-disabled='registerForm.$invalid'
+						class="btn btn-primary">Sign Up</button>
+					<button type="reset" class="btn">Reset</button>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="username">Username</label> <input type="text"
+					class="form-control" id="username" name="username"
+					placeholder="Username for system display name"
+					ng-model="reader.username" required="" /> <span class='help-block'
+					ng-show='registerForm.username.$error.required'>Username is
+					required</span>
+			</div>
+			<div class="form-group">
+				<label for="email">Email</label> <input type="email"
+					class="form-control" id="email" name="email"
+					placeholder="Email for system user identifier"
+					ng-model="reader.email" required="" /> <span class='help-block'
+					ng-show='registerForm.email.$error.required'>Email is
+					required</span> <span class='help-block'
+					ng-show="registerForm.email.$error.email">Invalid email
+					address.</span>
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label> <input type="password"
+					class="form-control" id="password" name="password"
+					ng-model="reader.password" required="" ng-minlength="3" /> <span
+					class='help-block' ng-show='registerForm.password.$error.required'>Password
+					is required</span> <span class='help-block'
+					ng-show='registerForm.password.$error.minlength'>Too short</span>
+			</div>
+			<div class="form-group">
+				<label for="confirmPassword">Confirm Password</label> <input
+					type="password" class="form-control" id="confirmPassword"
+					name="confirmPassword" ng-model="reader.confirmPassword"
+					required="" compare-to="reader.password" /> <span
+					class='help-block'
+					ng-show='registerForm.confirmPassword.$error.required'>Confirm
+					Password is required</span> <span class='help-block'
+					ng-show='registerForm.confirmPassword.$error.compareTo'>Must
+					match the previous entry</span>
+			</div>
+		</form>
+	</div>
+
+
+
+</div>

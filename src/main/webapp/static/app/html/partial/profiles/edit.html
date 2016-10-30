@@ -1,0 +1,57 @@
+<div class="container-form-style">
+
+	<ol class="breadcrumb">
+		<li><a href="#/home">Home</a></li>
+		<li><a href="#/profiles/view{{currentReader.id}}">My Profile
+				View</a></li>
+		<li class="active">My Profile Edit</li>
+	</ol>
+
+	<form name='profileForm' role="form" novalidate="" ng-submit="update()">
+
+		<div class="row container-form-style">
+			<h2 class="sub-header pull-left">Profile Edit</h2>
+			<div class="btn-toolbar pull-right">
+				<button type="submit" ng-disabled='profileForm.$invalid'
+					class="btn btn-primary">Save</button>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label for="username">Username</label> <input type="text"
+				class="form-control" id="username" name="username"
+				ng-model="profile.username" required="" /> <span class='help-block'
+				ng-show='profileForm.username.$error.required'>Username is
+				required</span>
+		</div>
+		<div class="form-group">
+			<label for="email">Email</label> <input type="email"
+				class="form-control" id="email" name="email"
+				ng-model="profile.email" required="" /> <span class='help-block'
+				ng-show='profileForm.email.$error.required'>Email is required</span>
+			<span class='help-block' ng-show="profileForm.email.$error.email">Invalid
+				email address.</span>
+		</div>
+		<div class="form-group">
+			<label for="password">Password</label> <input type="password"
+				class="form-control" id="password" name="password"
+				ng-model="profile.password" required="" ng-minlength="3" /> <span
+				class='help-block' ng-show='profileForm.password.$error.required'>Password
+				is required</span> <span class='help-block'
+				ng-show='profileForm.password.$error.minlength'>Too short</span>
+		</div>
+		<div class="form-group">
+			<label for="confirmPassword">Confirm Password</label> <input
+				type="password" class="form-control" id="confirmPassword"
+				name="confirmPassword" ng-model="profile.confirmPassword"
+				required="" compare-to="profile.password" /> <span
+				class='help-block'
+				ng-show='profileForm.confirmPassword.$error.required'>Confirm
+				Password is required</span> <span class='help-block'
+				ng-show='profileForm.confirmPassword.$error.compareTo'>Must
+				match the previous entry</span>
+		</div>
+
+	</form>
+
+</div>

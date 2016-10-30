@@ -1,0 +1,52 @@
+<div class="jumbotron">
+	<h1>MyBooks</h1>
+	<p>Treasury of precious thoughts gained from books.</p>
+</div>
+
+<div ng-show="currentReader">
+	<p>Hello {{currentReader.displayName}}!</p>
+	<p>Welcome to MyBooks service.</p>
+</div>
+<div ng-show="!currentReader">
+
+	<div class="row">
+
+		<div class="col-lg-4">
+			<h3>Purpose</h3>
+			<p>Here you can maintain own interesting thoughts, quotations,
+				comments and notes you found while reading a book.</p>
+			<p>This is for everyday or occasional readers, people who likes
+				reading and want to record interesting and useful thoughts.</p>
+		</div>
+
+		<div class="col-lg-4">
+			<h3>Overview</h3>
+			It is responsive web application to be able from any device to write
+			down notes as quick as possible. It is consisted of next parts:
+			<ul>
+				<li><b>Authentication</b> - registration, logging into the
+					portal and logout. In case of forgetting password it supports
+					generation a new password which will be send to the mail.</li>
+				<li><b>Maintain contents</b> - create, view, update, delete and
+					search contents about the book.</li>
+				<li><b>Profile</b> - reader can view and update his own profile
+					data.</li>
+				<li><b>Administrate readers</b> - Admin type of users can
+					maintain users' profiles by being able to update and delete their
+					profile data.</li>
+			</ul>
+		</div>
+
+		<div class="col-lg-4">
+			<h3>User Types</h3>
+			<ul>
+				<li><b>Readers</b> - people that have registered and can
+					maintain their data about read books.</li>
+				<li><b>Admins</b> - apart of functionalities which has common
+					reader it has ability to administrate other users.</li>
+			</ul>
+		</div>
+
+	</div>
+
+</div>

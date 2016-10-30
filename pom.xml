@@ -12,6 +12,7 @@
 	<description>MyBooks with AngularJS, Bootstrap, Thymeleaf and Spring</description>
 	
 	<properties>
+		<main.basedir>${basedir}/../..</main.basedir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<wro4j.version>1.7.8</wro4j.version>
 		<java.version>1.8</java.version>
@@ -37,10 +38,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -147,6 +144,19 @@
 
 	<build>
 		<resources>
+			<resource>
+                <directory>${basedir}/src/main/webapp</directory>
+                <targetPath>${basedir}/src/main/resources/META-INF/resources</targetPath>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <includes>
+                    <include>**/**</include>
+                </includes>
+            </resource>
 			<resource>
 				<directory>${project.basedir}/src/main/resources</directory>
 			</resource>

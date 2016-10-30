@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<script src="/static/assets/js/angular.js"></script>
+<script src="/static/assets/js/angular-route.js"></script>
+<script src="/static/assets/js/angular-resource.js"></script>
+<script src="/static/assets/js/ui-bootstrap-tpls-2.2.0.js"></script>
+<script src="/static/assets/js/jquery-3.1.1.min.js"></script>
+<script src="/static/assets/js/bootstrap.js"></script>
+<script src="/static/app/js/app.js"></script>
+<script src="/static/app/js/sharedServices.js"></script>
+<script src="/static/app/js/sharedDirectives.js"></script>
+<script src="/static/app/js/sharedControllers.js"></script>
+<script src="/static/app/js/books/bookControllers.js"></script>
+<script src="/static/app/js/books/bookFactories.js"></script>
+<script src="/static/app/js/profiles/profileControllers.js"></script>
+<script src="/static/app/js/profiles/profileFactories.js"></script>
+<script src="/static/app/js/readers/readerControllers.js"></script>
+<script src="/static/app/js/readers/readerFactories.js"></script>
+<script src="/static/app/js/notes/noteControllers.js"></script>
+<script src="/static/app/js/notes/noteServices.js"></script>
+<link rel="stylesheet" href="/static/assets/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/static/app/css/custom.css" />
+<link rel="icon" href="/static/app/img/favicon.ico"/>
+<title text="#{app.name}">List of Books</title>
+
+
+<style type="text/css">
+[ng\:cloak], [ng-cloak], .ng-cloak {
+	display: none !important;
+}
+
+</style>
+
+<script type="text/javascript">
+       
+        var URLS = {};
+        
+        URLS.home = '/home';
+        URLS.login = '/login';
+        URLS.register = '/register';
+        URLS.forgotten_password = '/forgotten_password';
+        
+        URLS.profilesRest = '/rest/profiles/:id';
+        URLS.profilesView = '/profiles/view/:profileId?';
+        URLS.profilesEdit = '/profiles/edit/:profileId?';
+        
+        URLS.booksRest = '/rest/books/:id';
+        URLS.booksList = '/books/list';
+        URLS.booksSearch = '/books/search';
+        URLS.booksView = '/books/view/:bookId?';
+        URLS.booksEdit = '/books/edit/:bookId?';
+        URLS.booksCreate = '/books/create';
+        
+        URLS.notesRest = '/rest/notes/:id';
+        URLS.notesView = '/notes/view/:noteId?';
+        URLS.notesEdit = '/notes/edit/:noteId?';
+
+        URLS.readersRest = '/rest/readers/:id';
+        URLS.readersList = '/readers/list';
+        URLS.readersSearch = '/readers/search';
+        URLS.readersView = '/readers/view/:readerId?';
+        URLS.readersEdit = '/readers/edit/:readerId?';
+        
+      
+    </script>
+
+</head>
+
+<body ng-app="app" ng-cloak="" class="ng-cloak">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container" ng-controller="navigation">
+      	<div class="navbar-header">
+        	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            	<span class="sr-only">Toggle navigation</span>
+            	<span class="icon-bar"></span>
+            	<span class="icon-bar"></span>
+            	<span class="icon-bar"></span>
+          	</button>
+          	<a class="navbar-brand" href="#/" title="MyBooks">MyBooks</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+        	<ul class="nav navbar-nav navbar-right">		
+				<li ng-show="currentReader"><a href="#/books/list">Books</a></li>
+				<li ng-show="currentReader"><a href="#/profiles/view/{{currentReader.id}}">My Profile</a></li>
+				<li ng-show="currentReader.systemRole == 'Admin'"><a href="#/readers/list">Admin</a></li>
+				<li ng-show="!currentReader"><a href="#/login">Login</a></li>
+				<li ng-show="!currentReader"><a href="#/register">Register</a></li>
+				<li ng-show="currentReader"><a href="" ng-click="logout()">Logout</a></li>				
+          	</ul>
+        </div>
+      </div>
+    </nav>
+
+	<div class="container">
+		<br/>
+		<div class="alert alert-success" ng-show="messageSuccess">{{messageSuccess}}</div>
+		<div class="alert alert-danger" ng-show="messageError">{{messageError}}</div>
+		
+		<div ng-view=""></div>
+	</div>
+	
+	<br/><br/>
+    <nav class="navbar navbar-inverse navbar-fixed-bottom visible-lg-block visible-md-block visible-sm-block">
+    	<div class="container">
+      		<small>2015 by <cite title="Source Title">Stanislav Markov</cite>.</small>
+      		<small>This is the requirement model for <a href="https://github.com/mstane/software-architecture-lab/wiki">Design Software Architecture Research.</a></small>
+      		<br/>
+      		<small>More feature details are in <a href="https://github.com/mstane/software-architecture-lab/wiki/Product-Requirements-Document">MyBooks Product Requirements Document</a>.</small>
+    		<small>Implementation details of this deployed web application are on <a href="https://github.com/mstane/software-architecture-lab">GitHub repository</a>.</small>
+    	</div>
+    </nav>
+
+</body>
+</html>

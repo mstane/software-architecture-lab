@@ -1,0 +1,33 @@
+<div class="container-form-style">
+
+	<ol class="breadcrumb">
+		<li><a href="#/home">Home</a></li>
+		<li><a href="#/books/list">Books</a></li>
+		<li><a href="#/books/view/{{getCurrentBook().id}}">Book View</a></li>
+		<li class="active">Note View</li>
+	</ol>
+
+	<div class="row container-form-style">
+		<h2 class="sub-header pull-left">Note View</h2>
+		<div class="btn-toolbar pull-right">
+			<a th:href="@{#/notes/edit/{{note.id}} }"
+				href="#/notes/edit/{{note.id}}" class="btn btn-primary">Edit</a>
+			<a ng-click="deleteNote()" class="btn btn-default">Delete</a>
+		</div>
+	</div>
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<td class="col-md-3">Title:</td>
+				<td>{{note.title}}</td>
+			</tr>
+			<tr>
+				<td>Content:</td>
+				<td>{{note.content}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+</div>

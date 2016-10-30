@@ -1,0 +1,35 @@
+<div class="container-form-style">
+
+	<ol class="breadcrumb">
+		<li><a href="#/home">Home</a></li>
+		<li><a href="#/readers/list">Readers</a></li>
+		<li class="active">Reader</li>
+	</ol>
+
+	<div class="row container-form-style">
+		<h2 class="sub-header pull-left">Reader</h2>
+		<div class="btn-toolbar pull-right">
+			<a href="#/readers/edit/{{reader.id}}" class="btn btn-primary">Edit</a>
+			<a ng-click="deleteReader()" class="btn btn-default">Delete</a>
+		</div>
+	</div>
+
+
+	<table class="table table-user-information">
+		<tbody>
+			<tr>
+				<td>Username:</td>
+				<td>{{reader.username}}</td>
+			</tr>
+			<tr>
+				<td>Email:</td>
+				<td><a href="mailto:{{reader.email}}">{{reader.email}}</a></td>
+			</tr>
+			<tr>
+				<td>System Role:</td>
+				<td>{{reader.systemRole}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>
