@@ -51,7 +51,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
         	.passwordEncoder(passwordEncoder);
     }
     
-//	@Override
+	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.httpBasic()
