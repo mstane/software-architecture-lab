@@ -19,9 +19,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRepository;
@@ -65,9 +67,21 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				
 			.logout()
+				.addLogoutHandler(new LogoutHandler() {
+	
+					@Override
+					public void logout(HttpServletRequest request, HttpServletResponse response,
+							Authentication authentication) {
+						response.setStatus(HttpServletResponse.SC_OK);
+						response.setHeader("Access-Control-Allow-Origin", "http://localhost:8000");
+						response.setHeader("Access-Control-Allow-Credentials", "true");
+						
+					}
+					
+				})
 				.logoutUrl("/logout")
 //				.deleteCookies("remember-me")
-				.logoutSuccessUrl("/")
+//				.logoutSuccessUrl("/")
 				.permitAll()
 				.and()
 //			.rememberMe().key("remember-me").tokenValiditySeconds(86400)
