@@ -136,13 +136,6 @@
 
 	<build>
 		<resources>
-			<resource>
-                <directory>${basedir}/src/main/webapp</directory>
-                <targetPath>${basedir}/src/main/resources/META-INF/resources</targetPath>
-                <includes>
-                    <include>**/**</include>
-                </includes>
-            </resource>
             <resource>
                 <directory>${basedir}/src/main/resources</directory>
                 <includes>
