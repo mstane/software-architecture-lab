@@ -5,7 +5,6 @@ import org.sm.lab.mybooks.domain.SearchItem;
 import org.sm.lab.mybooks.enums.Genre;
 import org.sm.lab.mybooks.repository.data.BookRepository;
 import org.sm.lab.mybooks.repository.data.ReaderRepository;
-import org.sm.lab.mybooks.repository.index.BookSearchRepository;
 import org.sm.lab.mybooks.security.AuthorizationService;
 import org.sm.lab.mybooks.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +27,6 @@ public class BookServiceImpl implements BookService {
 	
 	@Autowired
 	AuthorizationService authorizationService;
-
-	@Autowired
-	BookSearchRepository bookSearchRepository;
 	
 	@Override
 	public Page<Book> findReadersBooks(PageRequest pageRequest) {
@@ -64,7 +60,6 @@ public class BookServiceImpl implements BookService {
 		}
 		
 		book = bookRepository.save(book);
-		bookSearchRepository.save(book);
         return book;
     }
 	
@@ -72,7 +67,6 @@ public class BookServiceImpl implements BookService {
 	@PreAuthorize("@authorizationService.canAccessBook(principal, #id)")
 	public void deleteBook(Long id) {
         bookRepository.delete(id);
-        bookSearchRepository.delete(id);
     }
 
 	

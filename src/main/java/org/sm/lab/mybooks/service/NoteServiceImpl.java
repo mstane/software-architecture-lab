@@ -4,7 +4,6 @@ import org.sm.lab.mybooks.domain.Book;
 import org.sm.lab.mybooks.domain.Note;
 import org.sm.lab.mybooks.repository.data.BookRepository;
 import org.sm.lab.mybooks.repository.data.NoteRepository;
-import org.sm.lab.mybooks.repository.index.NoteSearchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
@@ -20,9 +19,6 @@ public class NoteServiceImpl implements NoteService {
 	@Autowired
     BookRepository bookRepository;
 	
-	@Autowired
-	NoteSearchRepository noteSearchRepository;
-	
 	@Override
 	@PreAuthorize("@authorizationService.canAccessNote(principal, #id)")
 	public Note findNote(Long id) {
@@ -35,7 +31,6 @@ public class NoteServiceImpl implements NoteService {
 		Book book = bookRepository.findOne(bookId);
 		note.setBook(book);
         note = noteRepository.save(note);
-        noteSearchRepository.save(note);
         return note;
     }
 
@@ -43,7 +38,6 @@ public class NoteServiceImpl implements NoteService {
 	@PreAuthorize("@authorizationService.canAccessNote(principal, #id)")
 	public void deleteNote(Long id) {
         noteRepository.delete(id);
-        noteSearchRepository.delete(id);
     }
 	
 }
