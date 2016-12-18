@@ -26,7 +26,6 @@ import org.sm.lab.mybooks.enums.Genre;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Book implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -65,7 +64,6 @@ public class Book implements Serializable {
     private Reader reader;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "book")
-//    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private List<Note> notes = new ArrayList<Note>();
 
 	public Long getId() {

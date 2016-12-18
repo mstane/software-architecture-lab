@@ -17,6 +17,7 @@
 		<java.version>1.8</java.version>
 		<javax.inject.version>1</javax.inject.version>
 		<snippetsDirectory>${project.build.directory}/generated-snippets</snippetsDirectory>
+		<spring-data-hazelcast.version>1.0</spring-data-hazelcast.version>
 	</properties>
 	
 
@@ -55,6 +56,11 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>spring-data-hazelcast</artifactId>
+            <version>${spring-data-hazelcast.version}</version>
+        </dependency>
+		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
@@ -81,18 +87,6 @@
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 		</dependency>
-       <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast-hibernate4</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast-spring</artifactId>
-        </dependency>
         
         <dependency>
             <groupId>org.springframework</groupId>
@@ -128,6 +122,7 @@
 		</dependency>		
 		
 	</dependencies>
+	
 
 	<build>
 		<resources>

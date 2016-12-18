@@ -3,7 +3,7 @@ package org.sm.lab.mybooks.web;
 import javax.validation.Valid;
 
 import org.sm.lab.mybooks.domain.Reader;
-import org.sm.lab.mybooks.service.ReaderService;
+import org.sm.lab.mybooks.service.ReaderKVService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,20 +17,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProfileRestController {
 	
 	@Autowired
-	ReaderService readerService;
+	ReaderKVService readerKVService;
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public Reader get(@PathVariable("id") long id) {
-		return this.readerService.findReader(id);
+		return this.readerKVService.findReader(id);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public Reader update(@PathVariable("id") long id, @RequestBody @Valid Reader reader) {
 		reader.setPassword(encodePassword(reader.getPassword()));
-		return readerService.saveReader(reader);
+		return readerKVService.saveReader(reader);
 	}
 	
 	private String encodePassword(String password) {
