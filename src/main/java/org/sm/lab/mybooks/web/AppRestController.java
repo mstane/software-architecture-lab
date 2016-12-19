@@ -12,7 +12,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.sm.lab.mybooks.domain.Reader;
 import org.sm.lab.mybooks.enums.Genre;
 import org.sm.lab.mybooks.enums.SystemRole;
-import org.sm.lab.mybooks.service.ReaderKVService;
+import org.sm.lab.mybooks.service.ReaderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +34,7 @@ public class AppRestController {
     private MailSender mailTemplate;
     
     @Autowired
-    private ReaderKVService readerKVService;
+    private ReaderService readerService;
     
 	
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
@@ -47,7 +47,7 @@ public class AppRestController {
 		HttpStatus httpStatus = null;
 		String message = null;
 		try {
-    		readerKVService.registerReader(reader);
+    		readerService.registerReader(reader);
        		httpStatus = HttpStatus.OK;
        		message = "You have successfully registered.";
 		} catch (Exception e) {
@@ -64,7 +64,7 @@ public class AppRestController {
 		HttpStatus httpStatus;
 		String message;
 		
-		Optional<Reader> readerOpt = readerKVService.findByEmail(email);
+		Optional<Reader> readerOpt = readerService.findByEmail(email);
         if (!readerOpt.isPresent()) {
         	httpStatus = HttpStatus.NOT_FOUND;
         	message = String.format("User with email=%s was not found", email);
@@ -72,7 +72,7 @@ public class AppRestController {
         	try {
         		Reader reader = readerOpt.get();
         		String generatedPassword = generatePassword(); 
-        		readerKVService.changePassword(generatedPassword, reader);
+        		readerService.changePassword(generatedPassword, reader);
         		sendMessage(reader.getEmail(), "Forgotten password", "Your password is: " + generatedPassword);        		
         		httpStatus = HttpStatus.OK;
         		message = "Your password has been successfully sent to your mail.";
