@@ -10,15 +10,16 @@
 
 	<name>mybooks</name>
 	<description>MyBooks RESTful microservices</description>
-	
+
 	<properties>
 		<main.basedir>${basedir}/../..</main.basedir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<javax.inject.version>1</javax.inject.version>
 		<snippetsDirectory>${project.build.directory}/generated-snippets</snippetsDirectory>
+		<findbugs.plugin.version>3.0.4</findbugs.plugin.version>
 	</properties>
-	
+
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -81,67 +82,68 @@
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 		</dependency>
-        
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-        </dependency>
-        
-        <dependency>
-        	<groupId>org.springframework.security</groupId>
-        	<artifactId>spring-security-test</artifactId>
-      	</dependency>
-      	
+
 		<dependency>
-		    <groupId>com.jayway.jsonpath</groupId>
-		    <artifactId>json-path</artifactId>
-		</dependency>      	
-        
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>${javax.inject.version}</version>
-        </dependency>        		
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>${javax.inject.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.scala-lang</groupId>
 			<artifactId>scala-library</artifactId>
 			<version>2.10.4</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.restdocs</groupId>
 			<artifactId>spring-restdocs-mockmvc</artifactId>
 			<scope>test</scope>
-		</dependency>		
-		
+		</dependency>
+
 	</dependencies>
-	
+
 
 	<build>
+	
 		<resources>
-            <resource>
-                <directory>${basedir}/src/main/resources</directory>
-                <includes>
-                    <include>**/**</include>
-                </includes>
-            </resource>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/**</include>
+				</includes>
+			</resource>
 			<resource>
 				<directory>${project.basedir}/src/main/resources</directory>
 			</resource>
 			<resource>
 				<directory>${project.build.directory}/generated-resources</directory>
 			</resource>
-            <resource>
-                <directory>${project.build.directory}/generated-resources</directory>
-            </resource>			
+			<resource>
+				<directory>${project.build.directory}/generated-resources</directory>
+			</resource>
 		</resources>
+		
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
@@ -160,7 +162,6 @@
 					</arguments>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
@@ -172,15 +173,14 @@
 					</dependency>
 				</dependencies>
 				<version>3.4.1</version>
-					<configuration>
-						<changeLogFile>src/main/resources/db/changelog/db.changelog-master.yaml</changeLogFile>
-						<driver>org.hsqldb.jdbcDriver</driver>
-						<url>jdbc:hsqldb:hsql://localhost:9001/</url>
-						<username>sa</username>
-						<password></password>
-					</configuration>			
-			</plugin>		
-
+				<configuration>
+					<changeLogFile>src/main/resources/db/changelog/db.changelog-master.yaml</changeLogFile>
+					<driver>org.hsqldb.jdbcDriver</driver>
+					<url>jdbc:hsqldb:hsql://localhost:9001/</url>
+					<username>sa</username>
+					<password></password>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.asciidoctor</groupId>
 				<artifactId>asciidoctor-maven-plugin</artifactId>
@@ -196,7 +196,7 @@
 							<backend>html</backend>
 							<doctype>book</doctype>
 							<attributes>
-								<snippets>${snippetsDirectory}</snippets> 
+								<snippets>${snippetsDirectory}</snippets>
 							</attributes>
 							<sourceDirectory>src/main/resources/docs/asciidoctor</sourceDirectory>
 							<outputDirectory>${project.build.outputDirectory}/static/docs</outputDirectory>
@@ -204,12 +204,30 @@
 					</execution>
 				</executions>
 			</plugin>
-
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>${findbugs.plugin.version}</version>
+				<configuration>
+					<!-- <debug>true</debug> -->
+					<effort>Max</effort>
+					<threshold>Low</threshold>
+				</configuration>
+			</plugin>
 		</plugins>
 
 	</build>
 	
-    <profiles>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</reporting>
+
+	<profiles>
 		<profile>
 			<id>debug</id>
 			<build>
@@ -218,21 +236,22 @@
 						<groupId>org.springframework.boot</groupId>
 						<artifactId>spring-boot-maven-plugin</artifactId>
 						<configuration>
-							<jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005</jvmArguments>
+							<jvmArguments>-Xdebug
+								-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005</jvmArguments>
 						</configuration>
 					</plugin>
 				</plugins>
 			</build>
-			
+
 		</profile>
 
-        <profile>
-            <id>default</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-	
+		<profile>
+			<id>default</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+
 	</profiles>
 
 </project>
