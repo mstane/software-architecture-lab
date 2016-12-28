@@ -20,6 +20,7 @@
 		<snippetsDirectory>${project.build.directory}/generated-snippets</snippetsDirectory>
 		<findbugs.plugin.version>3.0.4</findbugs.plugin.version>
 		<pmd.plugin.version>3.7</pmd.plugin.version>
+		<checkstyle.plugin.version>2.17</checkstyle.plugin.version>
 		<maven.project.info.reports.plugin.version>2.9</maven.project.info.reports.plugin.version>
 		<maven.jxr.plugin.version>2.5</maven.jxr.plugin.version>
 	</properties>
@@ -225,6 +226,11 @@
 				<version>${pmd.plugin.version}</version>
 			</plugin>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${checkstyle.plugin.version}</version>
+			</plugin>
+			<plugin>
 			    <groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-project-info-reports-plugin</artifactId>
 			    <version>${maven.project.info.reports.plugin.version}</version>
@@ -245,6 +251,11 @@
 				<artifactId>maven-pmd-plugin</artifactId>
 				<version>${pmd.plugin.version}</version>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>${checkstyle.plugin.version}</version>
+			</plugin>			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jxr-plugin</artifactId>
