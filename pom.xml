@@ -16,8 +16,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<javax.inject.version>1</javax.inject.version>
+		<asciidoctor.plugin.version>1.5.3</asciidoctor.plugin.version>
 		<snippetsDirectory>${project.build.directory}/generated-snippets</snippetsDirectory>
 		<findbugs.plugin.version>3.0.4</findbugs.plugin.version>
+		<pmd.plugin.version>3.7</pmd.plugin.version>
+		<maven.project.info.reports.plugin.version>2.9</maven.project.info.reports.plugin.version>
+		<maven.jxr.plugin.version>2.5</maven.jxr.plugin.version>
 	</properties>
 
 
@@ -184,6 +188,7 @@
 			<plugin>
 				<groupId>org.asciidoctor</groupId>
 				<artifactId>asciidoctor-maven-plugin</artifactId>
+				<version>${asciidoctor.plugin.version}</version>
 				<executions>
 					<execution>
 						<id>generate-docs</id>
@@ -214,6 +219,16 @@
 					<threshold>Low</threshold>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>${pmd.plugin.version}</version>
+			</plugin>
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-project-info-reports-plugin</artifactId>
+			    <version>${maven.project.info.reports.plugin.version}</version>
+			</plugin>
 		</plugins>
 
 	</build>
@@ -223,7 +238,18 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
+				<version>${findbugs.plugin.version}</version>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>${pmd.plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>${maven.jxr.plugin.version}</version>
+			</plugin>			
 		</plugins>
 	</reporting>
 
