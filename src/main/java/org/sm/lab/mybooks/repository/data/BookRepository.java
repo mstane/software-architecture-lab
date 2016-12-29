@@ -11,13 +11,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BookRepository extends JpaSpecificationExecutor<Book>, JpaRepository<Book, Long>, BookRepositoryCustom {
+public interface BookRepository
+        extends JpaSpecificationExecutor<Book>, JpaRepository<Book, Long>, BookRepositoryCustom {
 
-	Page<Book> findByReader(Reader reader, Pageable pageable);
-	
-	Page<Book> findByReaderId(Long readerId, Pageable pageable);
+    Page<Book> findByReader(Reader reader, Pageable pageable);
 
-	@Query("SELECT b FROM Book b WHERE LOWER(b.title) = LOWER(:keyword) OR  LOWER(b.author) = LOWER(:keyword)")
-	Page<Book> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
+    Page<Book> findByReaderId(Long readerId, Pageable pageable);
+
+    @Query("SELECT b FROM Book b WHERE LOWER(b.title) = LOWER(:keyword) OR  LOWER(b.author) = LOWER(:keyword)")
+    Page<Book> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
 
 }

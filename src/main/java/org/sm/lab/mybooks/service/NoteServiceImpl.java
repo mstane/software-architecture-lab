@@ -13,30 +13,30 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class NoteServiceImpl implements NoteService {
 
-	@Autowired
+    @Autowired
     NoteRepository noteRepository;
-	
-	@Autowired
+
+    @Autowired
     BookRepository bookRepository;
-	
-	@Override
-	@PreAuthorize("@authorizationService.canAccessNote(principal, #id)")
-	public Note findNote(Long id) {
+
+    @Override
+    @PreAuthorize("@authorizationService.canAccessNote(principal, #id)")
+    public Note findNote(Long id) {
         return noteRepository.findOne(id);
     }
-	
-	@Override
-	@PreAuthorize("@authorizationService.canAccessBook(principal, #bookId)")
-	public Note saveNote(Long bookId, Note note) {
-		Book book = bookRepository.findOne(bookId);
-		note.setBook(book);
+
+    @Override
+    @PreAuthorize("@authorizationService.canAccessBook(principal, #bookId)")
+    public Note saveNote(Long bookId, Note note) {
+        Book book = bookRepository.findOne(bookId);
+        note.setBook(book);
         return noteRepository.save(note);
     }
 
-	@Override
-	@PreAuthorize("@authorizationService.canAccessNote(principal, #id)")
-	public void deleteNote(Long id) {
+    @Override
+    @PreAuthorize("@authorizationService.canAccessNote(principal, #id)")
+    public void deleteNote(Long id) {
         noteRepository.delete(id);
     }
-	
+
 }

@@ -8,9 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories("org.sm.lab.mybooks.repository.data")
 public class MyBooksApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MyBooksApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(MyBooksApplication.class, args);
+    }
 
 }

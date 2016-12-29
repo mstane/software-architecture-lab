@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class AppController {
-	
-	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String index() {
-		return "/static/app/html/index.html";
-	}
-	
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index() {
+        return "/static/app/html/index.html";
+    }
+
 }

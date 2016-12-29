@@ -15,43 +15,35 @@ import org.sm.lab.mybooks.test.web.util.WithMockCustomUser;
 @WithMockCustomUser
 public class ProfileRestControllerTest extends BaseRestControllerTest {
 
-	private final String RESOURCE_PATH = "/rest/profiles/";
+    private final String RESOURCE_PATH = "/rest/profiles/";
 
-	@Test
-	public void getOne() throws Exception {
-		Reader reader = loadOneReader();
+    @Test
+    public void getOne() throws Exception {
+        Reader reader = loadOneReader();
 
-		mockMvc.perform(
-					get(RESOURCE_PATH + reader.getId())
-				)
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(jsonContentType))
+        mockMvc.perform(get(RESOURCE_PATH + reader.getId())).andExpect(status().isOk())
+                .andExpect(content().contentType(jsonContentType))
 
-				.andExpect(jsonPath("$.id", is(reader.getId().intValue())))
-				.andExpect(jsonPath("$.username", is(reader.getUsername())))
-				.andExpect(jsonPath("$.email", is(reader.getEmail())))
-				.andExpect(jsonPath("$.password", is(reader.getPassword())));
-	}
+                .andExpect(jsonPath("$.id", is(reader.getId().intValue())))
+                .andExpect(jsonPath("$.username", is(reader.getUsername())))
+                .andExpect(jsonPath("$.email", is(reader.getEmail())))
+                .andExpect(jsonPath("$.password", is(reader.getPassword())));
+    }
 
-	@Test
-	public void update() throws Exception {
-		Reader reader = loadOneReader();
-		String usernameUpdated = reader.getUsername() + "-updated";
-		reader.setUsername(usernameUpdated);
-		String readerJson = json(reader);
+    @Test
+    public void update() throws Exception {
+        Reader reader = loadOneReader();
+        String usernameUpdated = reader.getUsername() + "-updated";
+        reader.setUsername(usernameUpdated);
+        String readerJson = json(reader);
 
-		mockMvc.perform(
-					put(RESOURCE_PATH + reader.getId())
-						.with(csrf().asHeader())
-						.contentType(jsonContentType)
-						.content(readerJson)
-				)
+        mockMvc.perform(put(RESOURCE_PATH + reader.getId()).with(csrf().asHeader()).contentType(jsonContentType)
+                .content(readerJson))
 
-				.andExpect(status().isOk())
-				.andExpect(content().contentType(jsonContentType))
-				
-				.andExpect(jsonPath("$.id", is(reader.getId().intValue())))
-				.andExpect(jsonPath("$.username", is(usernameUpdated)));
-	}
+                .andExpect(status().isOk()).andExpect(content().contentType(jsonContentType))
+
+                .andExpect(jsonPath("$.id", is(reader.getId().intValue())))
+                .andExpect(jsonPath("$.username", is(usernameUpdated)));
+    }
 
 }

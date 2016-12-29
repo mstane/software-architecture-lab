@@ -125,7 +125,7 @@
 
 
 	<build>
-	
+
 		<resources>
 			<resource>
 				<directory>${basedir}/src/main/resources</directory>
@@ -143,7 +143,7 @@
 				<directory>${project.build.directory}/generated-resources</directory>
 			</resource>
 		</resources>
-		
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -231,14 +231,14 @@
 				<version>${checkstyle.plugin.version}</version>
 			</plugin>
 			<plugin>
-			    <groupId>org.apache.maven.plugins</groupId>
-			    <artifactId>maven-project-info-reports-plugin</artifactId>
-			    <version>${maven.project.info.reports.plugin.version}</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>${maven.project.info.reports.plugin.version}</version>
 			</plugin>
 		</plugins>
 
 	</build>
-	
+
 	<reporting>
 		<plugins>
 			<plugin>
@@ -255,12 +255,12 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>${checkstyle.plugin.version}</version>
-			</plugin>			
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jxr-plugin</artifactId>
 				<version>${maven.jxr.plugin.version}</version>
-			</plugin>			
+			</plugin>
 		</plugins>
 	</reporting>
 

@@ -19,54 +19,55 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class BookServiceImpl implements BookService {
 
-	@Autowired
+    @Autowired
     BookRepository bookRepository;
-	
-	@Autowired
-	ReaderRepository readerRepository;
-	
-	@Autowired
-	AuthorizationService authorizationService;
-	
-	@Override
-	public Page<Book> findReadersBooks(PageRequest pageRequest) {
-		UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return bookRepository.findByReaderId(userDetails.getId(), pageRequest);
+
+    @Autowired
+    ReaderRepository readerRepository;
+
+    @Autowired
+    AuthorizationService authorizationService;
+
+    @Override
+    public Page<Book> findReadersBooks(PageRequest pageRequest) {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        return bookRepository.findByReaderId(userDetails.getId(), pageRequest);
     }
-	
-	@Override
-	@PreAuthorize("@authorizationService.canAccessBook(principal, #id)")
-	public Book findBook(Long id) {
+
+    @Override
+    @PreAuthorize("@authorizationService.canAccessBook(principal, #id)")
+    public Book findBook(Long id) {
         return bookRepository.findOne(id);
     }
-	
-	@Override
-	public Page<SearchItem> search(String keyword, Genre genre, PageRequest pageRequest) {
-		UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return bookRepository.searchContents(userDetails.getId(), keyword, genre, pageRequest);
-	}
 
-	@Override
-	@PreAuthorize("@authorizationService.canAccessBook(principal, #receivedBook)")
-	public Book saveBook(Book receivedBook) {
-		Book book;
-		
-		if (receivedBook.getId() != null) {
-			book = bookRepository.findOne(receivedBook.getId());
-			book.copyFields(receivedBook); // to preserve relationship to notes
-		} else {
-			book = receivedBook;
-		}
-		
-		book = bookRepository.save(book);
+    @Override
+    public Page<SearchItem> search(String keyword, Genre genre, PageRequest pageRequest) {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        return bookRepository.searchContents(userDetails.getId(), keyword, genre, pageRequest);
+    }
+
+    @Override
+    @PreAuthorize("@authorizationService.canAccessBook(principal, #receivedBook)")
+    public Book saveBook(Book receivedBook) {
+        Book book;
+
+        if (receivedBook.getId() != null) {
+            book = bookRepository.findOne(receivedBook.getId());
+            book.copyFields(receivedBook); // to preserve relationship to notes
+        } else {
+            book = receivedBook;
+        }
+
+        book = bookRepository.save(book);
         return book;
     }
-	
-	@Override
-	@PreAuthorize("@authorizationService.canAccessBook(principal, #id)")
-	public void deleteBook(Long id) {
+
+    @Override
+    @PreAuthorize("@authorizationService.canAccessBook(principal, #id)")
+    public void deleteBook(Long id) {
         bookRepository.delete(id);
     }
 
-	
 }

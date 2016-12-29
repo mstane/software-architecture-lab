@@ -16,51 +16,51 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @Configuration
 public class DataSourceConfig {
 
-	private static final Logger logger = LoggerFactory.getLogger(DataSourceConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(DataSourceConfig.class);
 
-	/**
-	 * This is used to convert DATABASE_URL Heroku Postgres add-on convention
-	 * 
-	 * postgres://<username>:<password>@<host>:<port>/<dbname>
-	 * 
-	 * to Postgres JDBC driver convention
-	 * 
-	 * jdbc:postgresql://<host>:<port>/<dbname>?user=<username>&password=
-	 * <password>
-	 * 
-	 * @return
-	 */
-	@Bean
-	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = null;
-		String databaseUrl = System.getenv("DATABASE_URL");
+    /**
+     * This is used to convert DATABASE_URL Heroku Postgres add-on convention
+     * 
+     * postgres://<username>:<password>@<host>:<port>/<dbname>
+     * 
+     * to Postgres JDBC driver convention
+     * 
+     * jdbc:postgresql://<host>:<port>/<dbname>?user=<username>&password=
+     * <password>
+     * 
+     * @return
+     */
+    @Bean
+    public DataSource dataSource() {
+        DriverManagerDataSource dataSource = null;
+        String databaseUrl = System.getenv("DATABASE_URL");
 
-		if (databaseUrl != null && !databaseUrl.isEmpty()) {
-			try {
-				URI dbUri = new URI(databaseUrl);
-				String[] credentials = dbUri.getUserInfo().split(":");
+        if (databaseUrl != null && !databaseUrl.isEmpty()) {
+            try {
+                URI dbUri = new URI(databaseUrl);
+                String[] credentials = dbUri.getUserInfo().split(":");
 
-				if (credentials.length > 1) {
+                if (credentials.length > 1) {
 
-					String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath()
-							+ "?" + dbUri.getQuery();
+                    String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath()
+                            + "?" + dbUri.getQuery();
 
-					dataSource = new DriverManagerDataSource();
-					dataSource.setUrl(dbUrl);
-					dataSource.setUsername(credentials[0]);
-					dataSource.setPassword(credentials[1]);
-					dataSource.setDriverClassName("org.postgresql.Driver");
-				} else {
-					logger.error("Credentials for database are not properly set.");
-				}
+                    dataSource = new DriverManagerDataSource();
+                    dataSource.setUrl(dbUrl);
+                    dataSource.setUsername(credentials[0]);
+                    dataSource.setPassword(credentials[1]);
+                    dataSource.setDriverClassName("org.postgresql.Driver");
+                } else {
+                    logger.error("Credentials for database are not properly set.");
+                }
 
-			} catch (URISyntaxException e) {
-				logger.error("", e);
-			}
+            } catch (URISyntaxException e) {
+                logger.error("", e);
+            }
 
-		}
+        }
 
-		return dataSource;
-	}
+        return dataSource;
+    }
 
 }

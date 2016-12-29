@@ -1,4 +1,5 @@
 package org.sm.lab.mybooks.domain;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -22,10 +23,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Note implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
 
-	@Id
+    private static final long serialVersionUID = 1L;
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
@@ -48,72 +49,63 @@ public class Note implements Serializable {
     @ManyToOne
     private Book book;
 
-    
-    
-	@PrePersist
-	protected void onCreate() {
-		createdTime = new Date();
-		modifiedTime = new Date();
-	}
+    @PrePersist
+    protected void onCreate() {
+        createdTime = new Date();
+        modifiedTime = new Date();
+    }
 
-	@PreUpdate
-	protected void onUpdate() {
-		modifiedTime = new Date();
-	}
+    @PreUpdate
+    protected void onUpdate() {
+        modifiedTime = new Date();
+    }
 
-	
-	
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public String getContent() {
-		return content;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public Date getCreatedTime() {
-		return createdTime;
-	}
+    public Date getCreatedTime() {
+        return createdTime;
+    }
 
-	public void setCreatedTime(Date createdTime) {
-		this.createdTime = createdTime;
-	}
+    public void setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
+    }
 
-	public Date getModifiedTime() {
-		return modifiedTime;
-	}
+    public Date getModifiedTime() {
+        return modifiedTime;
+    }
 
-	public void setModifiedTime(Date modifiedTime) {
-		this.modifiedTime = modifiedTime;
-	}
+    public void setModifiedTime(Date modifiedTime) {
+        this.modifiedTime = modifiedTime;
+    }
 
-	public Book getBook() {
-		return book;
-	}
+    public Book getBook() {
+        return book;
+    }
 
-	public void setBook(Book book) {
-		this.book = book;
-	}
-	
+    public void setBook(Book book) {
+        this.book = book;
+    }
 
-
-
-	
-	
 }

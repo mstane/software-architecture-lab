@@ -13,15 +13,15 @@ import org.springframework.stereotype.Service;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
-    
+
     @Autowired
     private ReaderService readerService;
 
     @Override
     public UserDetailsImpl loadUserByUsername(String email) {
         LOGGER.debug("Authenticating user with email={}", email.replaceFirst("@.*", "@***"));
-        Reader reader = readerService.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException(String.format("User with email=%s was not found", email)));
+        Reader reader = readerService.findByEmail(email).orElseThrow(
+                () -> new UsernameNotFoundException(String.format("User with email=%s was not found", email)));
         return new UserDetailsImpl(reader);
     }
 

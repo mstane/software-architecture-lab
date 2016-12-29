@@ -17,30 +17,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/rest/notes")
 public class NoteRestController {
-	
-	@Autowired
-	NoteService noteService;
-	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public Note get(@PathVariable("id") long id) {
-		return this.noteService.findNote(id);
-	}
-	
-	@RequestMapping(method=RequestMethod.POST)
-	public Note create(@RequestBody @Valid Note note, @RequestParam(value = "bookId") long bookId) {
-		return noteService.saveNote(bookId, note);
-	}
-	
-	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public Note update(@PathVariable("id") long id, @RequestBody @Valid Note note, @RequestParam(value = "bookId") long bookId) {
-		return noteService.saveNote(bookId, note);
-	}	
-	
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Boolean> delete(@PathVariable("id") long id) {
-		this.noteService.deleteNote(id);
-		return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
-	}
 
-	
+    @Autowired
+    NoteService noteService;
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Note get(@PathVariable("id") long id) {
+        return this.noteService.findNote(id);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public Note create(@RequestBody @Valid Note note, @RequestParam(value = "bookId") long bookId) {
+        return noteService.saveNote(bookId, note);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public Note update(@PathVariable("id") long id, @RequestBody @Valid Note note,
+            @RequestParam(value = "bookId") long bookId) {
+        return noteService.saveNote(bookId, note);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Boolean> delete(@PathVariable("id") long id) {
+        this.noteService.deleteNote(id);
+        return new ResponseEntity<>(Boolean.TRUE, HttpStatus.OK);
+    }
+
 }

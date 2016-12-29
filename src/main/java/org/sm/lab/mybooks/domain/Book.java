@@ -1,4 +1,5 @@
 package org.sm.lab.mybooks.domain;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,9 +29,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Book implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	@Id
+    private static final long serialVersionUID = 1L;
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
@@ -55,7 +56,7 @@ public class Book implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Genre genre;
-    
+
     @Lob
     @Type(type = "org.hibernate.type.TextType")
     private String review;
@@ -66,96 +67,95 @@ public class Book implements Serializable {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "book")
     private List<Note> notes = new ArrayList<Note>();
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public String getAuthor() {
-		return author;
-	}
+    public String getAuthor() {
+        return author;
+    }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-	public Date getStartReadingDate() {
-		return startReadingDate;
-	}
+    public Date getStartReadingDate() {
+        return startReadingDate;
+    }
 
-	public void setStartReadingDate(Date startReadingDate) {
-		this.startReadingDate = startReadingDate;
-	}
+    public void setStartReadingDate(Date startReadingDate) {
+        this.startReadingDate = startReadingDate;
+    }
 
-	public Date getEndReadingDate() {
-		return endReadingDate;
-	}
+    public Date getEndReadingDate() {
+        return endReadingDate;
+    }
 
-	public void setEndReadingDate(Date endReadingDate) {
-		this.endReadingDate = endReadingDate;
-	}
+    public void setEndReadingDate(Date endReadingDate) {
+        this.endReadingDate = endReadingDate;
+    }
 
-	public Long getRating() {
-		return rating;
-	}
+    public Long getRating() {
+        return rating;
+    }
 
-	public void setRating(Long rating) {
-		this.rating = rating;
-	}
+    public void setRating(Long rating) {
+        this.rating = rating;
+    }
 
-	public Genre getGenre() {
-		return genre;
-	}
+    public Genre getGenre() {
+        return genre;
+    }
 
-	public void setGenre(Genre genre) {
-		this.genre = genre;
-	}
-	
-	public String getReview() {
-		return review;
-	}
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
 
-	public void setReview(String review) {
-		this.review = review;
-	}
+    public String getReview() {
+        return review;
+    }
 
-	public Reader getReader() {
-		return reader;
-	}
+    public void setReview(String review) {
+        this.review = review;
+    }
 
-	public void setReader(Reader reader) {
-		this.reader = reader;
-	}
+    public Reader getReader() {
+        return reader;
+    }
 
-	public List<Note> getNotes() {
-		return notes;
-	}
+    public void setReader(Reader reader) {
+        this.reader = reader;
+    }
 
-	public void setNotes(List<Note> notes) {
-		this.notes = notes;
-	}
-	
-	public void copyFields(Book fromBook) {
-		this.id = fromBook.getId();
-		this.title = fromBook.getTitle();
-		this.author = fromBook.getAuthor();
-		this.startReadingDate = fromBook.getStartReadingDate();
-		this.endReadingDate = fromBook.getEndReadingDate();
-		this.rating = fromBook.getRating();
-		this.genre = fromBook.getGenre();
-		this.review = fromBook.getReview();
-	}
-    
-	
+    public List<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(List<Note> notes) {
+        this.notes = notes;
+    }
+
+    public void copyFields(Book fromBook) {
+        this.id = fromBook.getId();
+        this.title = fromBook.getTitle();
+        this.author = fromBook.getAuthor();
+        this.startReadingDate = fromBook.getStartReadingDate();
+        this.endReadingDate = fromBook.getEndReadingDate();
+        this.rating = fromBook.getRating();
+        this.genre = fromBook.getGenre();
+        this.review = fromBook.getReview();
+    }
+
 }

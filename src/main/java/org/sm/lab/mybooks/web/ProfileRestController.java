@@ -15,30 +15,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/rest/profiles")
 public class ProfileRestController {
-	
-	@Autowired
-	ReaderService readerService;
-	
-	@Autowired
-	PasswordEncoder passwordEncoder;
 
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public Reader get(@PathVariable("id") long id) {
-		return this.readerService.findReader(id);
-	}
-	
-	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public Reader update(@PathVariable("id") long id, @RequestBody @Valid Reader reader) {
-		reader.setPassword(encodePassword(reader.getPassword()));
-		return readerService.saveReader(reader);
-	}
-	
-	private String encodePassword(String password) {
-		if (password != null) {
-			return passwordEncoder.encode(password);
-		}
-		return null;
-	}
+    @Autowired
+    ReaderService readerService;
 
-	
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Reader get(@PathVariable("id") long id) {
+        return this.readerService.findReader(id);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public Reader update(@PathVariable("id") long id, @RequestBody @Valid Reader reader) {
+        reader.setPassword(encodePassword(reader.getPassword()));
+        return readerService.saveReader(reader);
+    }
+
+    private String encodePassword(String password) {
+        if (password != null) {
+            return passwordEncoder.encode(password);
+        }
+        return null;
+    }
+
 }
