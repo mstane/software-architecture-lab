@@ -31,8 +31,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public Page<Book> findReadersBooks(PageRequest pageRequest) {
 		UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Page<Book> books = bookRepository.findByReaderId(userDetails.getId(), pageRequest);
-		return books;
+		return bookRepository.findByReaderId(userDetails.getId(), pageRequest);
     }
 	
 	@Override
@@ -50,7 +49,7 @@ public class BookServiceImpl implements BookService {
 	@Override
 	@PreAuthorize("@authorizationService.canAccessBook(principal, #receivedBook)")
 	public Book saveBook(Book receivedBook) {
-		Book book = null;
+		Book book;
 		
 		if (receivedBook.getId() != null) {
 			book = bookRepository.findOne(receivedBook.getId());

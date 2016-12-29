@@ -44,8 +44,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
     @Bean
 	public PasswordEncoder passwordEncoder() {
-		PasswordEncoder encoder = new BCryptPasswordEncoder();
-		return encoder;
+		return new BCryptPasswordEncoder();
 	}
     
     @Override
@@ -67,18 +66,13 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				
 			.logout()
-				.addLogoutHandler(new LogoutHandler() {
-	
-					@Override
-					public void logout(HttpServletRequest request, HttpServletResponse response,
-							Authentication authentication) {
-						response.setStatus(HttpServletResponse.SC_OK);
-						response.setHeader("Access-Control-Allow-Origin", "http://localhost:8000");
-						response.setHeader("Access-Control-Allow-Credentials", "true");
-						
-					}
-					
-				})
+				.addLogoutHandler(
+						(request, response, authentication) -> {
+							response.setStatus(HttpServletResponse.SC_OK);
+							response.setHeader("Access-Control-Allow-Origin", "http://localhost:8000");
+							response.setHeader("Access-Control-Allow-Credentials", "true");
+						}
+				)
 				.logoutUrl("/logout")
 //				.deleteCookies("remember-me")
 //				.logoutSuccessUrl("/")

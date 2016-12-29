@@ -6,7 +6,7 @@ import static java.util.stream.Collectors.toList;
 
 public enum SystemRole {
 
-    Admin, Common;
+    ADMIN, COMMON;
     
     public static List<String> names() {
     	return Arrays.stream(values())

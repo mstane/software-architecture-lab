@@ -45,8 +45,7 @@ public class ReaderServiceImpl implements ReaderService {
 	@Override
 	@PreAuthorize("@authorizationService.canAccessReader(principal, #reader)")
 	public Reader saveReader(Reader reader) {
-        reader = readerRepository.save(reader);
-        return reader;
+        return readerRepository.save(reader);
     }
 	
 	@Override
@@ -67,7 +66,7 @@ public class ReaderServiceImpl implements ReaderService {
 	
 	@Override
 	public Reader registerReader(Reader reader) {
-		reader.setSystemRole(SystemRole.Common);
+		reader.setSystemRole(SystemRole.COMMON);
 		reader.setPassword(encodePassword(reader.getPassword()));
 		return readerRepository.save(reader);
 	}
@@ -80,8 +79,7 @@ public class ReaderServiceImpl implements ReaderService {
 	
 	private String encodePassword(String password) {
 		if (password != null) {
-			password  = passwordEncoder.encode(password);
-			return password;
+			return passwordEncoder.encode(password);
 		}
 		return null;
 	}

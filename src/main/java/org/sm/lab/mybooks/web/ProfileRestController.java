@@ -35,8 +35,7 @@ public class ProfileRestController {
 	
 	private String encodePassword(String password) {
 		if (password != null) {
-			password  = passwordEncoder.encode(password);
-			return password;
+			return passwordEncoder.encode(password);
 		}
 		return null;
 	}

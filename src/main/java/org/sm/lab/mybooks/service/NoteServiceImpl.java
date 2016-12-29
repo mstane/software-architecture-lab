@@ -30,8 +30,7 @@ public class NoteServiceImpl implements NoteService {
 	public Note saveNote(Long bookId, Note note) {
 		Book book = bookRepository.findOne(bookId);
 		note.setBook(book);
-        note = noteRepository.save(note);
-        return note;
+        return noteRepository.save(note);
     }
 
 	@Override

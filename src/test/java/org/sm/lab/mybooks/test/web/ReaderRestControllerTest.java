@@ -17,7 +17,7 @@ import org.sm.lab.mybooks.domain.Reader;
 import org.sm.lab.mybooks.enums.SystemRole;
 import org.sm.lab.mybooks.test.web.util.WithMockCustomUser;
 
-@WithMockCustomUser(systemRole = SystemRole.Admin)
+@WithMockCustomUser(systemRole = SystemRole.ADMIN)
 public class ReaderRestControllerTest extends BaseRestControllerTest {
 
   private final String RESOURCE_PATH = "/rest/readers/";

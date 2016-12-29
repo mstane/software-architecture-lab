@@ -28,7 +28,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	
 	@Override
 	public boolean isAdmin(UserDetailsImpl userDetails) {
-		return userDetails != null && userDetails.getSystemRole() == SystemRole.Admin;
+		return userDetails != null && userDetails.getSystemRole() == SystemRole.ADMIN;
 	}
 
 	@Override
@@ -63,7 +63,9 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
 	@Override
 	public boolean canAccessBook(UserDetailsImpl userDetails, Long bookId) {
-		if (bookId == null || userDetails == null) return false;
+		if (bookId == null || userDetails == null) {
+			return false;
+		}
 		
 		Book book = bookRepository.findOne(bookId);
 		
@@ -77,7 +79,9 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
 	@Override
 	public boolean canAccessNote(UserDetailsImpl userDetails, Long noteId) {
-		if (noteId == null || userDetails == null) return false;
+		if (noteId == null || userDetails == null) {
+			return false;
+		}
 		
 		Note note = noteRepository.findOne(noteId);
 		

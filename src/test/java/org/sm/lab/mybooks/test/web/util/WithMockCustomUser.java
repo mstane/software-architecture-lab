@@ -16,7 +16,7 @@ public @interface WithMockCustomUser {
 
   String password() default "Mb.1234";
   
-  SystemRole systemRole() default SystemRole.Common;
+  SystemRole systemRole() default SystemRole.COMMON;
   
   String username() default "Agarf Rac0";
   

@@ -9,6 +9,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.sm.lab.mybooks.domain.Reader;
 import org.sm.lab.mybooks.enums.Genre;
 import org.sm.lab.mybooks.enums.SystemRole;
@@ -29,6 +31,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class AppRestController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(AppRestController.class);
 	
     @Autowired
     private MailSender mailTemplate;
@@ -53,6 +57,7 @@ public class AppRestController {
 		} catch (Exception e) {
 			httpStatus = HttpStatus.SERVICE_UNAVAILABLE;
 			message = e.getMessage();
+			logger.error("", e);
 		}
 		
 		return getMessageResponse(httpStatus, message);
@@ -79,6 +84,7 @@ public class AppRestController {
 			} catch (MailException e) {
 				httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
 				message = e.getMessage();
+				logger.error("", e);
 			}
         }
         
@@ -90,29 +96,32 @@ public class AppRestController {
 	@RequestMapping(value = "/app_data", method = RequestMethod.GET)
 	public ResponseEntity<Map<String, List<String>>> appData() {
 		
-		Map<String, List<String>> appData = new HashMap<String, List<String>>();
+		Map<String, List<String>> appData = new HashMap<>();
 		appData.put("genres", Genre.names());
 		appData.put("systemRoles", SystemRole.names());
 		
-		return new ResponseEntity<Map<String, List<String>>>(appData, HttpStatus.OK);
+		return new ResponseEntity<>(appData, HttpStatus.OK);
 	}
  
 		
 	private ResponseEntity<String> getMessageResponse(HttpStatus httpStatus, String message) {
-		Map<String, Object> messageJson = new HashMap<String, Object>();
+		Map<String, Object> messageJson = new HashMap<>();
 		messageJson.put("message", message);
 		
+		String outputMessage;
+		HttpStatus outputHttpStatus = httpStatus;
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			message = mapper.writeValueAsString(messageJson);
+			outputMessage = mapper.writeValueAsString(messageJson);
 		} catch (JsonProcessingException e) {
-			httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
-			message = "{ \"message\" : \"Json Processing Exception\" }";
+			outputHttpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+			outputMessage = "{ \"message\" : \"Json Processing Exception\" }";
+			logger.error("", e);
 		}
-		return new ResponseEntity<String>(message , httpStatus);
+		return new ResponseEntity<>(outputMessage , outputHttpStatus);
 	}
 	
-    private void sendMessage(String mailTo, String subject, String message) throws MailException {
+    private void sendMessage(String mailTo, String subject, String message) {
         org.springframework.mail.SimpleMailMessage mailMessage = new org.springframework.mail.SimpleMailMessage();
         mailMessage.setSubject(subject);
         mailMessage.setTo(mailTo);
@@ -121,8 +130,7 @@ public class AppRestController {
     }
     
 	private String generatePassword() {
-		String password = RandomStringUtils.random(10, true, true);
-		return password;
+		return RandomStringUtils.random(10, true, true);
 	}
    
 	

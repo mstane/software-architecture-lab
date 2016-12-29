@@ -139,7 +139,7 @@ public abstract class BaseRestControllerTest {
 			book.setTitle("Priamos Damokles Hyacinthus Deimos" + i);
 			book.setAuthor("Tuth Jeggregh K'gassen" + i);
 			book.setRating((long) number);
-			book.setGenre(Genre.Satire);
+			book.setGenre(Genre.SATIRE);
 			book.setReview("The book is fictional, it doesn't exist and the data are used as placeholder names." + i);
 			book.setStartReadingDate(new Date());
 			book.setEndReadingDate(new Date());
@@ -171,7 +171,7 @@ public abstract class BaseRestControllerTest {
 			reader.setUsername("Agarf Rac" + i);
 			reader.setEmail("agarf.rac" + i + "@example.com");
 			reader.setPassword(encodePassword("Mb.1234"));
-			reader.setSystemRole(SystemRole.Common);
+			reader.setSystemRole(SystemRole.COMMON);
 			readers.add(reader);
 		}
 
@@ -183,7 +183,7 @@ public abstract class BaseRestControllerTest {
 		reader.setUsername("Agarf Rac");
 		reader.setEmail("agarf.rac@example.com");
 		reader.setPassword(encodePassword("Mb.1234"));
-		reader.setSystemRole(SystemRole.Common);
+		reader.setSystemRole(SystemRole.COMMON);
 		reader = readerRepository.save(reader);
 		return reader;
 	}
