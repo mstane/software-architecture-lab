@@ -128,7 +128,7 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 
         searchQuery.where(predicates.toArray(new Predicate[] {}));
 
-        List<Order> orderList = new ArrayList<Order>();
+        List<Order> orderList = new ArrayList<>();
         orderList.add(cb.asc(searchRoot.get("id")));
         searchQuery.orderBy(orderList);
 
@@ -144,12 +144,12 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
         List<SearchItem> totalContents = searchContents(readerId, keyword, genre);
 
         int firstResult = pageable.getPageNumber() * pageable.getPageSize();
-        List<SearchItem> pageContent = new ArrayList<SearchItem>();
+        List<SearchItem> pageContent = new ArrayList<>();
         for (int i = firstResult; i < totalContents.size() && i < firstResult + pageable.getPageSize(); i++) {
             pageContent.add(totalContents.get(i));
         }
 
-        return new PageImpl<SearchItem>(pageContent, pageable, totalContents.size());
+        return new PageImpl<>(pageContent, pageable, totalContents.size());
     }
 
     public List<SearchItem> searchContents(Long readerId, String keyword, Genre genre) {
