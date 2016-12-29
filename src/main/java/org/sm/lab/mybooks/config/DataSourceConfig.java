@@ -38,24 +38,21 @@ public class DataSourceConfig {
 		if (databaseUrl != null && !databaseUrl.isEmpty()) {
 			try {
 				URI dbUri = new URI(databaseUrl);
-
 				String[] credentials = dbUri.getUserInfo().split(":");
-				String username = credentials[0];
-				String password;
+
 				if (credentials.length > 1) {
-					password = credentials[1];
+
+					String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath()
+							+ "?" + dbUri.getQuery();
+
+					dataSource = new DriverManagerDataSource();
+					dataSource.setUrl(dbUrl);
+					dataSource.setUsername(credentials[0]);
+					dataSource.setPassword(credentials[1]);
+					dataSource.setDriverClassName("org.postgresql.Driver");
 				} else {
-					password = "";
+					logger.error("Credentials for database are not properly set.");
 				}
-
-				String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath() + "?"
-						+ dbUri.getQuery();
-
-				dataSource = new DriverManagerDataSource();
-				dataSource.setUrl(dbUrl);
-				dataSource.setUsername(username);
-				dataSource.setPassword(password);
-				dataSource.setDriverClassName("org.postgresql.Driver");
 
 			} catch (URISyntaxException e) {
 				logger.error("", e);
