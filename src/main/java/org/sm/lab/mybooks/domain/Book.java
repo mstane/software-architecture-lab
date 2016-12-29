@@ -65,7 +65,7 @@ public class Book implements Serializable {
     private Reader reader;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "book")
-    private List<Note> notes = new ArrayList<Note>();
+    private List<Note> notes = new ArrayList<>();
 
     public Long getId() {
         return id;

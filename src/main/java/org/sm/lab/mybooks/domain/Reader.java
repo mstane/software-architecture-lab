@@ -50,7 +50,7 @@ public class Reader implements Serializable {
     private SystemRole systemRole;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "reader")
-    private List<Book> books = new ArrayList<Book>();
+    private List<Book> books = new ArrayList<>();
 
     public Long getId() {
         return id;

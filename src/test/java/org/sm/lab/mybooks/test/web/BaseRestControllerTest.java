@@ -29,7 +29,7 @@ import org.sm.lab.mybooks.repository.data.BookRepository;
 import org.sm.lab.mybooks.repository.data.NoteRepository;
 import org.sm.lab.mybooks.repository.data.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -40,13 +40,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.annotation.DirtiesContext.ClassMode;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = MyBooksApplication.class)
+//@SpringApplicationConfiguration(classes = MyBooksApplication.class)
+@ContextConfiguration(classes = {MyBooksApplication.class})
+@SpringBootTest
 @WebAppConfiguration
 @ActiveProfiles("test")
 @DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -57,7 +60,7 @@ public abstract class BaseRestControllerTest {
 
     protected MockMvc mockMvc;
 
-    protected HttpMessageConverter mappingJackson2HttpMessageConverter;
+    protected MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter;
 
     @Rule
     public JUnitRestDocumentation restDocumentation = new JUnitRestDocumentation("target/generated-snippets");
@@ -81,11 +84,13 @@ public abstract class BaseRestControllerTest {
 
     @Autowired
     protected void setConverters(HttpMessageConverter<?>[] converters) {
-
-        this.mappingJackson2HttpMessageConverter = Arrays.asList(converters).stream()
+        HttpMessageConverter<?> httpMessageConverter;
+        
+        httpMessageConverter = Arrays.asList(converters).stream()
                 .filter(hmc -> hmc instanceof MappingJackson2HttpMessageConverter).findAny().get();
-
-        Assert.assertNotNull("the JSON message converter must not be null", this.mappingJackson2HttpMessageConverter);
+        Assert.assertNotNull("the JSON message converter must not be null", httpMessageConverter);
+        
+        mappingJackson2HttpMessageConverter = (MappingJackson2HttpMessageConverter)httpMessageConverter;
     }
 
     @Before
