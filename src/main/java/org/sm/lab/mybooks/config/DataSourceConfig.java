@@ -21,12 +21,11 @@ public class DataSourceConfig {
     /**
      * This is used to convert DATABASE_URL Heroku Postgres add-on convention
      * 
-     * postgres://<username>:<password>@<host>:<port>/<dbname>
+     * postgres&#58;//&lt;username&gt;&#58;&lt;password&gt;@&lt;host&gt;&#58;&lt;port&gt;/&lt;dbname&gt;
      * 
      * to Postgres JDBC driver convention
      * 
-     * jdbc:postgresql://<host>:<port>/<dbname>?user=<username>&password=
-     * <password>
+     * jdbc&#58;postgresql&#58;//&lt;host&gt;&#58;&lt;port&gt;/&lt;dbname&gt;?user=&lt;username&gt;&amp;password=&lt;password&gt;
      * 
      * @return
      */
