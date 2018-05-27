@@ -22,10 +22,12 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import lombok.Data;
 import org.hibernate.annotations.Type;
 import org.sm.lab.mybooks.enums.Genre;
 import org.springframework.format.annotation.DateTimeFormat;
 
+@Data
 @Entity
 public class Book implements Serializable {
 
@@ -66,86 +68,6 @@ public class Book implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "book")
     private List<Note> notes = new ArrayList<>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public Date getStartReadingDate() {
-        return startReadingDate;
-    }
-
-    public void setStartReadingDate(Date startReadingDate) {
-        this.startReadingDate = startReadingDate;
-    }
-
-    public Date getEndReadingDate() {
-        return endReadingDate;
-    }
-
-    public void setEndReadingDate(Date endReadingDate) {
-        this.endReadingDate = endReadingDate;
-    }
-
-    public Long getRating() {
-        return rating;
-    }
-
-    public void setRating(Long rating) {
-        this.rating = rating;
-    }
-
-    public Genre getGenre() {
-        return genre;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
-    public String getReview() {
-        return review;
-    }
-
-    public void setReview(String review) {
-        this.review = review;
-    }
-
-    public Reader getReader() {
-        return reader;
-    }
-
-    public void setReader(Reader reader) {
-        this.reader = reader;
-    }
-
-    public List<Note> getNotes() {
-        return notes;
-    }
-
-    public void setNotes(List<Note> notes) {
-        this.notes = notes;
-    }
 
     public void copyFields(Book fromBook) {
         this.id = fromBook.getId();
